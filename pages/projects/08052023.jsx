@@ -33,7 +33,7 @@ export default function Home() {
       <div className={styles.main}>
           <section id="bekk" className={styles.section}>
 
-            <img src={`/images/FlytendeBekk.jpg`} alt="Flytende Bekk" /> 
+            <img src={`/images/Flytendebekk.jpg`} alt="Flytende Bekk" /> 
 
             <div>
               <h2>Flytende bekk</h2>
@@ -65,7 +65,7 @@ export default function Home() {
           
           <section id={"monumentet"}  className={styles.section}>
 
-            <img src={`/images/MettalGutter.JPG`} alt="Monument" /> 
+            <img src={`/images/MettalGutter.jpg`} alt="Monument" /> 
 
             <div>
               <h2>Fløtermonumentet</h2>
@@ -81,7 +81,7 @@ export default function Home() {
 
           <section id={"ender"} className={styles.section}>
 
-            <img src={`/images/DuckFly.JPG`} alt="Ender" /> 
+            <img src={`/images/DuckFly.jpg`} alt="Ender" /> 
 
             <div>
               <h2>Ender</h2>
