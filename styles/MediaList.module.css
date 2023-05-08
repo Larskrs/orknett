@@ -1,0 +1,51 @@
+.main {
+    height: 80vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    border-radius: 10px;
+    scroll-behavior: smooth;
+}
+.links {
+    color: white;
+}
+.links a {
+    color: white;
+}
+.section {
+    display : flex;
+    min-height: 80vh;
+    scroll-snap-align: start;
+    position: relative;
+    flex-direction: column-reverse;
+    
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    padding: 1rem;
+}
+.section {
+    flex-direction: row-reverse;
+    background-color: transparent !important;
+}
+
+.section > div {
+    position: relative;
+    height: fit-content;
+    background-color: var(--gray-1);
+    width: 100%;
+    max-width: 400px;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--gray-3);
+}
+.section div > * {
+    margin: 0px;
+}
+
+.row {
+    display: flex;
+    gap: 1rem;
+    background-color:transparent !important;
+    padding: .25rem !important;
+}
