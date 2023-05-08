@@ -42,7 +42,7 @@ export default function Home() {
                 <p>36 Blender</p>
                 <p>100 ISO</p>
               </div>
-              <p>Redigert i photoshop, eksponering og fjernet flekker.</p>
+              <p>Tok bilde av bekk, gjorde bilde svart hvitt. Bekken hadde ikke så mye kraft, men lukkertiden gjorde vannet glatt og mykt.</p>
               <a href='https://goo.gl/maps/noDCYGkD3tYv1JYS9'>Google Maps</a>
             </div>
           </section>
