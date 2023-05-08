@@ -11,6 +11,13 @@
 .links a {
     color: white;
 }
+.section img {
+    position: absolute;
+    object-fit: contain;
+    object-position: left;
+    height: 100%;
+    width: 100%;
+}
 .section {
     display : flex;
     min-height: 80vh;
@@ -22,7 +29,6 @@
     background-repeat: no-repeat;
     background-size: contain;
 
-    padding: 1rem;
 }
 .section {
     flex-direction: row-reverse;
@@ -38,6 +44,7 @@
     padding: 1rem;
     border-radius: 10px;
     border: 1px solid var(--gray-3);
+    margin: 1rem;
 }
 .section div > * {
     margin: 0px;

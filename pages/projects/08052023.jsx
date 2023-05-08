@@ -31,7 +31,10 @@ export default function Home() {
         </div> 
       </div>
       <div className={styles.main}>
-          <section id="bekk" style={{backgroundImage: `url(/images/FlytendeBekk.jpg)`}} className={styles.section}>
+          <section id="bekk" className={styles.section}>
+
+            <img src={`/images/FlytendeBekk.jpg`} alt="Flytende Bekk" /> 
+
             <div>
               <h2>Flytende bekk</h2>
               <div className={styles.row}>
@@ -44,7 +47,10 @@ export default function Home() {
             </div>
           </section>
 
-          <section id="arkitektur" style={{backgroundImage: `url(/images/DSC_0318.JPG)`}} className={styles.section}>
+          <section id="arkitektur" className={styles.section}>
+
+            <img src={`/images/DSC_0318.JPG`} alt="Flytende Bekk" /> 
+
             <div>
               <h2>Klostergahen 39</h2>
               <div className={styles.row}>
@@ -57,7 +63,10 @@ export default function Home() {
             </div>
           </section>
           
-          <section id={"monumentet"} style={{backgroundImage: `url(/images/MettalGutter.JPG)`}} className={styles.section}>
+          <section id={"monumentet"}  className={styles.section}>
+
+            <img src={`/images/MettalGutter.JPG`} alt="Monument" /> 
+
             <div>
               <h2>Fløtermonumentet</h2>
               <div className={styles.row}>
@@ -70,7 +79,10 @@ export default function Home() {
             </div>
           </section>
 
-          <section id={"ender"} style={{backgroundImage: `url(/images/DuckFly.JPG)`}} className={styles.section}>
+          <section id={"ender"} className={styles.section}>
+
+            <img src={`/images/DuckFly.JPG`} alt="Ender" /> 
+
             <div>
               <h2>Ender</h2>
               <div className={styles.row}>
