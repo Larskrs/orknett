@@ -5,6 +5,7 @@
     border-radius: 10px;
     scroll-behavior: smooth;
 }
+
 .links {
     color: white;
 }
@@ -16,7 +17,8 @@
     object-fit: contain;
     object-position: left;
     height: 100%;
-    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
 }
 .section {
     display : flex;
@@ -28,6 +30,7 @@
     background-position: left center;
     background-repeat: no-repeat;
     background-size: contain;
+    justify-content: center;
 
 }
 .section {
