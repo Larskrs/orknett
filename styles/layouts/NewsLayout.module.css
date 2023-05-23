@@ -1,0 +1,72 @@
+.container {
+    background-color: white;
+    color: black;
+
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.main {
+    width: 100%;
+    max-width: 935px;
+    background-color: white;
+    padding: 2rem;
+
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+
+    min-height: 100vh;
+
+}
+.header {
+    width: 100%;
+    min-height: 80vh;
+    background-color: rgb(252, 255, 83);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.header > div {
+    display: flex;
+    flex-direction: row;
+    max-width: 1000px;
+    width: 100%;
+    min-height: 500px;
+}
+.header > div > div {
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+
+}
+.header img {
+    object-fit: cover;
+}
+
+.header h2 {
+    margin: 0;
+    font-size: 60px;
+    font-weight: 700;
+    text-decoration: underline 1px;
+}
+.header p {
+    font-size: 25px;
+}
+
+.main p {
+    font-size: 25px;
+    line-height: 1.4em;
+    font-family: 'Times New Roman', Times, serif;
+}
+.main :first-child::first-letter {
+    font-size: 75px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
