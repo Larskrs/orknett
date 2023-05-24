@@ -5,12 +5,15 @@ import React, { useEffect } from "react";
 import { useRouter } from 'next/router'
 import { useSession } from "next-auth/react";
 import { GetAuthenticatedClient } from "@/lib/Supabase";
+import Image from "next/image";
+import { imageExtensions } from "@/lib/ExtensionHelper";
 
 export default function VideoUpload () {
     
     const router = useRouter()
     
     const [file, setFile] = useState();
+    const [fileUrl, setFileUrl] = useState()
     const [progress, setProgress] = useState(0);
     const [error, setError] = useState(null);
     const [submitting, setSubmitting] = useState(false);
@@ -67,7 +70,7 @@ export default function VideoUpload () {
                         if (percentComplete == 100) {
                             setFinished(true);
                             
-                            setLink(`/videos/${name}`);
+                            setLink(`/api/v1/files?fileId=${name}.${type}`);
 
                             
 
@@ -98,6 +101,7 @@ export default function VideoUpload () {
 
         if (files?.length) {
             setFile(files[0]);
+            setFileUrl(URL.createObjectURL(files[0]))
         }
     }
 
@@ -112,10 +116,13 @@ export default function VideoUpload () {
                 <div>
                     <Link href={link}>{link}</Link>
                 </div>}
+            {fileUrl &&
+                <Image src={fileUrl} width={250} height={250} />
+            }
             <form method="POST">
                 <div>
                     <label htmlFor="file"> File</label>
-                    <input type='file' id='file' accept=".png, .jpg, jpeg, gif, webm" onChange={handleSetFile}/>
+                    <input type='file' id='file' accept={imageExtensions} onChange={handleSetFile}/>
                 </div>
             </form>
             {file && <button onClick={handleSubmit}> Upload Video </button>}
