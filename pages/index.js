@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import RoundedDiv from '@/components/RoundedDiv'
+import LoginButton from '@/components/LoginButton'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,6 +28,7 @@ export default function Home() {
       <div className={styles.container}>
       <div className={styles.grid}>
         
+      <LoginButton />
 
         <div className={styles.work}>
           <h2>Nyeste Oppdrag</h2>
