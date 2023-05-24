@@ -5,6 +5,7 @@ import path from "path";
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "../auth/[...nextauth]"
 import { GetClient, GetAuthenticatedClient } from "@/lib/Supabase";
+import { GetContentType } from "@/lib/ExtensionHelper"
 
 export const config = {
   api: {
@@ -69,11 +70,10 @@ const CHUNK_SIZE_IN_BYTES = 1000000; // 1 mb
 function getVideoStream(req, res) {
 
 
-  const videoId = req.query.videoId;
-  let quality = req.query.quality;
-  if (!quality) { quality = "135"}
+  const fileName = req.query.fileId;
+  const [ id, extension ] = fileName.split(".")
 
-  let filePath = `./videos/${videoId}/${quality}.mp4`;
+  let filePath = `./files/${fileName}`;
   
 
 
@@ -101,7 +101,7 @@ function getVideoStream(req, res) {
         }
     }
 
-    res.setHeader("content-type", "video/mp4");
+    res.setHeader("content-type", GetContentType(extension));
 
     fs.stat(filePath, (err, stat) => {
         if (err) {

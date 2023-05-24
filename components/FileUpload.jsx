@@ -29,7 +29,7 @@ export default function VideoUpload () {
           id: id,
           source: `/api/v1/files?fileId=${id}.${extension}`,
           storage: process.env.NEXT_PUBLIC_STORAGE_ID,
-          user_id: session.data.user.id,
+          user: session.data.user.id,
         })
         .select("*")
         console.log({select: select, error})
