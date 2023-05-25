@@ -66,7 +66,7 @@ export default function Home({items}) {
         <h2 >Nyeste Bilder</h2>
           {items.map((item, index) => {
             return (
-                <div onClick={() => {setPreviewId(item.source)}}>
+                <div key={index} onClick={() => {setPreviewId(item.source)}}>
 
                 <RatioImage quality={5} src={item.source} >
                   {/* <h2 style={{color: "white"}}>Image</h2> */}
