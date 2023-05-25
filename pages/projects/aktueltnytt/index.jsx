@@ -1,4 +1,4 @@
-import styles from "@/styles/layouts/NewsPage.module.css"
+import NewsLayout from "@/layouts/NewsLayout";
 import Link from "next/link";
 
 export default function NewsPage() {
