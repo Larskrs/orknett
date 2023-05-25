@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { GetAuthenticatedClient } from "@/lib/Supabase";
 import Image from "next/image";
 import { imageExtensions } from "@/lib/ExtensionHelper";
+import { RatioImage } from "./RatioImage";
 
 export default function VideoUpload () {
     
@@ -26,13 +27,22 @@ export default function VideoUpload () {
         console.log("Uploading to database...")
 
         console.log({session})
+        const userId = session.status == "authenticated" ? session.data.user.id : null
 
         const {select, error} = await GetAuthenticatedClient("public",session).from("files")
-        .insert({
-          id: id,
-          source: `/api/v1/files?fileId=${id}.${extension}`,
-          storage: process.env.NEXT_PUBLIC_STORAGE_ID,
-          user: session.data.user.id,
+        
+        .insert(
+            userId ?     
+        {
+            id: id,
+            source: `/api/v1/files?fileId=${id}.${extension}`,
+            storage: process.env.NEXT_PUBLIC_STORAGE_ID,
+            user: userId,
+        } :
+        {
+            id: id,
+            source: `/api/v1/files?fileId=${id}.${extension}`,
+            storage: process.env.NEXT_PUBLIC_STORAGE_ID,  
         })
         .select("*")
         console.log({select: select, error})
@@ -117,7 +127,9 @@ export default function VideoUpload () {
                     <Link href={link}>{link}</Link>
                 </div>}
             {fileUrl &&
-                <Image src={fileUrl} width={250} height={250} />
+            <div style={{maxWidth: `500px`}}>
+                <RatioImage src={fileUrl} width={250} height={250} />
+            </div>
             }
             <form method="POST">
                 <div>

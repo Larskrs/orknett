@@ -7,6 +7,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .main {
@@ -36,6 +37,20 @@
     max-width: 1000px;
     width: 100%;
     min-height: 500px;
+}
+@media only screen and (max-width: 1000px) {
+    .header > div {
+        flex-direction: column-reverse;
+    }
+    .header img {
+        width: 100%;
+    }
+    .header p {
+        padding: 1rem;
+    }
+    .header h2 {
+        padding: 1rem;
+    }
 }
 .header > div > div {
 

@@ -10,21 +10,21 @@ import { GetContentType } from "@/lib/ExtensionHelper"
 export const config = {
   api: {
     bodyParser: false,
-    responseLimit: '12mb',
+    responseLimit: '28mb',
     externalResolver: true,
   },
 };
 
 
 
-async function uploadVideoStream(req, res) {
+async function UploadFileStream(req, res) {
 
   const session = await getServerSession(req, res, authOptions)
 
-  if (!session) {
-    res.status(404).json({message: 'You are not logged in or have an invalid session, please try again later.'})
-    return;
-  }
+  // if (!session) {
+  //   res.status(404).json({message: 'You are not logged in or have an invalid session, please try again later.'})
+  //   return;
+  // }
 
 
 
@@ -67,7 +67,7 @@ async function uploadVideoStream(req, res) {
 
 const CHUNK_SIZE_IN_BYTES = 1000000; // 1 mb
 
-function getVideoStream(req, res) {
+function GetFileStream(req, res) {
 
 
   const fileName = req.query.fileId;
@@ -159,11 +159,11 @@ export default async function handler(req, res) {
   const method = req.method;
 
   if (method === "GET") {
-    return getVideoStream(req, res);
+    return GetFileStream(req, res);
   }
 
   if (method === "POST") {
-    return await uploadVideoStream(req, res);
+    return await UploadFileStream(req, res);
   }
 
   return res.status(405).json({ error: `Method ${method} is not allowed` });

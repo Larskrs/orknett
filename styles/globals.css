@@ -14,13 +14,32 @@
   --gray-9: #999;
 
   color: white;
-  padding: 2rem;
+  padding: 0rem;
+  margin: 0px;
 
   scroll-behavior: smooth;
 
   
 }
+body {
+  margin: 0;
+  padding: 0;
+}
 
 * {
-
+  
 }
+
+button {
+  padding: 1rem !important;
+  padding-block: .5rem !important;
+  margin-block: .5rem !important;
+  background-color: var(--gray-2);
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  outline: 1px solid white;
+  width: fit-content;
+}
+
