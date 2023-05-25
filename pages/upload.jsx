@@ -5,7 +5,7 @@ import LoginButton from '@/components/LoginButton'
 
 import { useSession } from 'next-auth/react';
 
-export default function() {
+export default function Upload() {
     
     const session = useSession({
         required: false,

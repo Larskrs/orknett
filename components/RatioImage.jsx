@@ -1,10 +1,16 @@
 import React, { FC, useState } from 'react';
 import Image from 'next/image';
+import { GetContentType } from '@/lib/ExtensionHelper';
 
 
 export function RatioImage ({credit, quality=75, src, children, axis="height" }) {
   const [ratio, setRatio] = useState(5/1)
   const axisStyle = axis="width" ? {height: "100%"} : {width: "100%"}
+  
+
+  const type = src.split('.').pop();
+
+
 
   return (
     <>

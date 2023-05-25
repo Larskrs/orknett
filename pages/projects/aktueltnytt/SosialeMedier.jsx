@@ -2,7 +2,7 @@ import { RatioImage } from "@/components/RatioImage";
 import NewsLayout from "@/layouts/NewsLayout";
 import Image from "next/image";
 
-export default function() {
+export default function NewsPage() {
     return (
         <NewsLayout 
             title={"Har sosiale medier for mye makt?"}

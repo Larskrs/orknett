@@ -1,7 +1,7 @@
 import NewsLayout from "@/layouts/NewsLayout";
 import Image from "next/image";
 
-export default function() {
+export default function NewsPage() {
     return (
         <NewsLayout 
             title={"Er dataspill farlig for barn?"}

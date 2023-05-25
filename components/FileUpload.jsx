@@ -6,10 +6,10 @@ import { useRouter } from 'next/router'
 import { useSession } from "next-auth/react";
 import { GetAuthenticatedClient } from "@/lib/Supabase";
 import Image from "next/image";
-import { imageExtensions } from "@/lib/ExtensionHelper";
+import { contentTypeList } from "@/lib/ExtensionHelper";
 import { RatioImage } from "./RatioImage";
 
-export default function VideoUpload () {
+export default function FileUpload () {
     
     const router = useRouter()
     
@@ -134,10 +134,10 @@ export default function VideoUpload () {
             <form method="POST">
                 <div>
                     <label htmlFor="file"> File</label>
-                    <input type='file' id='file' accept={imageExtensions} onChange={handleSetFile}/>
+                    <input type='file' id='file' accept={contentTypeList['video'].concat(contentTypeList['image'])} onChange={handleSetFile}/>
                 </div>
             </form>
-            {file && <button onClick={handleSubmit}> Upload Video </button>}
+            {file && <button onClick={handleSubmit}> Upload File </button>}
         </div>
     )
 }
