@@ -2,14 +2,14 @@ import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
 import React, { useEffect } from "react";
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { useSession } from "next-auth/react";
 import { GetAuthenticatedClient } from "@/lib/Supabase";
 import Image from "next/image";
 import { contentTypeList } from "@/lib/ExtensionHelper";
 import { RatioImage } from "./RatioImage";
 
-export default function FileUpload () {
+export default function FileUpload ({batchPreset = ""}) {
     
     const router = useRouter()
     
@@ -20,8 +20,11 @@ export default function FileUpload () {
     const [submitting, setSubmitting] = useState(false);
     const [finished, setFinished] = useState(false);
     const [link, setLink] = useState(null);
+    const [batch, setBatch] = useState(batchPreset != "" ? batchPreset : "");
 
     const session = useSession();
+
+    console.log({batchPreset, batch})
     
     async function UploadToDatabase (id, extension) {
         console.log("Uploading to database...")
@@ -38,14 +41,18 @@ export default function FileUpload () {
             source: `/api/v1/files?fileId=${id}.${extension}`,
             storage: process.env.NEXT_PUBLIC_STORAGE_ID,
             user: userId,
+            batch : (batch != "" ? batch : null),
         } :
         {
             id: id,
             source: `/api/v1/files?fileId=${id}.${extension}`,
             storage: process.env.NEXT_PUBLIC_STORAGE_ID,  
+            batch : (batch != "" ? batch : null),
         })
         .select("*")
         console.log({select: select, error})
+
+        router.reload()
     }
 
     async function handleSubmit ( ) {
@@ -102,6 +109,7 @@ export default function FileUpload () {
                     setSubmitting(false);
                     setProgress(0);
                     UploadToDatabase(name, type);
+                    
             }
             // axios
     }
@@ -135,8 +143,10 @@ export default function FileUpload () {
                 <div>
                     <label htmlFor="file"> File</label>
                     <input type='file' id='file' accept={contentTypeList['image']} onChange={handleSetFile}/>
+                    {batchPreset == null && <input type='text' id='batch' onChange={(e) => {setBatch(e.target.value)}} /> }
                 </div>
             </form>
+            
             {file && <button onClick={handleSubmit}> Upload File </button>}
         </div>
     )
