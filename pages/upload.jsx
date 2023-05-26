@@ -1,5 +1,5 @@
 
-import FileSharingLayout from '@/components/FileSharingLayout';
+import FileSharingLayout from '@/layouts/FileSharingLayout';
 import FileUpload from '@/components/FileUpload'
 import LoginButton from '@/components/LoginButton'
 
@@ -14,7 +14,7 @@ export default function Upload() {
     return (
 
 
-        <FileSharingLayout>
+        <FileSharingLayout pageId={1}>
             <LoginButton />
             <FileUpload />
         </FileSharingLayout>

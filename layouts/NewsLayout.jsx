@@ -2,7 +2,7 @@ import styles from "@/styles/layouts/NewsLayout.module.css"
 import Head from "next/head";
 import Image from "next/image";
 
-export default function({children, 
+export default function NewsLayout({children, 
     color,
     image,
     title,

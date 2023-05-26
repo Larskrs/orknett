@@ -6,9 +6,10 @@ import RoundedDiv from '@/components/RoundedDiv'
 import LoginButton from '@/components/LoginButton'
 import { GetClient } from '@/lib/Supabase'
 import Link from 'next/link'
-import FileSharingLayout from '@/components/FileSharingLayout'
+import FileSharingLayout from '@/layouts/FileSharingLayout'
 import { RatioImage } from "@/components/RatioImage"
 import { useState } from 'react'
+import { RatioMedia } from '@/components/RatioMedia'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,7 +20,7 @@ export default function Home({items}) {
   const [previewId, setPreviewId] = useState("")
 
   return (
-    <FileSharingLayout>
+    <FileSharingLayout pageId={0}>
       
         
       <div className={styles.container}>
@@ -68,9 +69,9 @@ export default function Home({items}) {
             return (
                 <div key={index} onClick={() => {setPreviewId(item.source)}}>
 
-                <RatioImage quality={5} src={item.source} >
+                <RatioMedia quality={5} src={item.source} >
                   {/* <h2 style={{color: "white"}}>Image</h2> */}
-                </RatioImage>
+                </RatioMedia>
 
                 </div>
                 )

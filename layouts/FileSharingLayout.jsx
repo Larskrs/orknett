@@ -1,7 +1,12 @@
 import Head from "next/head";
 import Link from "next/link";
+import styles from "@/styles/layouts/FileSharingLayout.module.css"
+import { useState } from "react";
 
-export default function Layout({children}) {
+export default function Layout({children, pageId = 0}) {
+
+  const [current, setCurrent] = useState(pageId)
+
     return (
         <div>
                   <Head>
@@ -11,9 +16,9 @@ export default function Layout({children}) {
                     <link rel="icon" href="/favicon.ico" />
                   </Head>
                   
-                  <nav>
-                      <Link href={"/"}>Home</Link>
-                      <Link href={"/upload"}>Upload</Link>
+                  <nav className={styles.nav}>
+                      <Link className={current === 0 ? (styles.element, styles.default) : styles.default} href={"/"}>Home</Link>
+                      <Link className={current === 1 ? (styles.element, styles.default) : styles.default} href={"/upload"}>Upload</Link>
                   </nav>
 
                   <main>

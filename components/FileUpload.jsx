@@ -134,7 +134,7 @@ export default function FileUpload () {
             <form method="POST">
                 <div>
                     <label htmlFor="file"> File</label>
-                    <input type='file' id='file' accept={contentTypeList['video'].concat(contentTypeList['image'])} onChange={handleSetFile}/>
+                    <input type='file' id='file' accept={contentTypeList['image']} onChange={handleSetFile}/>
                 </div>
             </form>
             {file && <button onClick={handleSubmit}> Upload File </button>}
