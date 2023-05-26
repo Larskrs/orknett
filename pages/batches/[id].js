@@ -50,6 +50,7 @@ export async function getStaticPaths() {
     const { data, error } = await GetClient("public")
     .from("batches")
     .select("id")
+    .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
 
     const paths = data.map( (batch, i) => {return {params: {id: batch.id } } } )
     console.log({data, paths})
