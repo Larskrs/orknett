@@ -68,7 +68,8 @@ export async function getStaticProps({ params }){
     return {
         props:{
             batch: data
-        }
+        },
+        revalidate: 5, // In seconds
     }
 }
 
