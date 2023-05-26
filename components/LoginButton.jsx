@@ -8,7 +8,7 @@ export default function Component() {
       <>
         <div className="row">
             <Image className="avatar" src={session.user.image} alt={"name"} width={35} height={35}  />
-            {session.user.name} <br />
+            {/* {session.user.name} <br /> */}
         </div>
             <button onClick={() => signOut()}>Sign out</button>
  
@@ -35,7 +35,6 @@ export default function Component() {
   }
   return (
     <>
-      Not signed in <br />
       <button onClick={() => signIn()}>Sign in</button>
     </>
   )

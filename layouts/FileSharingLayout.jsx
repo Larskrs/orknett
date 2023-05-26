@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import styles from "@/styles/layouts/FileSharingLayout.module.css"
 import { useState } from "react";
+import LoginButton from "@/components/LoginButton"
 
 export default function Layout({children, pageId = 0}) {
 
@@ -20,9 +21,10 @@ export default function Layout({children, pageId = 0}) {
                       <Link className={current === 0 ? styles.element : styles.default} href={"/"}>Home</Link>
                       <Link className={current === 1 ? styles.element : styles.default} href={"/upload"}>Upload</Link>
                       <Link className={current === 2 ? styles.element : styles.default} href={"/batches"}>Batches</Link>
+                      <LoginButton />
                   </nav>
 
-                  <main>
+                  <main className={styles.main}>
                     {children}
                   </main>
         </div>

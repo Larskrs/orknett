@@ -58,6 +58,9 @@ export default function FileUpload ({batchPreset = ""}) {
     async function handleSubmit ( ) {
         const data = new FormData()
         
+
+        if (!session) { return; }
+
         if (!file) return;
         console.log(file.name);
         let fileNameR = file.name.split(".");
@@ -122,7 +125,11 @@ export default function FileUpload ({batchPreset = ""}) {
             setFileUrl(URL.createObjectURL(files[0]))
         }
     }
-
+    if (session.status !== "authenticated") {
+        return (
+            <p>You can not upload media without being logged in.</p>
+        )
+    }
     return (
         <div className='container'>
             {error && <p>{error}</p>}

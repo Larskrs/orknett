@@ -1,0 +1,40 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+.download {
+    display: flex;
+    border: 1px solid var(--gray-3);
+    background-color: var(--gray2);
+    border-collapse: collapse !important;
+    border-inline: 1px solid var(--gray-3);
+    gap: 0;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.download * {
+    margin: 0;
+    padding: 1rem;
+    text-decoration: none;
+    color: gray;
+}
+.downloadLink {
+    color: rgb(0, 100, 255);
+    text-decoration: none;
+}
+.image {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100px;
+    position: relative;
+    padding: 0;
+}
+.image img {
+    object-fit: cover;
+}
