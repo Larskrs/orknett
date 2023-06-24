@@ -58,11 +58,42 @@ export function RatioMedia ({credit, quality=75, src, className, children, axis=
     console.log({type})
 
     if (type == "image") { return ImageSection() }
+    if (type == "video") { return VideoSection() }
 
 
 
 
   }
+
+  function VideoSection () {
+    return (
+        <>
+        <video
+        className='img'
+        content={GetContentTypeFromSource(src)}
+        src={src}
+        layout='fill'
+      quality={quality}
+      
+      onLoadingComplete={(img => {
+          
+          console.log({height: img.naturalHeight, width: img.naturalWidth})
+          setRatio(img.naturalWidth / img.naturalHeight)
+        })}
+        />
+
+        <style jsx>{`
+
+            .img {
+                width: 100%;
+                position: relative;
+                display: flex;
+                aspect-ratio: ${ratio};
+            }
+        `}</style>
+        </>
+    )
+    }
   
   function ImageSection () {
     return (

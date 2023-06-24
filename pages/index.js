@@ -48,19 +48,7 @@ export default function Home() {
     </wrap>
     <wrap className={styles.wrap}>
       
-      <section className={styles.section}>
-        <div className={styles.group}>
-          <div className={styles.row}>
-            <div className={styles.card}>
-              <h1>Hvem er <span className={styles.gradient}>vi?</span></h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vitae lectus ut justo fermentum porta a bibendum mi. Vivamus at interdum ligula, at mollis lacus. Morbi rhoncus convallis erat, et ullamcorper odio consectetur eu. Ut mollis libero egestas ipsum imperdiet hendrerit. Nunc fermentum sed leo at consectetur. Proin non pharetra sapien. Sed consectetur velit at tellus convallis mattis. Fusce placerat laoreet aliquam. Nunc sit amet orci venenatis, ullamcorper nulla sed, egestas purus. Quisque sagittis tincidunt diam ut eleifend.</p>
-            </div>
-            <div className={styles.image}>
-              <Image src={"https://media.discordapp.net/attachments/1009799380796178475/1121922180524032051/Snapchat-3476154311.jpg?width=1207&height=905"} layout="fill" objectFit='cover'></Image>
-            </div>
-          </div>
-        </div>
-      </section>
+      
       <section className={styles.header}>
         <div className={styles.group}>
         <h3>Hva vil du se?</h3>
@@ -131,7 +119,7 @@ export default function Home() {
               <RatioImage src={"https://gyazo.com/a4d2ef3a3c5fa993aee234d5f1db8a33.jpg"} layout="fill" axis='height' objectFit='cover'></RatioImage>
             </div>
             <div className={styles.card}>
-                <h2>Aktuelle <span className={styles.gradient}>spøkmakere</span></h2>
+                <h2> <span className={styles.gradient}>U</span>aktuelle <span className={styles.gradient}>spøkmakere</span></h2>
                 <p>Bli med på en aktuell reise gjennom komforsonen og hvor langt en kan presse den i serien, Aktuelle spøkmakere.</p>
             </div>
           </div>

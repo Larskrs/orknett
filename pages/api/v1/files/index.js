@@ -3,7 +3,7 @@ import busboy from "busboy";
 import fs from "fs";
 import path from "path";
 import { getServerSession } from "next-auth/next"
-import { authOptions } from "../auth/[...nextauth]"
+import { authOptions } from "../../auth/[...nextauth]"
 import { GetClient, GetAuthenticatedClient } from "@/lib/Supabase";
 import { GetContentType } from "@/lib/ExtensionHelper"
 
