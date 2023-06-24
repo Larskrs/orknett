@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { GetContentTagFromSource, GetContentType, GetContentTypeFromSource, GetExtensionFromSource } from '@/lib/ExtensionHelper';
 
 
-export function RatioMedia ({credit, quality=75, src, children, axis="height" }) {
+export function RatioMedia ({credit, quality=75, src, className, children, axis="height" }) {
   const [ratio, setRatio] = useState(5/1)
   const axisStyle = axis="width" ? {height: "100%"} : {width: "100%"}
   

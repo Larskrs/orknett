@@ -24,10 +24,26 @@
 body {
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
+}
+html, body { 
+  scroll-behavior: smooth
+}
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  transition-property: all;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  transition-duration: .125s;
+  scroll-behavior: smooth;
 }
 
-* {
-  
+:root, body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  font-family: Poppins,Roboto,Open Sans,ui-sans-serif,system-ui,sans-serif;
 }
 
 button {
@@ -41,5 +57,19 @@ button {
   font-weight: 700;
   outline: 1px solid white;
   width: fit-content;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-block: .5rem;
+  font-weight: 600;
+}
+h1 {
+  font-size: 3rem;
+  margin-block: .5rem;
+  font-weight: 600;
+}
+p {
+  font-size: 1.25rem;
 }
 
