@@ -9,6 +9,7 @@ import { RatioMedia } from '@/components/RatioMedia';
 import { GetClient } from "@/lib/Supabase";
 import { GetContentTagFromSource, GetContentType, GetContentTypeFromSource, GetExtensionFromSource } from '@/lib/ExtensionHelper';
 import { Image } from "next/image" 
+import Link from 'next/link';
 
 export default function Secret({upload}) {
     
@@ -26,6 +27,7 @@ export default function Secret({upload}) {
                     type={GetContentType(GetExtensionFromSource(upload.source))}
                 >
                 </source> 
+                <Link href={upload.source}>{upload.source}</Link>
 
            
         </FileSharingLayout>
