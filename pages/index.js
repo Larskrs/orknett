@@ -97,15 +97,16 @@ export default function Home() {
       <section id="pride" className={styles.section} >
         <div className={styles.group} >
           <h2 style={{marginLeft: 0}}>Aktuelt feirer <span className={styles.gradient} style={{background: "-webkit-linear-gradient(#7ed1f9, #24ff25, #24ff3b)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"}}>Pride</span></h2>
+          <p>Lucas Langvarp Gjernes viser sin støtte til <Link href={"https://i.gyazo.com/0beef75fd7a4ce52d94aa47c0cd6caa6.mp4"}><span className={styles.gradient} style={{background: "-webkit-linear-gradient(#7ed1f9, #24ff25, #24ff3b)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"}}>Pride her:</span></Link></p>
           <div className={styles.row} >         
             <div className={styles.image} style={{maxWidth: `none`}}>
-              <Image src={"https://media.discordapp.net/attachments/1009799380796178475/1121935346356199435/Holy_Crap_it_LArs.jpg"} layout="fill" objectFit='cover'></Image>
+              <Image src={"https://gyazo.com/56f0525cd29599741973ad6909327e05.png"} layout="fill" objectFit='cover'></Image>
             </div>
             <div className={styles.image} style={{maxWidth: `none`}}>
-              <Image src={"https://media.discordapp.net/attachments/1009799380796178475/1121904123026092144/HomeLars.png?width=230&height=670"} layout="fill" objectFit='cover' objectPosition='top'></Image>
+              <Image src={"https://gyazo.com/4c968d1aba46e6c83a8dd1c9b0506b0b.png"} layout="fill" objectFit='cover' objectPosition='top'></Image>
             </div>
             <div className={styles.image} style={{maxWidth: `none`}}>
-              <Image src={"https://media.discordapp.net/attachments/1009799380796178475/1119762177931358358/d92da24bc52faa1e48b344281628b88c.jpg"} layout="fill" objectFit='cover'></Image>
+              <Image src={"https://gyazo.com/90129b6caf2db73f89e97564966836e6.png"} layout="fill" objectFit='cover'></Image>
             </div>
           </div>
         </div>
