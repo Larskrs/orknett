@@ -15,7 +15,7 @@ export default function Home() {
         <div className={styles.blur}> 
         <Image 
         className={styles.bg}
-          src={"https://gyazo.com/ef6b7b2905abc1fd9a4a8fc21d888cd1.png"}
+          src={"/images/pexels-steve-johnson-1704119.jpg"}
           layout='fill'
           objectPosition='center'
           objectFit='cover  '
@@ -71,6 +71,7 @@ export default function Home() {
       </div>
       </section>
 
+
       <section className={styles.section}>
         <div className={styles.group} style={{padding: 0}}>
           
@@ -93,6 +94,22 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="pride" className={styles.section} >
+        <div className={styles.group} >
+          <h2 style={{marginLeft: 0}}>Aktuelt feirer <span className={styles.gradient} style={{background: "-webkit-linear-gradient(#7ed1f9, #24ff25, #24ff3b)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"}}>Pride</span></h2>
+          <div className={styles.row} >         
+            <div className={styles.image} style={{maxWidth: `none`}}>
+              <Image src={"https://media.discordapp.net/attachments/1009799380796178475/1121935346356199435/Holy_Crap_it_LArs.jpg"} layout="fill" objectFit='cover'></Image>
+            </div>
+            <div className={styles.image} style={{maxWidth: `none`}}>
+              <Image src={"https://media.discordapp.net/attachments/1009799380796178475/1121904123026092144/HomeLars.png?width=230&height=670"} layout="fill" objectFit='cover' objectPosition='top'></Image>
+            </div>
+            <div className={styles.image} style={{maxWidth: `none`}}>
+              <Image src={"https://media.discordapp.net/attachments/1009799380796178475/1119762177931358358/d92da24bc52faa1e48b344281628b88c.jpg"} layout="fill" objectFit='cover'></Image>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section id="papparau" className={styles.section}>
         <div className={styles.group}>
@@ -112,19 +129,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={styles.section}>
-        <div className={styles.group}>
-          <div className={styles.row}>         
-            <div className={styles.image} style={{maxWidth: `none`}}>
-              <RatioImage src={"https://gyazo.com/a4d2ef3a3c5fa993aee234d5f1db8a33.jpg"} layout="fill" axis='height' objectFit='cover'></RatioImage>
-            </div>
-            <div className={styles.card}>
-                <h2> <span className={styles.gradient}>U</span>aktuelle <span className={styles.gradient}>spøkmakere</span></h2>
-                <p>Bli med på en aktuell reise gjennom komforsonen og hvor langt en kan presse den i serien, Aktuelle spøkmakere.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+
     
   </wrap>
   </div>
