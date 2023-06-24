@@ -112,7 +112,7 @@ export default function Home() {
             <div className={styles.card}>
                 <h2>Papparau</h2>
                 <p>Barn vil ikke <span className={styles.gradient}>elske! </span>
-                Den sjarmerende one hit wonder <span className={styles.gradient}>Aaparau</span> er Papparau i denne nye barneserien om gode gamle barnebøker. En nyere lesing med mormonske verdier.
+                Den sjarmerende one hit wonder <span className={styles.gradient}>Ap Aarau</span> er Papparau i denne nye barneserien om gode gamle barnebøker. En nyere lesing med mormonske verdier.
                 Bli med på reisen med <span className={styles.gradient}>Papparau</span> gjennom velkjente fortellinger fra ghettoen og stuebordet!
                 </p>
                 
