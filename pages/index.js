@@ -23,7 +23,7 @@ export default function Home() {
         </div>
         <Image 
         className={styles.bg}
-          src={"https://gyazo.com/ef6b7b2905abc1fd9a4a8fc21d888cd1.png"}
+          src={"https://media.discordapp.net/attachments/1017698590690381884/1116498307817156709/NR.1.00_03_04_18.Still003.jpg?width=1193&height=671"}
           layout='fill'
           objectPosition='top'
           objectFit='cover  '
@@ -87,30 +87,15 @@ export default function Home() {
             <div className={styles.card}>
                 <h2>Desperados, Banditos,</h2>
                 <h2> & <span className={styles.gradient}>Litagos</span></h2>
-                <p>Vårt nyeste <span className={styles.gradient}>prosjekt! </span>
-                Desperados, Banditos, & Litagos er en ny western inspirert action kortfilm med mye morro på lager!</p>
+                <p>
+                Bli med på et spennende eventyr i det ville vesten, der skjulte hemmeligheter og farlige allianser truer livene til våre helter. Etter et brutalt drap, setter Jesse Morgan og den nyutslupne Billy Ringo ut på en farefull reise for å avdekke sannheten om den verdifulle skatten kalt 
+Litagoen. Med nådeløse fiender i hælene og uventede vendepunkter, er det en kamp mot klokken for å finne skatten før det er for sent. Opplev en actionfylt western-film som tar deg med på et episk eventyr fylt med spenning, mysterier og kampen om Litagoen.
+                </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="pride" className={styles.section} >
-        <div className={styles.group} >
-          <h2 style={{marginLeft: 0}}>Aktuelt feirer <span className={styles.gradient} style={{background: "-webkit-linear-gradient(#7ed1f9, #24ff25, #24ff3b)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"}}>Pride</span></h2>
-          <p>Lucas Langvarp Gjernes viser sin støtte til <Link href={"https://i.gyazo.com/0beef75fd7a4ce52d94aa47c0cd6caa6.mp4"}><span className={styles.gradient} style={{background: "-webkit-linear-gradient(#7ed1f9, #24ff25, #24ff3b)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"}}>Pride her:</span></Link></p>
-          <div className={styles.row} >         
-            <div className={styles.image} style={{maxWidth: `none`}}>
-              <Image src={"https://gyazo.com/56f0525cd29599741973ad6909327e05.png"} layout="fill" objectFit='cover'></Image>
-            </div>
-            <div className={styles.image} style={{maxWidth: `none`}}>
-              <Image src={"https://gyazo.com/4c968d1aba46e6c83a8dd1c9b0506b0b.png"} layout="fill" objectFit='cover' objectPosition='top'></Image>
-            </div>
-            <div className={styles.image} style={{maxWidth: `none`}}>
-              <Image src={"https://gyazo.com/90129b6caf2db73f89e97564966836e6.png"} layout="fill" objectFit='cover'></Image>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section id="papparau" className={styles.section}>
         <div className={styles.group}>
