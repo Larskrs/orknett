@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import '../styles/globals.css'
 import { SessionProvider } from "next-auth/react"
+import AktueltTVLoading from '../components/AktueltTVLoading'
 
 import { Inter } from 'next/font/google'
 
@@ -19,7 +20,9 @@ export default function MyApp({  Component,  pageProps: { session, ...pageProps 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
       </Head>
       <SessionProvider session={session}>
-          <Component {...pageProps} />
+        <AktueltTVLoading/>
+        <Component {...pageProps} />
+        
       </SessionProvider>
     </div>
   )

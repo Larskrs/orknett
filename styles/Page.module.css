@@ -53,14 +53,12 @@ mask: var(--mask);
   width: 100vw;
   height: 100vw;
   z-index: 100;
-  outline: red 2px solid;
   opacity: .75;
   mix-blend-mode: screen;
   pointer-events: none;
 }
 .rotate {
   animation: rotate linear 50s infinite;
-  outline: red 2px solid;
 }
 .main {
   z-index: 1;
@@ -92,8 +90,20 @@ mask: var(--mask);
 
 .nav {
   display: flex;
-
+  align-items: center;
+  gap: 1rem;
   padding: 1rem;
+}
+.nav * {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+}
+.nav h2 {
+  font-size: 30px;
+}
+.nav div {
+  display: flex;
 }
 
 .header {
@@ -157,6 +167,7 @@ mask: var(--mask);
   overflow: hidden;
   border-radius: 15px;
   min-height: 150px;
+  transition-duration: 250ms;
 }
 .card {
   padding: 1rem;
@@ -174,7 +185,7 @@ mask: var(--mask);
 }
 .header .home:hover {
   scale: 1.025;
-  outline: 4px solid white
+  outline: 4px solid white;
 }
 .section .image {
   max-width: 500px;

@@ -1,0 +1,63 @@
+.loading {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    background: #111;
+    animation: Intro forwards 2.5s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+}
+.logo {
+    animation: IntroIMG forwards 2s ease-in-out;
+}
+.bg {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    animation: bg forwards 5s ease-in-out;
+    opacity: .125;
+    filter: blur(50px);
+}
+@keyframes Intro {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes bg {
+    0% {
+        scale: 5;
+        rotate: -45deg;
+    }
+}
+@keyframes IntroIMG {
+    0% {
+        scale: 2;
+        rotate: 12.5deg;
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+        translate: 0;
+        rotate: 0deg;
+    }
+    100% {
+        rotate: 15deg;
+        translate: 0 -300px;
+        opacity: 0;
+    }
+}

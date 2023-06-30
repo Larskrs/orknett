@@ -14,18 +14,12 @@ import { RatioMedia } from '@/components/RatioMedia';
 
 function FilePage ({files}) {
 
-    const session = useSession({
-        required: true
-    })
-
-    if (session.status !== "authenticated" && session.status) {
-        return;
-    }
+    const session = useSession()
 
 
 
     return (
-        <FileSharingLayout pageId={0}>
+        <FileSharingLayout pageId={2}>
 
             {session.status == "authenticated" && <FileUpload /> }
             <div className={styles.list}>
@@ -35,10 +29,8 @@ function FilePage ({files}) {
                     return (
                         <div className={styles.download} key={i}>
                             <RatioMedia src={file.source} />
-                            <div className={styles.download_detail}>
-                                <a download={fileId} href={file.source} className={styles.downloadLink}>Download</a>
-                                <a href={file.source} >{fileId}</a>
-                            </div>
+                            <a download={fileId} href={file.source} className={styles.downloadLink}>Download</a>
+                            <a href={file.source} >{fileId}</a>
                         </div>
                         )
                     } ) }
@@ -65,12 +57,6 @@ export async function getServerSideProps(ctx){
         ctx.res,
         authOptions,
     )
-
-    if (!session) {
-        ctx.res.end;
-        return {props: {}};
-    }
-
     const userId = session.user.id
     
     const { data, error } = await GetClient()

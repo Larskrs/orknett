@@ -73,6 +73,7 @@ export function RatioMedia ({credit, quality=75, src, className, children, axis=
         content={GetContentTypeFromSource(src)}
         src={src}
         layout='fill'
+        controls
       quality={quality}
       
       onLoadingComplete={(img => {
@@ -89,6 +90,7 @@ export function RatioMedia ({credit, quality=75, src, className, children, axis=
                 position: relative;
                 display: flex;
                 aspect-ratio: ${ratio};
+                pointer-events: all;
             }
         `}</style>
         </>
