@@ -3,7 +3,7 @@ import Image from 'next/legacy/image';
 import { GetContentTagFromSource, GetContentType, GetContentTypeFromSource, GetExtensionFromSource } from '@/lib/ExtensionHelper';
 
 
-export function RatioMedia ({credit, quality=10, src, className, children, axis="height", objectFit=false }) {
+export function RatioMedia ({credit, quality=10, src, className, children, canPlay=false, autoPlay=false, controls=false, axis="height", objectFit=false }) {
   const [ratio, setRatio] = useState(5/1)
   const axisStyle = axis="width" ? {height: "100%"} : {width: "100%"}
   
@@ -71,8 +71,13 @@ export function RatioMedia ({credit, quality=10, src, className, children, axis=
         content={GetContentTypeFromSource(src)}
         src={src}
         controls
-      
-
+        autoPlay={autoPlay}
+        style={{ pointerEvents: canPlay ? 'all' : 'none'}}
+        onPlay={(event) => {
+            if (!canPlay) {
+                event.target.pause();
+            }
+        }}
         />
 
         <style jsx>{`
@@ -114,7 +119,6 @@ export function RatioMedia ({credit, quality=10, src, className, children, axis=
                   position: relative;
                   display: flex;
                   aspect-ratio: ${ratio};
-                  pointer-events: all;
               }
           `}</style>
           </>

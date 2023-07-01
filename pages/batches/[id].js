@@ -15,7 +15,7 @@ function BatchPage ({batch}) {
 
     const session = useSession()
 
-
+    const [display, setDisplay] = useState(null)
 
     return (
         <FileSharingLayout pageId={2}>
@@ -23,6 +23,13 @@ function BatchPage ({batch}) {
             <p>Owner of batch: {batch.owner.name}</p>
             {session.status == "authenticated" && session.data.user.id == batch.owner && <FileUpload batchPreset={batch.id} /> }
             <div className={styles.list}>
+
+            {display && <div className={styles.display} onClick={() => {setDisplay(null)}}>
+
+                <RatioMedia axis='width' canPlay={true} src={display.source} autoPlay={true} />
+
+            </div> }
+
                 {batch.files.map((file, i) => {
 
                         return <FileElement key={i} file={file} />                    

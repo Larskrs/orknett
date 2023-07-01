@@ -12,8 +12,11 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from './api/auth/[...nextauth]';
 import { RatioMedia } from '@/components/RatioMedia';
 import FileElement from '@/components/FileElement'
+import { useState } from 'react';
 
 function FilePage ({files}) {
+
+    const [display, setDisplay] = useState(null)
 
     const session = useSession({
         required: true
@@ -25,14 +28,25 @@ function FilePage ({files}) {
 
 
 
+
     return (
         <FileSharingLayout pageId={0}>
 
             {session.status == "authenticated" && <FileUpload /> }
             <div className={styles.list}>
+                {display && <div className={styles.display} onClick={() => {setDisplay(null)}}>
+
+                        <RatioMedia axis='width' canPlay={true} src={display.source} autoPlay={true} />
+
+                    </div> }
                 {files.map((file, i) => {
 
-                  return <FileElement key={i} file={file} />
+
+
+                  return <FileElement key={i} file={file} onSelect={() => {
+                    console.log("Uploading file: \n" + file.fileName)
+                    setDisplay(file)
+                  }}/>
 
                 } ) }
             </div>
