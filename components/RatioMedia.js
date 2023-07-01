@@ -3,7 +3,7 @@ import Image from 'next/legacy/image';
 import { GetContentTagFromSource, GetContentType, GetContentTypeFromSource, GetExtensionFromSource } from '@/lib/ExtensionHelper';
 
 
-export function RatioMedia ({credit, quality=10, src, className, children, canPlay=false, autoPlay=false, controls=false, axis="height", objectFit=false }) {
+export function RatioMedia ({credit, quality=10, src, alt, className, children, canPlay=false, autoPlay=false, controls=false, axis="height", objectFit=false }) {
   const [ratio, setRatio] = useState(5/1)
   const axisStyle = axis="width" ? {height: "100%"} : {width: "100%"}
   
@@ -71,6 +71,7 @@ export function RatioMedia ({credit, quality=10, src, className, children, canPl
         content={GetContentTypeFromSource(src)}
         src={src}
         controls
+        alt={alt}
         autoPlay={autoPlay}
         style={{ pointerEvents: canPlay ? 'all' : 'none'}}
         onPlay={(event) => {
@@ -103,6 +104,7 @@ export function RatioMedia ({credit, quality=10, src, className, children, canPl
           content={GetContentTypeFromSource(src)}
           src={src}
           layout='fill'
+          alt={alt}
           controls
         quality={quality}
         
@@ -130,6 +132,7 @@ export function RatioMedia ({credit, quality=10, src, className, children, canPl
         <>
         <Image
         className='img'
+        alt={alt}
         content={GetContentTypeFromSource(src)}
         src={src}
         layout='fill'

@@ -27,7 +27,7 @@ function BatchPage ({batch}) {
 
             {display && <div className={styles.display} onClick={() => {setDisplay(null)}}>
 
-                <RatioMedia axis='width' canPlay={true} src={display.source} autoPlay={true} />
+                <source src={file.source} content={GetContentTypeFromSource(file.source)} />
 
             </div> }
 

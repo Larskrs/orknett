@@ -12,19 +12,110 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from './api/auth/[...nextauth]';
 import { RatioMedia } from '@/components/RatioMedia';
 import FileElement from '@/components/FileElement'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Arrow from '@/components/Arrow';
+
+
+
 
 function FilePage ({files}) {
 
     const [display, setDisplay] = useState(null)
-
+    const [displayId, setDisplayId] = useState(0)
     const session = useSession({
         required: true
     })
 
+
+
+    useEffect(() => {
+        document.onkeydown = checkKey;
+
+        function checkKey(e) {
+        
+            e = e || window.event;
+        
+            if (e.keyCode == '38') {
+                // up arrow
+            }
+            else if (e.keyCode == '40') {
+                // down arrow
+            }
+            else if (e.keyCode == '37') {
+               // left arrow
+               moveDisplay(displayId - 1)
+               
+            }
+            else if (e.keyCode == '39') {
+               // right arrow
+               moveDisplay(displayId + 1)
+            }
+        
+        }
+    }, )
+
+    
+
     if (session.status !== "authenticated" && session.status) {
         return;
     }
+
+    function moveDisplay (newID) {
+
+        if (newID + 1 > files.length) {
+            newID = files.length;
+        }
+
+        setDisplayId(newID)
+        setDisplay(files[newID])
+    }
+
+    
+    function getDisplayElement () {
+
+        const content = GetContentTypeFromSource(display.source)
+        const contentType = content.split("/").shift();
+        
+        if (contentType == "image") {
+            return (
+                <img className={styles.display_element}
+                    key={displayId}
+                    alt={display.fileName}
+                    src={display.source}
+                    content={GetContentTypeFromSource(display.source)}
+                 />
+            )
+        }
+        if (contentType == "audio") {
+            return (
+                <audio 
+                    key={displayId}
+                    className={styles.display_element}
+                    alt={display.fileName}
+                    src={display.source}
+                    content={GetContentTypeFromSource(display.source)} />
+            )
+        }
+        if (contentType == "video") {
+            return (
+                <video 
+                    key={displayId}
+                    className={styles.display_element}
+                    alt={display.fileName}
+                    src={display.source}
+                    content={GetContentTypeFromSource(display.source)} 
+                    controls
+                    autoPlay
+                        
+                />
+            )
+        }
+        
+
+    }
+    
+
+    
 
 
 
@@ -34,24 +125,36 @@ function FilePage ({files}) {
 
             {session.status == "authenticated" && <FileUpload /> }
             <div className={styles.list}>
-                {display && <div className={styles.display} onClick={() => {setDisplay(null)}}>
-
-                        <RatioMedia axis='width' canPlay={true} src={display.source} autoPlay={true} />
-
+                    {display && <div className={styles.display_controls}>
+                        <button onClick={() => {moveDisplay(displayId - 1)}}>{<Arrow direction='left'/>}</button>
+                        <button onClick={() => {moveDisplay(displayId + 1)}}>{<Arrow direction='right'/>}</button>
                     </div> }
+                 <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}}className={styles.display} onClick={() => {setDisplay(null)}}>
+
+                    {display && getDisplayElement()}
+
+                    </div>
                 {files.map((file, i) => {
 
 
 
                   return <FileElement key={i} file={file} onSelect={() => {
                     console.log("Uploading file: \n" + file.fileName)
-                    setDisplay(file)
+                    moveDisplay(i)
                   }}/>
 
                 } ) }
             </div>
         </FileSharingLayout>
     );
+
+
+
+
+
+
+
+
 }
 
 function mediaPreview(source) {

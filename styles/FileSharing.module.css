@@ -83,4 +83,47 @@
     z-index: 1000;
     background-color: rgba(0,0,0,.5);
     backdrop-filter: blur(50px);
+    align-items: center !important;
+    justify-content: center;
+    display: flex;
+    transition-duration: .25s;
+}
+.display_element {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    object-fit: contain;
+    animation: forwards display_element .25s ease-in-out;
+}
+.display_controls {
+    position: fixed !important;
+    height: 10vh;
+    width: 100vw;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    pointer-events: none;
+    z-index: 1001;
+}
+.display_controls > button {
+    pointer-events: all;
+    background: none;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    scale: 2;
+    padding-inline: 2rem;
+}
+@keyframes display_element {
+    0% {
+        translate: -25vw 0;
+        opacity: 0;
+        scale: 0;
+        rotate: 20deg;
+        filter: blur(100px);
+    }
+    80% {
+    }
 }
