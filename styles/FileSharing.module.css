@@ -7,6 +7,10 @@
     width: 100%;
     justify-content: center;
 }
+.row {
+    display: flex;
+    gap: .5rem;
+}
 .download {
     max-width: 300px;
     height: 300px;
@@ -95,6 +99,24 @@
     object-fit: contain;
     animation: forwards display_element .25s ease-in-out;
 }
+.display_unknown_element{
+    display: flex !important;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 1rem;
+    scale: 2;
+    align-items: center !important;
+    justify-content: center !important;
+    animation: forwards display_element .25s ease-in-out;
+}
+.display_unknown_element h2 {
+    width: fit-content;
+    display: flex;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 1rem;
+    animation: forwards display_element .25s ease-in-out;
+}
 .display_controls {
     position: fixed !important;
     height: 10vh;
@@ -104,8 +126,14 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    pointer-events: none;
+    pointer-events: all;
     z-index: 1001;
+}
+.display_controls h3 {
+    white-space: nowrap; 
+    width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis; 
 }
 .display_controls > button {
     pointer-events: all;

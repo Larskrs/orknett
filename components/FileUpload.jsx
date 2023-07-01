@@ -8,6 +8,7 @@ import { GetAuthenticatedClient } from "@/lib/Supabase";
 import Image from "next/image";
 import { contentTypeList } from "@/lib/ExtensionHelper";
 import { RatioImage } from "./RatioImage";
+import styles from "@/styles/FileSharing.module.css"
 
 export default function FileUpload ({batchPreset = ""}) {
     
@@ -133,7 +134,7 @@ export default function FileUpload ({batchPreset = ""}) {
         )
     }
     return (
-        <div className='container'>
+        <div className='container' style={{ zIndex: 1002, backgroundColor: "#111", }}>
             {error && <p>{error}</p>}
             {submitting && 
                 <div>
@@ -144,7 +145,7 @@ export default function FileUpload ({batchPreset = ""}) {
                     <Link href={link}>{link}</Link>
                 </div>}
             {fileUrl &&
-            <div style={{maxWidth: `500px`}}>
+            <div style={{width: `500px`}}>
                 <RatioImage src={fileUrl} width={250} height={250} />
             </div>
             }

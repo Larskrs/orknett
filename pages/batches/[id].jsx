@@ -8,66 +8,31 @@ import styles from '@/styles/FileSharing.module.css'
 import { GetContentType, GetContentTypeFromSource, GetExtensionFromSource } from '@/lib/ExtensionHelper';
 import { RatioImage } from '@/components/RatioImage';
 import Image from 'next/image';
-import { getServerSession } from "next-auth/next"
-import { authOptions } from './api/auth/[...nextauth]';
 import { RatioMedia } from '@/components/RatioMedia';
-import FileElement from '@/components/FileElement'
-import { useEffect, useState } from 'react';
+import FileElement from '@/components/FileElement';
+import { useState, useEffect } from 'react';
 import Arrow from '@/components/Arrow';
 
 
 
 
-function FilePage ({files}) {
+export default function BatchPage ({batch}) {
+
+    const session = useSession()
 
     const [display, setDisplay] = useState(null)
     const [displayId, setDisplayId] = useState(-1)
-    const session = useSession({
-        required: true
-    })
 
-
-    
-    useEffect(() => {
-        document.onkeydown = checkKey;
-        
-        function checkKey(e) {
-            
-            e = e || window.event;
-            
-            if (e.keyCode == '38') {
-                // up arrow
-            }
-            else if (e.keyCode == '40') {
-                // down arrow
-            }
-            else if (e.keyCode == '37') {
-                // left arrow
-                moveDisplay(displayId - 1)
-                
-            }
-            else if (e.keyCode == '39') {
-                // right arrow
-                moveDisplay(displayId + 1)
-            }
-            
-        }
-    }, )
-    
-    if (session.status !== "authenticated" && session.status) {
-        return;
-    }
-    
 
 
     function moveDisplay (newID) {
 
-        if (newID + 1 > files.length) {
-            newID = files.length;
+        if (newID + 1 > batch.files.length) {
+            newID = batch.files.length;
         }
 
         setDisplayId(newID)
-        setDisplay(files[newID])
+        setDisplay(batch.files[newID])
     }
 
     
@@ -121,17 +86,43 @@ function FilePage ({files}) {
         
 
     }
+
+    useEffect(() => {
+        document.onkeydown = checkKey;
     
-
-    
-
-
-
+        function checkKey(e) {
+        
+            e = e || window.event;
+        
+            if (e.keyCode == '38') {
+                // up arrow
+            }
+            else if (e.keyCode == '40') {
+                // down arrow
+            }
+            else if (e.keyCode == '37') {
+               // left arrow
+               moveDisplay(displayId - 1)
+               
+            }
+            else if (e.keyCode == '39') {
+               // right arrow
+               moveDisplay(displayId + 1)
+            }
+        
+        }
+    }, )
 
     return (
-        <FileSharingLayout pageId={0}>
 
-            {session.status == "authenticated" && <FileUpload /> }
+
+
+
+        
+        <FileSharingLayout pageId={2}>
+            <h2>{batch.title}</h2>
+            <p>Owner of batch: {batch.owner.name}</p>
+            {session.status == "authenticated" && session.data.user.id == batch.owner && <FileUpload batchPreset={batch.id} /> }
             <div className={styles.list}>
                     {display && <div className={styles.display_controls}>
                         <button onClick={() => {moveDisplay(displayId - 1)}}>{<Arrow direction='left'/>}</button>
@@ -149,7 +140,7 @@ function FilePage ({files}) {
                     {display && <DisplayElement/>}
 
                     </div>
-                {files.map((file, i) => {
+                {batch.files.map((file, i) => {
 
 
 
@@ -162,14 +153,6 @@ function FilePage ({files}) {
             </div>
         </FileSharingLayout>
     );
-
-
-
-
-
-
-
-
 }
 
 function mediaPreview(source) {
@@ -183,36 +166,44 @@ function mediaPreview(source) {
     }
 }
 
-export async function getServerSideProps(ctx){
+export async function getStaticProps({ params }){
 
-    const session = await getServerSession(
-        ctx.req,
-        ctx.res,
-        authOptions,
-    )
-
-    if (!session) {
-        ctx.res.end;
-        return {props: {}};
-    }
-
-    const userId = session.user.id
     
+    const batchId = params.id
     const { data, error } = await GetClient()
-    .from("files")
+    .from("batches")
     .select(`
-        *
+        *,
+        files (*)
     `)
+    .eq("id", batchId)
     .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
-    .eq("user", userId)
-    .order("created_at", {ascending: false})
+    .order("created_at", {
+        foreignTable: "files",
+        ascending: false
+    })
+    .single()
+
+    console.log({data, error})
 
     return {
         props:{
-            files: data
+            batch: data
         },
+        revalidate: 5, // In seconds
     }
 }
 
+export async function getStaticPaths() {
+    const { data, error } = await GetClient("public")
+    .from("batches")
+    .select("id")
+    .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
 
-export default FilePage;
+    const paths = data.map( (batch, i) => {return {params: {id: batch.id } } } )
+    console.log({data, paths})
+    return {
+      paths,
+      fallback: 'blocking',
+    };
+  }
