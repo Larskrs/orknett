@@ -3,7 +3,7 @@ import { RatioMedia } from './RatioMedia';
 
 
 
-export default function({file}) {
+export default function FileElement ({file}) {
 
         const fileId = file.source.split('/').pop().split('=').pop();
                     const creationDate = new Date(file.created_at);
