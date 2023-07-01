@@ -32,7 +32,7 @@ function FilePage ({files}) {
             <div className={styles.list}>
                 {files.map((file, i) => {
 
-                  return <FileElement file={file} />
+                  return <FileElement key={i} file={file} />
 
                 } ) }
             </div>

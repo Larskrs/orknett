@@ -25,7 +25,7 @@ function BatchPage ({batch}) {
             <div className={styles.list}>
                 {batch.files.map((file, i) => {
 
-                        return <FileElement file={file} />                    
+                        return <FileElement key={i} file={file} />                    
 
                     } ) }
             </div>

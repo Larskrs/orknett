@@ -10,7 +10,7 @@ export default function({file}) {
                     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
                     return (
-                        <div className={styles.download} key={file.id}>
+                        <div className={styles.download}>
                             <RatioMedia objectFit src={file.source} />
                             <div className={styles.download_detail}>
                                 <a>{file.fileName}</a>
