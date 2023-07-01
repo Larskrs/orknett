@@ -10,6 +10,7 @@ import { RatioImage } from '@/components/RatioImage';
 import Image from 'next/image';
 import { RatioMedia } from '@/components/RatioMedia';
 import FileElement from '@/components/FileElement';
+import { useState } from 'react';
 
 function BatchPage ({batch}) {
 
