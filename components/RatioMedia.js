@@ -1,14 +1,15 @@
 import React, { FC, useState } from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { GetContentTagFromSource, GetContentType, GetContentTypeFromSource, GetExtensionFromSource } from '@/lib/ExtensionHelper';
 
 
-export function RatioMedia ({credit, quality=75, src, className, children, axis="height" }) {
+export function RatioMedia ({credit, quality=10, src, className, children, axis="height", objectFit=false }) {
   const [ratio, setRatio] = useState(5/1)
   const axisStyle = axis="width" ? {height: "100%"} : {width: "100%"}
   
+  const content = GetContentTypeFromSource(src)
+  const type = content.split('/').shift();
 
-  const type = src.split('.').pop();
 
 
 
@@ -22,7 +23,7 @@ export function RatioMedia ({credit, quality=75, src, className, children, axis=
 
 
 
-      {MediaSection()}
+        {MediaSection()}
 
 
 
@@ -36,6 +37,7 @@ export function RatioMedia ({credit, quality=75, src, className, children, axis=
                 position: relative;
                 pointer-events: none;
                 width: 100%;
+                max-width: inherit;
             }
             .credit {
               margin-top: 0px;
@@ -44,21 +46,17 @@ export function RatioMedia ({credit, quality=75, src, className, children, axis=
               font-size: 14px;
               font-family: var(--inter);
             }
-            .video {
-                width: 100%;
-            }
         `}</style>
     </>
   );
 
   function MediaSection () {
 
-    const content = GetContentTypeFromSource(src)
-    const type = content.split('/').shift();
-    console.log({type})
+    // console.log({type})
 
     if (type == "image") { return ImageSection() }
     if (type == "video") { return VideoSection() }
+    if (type == "audio") { return AudioSection() }
 
 
 
@@ -72,22 +70,17 @@ export function RatioMedia ({credit, quality=75, src, className, children, axis=
         className='img'
         content={GetContentTypeFromSource(src)}
         src={src}
-        layout='fill'
         controls
-      quality={quality}
       
-      onLoadingComplete={(img => {
-          
-          console.log({height: img.naturalHeight, width: img.naturalWidth})
-          setRatio(img.naturalWidth / img.naturalHeight)
-        })}
+
         />
 
         <style jsx>{`
 
             .img {
-                width: 100%;
-                position: relative;
+                width: auto;
+                max-width: inherit;
+                height: auto;
                 display: flex;
                 aspect-ratio: ${ratio};
                 pointer-events: all;
@@ -96,6 +89,37 @@ export function RatioMedia ({credit, quality=75, src, className, children, axis=
         </>
     )
     }
+
+    function AudioSection () {
+      return (
+          <>
+          <video
+          className='img'
+          content={GetContentTypeFromSource(src)}
+          src={src}
+          layout='fill'
+          controls
+        quality={quality}
+        
+        onLoad={(video => {
+            setRatio(video.naturalWidth / video.naturalHeight)
+          })}
+          />
+  
+          <style jsx>{`
+  
+              .img {
+                  background: #222;
+                  width: 100%;
+                  position: relative;
+                  display: flex;
+                  aspect-ratio: ${ratio};
+                  pointer-events: all;
+              }
+          `}</style>
+          </>
+      )
+      }
   
   function ImageSection () {
     return (
@@ -105,11 +129,12 @@ export function RatioMedia ({credit, quality=75, src, className, children, axis=
         content={GetContentTypeFromSource(src)}
         src={src}
         layout='fill'
+        objectFit={objectFit ? 'cover' : 'none'}
       quality={quality}
       
       onLoadingComplete={(img => {
           
-          console.log({height: img.naturalHeight, width: img.naturalWidth})
+          // console.log({height: img.naturalHeight, width: img.naturalWidth})
           setRatio(img.naturalWidth / img.naturalHeight)
         })}
         />
@@ -121,6 +146,7 @@ export function RatioMedia ({credit, quality=75, src, className, children, axis=
                 position: relative;
                 display: flex;
                 aspect-ratio: ${ratio};
+                object-fit: ${objectFit ? "cover" : "none"}
             }
         `}</style>
         </>

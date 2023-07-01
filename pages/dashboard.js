@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { getServerSession } from "next-auth/next"
 import { authOptions } from './api/auth/[...nextauth]';
 import { RatioMedia } from '@/components/RatioMedia';
+import FileElement from '@/components/FileElement'
 
 function FilePage ({files}) {
 
@@ -31,17 +32,9 @@ function FilePage ({files}) {
             <div className={styles.list}>
                 {files.map((file, i) => {
 
-                    const fileId = file.source.split('/').pop().split('=').pop();
-                    return (
-                        <div className={styles.download} key={i}>
-                            <RatioMedia src={file.source} />
-                            <div className={styles.download_detail}>
-                                <a download={fileId} href={file.source} className={styles.downloadLink}>Download</a>
-                                <a href={file.source} >{fileId}</a>
-                            </div>
-                        </div>
-                        )
-                    } ) }
+                  return <FileElement file={file} />
+
+                } ) }
             </div>
         </FileSharingLayout>
     );

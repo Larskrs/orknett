@@ -26,7 +26,7 @@ export default function FileUpload ({batchPreset = ""}) {
 
     console.log({batchPreset, batch})
     
-    async function UploadToDatabase (id, extension) {
+    async function UploadToDatabase (fileName, id, extension) {
         console.log("Uploading to database...")
 
         console.log({session})
@@ -42,12 +42,14 @@ export default function FileUpload ({batchPreset = ""}) {
             storage: process.env.NEXT_PUBLIC_STORAGE_ID,
             user: userId,
             batch : (batch != "" ? batch : null),
+            fileName : fileName,
         } :
         {
             id: id,
             source: `/api/v1/files?fileId=${id}.${extension}`,
             storage: process.env.NEXT_PUBLIC_STORAGE_ID,  
             batch : (batch != "" ? batch : null),
+            fileName : fileName,
         })
         .select("*")
         console.log({select: select, error})
@@ -111,7 +113,7 @@ export default function FileUpload ({batchPreset = ""}) {
             } finally {
                     setSubmitting(false);
                     setProgress(0);
-                    UploadToDatabase(name, type);
+                    UploadToDatabase(file.name, name, type);
                     
             }
             // axios

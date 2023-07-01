@@ -11,7 +11,7 @@ function index({batches}) {
                 {batches.map((batch, i) => {
                     return (
                         
-                        <Link className={styles.download} key={i} href={"/batches/" + batch.id}>
+                        <Link key={i} href={"/batches/" + batch.id}>
                             <p className={styles.downloadLink}>{batch.title}</p>
                         </Link>
                     )

@@ -9,6 +9,9 @@ export default function RoundedDiv({children, style, expand}) {
         <style jsx>{`
 
             .div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 padding: 1rem;
                 background: transparent;
                 
