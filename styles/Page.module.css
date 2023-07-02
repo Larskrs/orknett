@@ -108,7 +108,6 @@ mask: var(--mask);
 
 .header {
   background-color: #111;
-  margin-block: 2rem;
   gap: 0px;
   padding: 1rem;
 }
