@@ -1,14 +1,11 @@
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
-import { useState } from "react";
-import React, { useEffect } from "react";
-import Router, { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import { GetAuthenticatedClient } from "@/lib/Supabase";
-import Image from "next/image";
 import { contentTypeList } from "@/lib/ExtensionHelper";
 import { RatioImage } from "./RatioImage";
-import styles from "@/styles/FileSharing.module.css"
+import { GetAuthenticatedClient } from "@/lib/Supabase";
 
 export default function FileUpload ({batchPreset = ""}) {
     
@@ -16,12 +13,14 @@ export default function FileUpload ({batchPreset = ""}) {
     
     const [file, setFile] = useState();
     const [fileUrl, setFileUrl] = useState()
-    const [progress, setProgress] = useState(0);
-    const [error, setError] = useState(null);
-    const [submitting, setSubmitting] = useState(false);
-    const [finished, setFinished] = useState(false);
-    const [link, setLink] = useState(null);
-    const [batch, setBatch] = useState(batchPreset != "" ? batchPreset : "");
+    const [progress, setProgress] = useState(0)
+    const [error, setError] = useState(null)
+    const [submitting, setSubmitting] = useState(false)
+    const [finished, setFinished] = useState(false)
+    const [link, setLink] = useState(null)
+    const [batch, setBatch] = useState(batchPreset != "" ? batchPreset : "")
+    const [visible, setVisible] = useState(false)
+    
 
     const session = useSession();
 
@@ -134,54 +133,99 @@ export default function FileUpload ({batchPreset = ""}) {
         )
     }
     return (
-        <div className='container' >
-            {error && <p>{error}</p>}
-            {submitting && 
-                <div>
-                    <progress value={progress} max="100">{progress}</progress> <p>{progress}</p>
-                </div>}
-            {link && 
-                <div>
-                    <Link href={link}>{link}</Link>
-                </div>}
-            {fileUrl &&
-            <div style={{width: `500px`}}>
-                <RatioImage src={fileUrl} width={250} height={250} />
+        <>
+
+        <button onClick={() => {setVisible(true)}}>Upload File</button>
+
+        <div className="background" onClick={() => {setVisible(false)}} style={{opacity: visible ? 1 : 0, pointerEvents: visible ? "all" : "none"}}>
             </div>
-            }
-            <form method="POST">
-                <div>
-                    <label htmlFor="file"> File</label>
-                    <input type='file' id='file' accept={contentTypeList['image']} onChange={handleSetFile}/>
-                    {batchPreset == null && <input type='text' id='batch' onChange={(e) => {setBatch(e.target.value)}} /> }
-                </div>
-            </form>
-            
-            {file && <button onClick={handleSubmit}> Upload File </button>}
 
-            <style jsx>{`
+            {visible && <div className="container">
 
-                .container {
-                    z-index: 200;
-                    position: fixed;
-                    height: 100%;
-                    width: 100%;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    display: flex;
-                    padding: 2rem;
-                    background-color: rgba(0,0,0,.5);
-                    backdrop-filter: blur(50px);
+                {error && <p>{error}</p>}
+                {submitting && 
+                    <div>
+                        <progress value={progress} max="100">{progress}</progress> <p>{progress}</p>
+                    </div>}
+                {link && 
+                    <div>
+                        <Link href={link}>{link}</Link>
+                    </div>}
+                {fileUrl &&
+                    <div style={{width: `500px`}}>
+                        <RatioImage src={fileUrl} width={250} height={250} />
+                    </div>
                 }
+
+
+            
+                    <div className="row">
+                    <input style={{display: "none"}} type='file' id='file' accept={contentTypeList['image']} onChange={handleSetFile}/>
+                    {batchPreset == null && <input type='text' id='batch' onChange={(e) => {setBatch(e.target.value)}} /> }
+                    
+                        <label className={"upload_button"}htmlFor="file">Select File to upload</label>
+                        {file && <label className="upload_button" onClick={handleSubmit}> Upload File </label>}
+                    </div> 
+
+        </div> }
+
+
+                <style jsx>{`
+
+                    .background {
+                        z-index: 200;
+                        position: fixed;
+                        height: 100%;
+                        width: 100%;
+                        left: 0;
+                        top: 0;
+                        background-color: rgba(0,0,0,.75);
+                        backdrop-filter: blur(50px);
+                        
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        gap: 0.5rem;
+                    }
+                    .container {
+                        z-index: 200;
+                        position: fixed;
+                        width: 100%;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        display: flex;
+                        padding: 2rem;
+                        
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        gap: 0.5rem;
+                    }
+                    .upload_button {
+                        padding: 1rem 2rem;
+                        background: #111;
+                        border: 1px solid var(--gray-3);
+                        border-radius: 10px;
+                        transition: none;
+                        outline: none;
+                    }
+                    .upload_button:hover {
+                        outline: 2px solid var(--gray-3);
+                        background: var(--gray-2);
+                    }
+                    .row {
+                        display: flex;
+                        gap: 0.5rem;
+                        pointer-events: all;
+                    }
 
             `}</style>
 
-
-
-        </div>
-    )
+    </>
+    );
 }
+
 
 
 function create_UUID(){
@@ -193,4 +237,3 @@ function create_UUID(){
     });
     return uuid;
 }
-

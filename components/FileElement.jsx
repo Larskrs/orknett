@@ -14,7 +14,7 @@ export default function FileElement ({file, onSelect}) {
 
 
                             
-                            <div style={{pointerEvents: `none`}}>
+                            <div style={{pointerEvents: `none`, width: "100%", height: "100%"}}>
                                 <RatioMedia alt={file.fileName} objectFit src={file.source} />
                             </div>
                             <div className={styles.download_detail}>

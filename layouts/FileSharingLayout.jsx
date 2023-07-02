@@ -19,8 +19,7 @@ export default function Layout({children, pageId = 0}) {
                   
                   <nav className={styles.nav}>
                       <Link className={current === -1 ? styles.element : styles.default} href={"/"}>Home</Link>
-                      <Link className={current === 0 ? styles.element : styles.default} href={"/dashboard"}>Dashboard</Link>
-                      <Link className={current === 1 ? styles.element : styles.default} href={"/upload"}>Upload</Link>
+                      <Link className={current === 0 ? styles.element : styles.default} href={"/dashboard"}>files</Link>
                       <Link className={current === 2 ? styles.element : styles.default} href={"/batches"}>Batches</Link>
                       <LoginButton />
                   </nav>

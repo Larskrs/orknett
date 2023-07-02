@@ -1,5 +1,5 @@
 
-import FileUpload from '@/components/FileUpload';
+import NewFileUpload from '@/components/NewFileUpload';
 import FileSharingLayout from '@/layouts/FileSharingLayout'
 import { GetClient } from '@/lib/Supabase';
 import { useSession } from 'next-auth/react';
@@ -58,6 +58,8 @@ export default function BatchPage ({batch}) {
                     className={styles.display_element}
                     alt={display.fileName}
                     src={display.source}
+                    controls
+                    autoPlay
                     content={GetContentTypeFromSource(display.source)} />
             )
         }
@@ -122,7 +124,7 @@ export default function BatchPage ({batch}) {
         <FileSharingLayout pageId={2}>
             <h2>{batch.title}</h2>
             <p>Owner of batch: {batch.owner.name}</p>
-            {session.status == "authenticated" && session.data.user.id == batch.owner && <FileUpload batchPreset={batch.id} /> }
+            {session.status == "authenticated" && session.data.user.id == batch.owner && <NewFileUpload batchPreset={batch.id} /> }
             <div className={styles.list}>
                     {display && <div className={styles.display_controls}>
                         <button onClick={() => {moveDisplay(displayId - 1)}}>{<Arrow direction='left'/>}</button>

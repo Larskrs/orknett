@@ -38,6 +38,13 @@ html, body {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion) {
+  /* styles to apply if a user's device settings are set to reduced motion */
+  * {
+    transition-duration: 0ms !important;
+  }
+}
+
 :root, body {
   padding: 0;
   margin: 0;

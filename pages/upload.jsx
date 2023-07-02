@@ -1,6 +1,6 @@
 
 import FileSharingLayout from '@/layouts/FileSharingLayout';
-import FileUpload from '@/components/FileUpload'
+import NewFileUpload from '@/components/NewFileUpload'
 import LoginButton from '@/components/LoginButton'
 
 import { useSession } from 'next-auth/react';
@@ -15,8 +15,7 @@ export default function Upload() {
 
 
         <FileSharingLayout pageId={1}>
-            <LoginButton />
-            <FileUpload />
+           {session.status === "authenticated" && <NewFileUpload /> }
         </FileSharingLayout>
     );
 }

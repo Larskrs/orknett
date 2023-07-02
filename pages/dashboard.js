@@ -1,5 +1,5 @@
 
-import FileUpload from '@/components/FileUpload';
+import NewFileUpload from '@/components/NewFileUpload';
 import FileSharingLayout from '@/layouts/FileSharingLayout'
 import { GetClient } from '@/lib/Supabase';
 import { useSession } from 'next-auth/react';
@@ -93,6 +93,8 @@ function FilePage ({files}) {
                     className={styles.display_element}
                     alt={display.fileName}
                     src={display.source}
+                    controls
+                    autoPlay
                     content={GetContentTypeFromSource(display.source)} />
             )
         }
@@ -131,7 +133,7 @@ function FilePage ({files}) {
     return (
         <FileSharingLayout pageId={0}>
 
-            {session.status == "authenticated" && <FileUpload /> }
+            {session.status == "authenticated" && <NewFileUpload /> }
             <div className={styles.list}>
                     {display && <div className={styles.display_controls}>
                         <button onClick={() => {moveDisplay(displayId - 1)}}>{<Arrow direction='left'/>}</button>
@@ -144,7 +146,7 @@ function FilePage ({files}) {
                         </div>
                         <button onClick={() => {moveDisplay(displayId + 1)}}>{<Arrow direction='right'/>}</button>
                     </div> }
-                 <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}}className={styles.display} onClick={() => {setDisplay(null)}}>
+                 <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
 
                     {display && <DisplayElement/>}
 

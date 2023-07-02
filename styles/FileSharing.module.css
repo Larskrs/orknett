@@ -3,7 +3,7 @@
     flex-direction: row;
     flex-wrap: wrap; 
     gap: .5rem;
-    max-width: 1500px;
+    max-width: 5000px;
     width: 100%;
     justify-content: center;
 }
