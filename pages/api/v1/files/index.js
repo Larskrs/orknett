@@ -76,7 +76,7 @@ function GetFileStream(req, res) {
   let filePath = `./files/${fileName}`;
   
 
-
+  
   const options = {};
 
     let start;
@@ -117,6 +117,7 @@ function GetFileStream(req, res) {
             res.statusCode = 200;
             res.setHeader("accept-ranges", "bytes");
             res.setHeader("content-length", contentLength);
+            
             res.end();
         }
         else {        
@@ -142,6 +143,9 @@ function GetFileStream(req, res) {
                 res.setHeader("content-range", `bytes ${start || 0}-${end || (contentLength-1)}/${contentLength}`);
                 res.setHeader("accept-ranges", "bytes");
             }
+            res.setHeader("filename", fileName);
+            res.setHeader("content-disposition", "filename=" + fileName)
+            console.log(`File ${filePath} Filename ${fileName}`)
 
             const fileStream = fs.createReadStream(filePath, options);
             fileStream.on("error", error => {
@@ -149,6 +153,7 @@ function GetFileStream(req, res) {
                 console.log(error);
                 res.sendStatus(500);
             });
+
             
             fileStream.pipe(res);
         }
