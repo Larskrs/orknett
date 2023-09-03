@@ -145,7 +145,6 @@ function GetFileStream(req, res) {
             }
             res.setHeader("filename", fileName);
             res.setHeader("content-disposition", "filename=" + fileName)
-            console.log(`File ${filePath} Filename ${fileName}`)
 
             const fileStream = fs.createReadStream(filePath, options);
             fileStream.on("error", error => {
