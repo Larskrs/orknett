@@ -140,8 +140,8 @@ function FilePage ({files}) {
                         <div>
                             <h3>{display.fileName}</h3>
                             <div className={styles.row}>
-                                <Link href={display.source} className={styles.downloadLink} download>Download</Link>
-                                <Link href={display.source} className={styles.downloadLink} >Direct Link</Link>
+                                <a href={display.source} className={styles.downloadLink} download={display.source}>Download</a>
+                                <p onClick={() => {navigator.clipboard.writeText(document.domain +  display.source)}} className={styles.downloadLink} >Copy Link</p>
                             </div>
                         </div>
                         <button onClick={() => {moveDisplay(displayId + 1)}}>{<Arrow direction='right'/>}</button>

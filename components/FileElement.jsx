@@ -1,6 +1,6 @@
 import styles from '@/styles/FileSharing.module.css'
 import { RatioMedia } from './RatioMedia';
-
+import Link from 'next/link';
 
 
 export default function FileElement ({file, onSelect}) {
@@ -20,8 +20,8 @@ export default function FileElement ({file, onSelect}) {
                             <div className={styles.download_detail}>
                                 <a>{file.fileName}</a>
                                 <div className={styles.links}>
-                                    <a download={fileId} href={file.source} className={styles.downloadLink}>Download</a>
-                                    <a href={file.source} className={styles.downloadLink} >View</a>
+                                    <a href={file.source} className={styles.downloadLink} download={file.source}>Download</a>
+                                    <p onClick={() => {navigator.clipboard.writeText(document.domain +  file.source)}} className={styles.downloadLink} >Copy Link</p>
                                 </div>
                                 <a>{creationDate.toLocaleDateString("en-EN")}</a>
                             </div>
