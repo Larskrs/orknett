@@ -11,7 +11,7 @@ function index({articles}) {
                 {articles.map((article, i) => {
                     return (
                         
-                        <Link key={i} className={styles.article} href={"/articles/" + article.id}>
+                        <Link key={i} className={styles.article} href={"/dashboard/articles/" + article.id}>
                             <h3>{article.headers.title}</h3>
                             <p>{article.headers.sub_header}</p>
                         </Link>

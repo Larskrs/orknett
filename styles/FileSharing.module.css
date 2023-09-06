@@ -185,3 +185,25 @@
     margin: 0;
     color: gray;
 }
+
+
+
+.settings_wrapper {
+    width: 100%;
+    margin: 1rem;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+.settings_wrapper h3 {
+    margin-block: .25rem;
+}
+.settings_wrapper p {
+    margin-block: .25rem;
+    font-size: 16px;
+}
+.settings_wrapper section p {
+    margin-block: 0;
+    color: gray;
+    font-size: 14px;
+}
