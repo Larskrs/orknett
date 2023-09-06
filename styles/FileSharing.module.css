@@ -8,6 +8,7 @@
     justify-content: center;
 }
 .row {
+    flex-direction: row;
     display: flex;
     gap: .5rem;
 }
@@ -156,4 +157,31 @@
     }
     80% {
     }
+}
+
+.wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 1rem;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.article {
+    width: 350px;
+    height: 150px;
+    padding: 1rem;
+    border: 1px solid #222;
+    border-radius: 8px;
+    text-decoration: none;
+    position: relative;
+}
+.article h3 {
+    color: white;
+}
+.article > * {
+    margin: 0;
+    color: gray;
 }

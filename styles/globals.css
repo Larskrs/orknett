@@ -80,3 +80,6 @@ p {
   font-size: 1.25rem;
 }
 
+.avatar {
+  border-radius: 50%;
+}

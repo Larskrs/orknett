@@ -9,12 +9,12 @@
     align-items: center;
     z-index: 10000;
     background: #111;
-    animation: Intro forwards 2.5s ease-in-out;
+    animation: Intro forwards 1.5s ease-in-out;
     opacity: 0;
     pointer-events: none;
 }
 .logo {
-    animation: IntroIMG forwards 2s ease-in-out;
+    animation: IntroIMG forwards 1s ease-in-out;
 }
 .bg {
     height: 100vh;

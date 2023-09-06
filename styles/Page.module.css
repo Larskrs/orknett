@@ -194,7 +194,7 @@ mask: var(--mask);
   overflow: visible;
 }
 .section img {
-    border-radius: 25px;
+    border-radius: 5px;
     overflow: hidden;
 }
 .section:hover img {

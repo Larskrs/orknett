@@ -9,7 +9,7 @@ import { GetContentType, GetContentTypeFromSource, GetExtensionFromSource } from
 import { RatioImage } from '@/components/RatioImage';
 import Image from 'next/image';
 import { getServerSession } from "next-auth/next"
-import { authOptions } from './api/auth/[...nextauth]';
+import { authOptions } from '../api/auth/[...nextauth]';
 import { RatioMedia } from '@/components/RatioMedia';
 import FileElement from '@/components/FileElement'
 import { useEffect, useState } from 'react';

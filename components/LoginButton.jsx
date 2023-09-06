@@ -7,7 +7,7 @@ export default function Component() {
     return (
       <>
         <div className="row">
-            <Image onClick={() => signOut()} className="avatar" src={session.user.image} alt={"name"} width={35} height={35}  />
+            <Image onClick={() => signOut()} className="avatar" src={session.user.image} alt={session.user.name + "'s avatar"} width={35} height={35}  />
             {/* {session.user.name} <br /> */}
         </div>
  
@@ -16,7 +16,7 @@ export default function Component() {
             .avatar {
                 border: none;
                 border-radius: 50%;
-                margin-right: 1rem;
+                margin-right: 0rem;
             }
             .row {
                 width: fit-content;

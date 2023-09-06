@@ -1,0 +1,16 @@
+.wrap {
+    padding: .5rem .5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: min-content;
+    height: min-content;
+    gap: .5rem;
+    background-color: #222;
+    border-radius: 8px;
+    position: relative;
+}
+.wrap > * {
+    margin: 0;
+}
