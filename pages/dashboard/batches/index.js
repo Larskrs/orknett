@@ -15,7 +15,7 @@ function index({batches}) {
                         
                         <Link key={i} className={styles.article} href={"/dashboard/batches/" + batch.id}>
                             <p >{batch.title}</p>
-                            <Badge style={{position: "absolute", bottom: "1rem"}}>
+                            <Badge style={{position: "absolute", bottom: "1rem", marginRight: "1rem"}}>
                                 <Image className="avatar" src={batch.owner.image} alt={batch.owner.name + "'s avatar"} width={35} height={35}  />
                                 <p >{batch.owner.name}</p>
                             </Badge>
