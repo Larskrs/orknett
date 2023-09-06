@@ -22,28 +22,30 @@ function index({article}) {
     );
 }
 
-export async function getStaticProps({ params}) {
+export async function getStaticProps({ params }) {
 
-    const url = process.env.NEXTAUTH_URL + `/api/v1/media/articles/${params.id}`
-    const request = await fetch(url)
-    const json = await request.json()
+    const { data, error } = await GetClient("public")
+    .from("articles")
+    .select("*")
+    .eq("id", params.id)
+    .single()
 
     return {
         props:{
-            article: json.data,
+            article: data,
         }
     }
 }
 
 export async function getStaticPaths() {
 
-    const url = process.env.NEXTAUTH_URL + "/api/v1/media/articles?limit=5"
-    const request = await fetch(url)
-    const { data } = await request.json()
+    const { data, error } = await GetClient("public")
+    .from("articles")
+    .select("id")
 
-    console.log(data)
+    console.log({data})
 
-    const paths = data.map( (batch, i) => {return {params: {id: batch.id + "" } } } )
+    const paths = data.map( (article, i) => {return {params: {id: article.id + "" } } } )
     console.log({paths: paths[0]})
     return {
       paths,
