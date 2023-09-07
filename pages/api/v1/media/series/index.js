@@ -25,7 +25,7 @@ export default async function handler(req, res) {
       `)
       .limit(limit)
       .order(orderParam().table, {ascending: orderParam().ascending})
-      .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
+      // .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
       .in("type", allowedTypes)
       
       res.status(200).json({ data, error});

@@ -6,7 +6,9 @@ const nextConfig = {
       "lh3.googleusercontent.com",
       "cdn.discordapp.com",
       "gyazo.com",
-      "media.discordapp.net"
+      "media.discordapp.net",
+      "aktuelt.tv",
+      "i.gyazo.com"
     ],
   }
 }

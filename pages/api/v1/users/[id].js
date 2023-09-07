@@ -1,13 +1,12 @@
-import { GetClient, GetAuthenticatedClient } from "@/lib/Supabase";
+import { GetClient, GetAuthenticatedClient, GetServiceClient } from "@/lib/Supabase";
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "../../auth/[...nextauth]"
 
 export default async function handler(req, res) {
     const { id } = req.query
 
-    const session = await getServerSession(req, res, authOptions);
     
-    let { data, error } = await GetAuthenticatedClient("next_auth", session)
+    let { data, error } = await GetServiceClient("next_auth")
       .from("users")
       .select(`
         *

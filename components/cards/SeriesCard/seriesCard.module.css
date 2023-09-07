@@ -1,0 +1,13 @@
+.wrap {
+    width: calc(27px*5);
+    height: calc(40px*5);
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #222;
+    border: none;
+    overflow: hidden;
+    position: relative;
+}
+.poster {
+    border: none;
+}

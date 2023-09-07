@@ -55,10 +55,10 @@ export async function getServerSideProps(ctx){
 
 async function GetOwner(owner) {
     const url = process.env.NEXTAUTH_URL + "/api/v1/users/" + owner
-    const accessTokenSecret = GetCookie( req.headers.cookie, "next-auth.session-token" )
+    // const accessTokenSecret = GetCookie( req.headers.cookie, "next-auth.session-token" )
     
     const request = await fetch(url, {
-        headers: { Cookie: "next-auth.session-token=" + accessTokenSecret}
+        // headers: { Cookie: "next-auth.session-token=" + accessTokenSecret}
     })
     const json = await request.json()
     return json
