@@ -1,7 +1,7 @@
 
 import NewFileUpload from '@/components/NewFileUpload';
 import FileSharingLayout from '@/layouts/FileSharingLayout'
-import { GetClient } from '@/lib/Supabase';
+import { GetClient, GetServiceClient } from '@/lib/Supabase';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import styles from '@/styles/FileSharing.module.css'
@@ -130,7 +130,7 @@ export default function BatchPage ({batch}) {
             </Head>
 
             <h2>{batch.title}</h2>
-            <div style={{display: "flex", gap: ".5rem", flexWrap: "wrap"}}>
+            {/* <div style={{display: "flex", gap: ".5rem", flexWrap: "wrap"}}>
                 {batch.owners.map((owner, i) => {
                     return (
                     <Badge key={i}>
@@ -139,7 +139,7 @@ export default function BatchPage ({batch}) {
                     </Badge>
                     )
                 })}
-            </div>
+            </div> */}
             {session.status == "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id) && <NewFileUpload batchPreset={batch.id} /> }
             <div className={styles.wrap}>
                 <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
@@ -175,6 +175,20 @@ function mediaPreview(source) {
 export async function getStaticProps({ params }){
 
     
+    async function GetOwners(owners) {
+        const {data, error} = await GetServiceClient("next_auth")
+        .from("users")
+        .select(`
+          *
+        `)
+        .in("id", owners)
+
+        return data
+        
+
+    }
+    
+    
     const batchId = params.id
     const { data, error } = await GetClient()
     .from("batches")
@@ -199,24 +213,13 @@ export async function getStaticProps({ params }){
         },
         revalidate: 5, // In seconds
     }
+
+
+
+
 }
 
-async function GetOwner(owner) {
-    const url = process.env.NEXTAUTH_URL + "/api/v1/users/" + owner
-    // const accessTokenSecret = GetCookie( req.headers.cookie, "next-auth.session-token" )
-    
-    const request = await fetch(url, {
-        // headers: { Cookie: "next-auth.session-token=" + accessTokenSecret}
-    })
-    const json = await request.json()
-    return json
-}
 
-async function GetOwners(owners) {
-    const data = await Promise.all(owners.map(async (owner) => await GetOwner(owner)))
-    console.log({data})
-    return data
-}
 
 export async function getStaticPaths() {
     const { data, error } = await GetClient("public")
