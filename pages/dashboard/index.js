@@ -163,7 +163,7 @@ function FilePage ({files}) {
                 {Object.keys(groupedFiles).map((group, gi) => {
                     var files = groupedFiles[group]
                     return (
-                        <div className={styles.list}>
+                        <div key={gi} className={styles.list}>
                         <h3>{group}</h3>
                         <div className={styles.list}>
                         {files.map((file, i) => {
