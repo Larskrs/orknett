@@ -23,7 +23,7 @@ function index({batches}) {
                             {batch.owners.map((owner, i) => {
                                 if (i > 1) return <Badge><span style={{height: 25}}></span>mer...</Badge>
                                 return (
-                                <Badge>
+                                <Badge key={i}>
                                     <Image className="avatar" src={owner.image} alt={owner.name + "'s avatar"} width={25} height={25}  />
                                     <p style={{fontSize: "16px", maxWidth: "100px", textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden"}}>{owner.name}</p>
                                 </Badge>

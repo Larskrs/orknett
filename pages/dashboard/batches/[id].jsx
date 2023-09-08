@@ -133,7 +133,7 @@ export default function BatchPage ({batch}) {
             <div style={{display: "flex", gap: ".5rem", flexWrap: "wrap"}}>
                 {batch.owners.map((owner, i) => {
                     return (
-                    <Badge>
+                    <Badge key={i}>
                         <Image className="avatar" src={owner.image} alt={owner.name + "'s avatar"} width={25} height={25}  />
                         <p style={{fontSize: "16px", maxWidth: "100px", textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden"}}>{owner.name}</p>
                     </Badge>
