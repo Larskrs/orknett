@@ -19,7 +19,7 @@ function index({batches}) {
                             <div style={{display: "flex", gap: 8, padding: 8}}>
                                 {shuffleArray(batch.files).map((file, i) => {
                                     if (i > 2) { return}
-                                    return <Image src={file.source} style={{borderRadius: 8}} width={50} height={50} />
+                                    return <Image key={file.id} src={file.source} style={{borderRadius: 8}} width={50} height={50} />
                                 })}
                             </div>
                             <Badge style={{position: "absolute", bottom: "1rem", marginRight: "1rem"}}>
