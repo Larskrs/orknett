@@ -125,7 +125,7 @@ export default function BatchPage ({batch}) {
             <h2>{batch.title}</h2>
             <p>Owner of batch: {batch.owner.name}</p>
             {session.status == "authenticated" && session.data.user.id == batch.owner && <NewFileUpload batchPreset={batch.id} /> }
-            <div className={styles.list}>
+            <div className={styles.wrap}>
                     {display && <div className={styles.display_controls}>
                         <button onClick={() => {moveDisplay(displayId - 1)}}>{<Arrow direction='left'/>}</button>
                         <div>

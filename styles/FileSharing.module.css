@@ -179,6 +179,20 @@
     border-radius: 8px;
     text-decoration: none;
     position: relative;
+    overflow: hidden;
+}
+.thumbnail {
+    scale: 2;
+    opacity: .25;
+}
+.article:hover .thumbnail {
+    scale: 1.5;
+    rotate: 5deg;
+    transition-duration: .25s;
+    opacity: .5;
+}
+.article:hover {
+    border-color: #7e7e7e;
 }
 .article h3 {
     color: white;

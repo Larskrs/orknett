@@ -6,22 +6,19 @@ import { GetCookie } from "@/lib/CookieHelper";
 import Image from "next/image";
 import { Badge } from "@/components";
 import { RatioImage } from "@/components/RatioImage";
+import { isSourceContentType } from "@/lib/ExtensionHelper";
 
 function index({batches}) {
     return (
         <FileSharingLayout pageId={2}>
             <div className={styles.wrap}>
                 {batches.map((batch, i) => {
+
                     return (
                         
                         <Link key={i} className={styles.article} href={"/dashboard/batches/" + batch.id}>
-                            <p >{batch.title}</p>
-                            <div style={{display: "flex", gap: 8, padding: 8}}>
-                                {shuffleArray(batch.files).map((file, i) => {
-                                    if (i > 2) { return}
-                                    return <Image key={file.id} src={file.source} style={{borderRadius: 8}} width={50} height={50} />
-                                })}
-                            </div>
+                            {batch.thumbnail && <Image className={styles.thumbnail} style={{zIndex: -1}} src={batch.thumbnail} alt={"thumbnail"} objectFit={"cover"} fill /> } 
+                            <p style={{zIndex: 2, color: "#ccc"}}>{batch.title}</p>
                             <Badge style={{position: "absolute", bottom: "1rem", marginRight: "1rem"}}>
                                 <Image className="avatar" src={batch.owner.image} alt={batch.owner.name + "'s avatar"} width={25} height={25}  />
                                 <p style={{fontSize: "16px", maxWidth: "100px", textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden"}}>{batch.owner.name}</p>
@@ -50,6 +47,13 @@ export async function getServerSideProps(ctx){
         const batch = data[i]
         const owner = await GetOwner(batch.owner)
         data[i].owner = owner
+
+        var shuffled = shuffleArray(batch.files)
+        var files = shuffled.filter((f) => isSourceContentType(f.source, "image"))
+        var file = files[0]
+
+        if (file)
+        data[i].thumbnail = file.source
     }
 
     return {

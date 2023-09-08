@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const RatingStars = ({ rating }) => {
+const RatingStars = ({ rating, children }) => {
     const starCount = 5;
     const stars = [];
   
@@ -19,7 +19,7 @@ const RatingStars = ({ rating }) => {
       stars.push(<Image key={i} src={starClass} alt={starClass} width={16} height={16}/>);
     }
   
-    return <div>{stars}</div>;
+    return <div>{stars}{children}</div>;
   };
   
 

@@ -25,7 +25,8 @@ export default function FileElement ({file, onSelect}) {
                                     <a href={file.source} className={styles.downloadLink} download={file.source}>Download</a>
                                     <p onClick={() => {navigator.clipboard.writeText(document.domain +  file.source)}} className={styles.downloadLink} >Copy Link</p>
                                 </div>
-                                <Stars max={5} rating={3} />
+                                <Stars max={5} rating={3} ><span> your rating</span></Stars>
+
                                 {/* <a>{creationDate.toLocaleDateString("en-EN")}</a> */}
                             </div>
                         </div>
