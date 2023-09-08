@@ -2,6 +2,7 @@ import { GetClient } from "@/lib/Supabase";
 import FileSharingLayout from "@/layouts/FileSharingLayout";
 import Link from "next/link";
 import styles from '@/styles/FileSharing.module.css'
+import { Stars } from "@/components";
 
 
 function index({articles}) {

@@ -26,7 +26,7 @@ export async function getServerSideProps(ctx){
 
     const { req, res} = ctx
 
-    const url = process.env.NEXTAUTH_URL + "/api/v1/media/series?limit=5"
+    const url = process.env.NEXTAUTH_URL + "/api/v1/media/series?limit=6"
     const request = await fetch(url)
     const json = await request.json()
 

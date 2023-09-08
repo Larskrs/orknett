@@ -1,6 +1,8 @@
 import styles from '@/styles/FileSharing.module.css'
 import { RatioMedia } from './RatioMedia';
 import Link from 'next/link';
+import Image from 'next/image';
+import { Badge, Stars } from '.';
 
 
 export default function FileElement ({file, onSelect}) {
@@ -23,7 +25,8 @@ export default function FileElement ({file, onSelect}) {
                                     <a href={file.source} className={styles.downloadLink} download={file.source}>Download</a>
                                     <p onClick={() => {navigator.clipboard.writeText(document.domain +  file.source)}} className={styles.downloadLink} >Copy Link</p>
                                 </div>
-                                <a>{creationDate.toLocaleDateString("en-EN")}</a>
+                                <Stars max={5} rating={3} />
+                                {/* <a>{creationDate.toLocaleDateString("en-EN")}</a> */}
                             </div>
                         </div>
                         )

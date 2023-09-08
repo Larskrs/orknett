@@ -26,6 +26,8 @@ function FilePage ({files}) {
         required: true
     })
 
+    var groupedFiles = getGroupedFiles(files);
+
 
     
     useEffect(() => {
@@ -59,6 +61,13 @@ function FilePage ({files}) {
     }
     
 
+    function getIndexById (uuid) {
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].id === uuid) {
+              return i; // Return the index of the object with the matching ID
+            }
+          }
+    }
 
     function moveDisplay (newID) {
 
@@ -134,7 +143,7 @@ function FilePage ({files}) {
         <FileSharingLayout pageId={0}>
 
             {session.status == "authenticated" && <NewFileUpload /> }
-            <div className={styles.list}>
+            <div>
                     {display && <div className={styles.display_controls}>
                         <button onClick={() => {moveDisplay(displayId - 1)}}>{<Arrow direction='left'/>}</button>
                         <div>
@@ -151,16 +160,26 @@ function FilePage ({files}) {
                     {display && <DisplayElement/>}
 
                     </div>
-                {files.map((file, i) => {
+                {Object.keys(groupedFiles).map((group, gi) => {
+                    var files = groupedFiles[group]
+                    return (
+                        <div className={styles.list}>
+                        <h3>{group}</h3>
+                        <div className={styles.list}>
+                        {files.map((file, i) => {
 
 
 
-                  return <FileElement key={i} file={file} onSelect={() => {
-                    console.log("Uploading file: \n" + file.fileName)
-                    moveDisplay(i)
-                  }}/>
-
-                } ) }
+                            return <FileElement key={file.id} file={file} onSelect={() => {
+                              console.log("Uploading file: \n" + file.id)
+                              moveDisplay(getIndexById(file.id))
+                            }}/>
+          
+                          } ) }
+                          </div>
+                        </div>
+                    )
+                })}
             </div>
         </FileSharingLayout>
     );
@@ -214,6 +233,24 @@ export async function getServerSideProps(ctx){
             files: data
         },
     }
+}
+
+function getGroupedFiles(files) {
+    const groupedData = files.reduce((groups, item) => {
+        const date = new Date(item.created_at);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based, so we add 1
+        const year = date.getFullYear();
+
+        const formattedDate = `${day}-${month}-${year}`;
+        if (!groups[formattedDate]) {
+          groups[formattedDate] = [];
+        }
+        groups[formattedDate].push(item);
+        return groups;
+      }, {});
+
+      return groupedData;
 }
 
 

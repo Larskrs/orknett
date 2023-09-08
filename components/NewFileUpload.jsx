@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { contentTypeList } from "@/lib/ExtensionHelper";
 import { RatioImage } from "./RatioImage";
 import { GetAuthenticatedClient } from "@/lib/Supabase";
+import Image from "next/image";
 
 export default function FileUpload ({batchPreset = ""}) {
     
@@ -152,8 +153,8 @@ export default function FileUpload ({batchPreset = ""}) {
                         <Link href={link}>{link}</Link>
                     </div>}
                 {fileUrl &&
-                    <div style={{width: `500px`}}>
-                        <RatioImage src={fileUrl} width={250} height={250} />
+                    <div style={{width: `500px`, height: `500px`, position: "relative"}}>
+                        <Image src={fileUrl} fill objectFit="contain" />
                     </div>
                 }
 
