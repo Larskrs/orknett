@@ -19,10 +19,17 @@ function index({batches}) {
                         <Link key={i} className={styles.article} href={"/dashboard/batches/" + batch.id}>
                             {batch.thumbnail && <Image className={styles.thumbnail} style={{zIndex: -1}} src={batch.thumbnail} alt={"thumbnail"} objectFit={"cover"} fill /> } 
                             <p style={{zIndex: 2, color: "#ccc"}}>{batch.title}</p>
-                            <Badge style={{position: "absolute", bottom: "1rem", marginRight: "1rem"}}>
-                                <Image className="avatar" src={batch.owner.image} alt={batch.owner.name + "'s avatar"} width={25} height={25}  />
-                                <p style={{fontSize: "16px", maxWidth: "100px", textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden"}}>{batch.owner.name}</p>
-                            </Badge>
+                            <div style={{position: "absolute", bottom: "1rem", marginRight: "1rem", display: "flex", gap: ".5rem", flexWrap: "wrap"}}>
+                            {batch.owners.map((owner, i) => {
+                                if (i > 1) return <Badge><span style={{height: 25}}></span>mer...</Badge>
+                                return (
+                                <Badge>
+                                    <Image className="avatar" src={owner.image} alt={owner.name + "'s avatar"} width={25} height={25}  />
+                                    <p style={{fontSize: "16px", maxWidth: "100px", textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden"}}>{owner.name}</p>
+                                </Badge>
+                                )
+                                })}
+                            </div>
                         </Link>
                     )
                 })}
@@ -45,8 +52,8 @@ export async function getServerSideProps(ctx){
 
     for (const i in data) {
         const batch = data[i]
-        const owner = await GetOwner(batch.owner)
-        data[i].owner = owner
+        const owners = await GetOwners(batch.owners)
+        data[i].owners = owners
 
         var shuffled = shuffleArray(batch.files)
         var files = shuffled.filter((f) => isSourceContentType(f.source, "image"))
@@ -72,6 +79,11 @@ async function GetOwner(owner) {
     })
     const json = await request.json()
     return json
+}
+
+async function GetOwners(owners) {
+    const data = await Promise.all(owners.map(async (owner) => await GetOwner(owner)))
+    return data
 }
 }
 

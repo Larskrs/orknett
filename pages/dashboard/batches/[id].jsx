@@ -13,6 +13,7 @@ import FileElement from '@/components/FileElement';
 import { useState, useEffect } from 'react';
 import Arrow from '@/components/Arrow';
 import Head from 'next/head';
+import { Badge } from '@/components';
 
 
 
@@ -129,8 +130,17 @@ export default function BatchPage ({batch}) {
             </Head>
 
             <h2>{batch.title}</h2>
-            <p>Owner of batch: {batch.owner.name}</p>
-            {session.status == "authenticated" && session.data.user.id == batch.owner && <NewFileUpload batchPreset={batch.id} /> }
+            <div style={{display: "flex", gap: ".5rem", flexWrap: "wrap"}}>
+                {batch.owners.map((owner, i) => {
+                    return (
+                    <Badge>
+                        <Image className="avatar" src={owner.image} alt={owner.name + "'s avatar"} width={25} height={25}  />
+                        <p style={{fontSize: "16px", maxWidth: "100px", textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden"}}>{owner.name}</p>
+                    </Badge>
+                    )
+                })}
+            </div>
+            {session.status == "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id) && <NewFileUpload batchPreset={batch.id} /> }
             <div className={styles.wrap}>
                 <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
                 </div>
@@ -180,12 +190,32 @@ export async function getStaticProps({ params }){
     })
     .single()
 
+    const owners = await GetOwners(data.owners)
+    data.owners = owners
+
     return {
         props:{
             batch: data
         },
         revalidate: 5, // In seconds
     }
+}
+
+async function GetOwner(owner) {
+    const url = process.env.NEXTAUTH_URL + "/api/v1/users/" + owner
+    // const accessTokenSecret = GetCookie( req.headers.cookie, "next-auth.session-token" )
+    
+    const request = await fetch(url, {
+        // headers: { Cookie: "next-auth.session-token=" + accessTokenSecret}
+    })
+    const json = await request.json()
+    return json
+}
+
+async function GetOwners(owners) {
+    const data = await Promise.all(owners.map(async (owner) => await GetOwner(owner)))
+    console.log({data})
+    return data
 }
 
 export async function getStaticPaths() {
