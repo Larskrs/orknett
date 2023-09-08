@@ -5,6 +5,7 @@ import styles from '@/styles/FileSharing.module.css'
 import { GetCookie } from "@/lib/CookieHelper";
 import Image from "next/image";
 import { Badge } from "@/components";
+import { RatioImage } from "@/components/RatioImage";
 
 function index({batches}) {
     return (
@@ -15,6 +16,12 @@ function index({batches}) {
                         
                         <Link key={i} className={styles.article} href={"/dashboard/batches/" + batch.id}>
                             <p >{batch.title}</p>
+                            <div style={{display: "flex", gap: 8, padding: 8}}>
+                                {shuffleArray(batch.files).map((file, i) => {
+                                    if (i > 2) { return}
+                                    return <Image src={file.source} style={{borderRadius: 8}} width={50} height={50} />
+                                })}
+                            </div>
                             <Badge style={{position: "absolute", bottom: "1rem", marginRight: "1rem"}}>
                                 <Image className="avatar" src={batch.owner.image} alt={batch.owner.name + "'s avatar"} width={25} height={25}  />
                                 <p style={{fontSize: "16px", maxWidth: "100px", textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden"}}>{batch.owner.name}</p>
@@ -34,11 +41,10 @@ export async function getServerSideProps(ctx){
     let { data, error } = await GetClient("public")
     .from("batches")
     .select(`
-        *
+        *,
+        files (*)
     `)
     .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
-
-    
 
     for (const i in data) {
         const batch = data[i]
@@ -64,4 +70,12 @@ async function GetOwner(owner) {
     return json
 }
 }
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+    }
+    return array
+  }
 export default index;
