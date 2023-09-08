@@ -130,7 +130,7 @@ export default function BatchPage ({batch}) {
             </Head>
 
             <h2>{batch.title}</h2>
-            {/* <div style={{display: "flex", gap: ".5rem", flexWrap: "wrap"}}>
+            <div style={{display: "flex", gap: ".5rem", flexWrap: "wrap"}}>
                 {batch.owners.map((owner, i) => {
                     return (
                     <Badge key={i}>
@@ -139,7 +139,7 @@ export default function BatchPage ({batch}) {
                     </Badge>
                     )
                 })}
-            </div> */}
+            </div>
             {session.status == "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id) && <NewFileUpload batchPreset={batch.id} /> }
             <div className={styles.wrap}>
                 <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
