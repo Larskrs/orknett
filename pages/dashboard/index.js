@@ -26,7 +26,7 @@ function FilePage ({files}) {
         required: true
     })
 
-    var groupedFiles = getGroupedFiles(files);
+
 
 
     
@@ -135,7 +135,7 @@ function FilePage ({files}) {
     
 
     
-
+    var groupedFiles = getGroupedFiles(files);
 
 
 
@@ -144,22 +144,12 @@ function FilePage ({files}) {
 
             {session.status == "authenticated" && <NewFileUpload /> }
             <div>
-                    {display && <div className={styles.display_controls}>
-                        <button onClick={() => {moveDisplay(displayId - 1)}}>{<Arrow direction='left'/>}</button>
-                        <div>
-                            <h3>{display.fileName}</h3>
-                            <div className={styles.row}>
-                                <a href={display.source} className={styles.downloadLink} download={display.source}>Download</a>
-                                <p onClick={() => {navigator.clipboard.writeText(document.domain +  display.source)}} className={styles.downloadLink} >Copy Link</p>
-                            </div>
-                        </div>
-                        <button onClick={() => {moveDisplay(displayId + 1)}}>{<Arrow direction='right'/>}</button>
-                    </div> }
+                    
                  <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
+                </div>
 
                     {display && <DisplayElement/>}
 
-                    </div>
                 {Object.keys(groupedFiles).map((group, gi) => {
                     var files = groupedFiles[group]
                     return (

@@ -12,6 +12,7 @@ import { RatioMedia } from '@/components/RatioMedia';
 import FileElement from '@/components/FileElement';
 import { useState, useEffect } from 'react';
 import Arrow from '@/components/Arrow';
+import Head from 'next/head';
 
 
 
@@ -122,26 +123,19 @@ export default function BatchPage ({batch}) {
 
         
         <FileSharingLayout pageId={2}>
+
+            <Head>
+                <title>{batch.title}</title>
+            </Head>
+
             <h2>{batch.title}</h2>
             <p>Owner of batch: {batch.owner.name}</p>
             {session.status == "authenticated" && session.data.user.id == batch.owner && <NewFileUpload batchPreset={batch.id} /> }
             <div className={styles.wrap}>
-                    {display && <div className={styles.display_controls}>
-                        <button onClick={() => {moveDisplay(displayId - 1)}}>{<Arrow direction='left'/>}</button>
-                        <div>
-                            <h3>{display.fileName}</h3>
-                            <div className={styles.row}>
-                                <a href={display.source} className={styles.downloadLink} download={display.source}>Download</a>
-                                <p onClick={() => {navigator.clipboard.writeText(document.domain +  display.source)}} className={styles.downloadLink} >Copy Link</p>
-                            </div>
-                        </div>
-                        <button onClick={() => {moveDisplay(displayId + 1)}}>{<Arrow direction='right'/>}</button>
-                    </div> }
-                 <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}}className={styles.display} onClick={() => {setDisplay(null)}}>
+                <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
+                </div>
 
                     {display && <DisplayElement/>}
-
-                    </div>
                 {batch.files.map((file, i) => {
 
 

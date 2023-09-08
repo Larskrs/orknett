@@ -85,24 +85,35 @@
 }
 .display {
     position: fixed !important;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     left: 0;
     top: 0;
-    z-index: 1000;
+    z-index: 100;
     background-color: rgba(0,0,0,.5);
     backdrop-filter: blur(50px);
     align-items: center !important;
     justify-content: center;
     display: flex;
     transition-duration: .25s;
+    overflow: hidden !important;
 }
 .display_element {
-    width: 80%;
-    height: 80%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    max-height: 80vh;
+    max-width: 80vw;
+    transform: translate(-50%, -50%);
     display: flex;
     object-fit: contain;
     animation: forwards display_element .25s ease-in-out;
+    background-color: rgba(17, 17, 17, 0.25);
+    border-radius: 16px;
+    pointer-events: all !important;
+    z-index: 2000;
 }
 .display_unknown_element{
     display: flex !important;
@@ -124,13 +135,13 @@
 }
 .display_controls {
     position: fixed !important;
-    height: 14vh;
+    height: 12vh;
     width: 100vw;
     left: 0;
     bottom: 0;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     pointer-events: all;
     z-index: 1001;
 }
