@@ -23,15 +23,15 @@ export default function Home() {
         <div className={styles.blur}> 
         <Image 
         className={styles.bg}
+          fill
           src={"/images/loadingbg.jpg"}
-          layout='fill'
           objectPosition='center'
           objectFit='cover  '
           ></Image>
         </div>
         <Image 
         className={styles.bg}
-          src={"https://media.discordapp.net/attachments/1017698590690381884/1116498307817156709/NR.1.00_03_04_18.Still003.jpg?width=1193&height=671"}
+          src={"http://aktuelt.tv/api/v1/files?fileId=6ae7ec9b-9bf9-4032-baa3-c0b3f96e172b.JPG"}
           layout='fill'
           objectPosition='top'
           objectFit='cover  '

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 523 523" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-2018.92,-6.5102)">
+        <g transform="matrix(1,0,0,1,-3392.08,-953.49)">
+            <rect id="VideoIcon" x="5411" y="960" width="523" height="523" style="fill:none;"/>
+            <g id="VideoIcon1" serif:id="VideoIcon">
+                <g transform="matrix(4.05814e-17,0.982429,-1.14332,2.30567e-17,6005.41,-1614.29)">
+                    <path d="M2965.77,190.935L2804.22,190.935L2804.22,214.115L2965.77,214.115L2965.77,190.935" style="fill:white;stroke:white;stroke-width:7.69px;"/>
+                </g>
+                <g transform="matrix(4.05814e-17,0.982429,-1.14332,2.30567e-17,5849.85,-1614.29)">
+                    <path d="M2965.77,190.935L2804.22,190.935L2804.22,214.115L2965.77,214.115L2965.77,190.935" style="fill:white;stroke:white;stroke-width:7.69px;"/>
+                </g>
+                <g transform="matrix(1.26322,0,0,1.26322,2825.99,849.955)">
+                    <circle cx="2191.9" cy="355.767" r="33.417" style="fill:white;"/>
+                </g>
+                <g transform="matrix(1.26322,0,0,1.26322,2981.3,849.955)">
+                    <circle cx="2191.9" cy="355.767" r="33.417" style="fill:white;"/>
+                </g>
+                <g transform="matrix(1.12692,1.9575e-17,-5.38567e-17,1.14332,2444.92,883.122)">
+                    <path d="M2965.77,190.935L2804.22,190.935L2804.22,214.115L2965.77,214.115L2965.77,190.935" style="fill:white;stroke:white;stroke-width:8.9px;"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

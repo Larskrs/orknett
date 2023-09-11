@@ -52,6 +52,7 @@ mask: var(--mask);
   position: absolute;
   width: 100vw;
   height: 100vw;
+  bottom: 0;
   z-index: 100;
   opacity: .75;
   mix-blend-mode: screen;

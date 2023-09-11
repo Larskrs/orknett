@@ -3,6 +3,7 @@ import FileSharingLayout from "@/layouts/FileSharingLayout";
 import Link from "next/link";
 import styles from '@/styles/FileSharing.module.css'
 import { Stars } from "@/components";
+import Image from "next/image";
 
 
 function index({articles}) {
@@ -13,6 +14,9 @@ function index({articles}) {
                     return (
                         
                         <Link key={i} className={styles.article} href={"/dashboard/articles/" + article.id}>
+
+                            {article.thumbnail && <Image className={styles.thumbnail} style={{zIndex: -1, objectFit: "cover"}} src={article.thumbnail} alt={"thumbnail"} fill /> } 
+
                             <h3>{article.headers.title}</h3>
                             <p>{article.headers.sub_header}</p>
                         </Link>
