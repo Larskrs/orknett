@@ -10,7 +10,7 @@ import { GetContentType } from "@/lib/ExtensionHelper"
 export const config = {
   api: {
     bodyParser: false,
-    responseLimit: '28mb',
+    responseLimit: false,
     externalResolver: true,
   },
 };
