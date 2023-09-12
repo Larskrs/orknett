@@ -65,7 +65,7 @@ async function UploadFileStream(req, res) {
 
 
 
-const CHUNK_SIZE_IN_BYTES = 2000000; // 1 mb
+const CHUNK_SIZE_IN_BYTES = 8000000; // 8 mb
 
 function GetFileStream(req, res) {
 

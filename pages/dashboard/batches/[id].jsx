@@ -16,7 +16,16 @@ import Head from 'next/head';
 import { Badge, ImprovedFileUpload } from '@/components';
 
 
-
+function NoAccessPage () {
+    return (
+        <FileSharingLayout pageId={2}>
+                <div style={{position: "fixed", top: "50%", left: "50%", translate: "-50% -50%"}}>
+                    <h2>You do not have access to this batch.</h2>
+                    <Link href={"/dashboard/batches"}>Go Back</Link>
+                </div>
+            </FileSharingLayout>
+    )
+}
 
 export default function BatchPage ({batch}) {
 
@@ -24,7 +33,6 @@ export default function BatchPage ({batch}) {
 
     const [display, setDisplay] = useState(null)
     const [displayId, setDisplayId] = useState(-1)
-
 
 
     function moveDisplay (newID) {
@@ -96,6 +104,10 @@ export default function BatchPage ({batch}) {
 
     }
 
+
+    
+
+
     useEffect(() => {
         document.onkeydown = checkKey;
     
@@ -121,6 +133,16 @@ export default function BatchPage ({batch}) {
         
         }
     }, )
+
+
+    
+    if (batch.settings?.access == "private") {
+
+        if (session.status != "authenticated") return NoAccessPage()
+        if (!batch.owners.map((o) => o.id).includes(session.data.user.id)) return NoAccessPage()
+
+    }
+
 
     return (
 

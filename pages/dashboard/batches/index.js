@@ -18,7 +18,7 @@ function index({batches}) {
                         
                         <Link key={i} className={styles.article} href={"/dashboard/batches/" + batch.id}>
                             {batch.thumbnail && <Image className={styles.thumbnail} style={{zIndex: -1}} src={batch.thumbnail} alt={"thumbnail"} objectFit={"cover"} fill /> } 
-                            <p style={{zIndex: 2, color: "#ccc"}}>{batch.title}</p>
+                            <p style={{zIndex: 2, color: "#ccc"}}>{batch.title} </p>
                             <div style={{position: "absolute", bottom: "1rem", marginRight: "1rem", display: "flex", gap: ".5rem", flexWrap: "wrap"}}>
                             {batch.owners.map((owner, i) => {
                                 if (i > 1) return <Badge><span style={{height: 25}}></span>mer...</Badge>
@@ -28,7 +28,9 @@ function index({batches}) {
                                     <p style={{fontSize: "16px", maxWidth: "100px", textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden"}}>{owner.name}</p>
                                 </Badge>
                                 )
+                                
                                 })}
+                                
                             </div>
                         </Link>
                     )
