@@ -3,6 +3,8 @@ import Badge from "./cards/badge/badge";
 import InputField from "./cards/inputfield/inputfield";
 import SeriesCard from "./cards/SeriesCard/seriesCard";
 import Stars from "./cards/StarRatingCard/starRating";
+import ImprovedFileUpload from "./ImprovedFileUpload";
+import FileUploading from "./FileUploading";
 
 export 
 {
@@ -11,4 +13,6 @@ export
     Badge,
     LargeCard,
     Stars,
+    ImprovedFileUpload,
+    FileUploading,
 };

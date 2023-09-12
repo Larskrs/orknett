@@ -23,7 +23,7 @@ export default function FileElement ({file, onSelect}) {
                                 
                                 {type == "video" && <RatioMedia alt={file.fileName} objectFit src={"/video.svg"} /> }
                                 {type == "audio" && <RatioMedia alt={file.fileName} objectFit src={"/audio.svg"} /> }
-                                {type == "image" && <RatioMedia alt={file.fileName} objectFit src={file.source} /> }
+                                {type == "image" && <RatioMedia alt={file.fileName} quality={1} objectFit src={file.source} /> }
                             </div>
                             <div className={styles.download_detail}>
                                 <a>{file.fileName}</a>

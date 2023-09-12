@@ -14,6 +14,7 @@ import { RatioMedia } from '@/components/RatioMedia';
 import FileElement from '@/components/FileElement'
 import { useEffect, useState } from 'react';
 import Arrow from '@/components/Arrow';
+import { ImprovedFileUpload } from '@/components';
 
 
 
@@ -142,7 +143,7 @@ function FilePage ({files}) {
     return (
         <FileSharingLayout pageId={0}>
 
-            {session.status == "authenticated" && <NewFileUpload /> }
+            {session.status == "authenticated" && <ImprovedFileUpload /> }
             <div>
                     
                  <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>

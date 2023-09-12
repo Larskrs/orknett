@@ -13,7 +13,7 @@ import FileElement from '@/components/FileElement';
 import { useState, useEffect } from 'react';
 import Arrow from '@/components/Arrow';
 import Head from 'next/head';
-import { Badge } from '@/components';
+import { Badge, ImprovedFileUpload } from '@/components';
 
 
 
@@ -45,7 +45,12 @@ export default function BatchPage ({batch}) {
         
         if (contentType == "image") {
             return (
-                <img className={styles.display_element}
+                <Image className={styles.display_element}
+                    quality={50}
+                    width={1200}
+                    height={1200}
+                    priority={true}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     key={displayId}
                     alt={display.fileName}
                     src={display.source}
@@ -140,7 +145,7 @@ export default function BatchPage ({batch}) {
                     )
                 })}
             </div>
-            {session.status == "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id) && <NewFileUpload batchPreset={batch.id} /> }
+            {session.status == "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id) && <ImprovedFileUpload batchPreset={batch.id} /> }
             <div className={styles.wrap}>
                 <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
                 </div>

@@ -5,6 +5,7 @@ import styles from '../styles/Page.module.css'
 import { RatioMedia } from '@/components/RatioMedia'
 import Head from 'next/head'
 
+
 export default function Home() {
   return (
   <div>
@@ -24,7 +25,7 @@ export default function Home() {
         <Image 
         className={styles.bg}
           fill
-          src={"/images/loadingbg.jpg"}
+          src={"http://aktuelt.tv/api/v1/files?fileId=6ae7ec9b-9bf9-4032-baa3-c0b3f96e172b.JPG"}
           objectPosition='center'
           objectFit='cover  '
           ></Image>

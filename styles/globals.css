@@ -36,6 +36,7 @@ html, body {
   transition-timing-function: cubic-bezier(.4,0,.2,1);
   transition-duration: .125s;
   scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 
 @media (prefers-reduced-motion) {
@@ -117,3 +118,35 @@ p {
 .avatar {
   border-radius: 50%;
 }
+
+progress {
+	background-color: #222;
+  outline: transparent 1px solid;
+  border: transparent 1px solid;
+	border-radius: 20px;
+	position: relative;
+	margin: 24px 0;
+	height: 16px;
+	width: 300px;
+}
+progress::-webkit-progress-bar {
+  background-color: green;
+}
+progress::-webkit-progress-value {
+  background-color: red;
+}
+
+.progress-done {
+	background: linear-gradient(to left, #F2709C, #FF9472);
+	box-shadow: 0 3px 3px -5px #F2709C, 0 2px 5px #F2709C;
+	border-radius: 20px;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 0;
+	opacity: 0;
+	transition: 1s ease 0.3s;
+}
+
