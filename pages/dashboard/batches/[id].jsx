@@ -175,7 +175,7 @@ export default function BatchPage ({batch}) {
     function displayFilters () {
         return <div className={styles.row}>{
             getPossibleExtensionFilters().map((ext) => {
-                return <button onClick={() => {if (ext == filter) {setFilter("")} else setFilter(ext)}} style={{border: "none", outline: filter != ext ? "none" : "2px solid white"}}>{ext}</button>
+                return <button key={ext} onClick={() => {if (ext == filter) {setFilter("")} else setFilter(ext)}} style={{border: "none", outline: filter != ext ? "none" : "2px solid white"}}>{ext}</button>
             })
         }</div>
     }
