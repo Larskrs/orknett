@@ -1,4 +1,3 @@
-import canvas, { createCanvas } from "canvas";
 import fs from "fs";
 import jsmediatags from "jsmediatags"
 
