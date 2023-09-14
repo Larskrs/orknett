@@ -34,9 +34,8 @@ async function GetCover(req, res) {
             res.end(Buffer.from(data));
         },
         onError: function(error) {
-        //   console.log(':(', error.type, error.info);
-            res.setHeader('Content-Type', "image/svg")
-            res.end(Buffer.from(fs.readFileSync(getContentIconSource(fileId))))
+            console.log(':(', error.type, error.info);
+            res.status(500).json(error.type, error.info)
 
         }
       });
