@@ -5,7 +5,7 @@ import { GetClient } from '@/lib/Supabase';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import styles from '@/styles/FileSharing.module.css'
-import { GetContentType, GetContentTypeFromSource, GetExtensionFromSource } from '@/lib/ExtensionHelper';
+import { GetContentType, GetContentTypeFromSource, GetExtensionFromSource, isSourceContentType } from '@/lib/ExtensionHelper';
 import { RatioImage } from '@/components/RatioImage';
 import Image from 'next/image';
 import { getServerSession } from "next-auth/next"
@@ -14,7 +14,7 @@ import { RatioMedia } from '@/components/RatioMedia';
 import FileElement from '@/components/FileElement'
 import { useEffect, useState } from 'react';
 import Arrow from '@/components/Arrow';
-import { ImprovedFileUpload } from '@/components';
+import { AudioPlayer, ImprovedFileUpload } from '@/components';
 
 
 
@@ -26,6 +26,18 @@ function FilePage ({files}) {
     const session = useSession({
         required: true
     })
+    const [filter, setFilter] = useState("")
+
+    function getPossibleExtensionFilters () {
+        let filters = []
+        files.map((f) => {
+            const ext = GetContentTypeFromSource(f.source).split("/")[0]
+            if (!filters.includes(ext)) {
+                filters.push(ext)
+            }
+        })
+        return filters
+    }
 
 
 
@@ -70,14 +82,32 @@ function FilePage ({files}) {
           }
     }
 
+    function getFilteredFiles (files) {
+        
+        if (filter == "" || null) {
+            return files
+        }
+        files = files.filter((f) => isSourceContentType(f.source, filter))
+
+        return files
+    }
+
+    function displayFilters () {
+        return <div className={styles.row}>{
+            getPossibleExtensionFilters().map((ext) => {
+                return <button onClick={() => {if (ext == filter) {setFilter("")} else setFilter(ext)}} style={{border: "none", outline: filter != ext ? "none" : "2px solid white"}}>{ext}</button>
+            })
+        }</div>
+    }
+
     function moveDisplay (newID) {
 
-        if (newID + 1 > files.length) {
-            newID = files.length;
+        if (newID + 1 > getFilteredFiles(files).length) {
+            newID = getFilteredFiles(files).length;
         }
 
         setDisplayId(newID)
-        setDisplay(files[newID])
+        setDisplay(getFilteredFiles(files)[newID])
     }
 
     
@@ -97,15 +127,11 @@ function FilePage ({files}) {
             )
         }
         if (contentType == "audio") {
+
             return (
-                <audio 
-                    key={displayId}
-                    className={styles.display_element}
-                    alt={display.fileName}
-                    src={display.source}
-                    controls
-                    autoPlay
-                    content={GetContentTypeFromSource(display.source)} />
+                <div className={styles.display_element}>
+                    <AudioPlayer alt={display.fileName} src={display.source} cover={`/api/v1/files/audio/cover?fileId=${display.source.split("fileId=").pop()}`} /> 
+                </div>
             )
         }
         if (contentType == "video") {
@@ -136,14 +162,17 @@ function FilePage ({files}) {
     
 
     
-    var groupedFiles = getGroupedFiles(files);
+    var groupedFiles = getGroupedFiles(getFilteredFiles(files));
 
 
 
     return (
         <FileSharingLayout pageId={0}>
 
-            {session.status == "authenticated" && <ImprovedFileUpload /> }
+            <div className={styles.row} style={{gap: "2rem"}}>
+                {displayFilters()}
+                {session.status == "authenticated" && <ImprovedFileUpload /> }
+            </div>
             <div>
                     
                  <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
@@ -182,17 +211,6 @@ function FilePage ({files}) {
 
 
 
-}
-
-function mediaPreview(source) {
-
-    const content = GetContentTypeFromSource(source).split("/").shift()
-    
-    if (content == "image") {
-        return <div className={styles.image}>
-            <Image width={100} objectFit={'cover'} height={100} src={source} />
-        </div>
-    }
 }
 
 export async function getServerSideProps(ctx){

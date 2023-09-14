@@ -27,9 +27,8 @@ export default function Home() {
         <Image 
         className={styles.bg}
           src={"/images/loadingbg.jpg"}
-          layout='fill'
-          objectPosition='center'
-          objectFit='cover  '
+          fill
+          style={{objectFit: "cover", objectPosition: "center"}}
           ></Image>
         </div>
         <Image 
@@ -70,16 +69,16 @@ export default function Home() {
         <div className={styles.row} >
           
             <Link href="#desperados" className={styles.home}>
-              <Image src={"https://gyazo.com/7c00c36443ec021a386311bf799da5b1.png"} layout="fill" objectFit='cover'/>
+              <Image src={"https://gyazo.com/7c00c36443ec021a386311bf799da5b1.png"} fill/>
             </Link>
             <Link href="#papparau" className={styles.home}>
-              <Image src={"https://gyazo.com/f12284bee733a43ccbda32243e30363e.jpg"} layout="fill" objectFit='cover'/>
+              <Image src={"https://gyazo.com/f12284bee733a43ccbda32243e30363e.jpg"} fill/>
             </Link>
             <Link href="" className={styles.home}>
-              <Image src={"https://cdn.discordapp.com/attachments/1022453749211471882/1124131548724207666/Aktuellefarger.jpg"} layout="fill" objectFit='cover' objectPosition='center'/>
+              <Image src={"https://cdn.discordapp.com/attachments/1022453749211471882/1124131548724207666/Aktuellefarger.jpg"} fill/>
             </Link>
             <Link href="" className={styles.home}>
-              <Image src={"https://gyazo.com/ef6b7b2905abc1fd9a4a8fc21d888cd1.png"} layout="fill" objectFit='cover' objectPosition='top'/>
+              <Image src={"https://gyazo.com/ef6b7b2905abc1fd9a4a8fc21d888cd1.png"} fill />
             </Link>
         </div>
         

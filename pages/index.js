@@ -26,16 +26,14 @@ export default function Home() {
         className={styles.bg}
           fill
           src={"http://aktuelt.tv/api/v1/files?fileId=6ae7ec9b-9bf9-4032-baa3-c0b3f96e172b.JPG"}
-          objectPosition='center'
-          objectFit='cover  '
+          style={{objectFit: "cover", objectPosition: "center"}}
           ></Image>
         </div>
         <Image 
         className={styles.bg}
           src={"http://aktuelt.tv/api/v1/files?fileId=6ae7ec9b-9bf9-4032-baa3-c0b3f96e172b.JPG"}
-          layout='fill'
-          objectPosition='top'
-          objectFit='cover  '
+          fill
+          style={{objectFit: "cover", objectPosition: "center"}}
           ></Image>
 
 
@@ -68,16 +66,16 @@ export default function Home() {
         <div className={styles.row} >
           
             <Link href="#desperados" className={styles.home}>
-              <Image src={"https://gyazo.com/7c00c36443ec021a386311bf799da5b1.png"} layout="fill" objectFit='cover'/>
+              <Image src={"https://gyazo.com/7c00c36443ec021a386311bf799da5b1.png"} fill style={{objectFit: "cover", objectPosition: "center"}}/>
             </Link>
             <Link href="#papparau" className={styles.home}>
-              <Image src={"https://gyazo.com/f12284bee733a43ccbda32243e30363e.jpg"} layout="fill" objectFit='cover'/>
+              <Image src={"https://gyazo.com/f12284bee733a43ccbda32243e30363e.jpg"} fill style={{objectFit: "cover", objectPosition: "center"}}/>
             </Link>
             <Link href="" className={styles.home}>
-              <Image src={"https://cdn.discordapp.com/attachments/1022453749211471882/1124131548724207666/Aktuellefarger.jpg"} layout="fill" objectFit='cover' objectPosition='center'/>
+              <Image src={"https://cdn.discordapp.com/attachments/1022453749211471882/1124131548724207666/Aktuellefarger.jpg"} fill style={{objectFit: "cover", objectPosition: "center"}}/>
             </Link>
             <Link href="" className={styles.home}>
-              <Image src={"https://gyazo.com/ef6b7b2905abc1fd9a4a8fc21d888cd1.png"} layout="fill" objectFit='cover' objectPosition='top'/>
+              <Image src={"https://gyazo.com/ef6b7b2905abc1fd9a4a8fc21d888cd1.png"} fill style={{objectFit: "cover", objectPosition: "top"}}/>
             </Link>
         </div>
         
@@ -95,7 +93,7 @@ export default function Home() {
         <div className={styles.group}>
           <div className={styles.row}>         
             <div className={styles.image} style={{maxWidth: `none`}}>
-              <Image src={"https://gyazo.com/8a452238e47a596ad2558bb71369bac1.gif"} layout="fill" objectFit='cover'></Image>
+              <Image src={"https://gyazo.com/8a452238e47a596ad2558bb71369bac1.gif"} fill style={{objectFit: "cover", objectPosition: "center"}}></Image>
             </div>
             <div className={styles.card}>
                 <h2>Desperados, Banditos,</h2>
@@ -122,7 +120,7 @@ Litagoen. Med nådeløse fiender i hælene og uventede vendepunkter, er det en k
                 
             </div>
             <div className={styles.image} style={{maxWidth: `none`}}>
-              <Image src={"https://gyazo.com/f12284bee733a43ccbda32243e30363e.jpg"} layout="fill" objectFit='cover' objectPosition='center'></Image>
+              <Image src={"https://gyazo.com/f12284bee733a43ccbda32243e30363e.jpg"} fill style={{objectFit: "cover", objectPosition: "center"}}></Image>
             </div>
           </div>
         </div>

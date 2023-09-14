@@ -5,6 +5,7 @@ import SeriesCard from "./cards/SeriesCard/seriesCard";
 import Stars from "./cards/StarRatingCard/starRating";
 import ImprovedFileUpload from "./ImprovedFileUpload";
 import FileUploading from "./FileUploading";
+import AudioPlayer from "./cards/AudioPlayer/AudioPlayer";
 
 export 
 {
@@ -15,4 +16,5 @@ export
     Stars,
     ImprovedFileUpload,
     FileUploading,
+    AudioPlayer,
 };

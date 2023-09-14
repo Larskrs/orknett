@@ -136,7 +136,7 @@ export function RatioMedia ({credit, quality=10, src, alt, className, children, 
         content={GetContentTypeFromSource(src)}
         src={src}
         layout='fill'
-        objectFit={objectFit ? 'cover' : 'none'}
+        style={{objectFit: (objectFit ? 'cover' : 'none')}}
       quality={quality}
       
       onLoadingComplete={(img => {

@@ -34,7 +34,7 @@ export default function Component() {
   }
   return (
     <>
-      <button onClick={() => signIn()}>Sign in</button>
+      <button onClick={() => signIn()}>Login</button>
     </>
   )
 }

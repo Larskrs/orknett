@@ -5,7 +5,7 @@ import { GetClient, GetServiceClient } from '@/lib/Supabase';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import styles from '@/styles/FileSharing.module.css'
-import { GetContentType, GetContentTypeFromSource, GetExtensionFromSource } from '@/lib/ExtensionHelper';
+import { GetContentType, GetContentTypeFromSource, GetExtensionFromSource, isSourceContentType } from '@/lib/ExtensionHelper';
 import { RatioImage } from '@/components/RatioImage';
 import Image from 'next/image';
 import { RatioMedia } from '@/components/RatioMedia';
@@ -13,7 +13,7 @@ import FileElement from '@/components/FileElement';
 import { useState, useEffect } from 'react';
 import Arrow from '@/components/Arrow';
 import Head from 'next/head';
-import { Badge, ImprovedFileUpload } from '@/components';
+import { AudioPlayer, Badge, ImprovedFileUpload } from '@/components';
 
 
 function NoAccessPage () {
@@ -33,18 +33,34 @@ export default function BatchPage ({batch}) {
 
     const [display, setDisplay] = useState(null)
     const [displayId, setDisplayId] = useState(-1)
+    const [filter, setFilter] = useState("")
+    const [current, setCurrent] = useState(0)
 
+    function getPossibleExtensionFilters () {
+        var files = batch.files
+        let filters = []
+        files.map((f) => {
+            const ext = GetContentTypeFromSource(f.source).split("/")[0]
+            if (!filters.includes(ext)) {
+                filters.push(ext)
+            }
+        })
+        return filters
+    }
 
     function moveDisplay (newID) {
 
-        if (newID + 1 > batch.files.length) {
-            newID = batch.files.length;
+        if (newID + 1 > getFilteredFiles().length) {
+            newID = getFilteredFiles().length;
         }
 
         setDisplayId(newID)
-        setDisplay(batch.files[newID])
+        setDisplay(getFilteredFiles()[newID])
     }
 
+    function PlayNextFile() {
+        moveDisplay(displayId + 1)
+    }
     
     function DisplayElement () {
 
@@ -67,15 +83,16 @@ export default function BatchPage ({batch}) {
             )
         }
         if (contentType == "audio") {
+
             return (
-                <audio 
-                    key={displayId}
-                    className={styles.display_element}
-                    alt={display.fileName}
+                <div className={styles.display_element}>
+                    <AudioPlayer alt={display.fileName}
                     src={display.source}
-                    controls
-                    autoPlay
-                    content={GetContentTypeFromSource(display.source)} />
+                    onCompleted={() => {
+                        PlayNextFile()
+                    }} 
+                    cover={`/api/v1/files/audio/cover?fileId=${display.source.split("fileId=").pop()}`} />
+                </div>
             )
         }
         if (contentType == "video") {
@@ -88,6 +105,7 @@ export default function BatchPage ({batch}) {
                     content={GetContentTypeFromSource(display.source)} 
                     controls
                     autoPlay
+                    onEnded={() => PlayNextFile()}
                         
                 />
             )
@@ -143,6 +161,25 @@ export default function BatchPage ({batch}) {
 
     }
 
+    function getFilteredFiles () {
+        
+        var files = batch.files
+        if (filter == "" || null) {
+            return files
+        }
+        files = files.filter((f) => isSourceContentType(f.source, filter))
+
+        return files
+    }
+
+    function displayFilters () {
+        return <div className={styles.row}>{
+            getPossibleExtensionFilters().map((ext) => {
+                return <button onClick={() => {if (ext == filter) {setFilter("")} else setFilter(ext)}} style={{border: "none", outline: filter != ext ? "none" : "2px solid white"}}>{ext}</button>
+            })
+        }</div>
+    }
+
 
     return (
 
@@ -157,6 +194,7 @@ export default function BatchPage ({batch}) {
             </Head>
 
             <h2>{batch.title}</h2>
+            
             <div style={{display: "flex", gap: ".5rem", flexWrap: "wrap"}}>
                 {batch.owners.map((owner, i) => {
                     return (
@@ -167,13 +205,18 @@ export default function BatchPage ({batch}) {
                     )
                 })}
             </div>
-            {session.status == "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id) && <ImprovedFileUpload batchPreset={batch.id} /> }
+            <div className={styles.row} style={{gap: "2rem"}}>
+                
+                {displayFilters()}
+                {session.status == "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id) && <ImprovedFileUpload batchPreset={batch.id} /> }
+            
+            </div>
             <div className={styles.wrap}>
                 <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
                 </div>
 
                     {display && <DisplayElement/>}
-                {batch.files.map((file, i) => {
+                {getFilteredFiles().map((file, i) => {
 
 
 
@@ -186,17 +229,6 @@ export default function BatchPage ({batch}) {
             </div>
         </FileSharingLayout>
     );
-}
-
-function mediaPreview(source) {
-
-    const content = GetContentTypeFromSource(source).split("/").shift()
-    
-    if (content == "image") {
-        return <div className={styles.image}>
-            <Image width={100} objectFit={'cover'} height={100} src={source} />
-        </div>
-    }
 }
 
 export async function getStaticProps({ params }){

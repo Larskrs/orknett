@@ -5,7 +5,8 @@ import path from "path";
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "../../auth/[...nextauth]"
 import { GetClient, GetAuthenticatedClient } from "@/lib/Supabase";
-import { GetContentType } from "@/lib/ExtensionHelper"
+import { GetContentType, isSourceContentType } from "@/lib/ExtensionHelper"
+import jsmediatags from "jsmediatags";
 
 export const config = {
   api: {
@@ -65,7 +66,7 @@ async function UploadFileStream(req, res) {
 
 
 
-const CHUNK_SIZE_IN_BYTES = 8000000; // 8 mb
+const CHUNK_SIZE_IN_BYTES = 1000000; // 1 mb
 
 function GetFileStream(req, res) {
 
@@ -74,7 +75,6 @@ function GetFileStream(req, res) {
   const [ id, extension ] = fileName.split(".")
 
   let filePath = `./files/${fileName}`;
-  
 
   
   const options = {};
@@ -146,6 +146,8 @@ function GetFileStream(req, res) {
             res.setHeader("filename", fileName);
             res.setHeader("content-disposition", "filename=" + fileName)
 
+
+
             const fileStream = fs.createReadStream(filePath, options);
             fileStream.on("error", error => {
                 console.log(`Error reading file ${filePath}.`);
@@ -158,11 +160,53 @@ function GetFileStream(req, res) {
         }
     });
 }
+function GetVideoStream (req, res) {
+
+  const fileName = req.query.fileId;
+  const [ id, extension ] = fileName.split(".")
+
+  let filePath = `./files/${fileName}`;
+
+  const range = req.headers.range;
+
+  if (!range) {
+    return GetFileStream(req, res)
+  }
+
+  const videoSizeInBytes = fs.statSync(filePath).size;
+
+  const chunkStart = Number(range.replace(/\D/g, ""));
+
+  const chunkEnd = Math.min(
+    chunkStart + CHUNK_SIZE_IN_BYTES,
+    videoSizeInBytes - 1
+  );
+
+  const contentLength = chunkEnd - chunkStart + 1;
+
+  const headers = {
+    "Content-Range": `bytes ${chunkStart}-${chunkEnd}/${videoSizeInBytes}`,
+    "Accept-Ranges": "bytes",
+    "Content-Length": contentLength,
+    "Content-Type": "video/mp4",
+  };
+
+  res.writeHead(206, headers);
+  const videoStream = fs.createReadStream(filePath, {
+    start: chunkStart,
+    end: chunkEnd,
+  });
+
+  videoStream.pipe(res);
+
+}
+
 
 export default async function handler(req, res) {
   const method = req.method;
 
   if (method === "GET") {
+    // return GetFileStream(req, res);
     return GetFileStream(req, res);
   }
 

@@ -2,8 +2,9 @@ import styles from '@/styles/FileSharing.module.css'
 import { RatioMedia } from './RatioMedia';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Badge, Stars } from '.';
+import { AudioPlayer, Badge, Stars } from '.';
 import { GetContentTypeFromSource } from '@/lib/ExtensionHelper';
+import { useRouter } from 'next/router';
 
 
 export default function FileElement ({file, onSelect}) {
@@ -15,21 +16,26 @@ export default function FileElement ({file, onSelect}) {
                     const type = contentType.split('/')[0];
 
                     return (
-                        <div className={styles.download} onClick={onSelect}>
-
-
+                        <div className={styles.download}>
                             
-                            <div style={{pointerEvents: `none`, width: "100%", height: "100%"}}>
+                            <div onClick={onSelect} style={{width: "100%", height: "100%"}}>
                                 
-                                {type == "video" && <RatioMedia alt={file.fileName} objectFit src={"/video.svg"} /> }
-                                {type == "audio" && <RatioMedia alt={file.fileName} objectFit src={"/audio.svg"} /> }
-                                {type == "image" && <RatioMedia alt={file.fileName} quality={1} objectFit src={file.source} /> }
+                                {type == "video" && <Image alt={file.fileName} fill src={"/video.svg"} /> }
+                                {/* {type == "audio" && <Image alt={file.fileName} fill src={"/audio.svg"} /> } */}
+                                {type == "audio" && <>
+                                    
+                                    <Image alt={file.fileName} fill src={`/api/v1/files/audio/cover?fileId=${file.source.split("fileId=").pop()}`} /> 
+                                    
+                                </> }
+                                {type == "image" && <Image alt={file.fileName} quality={1} style={{objectFit: "contain"}} sizes={[]} fill src={file.source} /> }
+
+                                {type == "application" && <Badge style={{with: "100%", minHeight: "100%", textAlign: "center"}}><h2>{file.source.split(".").pop()}</h2></Badge>}
                             </div>
                             <div className={styles.download_detail}>
                                 <a>{file.fileName}</a>
                                 <div className={styles.links}>
                                     <a href={file.source} className={styles.downloadLink} download={file.source}>Download</a>
-                                    <p onClick={() => {navigator.clipboard.writeText(document.domain +  file.source)}} className={styles.downloadLink} >Copy Link</p>
+                                    <Link href={file.source} target="_blank" onClick={() => {navigator.clipboard.writeText(document.domain +  file.source)}} className={styles.downloadLink} >Copy Link</Link>
                                 </div>
                                 <Stars max={5} rating={3} ><span> your rating</span></Stars>
 

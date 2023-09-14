@@ -176,7 +176,7 @@ export default function FileUpload ({batchPreset = ""}) {
                         
                         <label className={"upload_button"}htmlFor="file">Select File to upload</label>
                         {/* <label className="upload_button" onClick={() => {setSubmitting(true)}}> Upload File </label> */}
-                        <p>Size {getReadableFileSizeString(getTotalSize(files))}</p>
+                        <p style={{fontSize: 14}}>Size {getReadableFileSizeString(getTotalSize(files))}</p>
                     </div> 
 
         </div> }
@@ -206,11 +206,11 @@ export default function FileUpload ({batchPreset = ""}) {
                         flex-direction: column;
                         width: fit-content; /* viewport width */
                         /* height: 90vh; */
-                        max-height: 90vh;
+                        max-height: 80vh;
                         overflow-y: scroll;
                         overflow-x: hidden;
                         padding: 0rem;
-                        top: 2rem;
+                        top: 6rem;
                         left: 2rem;
                         right: 2rem;
                         gap: 0.5rem;
@@ -243,6 +243,7 @@ export default function FileUpload ({batchPreset = ""}) {
                         border: 1px solid var(--gray-3);
                         border-radius: 10px;
                         transition: none;
+                        font-size: 14px;
                         outline: none;
                     }
                     .upload_button:hover {
@@ -254,7 +255,8 @@ export default function FileUpload ({batchPreset = ""}) {
                         gap: 1rem;
                         pointer-events: all;
                         background-color: #111;
-                        padding: 1rem 2rem;
+                        padding: .5rem 2rem;
+                        font-size: 14px;
                     }
 
             `}</style>

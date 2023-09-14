@@ -150,3 +150,37 @@ progress::-webkit-progress-value {
 	transition: 1s ease 0.3s;
 }
 
+input[type="range"]::after {
+  display: none;
+}
+input[type="range"]::before {
+  display: none;
+}
+input[type="range"]::-moz-range-thumb {
+  opacity: 1;
+  width: 0px;
+  height: 100%;
+  border-radius: 0;
+  border: none;
+  background-color: rgb(149, 120, 245);
+  transition: all 0.3s ease;
+}
+input[type="range"]::-moz-range-progress {
+  background-color: rgb(77, 34, 215);
+  height: 100%;
+}
+input[type="range"]:focus {
+  outline: 2px solid white;
+}
+
+
+input[type="range"] {
+  -webkit-appearance: none; 
+  box-shadow: none !important;  
+  background-color: #222; 
+  border-radius: 4px;
+  overflow: hidden;
+}
+:-webkit-autofill { 
+  color: #fff !important;
+  }
