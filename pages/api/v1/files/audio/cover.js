@@ -1,6 +1,5 @@
 import { GetContentTypeFromSource } from "@/lib/ExtensionHelper";
 import { getContentIconSource } from "@/lib/FileHelper";
-import canvas, { createCanvas } from "canvas";
 import fs from "fs";
 import jsmediatags from "jsmediatags"
 import path from "path";
