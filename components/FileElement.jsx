@@ -7,7 +7,7 @@ import { GetContentTypeFromSource } from '@/lib/ExtensionHelper';
 import { useRouter } from 'next/router';
 
 
-export default function FileElement ({file, onSelect}) {
+export default function FileElement ({file, onSelect, download=true, rating=0}) {
 
         const fileId = file.source.split('/').pop().split('=').pop();
                     const creationDate = new Date(file.created_at);
@@ -34,10 +34,10 @@ export default function FileElement ({file, onSelect}) {
                             <div className={styles.download_detail}>
                                 <a>{file.fileName}</a>
                                 <div className={styles.links}>
-                                    <a href={file.source} className={styles.downloadLink} download={file.source}>Download</a>
+                                    {download && <a href={file.source} className={styles.downloadLink} download={file.source}>Download</a>}
                                     <Link href={file.source} target="_blank" onClick={() => {navigator.clipboard.writeText(document.domain +  file.source)}} className={styles.downloadLink} >Copy Link</Link>
                                 </div>
-                                <Stars max={5} rating={3} ><span> your rating</span></Stars>
+                                {rating > 0 && <Stars max={5} rating={rating} ><span> your rating</span></Stars>}
 
                                 {/* <a>{creationDate.toLocaleDateString("en-EN")}</a> */}
                             </div>

@@ -220,7 +220,11 @@ export default function BatchPage ({batch}) {
 
 
 
-                  return <FileElement key={i} file={file} onSelect={() => {
+                  return <FileElement 
+                    key={i}
+                    file={file}
+                    download={batch.settings?.download || (session.status === "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id))}
+                    onSelect={() => {
                     console.log("Uploading file: \n" + file.fileName)
                     moveDisplay(i)
                   }}/>
