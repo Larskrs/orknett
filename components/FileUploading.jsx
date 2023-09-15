@@ -14,6 +14,7 @@ export default function FileUploading ({
     file,
     batch,
     session,
+    onUploaded=() => {},
     run=false
 }) {
 
@@ -24,7 +25,7 @@ export default function FileUploading ({
     const [finished, setFinished] = useState(false)
     const [link, setLink] = useState(null)
 
-    async function UploadToDatabase (fileName, id, extension) {
+    async function UploadToDatabase (fileName, id, extension, onUploaded=() => {}) {
         console.log("Uploading to database...")
 
         console.log({session})
@@ -110,13 +111,14 @@ export default function FileUploading ({
                     setFinished(true)
                     setProgress(0);
                     UploadToDatabase(file.name, name, type);
+                    onUploaded()
                     
             }
             // axios
     }
 
     return (
-        <div onClick={handleSubmit} style={{background: "#111", border: "1px solid #222", cursor: "pointer", borderRadius: "8px", padding: "1rem 2rem 1rem 1rem", display: "flex", wordBreak: "break-word", flexDirection: "row", minWidth: "200px", width: "auto", gap: 8}}>
+        <div onClick={handleSubmit} style={{background: "#111", border: "1px solid #222", cursor: "pointer", borderRadius: "8px", padding: "1rem 2rem 1rem 1rem", display: (finished ? "none" : "flex"), wordBreak: "break-word", flexDirection: "row", minWidth: "200px", width: "auto", gap: 8}}>
             <Image style={{objectFit: "cover", borderRadius: 8}} width={50} height={50} src={fileUrl} quality={0} />
             <div>
 

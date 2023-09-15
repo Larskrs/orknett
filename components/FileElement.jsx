@@ -3,11 +3,24 @@ import { RatioMedia } from './RatioMedia';
 import Link from 'next/link';
 import Image from 'next/image';
 import { AudioPlayer, Badge, Stars } from '.';
-import { GetContentTypeFromSource } from '@/lib/ExtensionHelper';
+import { GetContentTypeFromSource, isSourceContentType } from '@/lib/ExtensionHelper';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { getContentIconSource } from '@/lib/FileHelper';
 
 
 export default function FileElement ({file, onSelect, download=true, rating=0}) {
+
+
+        const [image, setImage] = useState()
+
+        useEffect(() => {
+            
+            if (isSourceContentType(file.source, "audio")) {
+                setImage(`/api/v1/files/audio/cover?fileId=${file.source.split("fileId=").pop()}`)
+            }
+
+        })
 
         const fileId = file.source.split('/').pop().split('=').pop();
                     const creationDate = new Date(file.created_at);
@@ -24,10 +37,12 @@ export default function FileElement ({file, onSelect, download=true, rating=0}) 
                                 {/* {type == "audio" && <Image alt={file.fileName} fill src={"/audio.svg"} /> } */}
                                 {type == "audio" && <>
                                     
-                                    <Image alt={file.fileName} fill src={`/api/v1/files/audio/cover?fileId=${file.source.split("fileId=").pop()}`} /> 
+                                    <Image alt={file.fileName} fill src={image} /> 
                                     
                                 </> }
-                                {type == "image" && <Image alt={file.fileName} quality={1} style={{objectFit: "contain"}} sizes={[]} fill src={file.source} /> }
+                                {type == "image" && <Image alt={file.fileName} quality={1} style={{objectFit: "contain"}} sizes={[]} fill src={file.source} onError={(e) => {
+                                    setImage(getContentIconSource(GetContentTypeFromSource().split("/")[0]))
+                                }} /> }
 
                                 {type == "application" && <Badge style={{with: "100%", minHeight: "100%", textAlign: "center"}}><h2>{file.source.split(".").pop()}</h2></Badge>}
                             </div>

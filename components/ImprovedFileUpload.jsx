@@ -27,6 +27,8 @@ export default function FileUpload ({batchPreset = ""}) {
     
 
     const session = useSession();
+    let filesLeft = files
+
     
     async function UploadToDatabase (fileName, id, extension) {
         console.log("Uploading to database...")
@@ -166,7 +168,10 @@ export default function FileUpload ({batchPreset = ""}) {
                     </div>
                 } */}
 
-                <div className="fileList">{files && files.length > 0 && files.map((f, i) => <FileUploading key={f.name} file={f} batch={batch} session={session} run={submitting} />) }</div>
+                <div className="fileList">{filesLeft && filesLeft.length > 0 && filesLeft.map((f, i) => <FileUploading key={f.name} file={f} batch={batch} session={session} run={submitting} onUploaded={() => {
+                    filesLeft = filesLeft.splice(i, 1);
+                    
+                }} />) }</div>
                 {/* {files && [...files].forEach(file => console.log(file) )} */}
 
             

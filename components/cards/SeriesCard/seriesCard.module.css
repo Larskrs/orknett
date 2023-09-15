@@ -2,6 +2,7 @@
     width: calc(27px*5);
     height: calc(40px*5);
     border-radius: 8px;
+    outline: transparent !important; 
     cursor: pointer;
     background-color: #222;
     border: none;
@@ -10,4 +11,11 @@
 }
 .poster {
     border: none;
+}
+.wrap:hover {
+    outline: 1px solid #999 !important;
+}
+.wrap:checked .poster {
+    scale: 1.1;
+    border: 5px solid #222 !important;
 }

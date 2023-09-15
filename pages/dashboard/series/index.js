@@ -2,13 +2,20 @@ import { GetClient } from "@/lib/Supabase";
 import FileSharingLayout from "@/layouts/FileSharingLayout";
 import Link from "next/link";
 import styles from '@/styles/FileSharing.module.css'
-import { SeriesCard } from "@/components";
+import { SeriesCard, Slider } from "@/components";
+import { useState } from "react";
 
 
 function index({data}) {
+
+    const [progress, setProgress] = useState(25)
+
     return (
         <FileSharingLayout pageId={3}>
+                {/* <Slider min={0} max={100} defaultValue={50} onChange={(e) => {console.log(e); setProgress(e)}}/> */}
             <div className={styles.wrap}>
+
+
                 {data.map((series, i) => {
                     return (
                         

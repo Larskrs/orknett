@@ -23,6 +23,7 @@
     gap: 32px;
     padding-right: 1rem;
     align-items: center;
+    width: 100%;
 }
 .title {
     font-size: 14px;
@@ -46,3 +47,81 @@
     font-size: 10px;
     margin: 0;
 }
+.coverContainer {
+    position: relative;
+    height: 100px;
+    object-fit: contain;
+    background-color: #111;
+    cursor: pointer;
+    user-select: none;
+}
+.play {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: rotate .25s;
+    transition: opacity 1s ease 1s;
+    transition-delay: 2s;
+    opacity: 0;
+}
+.coverContainer:active .play {
+    scale: 1.1;
+    opacity: 1 !important;
+    rotate: 0deg;
+    transition-delay: 0s !important;
+    transition-duration: 0s !important;
+}
+.coverContainer:not(:active) > img {
+    opacity: 1 !important;
+    rotate: 0deg;
+    transition-delay: 2s !important;
+    transition-duration: 1s !important;
+    /* border-radius: .5rem; */
+}
+.coverContainer:active > img {
+    opacity: 0.5 !important;
+    /* border-radius: 50%; */
+    transition-delay: 0s !important;
+    transition-duration: 0s !important;
+}
+.coverContainer > img {
+    animation: playing 10s linear infinite;
+    border-radius: 100%;
+}
+
+.play > span {
+    background-color: white;
+    width: 8px;
+    height: 48px;
+    position: absolute;
+    border-radius: 8px;
+    transition: all 250ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.play span:first-child {
+    translate: -15px 0px;
+}
+.play span:last-child {
+    translate: 15px 0px;
+}
+
+@keyframes playing {
+    0% {
+        rotate: 0deg;
+        scale: 1.01;
+    }
+    50% {
+        scale: 1;
+    }
+    100% {
+        rotate: 360deg;
+        scale: 1.01;
+    }
+}
+
+
+
