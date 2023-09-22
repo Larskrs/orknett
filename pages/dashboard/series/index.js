@@ -3,12 +3,9 @@ import FileSharingLayout from "@/layouts/FileSharingLayout";
 import Link from "next/link";
 import styles from '@/styles/FileSharing.module.css'
 import { SeriesCard, Slider } from "@/components";
-import { useState } from "react";
 
 
 function index({data}) {
-
-    const [progress, setProgress] = useState(25)
 
     return (
         <FileSharingLayout pageId={3}>
