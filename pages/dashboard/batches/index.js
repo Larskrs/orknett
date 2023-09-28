@@ -15,7 +15,7 @@ function BatchesPage ({batches}) {
     const router = useRouter()
 
     return (
-        <FileSharingLayout pageId={2}>
+        <FileSharingLayout pageId={2} batches={batches}>
             <div className={styles.wrap}>
                 {batches.map((batch, i) => {
 

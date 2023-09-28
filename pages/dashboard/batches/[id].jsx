@@ -14,6 +14,8 @@ import { useState, useEffect } from 'react';
 import Arrow from '@/components/Arrow';
 import Head from 'next/head';
 import { AudioPlayer, Badge, ImprovedFileUpload } from '@/components';
+import axios from "axios";
+import { GetBatches } from '@/lib/BatchLib';
 
 
 function NoAccessPage () {
@@ -27,7 +29,7 @@ function NoAccessPage () {
     )
 }
 
-export default function BatchPage ({batch}) {
+export default function BatchPage ({batch, batches}) {
 
     const session = useSession()
 
@@ -183,11 +185,7 @@ export default function BatchPage ({batch}) {
 
     return (
 
-
-
-
-        
-        <FileSharingLayout pageId={2}>
+        <FileSharingLayout pageId={2} batches={batches}>
 
             <Head>
                 <title>{batch.title}</title>
@@ -238,6 +236,7 @@ export default function BatchPage ({batch}) {
 export async function getStaticProps({ params }){
 
     
+
     async function GetOwners(owners) {
         const {data, error} = await GetServiceClient("next_auth")
         .from("users")
@@ -270,9 +269,12 @@ export async function getStaticProps({ params }){
     const owners = await GetOwners(data.owners)
     data.owners = owners
 
+    const batches = await GetBatches ();
+
     return {
         props:{
-            batch: data
+            batch: data,
+            batches: batches.data,
         },
         revalidate: 5, // In seconds
     }
@@ -281,7 +283,6 @@ export async function getStaticProps({ params }){
 
 
 }
-
 
 
 export async function getStaticPaths() {

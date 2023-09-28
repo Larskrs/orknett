@@ -15,11 +15,12 @@ import FileElement from '@/components/FileElement'
 import { useEffect, useState } from 'react';
 import Arrow from '@/components/Arrow';
 import { AudioPlayer, ImprovedFileUpload } from '@/components';
+import axios from 'axios';
+import { GetBatches } from '@/lib/BatchLib';
 
 
 
-
-function FilePage ({files}) {
+function FilePage ({files, batches}) {
 
     const [display, setDisplay] = useState(null)
     const [displayId, setDisplayId] = useState(-1)
@@ -167,7 +168,7 @@ function FilePage ({files}) {
 
 
     return (
-        <FileSharingLayout pageId={0}>
+        <FileSharingLayout pageId={0} batches={batches}>
 
             <div className={styles.row} style={{gap: "2rem"}}>
                 {displayFilters()}
@@ -237,12 +238,16 @@ export async function getServerSideProps(ctx){
     .eq("user", userId)
     .order("created_at", {ascending: false})
 
+    const batches = await GetBatches ()
+
     return {
         props:{
-            files: data
+            files: data,
+            batches: batches.data
         },
     }
 }
+
 
 function getGroupedFiles(files) {
     const groupedData = files.reduce((groups, item) => {

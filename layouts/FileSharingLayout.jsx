@@ -10,13 +10,9 @@ import { GetShortHandle } from "@/lib/ShorthandHelper";
 import { useRouter } from "next/router";
 import { isSourceContentType } from "@/lib/ExtensionHelper";
 
-export default function Layout({children, pageId = 0}) {
+export default function Layout({children, pageId = 0, batches}) {
     const router = useRouter()
     const [current, setCurrent] = useState(pageId)
-    const { data, isLoading, error, refresh} = useFetch(
-      `batches`, {});
-
-      console.log({data})
 
     return (
         <div>
@@ -37,10 +33,7 @@ export default function Layout({children, pageId = 0}) {
                   </nav>
                   
                   <nav className={styles.actionBar}>
-                    {isLoading || error || !data.batches
-                    ? (<p>Damn</p>) 
-                    :
-                    data.batches.map((batch) =>
+                    {batches && batches.map((batch) =>
                       <Badge style={{cursor: "pointer", overflow: "hidden"}} key={batch.id} onClick={() => router.push("/dashboard/batches/" + batch.id)}>
                             {isSourceContentType(batch.thumbnail, "image") && <ColorImage style={{zIndex: 0}} source={batch.thumbnail} /> }
                             <h2 style={{zIndex: 1}}>{GetShortHandle(batch.title).combined}</h2>
