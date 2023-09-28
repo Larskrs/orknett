@@ -4,11 +4,16 @@ import Link from "next/link";
 import styles from '@/styles/FileSharing.module.css'
 import { GetCookie } from "@/lib/CookieHelper";
 import Image from "next/image";
-import { Badge } from "@/components";
+import { Badge, ColorImage } from "@/components";
 import { RatioImage } from "@/components/RatioImage";
-import { isSourceContentType } from "@/lib/ExtensionHelper";
+import { contentTypeList, isSourceContentType } from "@/lib/ExtensionHelper";
+import { GetShortHandle } from "@/lib/ShorthandHelper";
+import { useRouter } from "next/router";
 
 function index({batches}) {
+
+    const router = useRouter()
+
     return (
         <FileSharingLayout pageId={2}>
             <div className={styles.wrap}>
@@ -33,6 +38,11 @@ function index({batches}) {
                                 
                             </div>
                         </Link>
+
+                        // <Badge style={{cursor: "pointer", overflow: "hidden"}} key={batch.id} onClick={() => router.push("/dashboard/batches/" + batch.id)}>
+                        //     <ColorImage style={{zIndex: 0}} source={batch.thumbnail} />
+                        //     <h1 style={{zIndex: 1}}>{GetShortHandle(batch.title).combined}</h1>
+                        // </Badge>
                     )
                 })}
             </div>
@@ -51,15 +61,16 @@ export async function getServerSideProps(ctx){
         files (*)
     `)
     .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
+    .order("created_at", {ascending: false, foreignTable: "files"})
+    // .filter('files.source', 'in', ['png','jpg'])
+    .limit(1, { foreignTable: "files"})
 
     for (const i in data) {
         const batch = data[i]
         const owners = await GetOwners(batch.owners)
         data[i].owners = owners
 
-        var shuffled = shuffleArray(batch.files)
-        var files = shuffled.filter((f) => isSourceContentType(f.source, "image"))
-        var file = files[0]
+        var file = batch.files[0]
 
         if (file)
         data[i].thumbnail = file.source

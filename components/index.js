@@ -7,6 +7,7 @@ import ImprovedFileUpload from "./ImprovedFileUpload";
 import FileUploading from "./FileUploading";
 import AudioPlayer from "./cards/AudioPlayer/AudioPlayer";
 import Slider from "./cards/Slider/Slider";
+import ColorImage from "./cards/ColorImage/ColorImage";
 
 export 
 {
@@ -18,5 +19,6 @@ export
     ImprovedFileUpload,
     FileUploading,
     AudioPlayer,
-    Slider
+    Slider,
+    ColorImage
 };
