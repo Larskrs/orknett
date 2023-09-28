@@ -35,7 +35,7 @@ export default function Layout({children, pageId = 0, batches}) {
                   <nav className={styles.actionBar}>
                     {batches && batches.map((batch) =>
                       <Badge style={{cursor: "pointer", overflow: "hidden"}} key={batch.id} onClick={() => router.push("/dashboard/batches/" + batch.id)}>
-                            {isSourceContentType(batch.thumbnail, "image") && <ColorImage style={{zIndex: 0}} source={batch.thumbnail} /> }
+                            {/* {isSourceContentType(batch.thumbnail, "image") && <ColorImage style={{zIndex: 0}} source={batch.thumbnail} /> } */}
                             <h2 style={{zIndex: 1}}>{GetShortHandle(batch.title).combined}</h2>
                       </Badge>
                     )}
