@@ -30,7 +30,9 @@ export default async function handler(req, res) {
         if (file)
         data[i].thumbnail = file.source
     }
-    res.setHeader("Access-Control-Allow-Origin")
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    res.setHeader('Access-Control-Allow-Origin', '*') // replace this your actual origin
+    res.setHeader('Access-Control-Allow-Methods', 'GET')
     res.status(200).json({batches: data})
   }
 
