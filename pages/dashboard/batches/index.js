@@ -10,7 +10,7 @@ import { contentTypeList, isSourceContentType } from "@/lib/ExtensionHelper";
 import { GetShortHandle } from "@/lib/ShorthandHelper";
 import { useRouter } from "next/router";
 
-function index({batches}) {
+function BatchesPage ({batches}) {
 
     const router = useRouter()
 

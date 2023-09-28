@@ -8,10 +8,13 @@ export default function ColorImage ({source}) {
     const [color, setColor] = useState("")
     const fac = new FastAverageColor();
     
-    if (!isSourceContentType(source, "image")) {
-        return;
-    }
+    
     useEffect(() => {
+
+        if (!isSourceContentType(source, "image")) {
+            return;
+        }
+
         fac.getColorAsync(source)
         .then(color => {
             setColor(color.hex)
