@@ -8,6 +8,7 @@ import { Badge, ColorImage } from "@/components";
 import useFetch from "@/hooks/useFetch";  
 import { GetShortHandle } from "@/lib/ShorthandHelper";
 import { useRouter } from "next/router";
+import { isSourceContentType } from "@/lib/ExtensionHelper";
 
 export default function Layout({children, pageId = 0}) {
     const router = useRouter()
@@ -41,7 +42,7 @@ export default function Layout({children, pageId = 0}) {
                     :
                     data.batches.map((batch) =>
                       <Badge style={{cursor: "pointer", overflow: "hidden"}} key={batch.id} onClick={() => router.push("/dashboard/batches/" + batch.id)}>
-                            <ColorImage style={{zIndex: 0}} source={batch.thumbnail} />
+                            {isSourceContentType(batch.thumbnail, "image") && <ColorImage style={{zIndex: 0}} source={batch.thumbnail} /> }
                             <h2 style={{zIndex: 1}}>{GetShortHandle(batch.title).combined}</h2>
                       </Badge>
                     )}

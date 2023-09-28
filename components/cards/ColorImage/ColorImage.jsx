@@ -11,7 +11,7 @@ export default function ColorImage ({source}) {
     
     useEffect(() => {
 
-        if (!isSourceContentType(source, "image")) {
+        if (source.toLowerCase().includes(['.png', '.jpg', '.jpeg'])) {
             return;
         }
 

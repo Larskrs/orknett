@@ -16,7 +16,7 @@ const useFetch = (endpoint, query) => {
     method: "GET",
     url: `${baseUrl}/api/v1/${endpoint}`,
     headers: {
-
+        "Access-Control-Allow-Origin": "true"
     },
     params: {},
   };
