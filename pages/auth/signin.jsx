@@ -11,7 +11,7 @@ export default function SignIn({ providers }) {
             <div className="background">
                 <Image 
                 style={{objectFit: "cover", objectPosition: "center",}}
-                src={"http://aktuelt.tv/api/v1/files?fileId=97b9c093-b87c-49bd-a4dc-1bbabdd644e1.jpeg"} fill/>
+                src={"http://aktuelt.tv/api/v1/files?fileId=c73e05a8-a81a-4fb8-a348-84d4ad81d33c.jpg"} fill/>
             </div>
             <div className="box">
                 <Image src={"/aktueltstudio_logo.svg"} width={150} height={150} />
