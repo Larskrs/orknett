@@ -87,7 +87,7 @@ export default function BatchPage ({batch, batches}) {
         if (contentType == "audio") {
 
             return (
-                <div className={styles.display_element}>
+                <div className={styles.display_element} key={displayId}>
                     <AudioPlayer alt={display.fileName}
                     src={display.source}
                     onCompleted={() => {
@@ -223,7 +223,6 @@ export default function BatchPage ({batch, batches}) {
                     file={file}
                     download={batch.settings?.download || (session.status === "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id))}
                     onSelect={() => {
-                    console.log("Uploading file: \n" + file.fileName)
                     moveDisplay(i)
                   }}/>
 
@@ -276,7 +275,7 @@ export async function getStaticProps({ params }){
             batch: data,
             batches: batches.data,
         },
-        revalidate: 5, // In seconds
+        revalidate: false, // In seconds
     }
 
 

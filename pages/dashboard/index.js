@@ -17,6 +17,7 @@ import Arrow from '@/components/Arrow';
 import { AudioPlayer, ImprovedFileUpload } from '@/components';
 import axios from 'axios';
 import { GetBatches } from '@/lib/BatchLib';
+import Layout from '@/layouts/newUI/layout';
 
 
 
@@ -185,7 +186,7 @@ function FilePage ({files, batches}) {
                     var files = groupedFiles[group]
                     return (
                         <div key={gi} className={styles.list}>
-                        <h3>{group}</h3>
+                        <h3 style={{margin: 0}}>{group}</h3>
                         <div className={styles.list}>
                         {files.map((file, i) => {
 

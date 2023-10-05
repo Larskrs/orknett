@@ -10,7 +10,7 @@ import { GetShortHandle } from "@/lib/ShorthandHelper";
 import { useRouter } from "next/router";
 import { isSourceContentType } from "@/lib/ExtensionHelper";
 
-export default function Layout({children, pageId = 0, batches}) {
+export default function Layout({children, pageId = 0, theme = "dark"}) {
     const router = useRouter()
     const [current, setCurrent] = useState(pageId)
 
@@ -23,22 +23,15 @@ export default function Layout({children, pageId = 0, batches}) {
                     <link rel="icon" href="/aktueltstudio_logo.svg" />
                   </Head>
                   
-                  <nav className={styles.nav}>
+                  <nav className={styles.nav} style={{
+                    backgroundColor: (theme == "dark" ? "var(--dark-green)" : "transparent")
+                  }}>
                       <Link className={current === -1 ? styles.element : styles.default} href={"/"}><Image width={30} height={30} src={"/aktueltstudio_logo.svg"} /></Link>
                       {/* <Link className={current === 0 ? styles.element : styles.default} href={"/dashboard"}>files</Link> */}
                       <Link className={current === 2 ? styles.element : styles.default} href={"/dashboard/batches"}>Batches</Link>
                       <Link className={current === 3 ? styles.element : styles.default} href={"/dashboard/articles"}>Articles</Link>
                       <Link className={current === 4 ? styles.element : styles.default} href={"/dashboard/series"}>Series</Link>
                       <LoginButton />
-                  </nav>
-                  
-                  <nav className={styles.actionBar}>
-                    {batches && batches.map((batch) =>
-                      <Badge style={{cursor: "pointer", overflow: "hidden"}} key={batch.id} onClick={() => router.push("/dashboard/batches/" + batch.id)}>
-                            {batch.thumbnail && isSourceContentType(batch.thumbnail, "image") && <ColorImage style={{zIndex: 0}} source={batch.thumbnail} /> }
-                            <h2 style={{zIndex: 1}}>{GetShortHandle(batch.title).combined}</h2>
-                      </Badge>
-                    )}
                   </nav>
 
                   <main className={styles.main}>

@@ -4,17 +4,17 @@
     
     /* Grid */
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: 5fr 3fr 1fr;
+    grid-template-columns: 300px 1fr;
     /* Movement */
     transition: unset;
+    background-color: var(--eggshell);
 }
 .pageContainer div {
-    background-color: #222;
-    border: 1px solid #fff;
+    background-color: var(--eggshell);
 }
-.pageContainer div:nth-child(2) {
+.pageContainer div:nth-child(1) {
     display: grid;
     align-items: center;
     justify-content: center;
+    background-color: var(--eerie-black);
 }

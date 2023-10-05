@@ -6,7 +6,7 @@
     max-width: 5000px;
     width: 100%;
     justify-content: left;
-    padding: 1rem;
+    padding: .25rem;
 }
 .row {
     flex-direction: row;
@@ -14,8 +14,8 @@
     gap: .5rem;
 }
 .download {
-    max-width: 300px;
-    height: 300px;
+    max-width: 250px;
+    height: 250px;
     min-width: 200px;
     width: 100%;
     display: flex;
@@ -196,7 +196,6 @@
 }
 .thumbnail {
     scale: 2;
-    opacity: .25;
 }
 .article:hover .thumbnail {
     scale: 1.5;

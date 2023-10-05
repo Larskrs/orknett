@@ -15,10 +15,13 @@ function index({data}) {
 
                 {data.map((series, i) => {
                     return (
-                        
-                        <SeriesCard key={i} title={series.title} poster={series.posters?.[0]}>
-                            
-                        </SeriesCard>
+                        <Link href={`/dashboard/series/${series.id}`}>
+                            <SeriesCard key={i}
+                                title={series.title}
+                                poster={series.posters?.[0]}>
+
+                            </SeriesCard>
+                        </Link>
                     )
                 })}
             </div>

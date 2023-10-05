@@ -1,7 +1,7 @@
 :root {
 
   overflow-x: hidden;
-  background-color: var(--gray-1);
+  background-color: var(--eerie-black);
 
   --gray-1: #111;
   --gray-2: #222;
@@ -12,6 +12,18 @@
   --gray-7: #777;
   --gray-8: #888;
   --gray-9: #999;
+
+  /* THEME COLORS */
+  --eerie-black: #22201c;
+  --jet: #322e29;
+  --black-olive: #423e37;
+  --xanthous: #e3b23c;
+  --gold-metallic: #e1c066;
+  --eggshell: #edebd7ff;
+  --bright-pink-crayola: #f45866;
+  --magenta-haze: #ac3976;
+  --tekhelet: #631a86;
+  --folly: #ff1053;
 
   color: white;
   padding: 0rem;

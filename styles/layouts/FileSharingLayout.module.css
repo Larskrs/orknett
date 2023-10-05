@@ -4,9 +4,10 @@
     justify-content: left;
     align-items: center;
     padding: 1rem 2rem;
-    background-color: #222;
+    margin: 0rem;
+    background-color: transparent;
     position: fixed;
-    width: 100vw;
+    width: 100%;
     z-index: 2000;
     height: 60px;
 }
@@ -15,7 +16,8 @@
     margin-left: auto;
 }
 .nav a {
-    color: white;
+    color: var(--flame);
+    font-weight: 900;
     font-size: 16px;
     text-decoration: none;
     position: relative;
@@ -73,22 +75,9 @@
 		background: transparent;
     }
 
-    .actionBar {
-        z-index: 200;
-        padding: 1rem;
-        background-color: #222;
-        position: fixed;
-        left: 0px;
-        top: 60px;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        gap: .5rem;
-    }
 
     .main {
         padding-top: 67px;
-        padding-left: 90px;
         display: flex;
         flex-direction: column;
         align-items: center;
