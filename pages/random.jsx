@@ -5,7 +5,7 @@ import { GetContentTypeFromSource, GetExtensionFromSource } from "@/lib/Extensio
 import { AudioPlayer, Badge } from "@/components";
 import styles from "@/styles/FileSharing.module.css"
 
-export default function() {
+export default function Random () {
 
     
     const [display, setDisplay] = useState(null)
