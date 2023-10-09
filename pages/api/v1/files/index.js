@@ -11,7 +11,7 @@ import jsmediatags from "jsmediatags";
 export const config = {
   api: {
     bodyParser: false,
-    responseLimit: false,
+    responseLimit: '32mb',
     externalResolver: true,
   },
 };
@@ -153,6 +153,7 @@ function GetFileStream(req, res) {
                 console.log(`Error reading file ${filePath}.`);
                 console.log(error);
                 res.sendStatus(500);
+                
             });
 
             
@@ -197,6 +198,11 @@ function GetVideoStream (req, res) {
     end: chunkEnd,
   });
 
+  res.on("close", function () {
+    videoStream.destroy()
+    return;
+  })
+
   videoStream.pipe(res);
 
 }
@@ -207,7 +213,7 @@ export default async function handler(req, res) {
 
   if (method === "GET") {
     // return GetFileStream(req, res);
-    return GetFileStream(req, res);
+    return GetVideoStream(req, res);
   }
 
   if (method === "POST") {

@@ -8,6 +8,7 @@ import FileUploading from "./FileUploading";
 import AudioPlayer from "./cards/AudioPlayer/AudioPlayer";
 import Slider from "./cards/Slider/Slider";
 import ColorImage from "./cards/ColorImage/ColorImage";
+import Glossy from "./cards/Glossy/Glossy";
 
 export 
 {
@@ -20,5 +21,6 @@ export
     FileUploading,
     AudioPlayer,
     Slider,
-    ColorImage
+    ColorImage,
+    Glossy
 };

@@ -18,18 +18,28 @@ import axios from "axios";
 import { GetBatches } from '@/lib/BatchLib';
 
 
-function NoAccessPage () {
-    return (
-        <FileSharingLayout pageId={2}>
-                <div style={{position: "fixed", top: "50%", left: "50%", translate: "-50% -50%"}}>
-                    <h2>You do not have access to this batch.</h2>
-                    <Link href={"/dashboard/batches"}>Go Back</Link>
-                </div>
-            </FileSharingLayout>
-    )
-}
+
 
 export default function BatchPage ({batch, batches}) {
+
+    function NoAccessPage () {
+        return (
+            <FileSharingLayout pageId={2}>
+
+                    <Head>
+                        <title>{batch.title}</title>
+                        <meta content={batch.title} property="og:title" />
+                        <meta content="Ingen Beskrivelse funnet" property="og:description" />
+                        <meta content={batch?.files?.[0]?.source} property="og:image" />
+                    </Head>
+
+                    <div style={{position: "fixed", top: "50%", left: "50%", translate: "-50% -50%"}}>
+                        <h2>You do not have access to this batch.</h2>
+                        <Link href={"/dashboard/batches"}>Go Back</Link>
+                    </div>
+                </FileSharingLayout>
+        )
+    }
 
     const session = useSession()
 

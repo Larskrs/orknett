@@ -1,0 +1,5 @@
+.display_element {
+    position: relative !important;
+    width: 100vw !important;
+    height: 100vh !important;
+}

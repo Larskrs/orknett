@@ -9,6 +9,7 @@ import { GetAuthenticatedClient, GetClient } from "@/lib/Supabase";
 import Image from "next/image";
 import { getReadableFileSizeString } from "@/lib/FileHelper";
 import { RatioMedia } from "./RatioMedia";
+import { Slider } from ".";
 
 export default function FileUploading ({
     file,
@@ -125,8 +126,8 @@ export default function FileUploading ({
                 <p style={{opacity: finished ? 0.25 : 1, fontSize: 20, margin: 0}}>{file.name}</p>
                 <p style={{margin: 0, fontSize: 16, color: "#444"}}>{getReadableFileSizeString(file.size)}</p>
                 {!finished && submitting && <div style={{display: "flex", gap: ".5rem"}}>
-                    <progress max={100} value={progress} />
-                    <p>{progress}%</p>
+                    {/* <progress max={100} value={progress} /> */}
+                    <Slider currentValue={progress} max={100} min={0} smooth={true} trackStyle={{height: "16px"}} progressStyle={{background: "yellow"}} />
                 </div> }
 
             </div>
