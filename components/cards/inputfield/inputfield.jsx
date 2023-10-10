@@ -2,17 +2,17 @@
 import styles from "./inputfield.module.css"
 import { useState } from "react";
 
-export default function InputField ({children, maxInputLength = 25, defaultValue="",  ...props}) {
+export default function InputField ({children, maxInputLength = 25, defaultValue=""},  ...props) {
 
     const [length, setLength] = useState(defaultValue.length)
 
     return (
-        <div className={styles.wrap}>
+        <div className={styles.wrap} onClick={() => {}}>
             <input 
                 className={styles.input}
                 maxLength={maxInputLength}
                 defaultValue={defaultValue}
-
+                {...props}
 
             onChange={(e) => {
 

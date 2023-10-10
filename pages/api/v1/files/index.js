@@ -108,6 +108,7 @@ function GetFileStream(req, res) {
             console.error(`File stat error for ${filePath}.`);
             console.error(err);
             res.status(500);
+            res.end();
             return;
         }
 

@@ -11,10 +11,12 @@ export default function Display ({batch}) {
     
     const [display, setDisplay] = useState(null)
     const [displayId, setDisplayId] = useState(0)
+    const [displayTime, setDisplayTime] = useState(15)
     const [loading, setLoading] = useState(false)
 
     const ScrollDisplay = () => {
 
+        setDisplayTime(15)
         setDisplay(null)
 
         console.log("Changing...")
@@ -83,7 +85,7 @@ export default function Display ({batch}) {
     useEffect(() => {
     
         const intervalId = setInterval(() => {
-            ScrollDisplay()// Fetch data at regular intervals
+            ScrollDisplay()
         }, 15000); // Replace 60000 with your desired interval in milliseconds (e.g., 60000 milliseconds = 1 minute)
     
         return () => {
@@ -112,9 +114,9 @@ export default function Display ({batch}) {
 
             <div style={{zIndex:9999, position: "fixed", left: "1rem", bottom: "1rem"}}>
             <div>{batch.files.map((f, i) => {
-                return <p key={f.id} style={{margin: 0}}>
-                    {(displayId == i) ? (<span style={{fontSize: 18, color: "lime"}}>{" ● "}</span>) : <span style={{marginLeft: 16}}/>}
-                    {((displayId == i) ? <span style={{opacity: 1, transform: "scale(2)"}}>{f.fileName}</span> : <span style={{opacity: 0.75}}>{f.fileName}</span>)}
+                return <p key={f.id} style={{margin: 0, display: "flex"}}>
+                    <span style={{fontSize: 18, transitionDuration: ".5s", height: "25px", width: (displayId == i ? "5spx" : "2.5px"), display: "flex", background: (displayId == i ? "lime" : "#333")}}></span>
+                    {((displayId == i) ? <span style={{opacity: 1, translate: "10px 0px"}}>{f.fileName}</span> : <span style={{opacity: 0}}>{f.fileName}</span>)}
                     </p>
             })}</div>
                 {/* <div>

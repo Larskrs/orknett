@@ -8,7 +8,7 @@ import { SeriesCard, Slider } from "@/components";
 function index({data}) {
 
     return (
-        <FileSharingLayout pageId={3}>
+        <FileSharingLayout pageId={4}>
                 {/* <Slider min={0} max={100} defaultValue={50} onChange={(e) => {console.log(e); setProgress(e)}}/> */}
             <div className={styles.wrap}>
 

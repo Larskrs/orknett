@@ -1,7 +1,8 @@
 :root {
 
   overflow-x: hidden;
-  background-color: var(--eerie-black);
+  background: rgb(0, 0, 0);
+  background: linear-gradient(0deg, rgb(1, 0, 23) 0%, rgb(0, 13, 8) 100%);
 
   --gray-1: #111;
   --gray-2: #222;
@@ -79,16 +80,12 @@ button {
   width: fit-content;
 }
 input[type="text"] {
-  padding: 1rem !important;
-  padding-block: .5rem;
-  margin-block: .5rem;
   background-color: var(--gray-2);
   border-radius: 6px;
   color: white;
   text-decoration: none;
-  font-weight: 700;
   border: 1px solid white;
-  width: 400px;
+  width: 100%;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 input[type="text"]:focus {

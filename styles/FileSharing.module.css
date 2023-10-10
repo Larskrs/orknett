@@ -5,8 +5,8 @@
     gap: .5rem;
     max-width: 5000px;
     width: 100%;
-    justify-content: left;
-    padding: .25rem;
+    justify-content: center;
+    padding: .5rem;
 }
 .row {
     flex-direction: row;
@@ -102,20 +102,44 @@
 }
 .display_element {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    width: auto;
-    height: auto;
-    max-height: 80vh;
-    max-width: 80vw;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding: 0rem;
     display: flex;
+    max-width: 100vw;
+    max-height: 100vw;
     object-fit: contain;
     animation: forwards display_element .25s ease-in-out;
     background-color: rgba(17, 17, 17, 0.25);
     border-radius: 16px;
     pointer-events: all !important;
     z-index: 2000;
+    
+    width: unset;
+    height: 80vh;
+    translate: -50% -50%;
+    left: 50%;
+    top: 50%;
+}
+@media screen and (max-height: 600px) {
+    .display_element {
+        width: unset;
+        height: 80vh;
+        translate: -50% -50%;
+        left: 55%;
+        top: 50%;
+    }
+}
+@media screen and (max-width: 700px) {
+    .display_element {
+        width: 90vw;
+        height: auto;
+        translate: -50% -50%;
+        left: 50%;
+        top: 50%;
+        padding: 0;
+    }   
 }
 .display_unknown_element{
     display: flex !important;
@@ -218,10 +242,10 @@
 
 .settings_wrapper {
     width: 100%;
+    display: flex;
+    flex-direction: column;
     margin: 1rem;
-    position: absolute;
-    left: 0px;
-    top: 0px;
+    padding: 1rem 2rem;
 }
 .settings_wrapper h3 {
     margin-block: .25rem;

@@ -50,7 +50,7 @@ export default function FileElement ({file, onSelect, download=true, rating=0}) 
                                 <a>{file.fileName}</a>
                                 <div className={styles.links}>
                                     {download && <a href={file.source} className={styles.downloadLink} download={file.source}>Download</a>}
-                                    <Link href={file.source} target="_blank" onClick={() => {navigator.clipboard.writeText(document.domain +  file.source)}} className={styles.downloadLink} >Copy Link</Link>
+                                    <Link href={file.source} target="_blank" onClick={() => {navigator.clipboard.writeText(document.domain +  file.source)}} className={styles.downloadLink} >Del</Link>
                                 </div>
                                 {rating > 0 && <Stars max={5} rating={rating} ><span> your rating</span></Stars>}
 
