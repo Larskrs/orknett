@@ -3,7 +3,8 @@
   overflow-x: hidden;
   background: rgb(0, 0, 0);
   background: linear-gradient(0deg, rgb(1, 0, 23) 0%, rgb(0, 13, 8) 100%);
-
+  background-size: cover;
+  
   --gray-1: #111;
   --gray-2: #222;
   --gray-3: #333;
@@ -44,6 +45,7 @@ html, body {
   scroll-behavior: smooth;
   background: rgb(0, 0, 0);
   background: linear-gradient(0deg, rgb(1, 0, 23) 0%, rgb(0, 13, 8) 100%);
+  background-size: cover;
 }
 * {
   -ms-overflow-style: none;  /* IE and Edge */
