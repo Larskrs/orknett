@@ -4,7 +4,9 @@
   background: rgb(0, 0, 0);
   background: linear-gradient(0deg, rgb(1, 0, 23) 0%, rgb(0, 13, 8) 100%);
   background-size: cover;
-  
+  width: 100vw;
+  height: 100vh;
+
   --gray-1: #111;
   --gray-2: #222;
   --gray-3: #333;
@@ -32,7 +34,9 @@
   margin: 0px;
 
   scroll-behavior: smooth;
-
+  -webkit-background-size: cover;
+  background-position:center ;
+  background-attachment: fixed;
   
 }
 body {
@@ -44,9 +48,18 @@ body {
 html, body { 
   scroll-behavior: smooth;
   background: rgb(0, 0, 0);
-  background: linear-gradient(0deg, rgb(1, 0, 23) 0%, rgb(0, 13, 8) 100%);
   background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  -webkit-background-size: cover;
+  background-position:center ;
+  background-attachment: fixed;
+  overflow-x: hidden;
+  
 }
+
+
+
 * {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
