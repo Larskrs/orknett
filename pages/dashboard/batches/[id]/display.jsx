@@ -99,7 +99,7 @@ export default function Display ({batch}) {
 
             <div style={{position: "absolute", left: 0, top: 0, translate: `0px -${100*displayId}vh`, transitionDuration: "2.5s"}}>{batch.files.map((f, i) => {
                 return (
-                    <div className="display_element" style={{   
+                    <div key={i} className="display_element" style={{   
                         transitionDuration: "2s",
                         opacity: displayId == i ? 1 : 0,
                         scale: displayId == i ? "1" : "0.7",
