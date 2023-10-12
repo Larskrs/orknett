@@ -14,7 +14,7 @@ import { RatioMedia } from '@/components/RatioMedia';
 import FileElement from '@/components/FileElement'
 import { useEffect, useState } from 'react';
 import Arrow from '@/components/Arrow';
-import { AudioPlayer, ImprovedFileUpload } from '@/components';
+import { AudioPlayer, DisplayElement, ImprovedFileUpload } from '@/components';
 import axios from 'axios';
 import { GetBatches } from '@/lib/BatchLib';
 import Layout from '@/layouts/newUI/layout';
@@ -111,56 +111,6 @@ function FilePage ({files, batches}) {
         setDisplayId(newID)
         setDisplay(getFilteredFiles(files)[newID])
     }
-
-    
-    function DisplayElement () {
-
-        const content = GetContentTypeFromSource(display.source)
-        const contentType = content.split("/").shift();
-        
-        if (contentType == "image") {
-            return (
-                <img className={styles.display_element}
-                    key={displayId}
-                    alt={display.fileName}
-                    src={display.source}
-                    content={GetContentTypeFromSource(display.source)}
-                 />
-            )
-        }
-        if (contentType == "audio") {
-
-            return (
-                <div className={styles.display_element}>
-                    <AudioPlayer alt={display.fileName} src={display.source} cover={`/api/v1/files/audio/cover?fileId=${display.source.split("fileId=").pop()}`} /> 
-                </div>
-            )
-        }
-        if (contentType == "video") {
-            return (
-                <video 
-                    key={displayId}
-                    className={styles.display_element}
-                    alt={display.fileName}
-                    src={display.source}
-                    content={GetContentTypeFromSource(display.source)} 
-                    controls
-                    autoPlay
-                        
-                />
-            )
-        }
-        else {
-            return (
-                <div className={styles.display_unknown_element} key={displayId}>
-                    <h2>.{GetExtensionFromSource(display.source)}</h2>
-                    <h3>{display.fileName}</h3>
-                </div>
-            )
-        }
-        
-
-    }
     
 
     
@@ -169,7 +119,7 @@ function FilePage ({files, batches}) {
 
 
     return (
-        <FileSharingLayout pageId={0} batches={batches}>
+        <FileSharingLayout pageId={2} batches={batches}>
 
             <div className={styles.row} style={{gap: "2rem"}}>
                 {displayFilters()}
@@ -180,7 +130,7 @@ function FilePage ({files, batches}) {
                  <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
                 </div>
 
-                    {display && <DisplayElement/>}
+                    {display && <DisplayElement file={display} id={displayId} onEnded={() => moveDisplay(displayId + 1)} />}
 
                 {Object.keys(groupedFiles).map((group, gi) => {
                     var files = groupedFiles[group]

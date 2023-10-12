@@ -15,15 +15,15 @@ function BatchesPage ({batches}) {
     const router = useRouter()
 
     return (
-        <FileSharingLayout pageId={2} batches={batches}>
+        <FileSharingLayout pageId={3} batches={batches}>
             <div className={styles.wrap}>
                 {batches.map((batch, i) => {
 
                     return (
                         
                         <Link key={i} className={styles.article} href={"/dashboard/batches/" + batch.id}>
-                            {batch.thumbnail && <Image className={styles.thumbnail} style={{zIndex: -1}} src={batch.thumbnail} alt={"thumbnail"} objectFit={"cover"} fill /> } 
-                            <p style={{zIndex: 2, color: "#ccc"}}>{batch.title} </p>
+                        <Image className={styles.thumbnail} src={batch.thumbnail} alt={batch.thumbnail} fill />
+                            <p style={{zIndex: 5, color: "#ccc", position: "relative"}}>{batch.title} </p>
                         </Link>
 
                         // <Badge style={{cursor: "pointer", overflow: "hidden"}} key={batch.id} onClick={() => router.push("/dashboard/batches/" + batch.id)}>
@@ -50,15 +50,22 @@ export async function getServerSideProps(ctx){
     .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
     .order("created_at", {ascending: false, foreignTable: "files"})
     // .filter('files.source', 'in', ['png','jpg'])
-    .limit(1, { foreignTable: "files"})
+    .limit(15, { foreignTable: "files"})
 
     for (const i in data) {
         const batch = data[i]
 
-        var file = batch.files[0]
+        let thumbnail = ""
+        for (const f in batch.files) {
+            const file = batch.files[f]
+            if (!isSourceContentType(file.source, "image")) { continue; }
+            thumbnail = file.source
+            break
 
-        if (file)
-        data[i].thumbnail = file.source
+        }
+
+        if (thumbnail !== "")
+        data[i].thumbnail = thumbnail
     }
 
     return {

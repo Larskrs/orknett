@@ -7,7 +7,7 @@ import { InputField } from "@/components";
 
 function index({article}) {
     return (
-        <FileSharingLayout pageId={3}>
+        <FileSharingLayout pageId={4}>
             <div className={styles.settings_wrapper}>
                 <h3>Headers</h3>
                 <section style={{display: "flex", flexDirection: "column", gap: ".5rem"}}>

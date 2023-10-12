@@ -26,8 +26,10 @@ async function GetCover(req, res) {
 
    jsmediatags.read(filePath, {
         onSuccess: function(tag) {
-          const picture = tag.tags.picture
-          const data = picture.data
+          const picture = tag?.tags?.picture
+          if (!picture) { res.status(500).json({message: "No picture"}); return; }
+          const data = picture?.data
+          if (!data)    { res.status(500).json({message: "No picture data"}); return; }
 
             res.setHeader('Content-Type', picture.format); // Change the content type as needed
         

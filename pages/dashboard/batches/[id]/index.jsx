@@ -13,7 +13,7 @@ import FileElement from '@/components/FileElement';
 import { useState, useEffect } from 'react';
 import Arrow from '@/components/Arrow';
 import Head from 'next/head';
-import { AudioPlayer, Badge, ImprovedFileUpload } from '@/components';
+import { AudioPlayer, Badge, DisplayElement, ImprovedFileUpload } from '@/components';
 import axios from "axios";
 import { GetBatches } from '@/lib/BatchLib';
 
@@ -24,7 +24,7 @@ export default function BatchPage ({batch, batches}) {
 
     function NoAccessPage () {
         return (
-            <FileSharingLayout pageId={2}>
+            <FileSharingLayout pageId={3}>
 
                     <Head>
                         <title>{batch.title}</title>
@@ -73,66 +73,7 @@ export default function BatchPage ({batch, batches}) {
     function PlayNextFile() {
         moveDisplay(displayId + 1)
     }
-    
-    function DisplayElement () {
 
-        const content = GetContentTypeFromSource(display.source)
-        const contentType = content.split("/").shift();
-        
-        if (contentType == "image") {
-            return (
-                <Image className={styles.display_element}
-                    quality={50}
-                    width={1200}
-                    height={1200}
-                    priority={true}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    key={displayId}
-                    alt={display.fileName}
-                    src={display.source}
-                    content={GetContentTypeFromSource(display.source)}
-                 />
-            )
-        }
-        if (contentType == "audio") {
-
-            return (
-                <div className={styles.display_element} key={displayId}>
-                    <AudioPlayer alt={display.fileName}
-                    src={display.source}
-                    onCompleted={() => {
-                        PlayNextFile()
-                    }} 
-                    cover={`/api/v1/files/audio/cover?fileId=${display.source.split("fileId=").pop()}`} />
-                </div>
-            )
-        }
-        if (contentType == "video") {
-            return (
-                <video 
-                    key={displayId}
-                    className={styles.display_element}
-                    alt={display.fileName}
-                    src={display.source}
-                    content={GetContentTypeFromSource(display.source)} 
-                    controls
-                    autoPlay
-                    onEnded={() => PlayNextFile()}
-                        
-                />
-            )
-        }
-        else {
-            return (
-                <div className={styles.display_unknown_element} key={displayId}>
-                    <h2>.{GetExtensionFromSource(display.source)}</h2>
-                    <h3>{display.fileName}</h3>
-                </div>
-            )
-        }
-        
-
-    }
 
 
     
@@ -223,7 +164,7 @@ export default function BatchPage ({batch, batches}) {
                 <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
                 </div>
 
-                    {display && <DisplayElement/>}
+                    {display && <DisplayElement file={display} id={displayId} onEnded={PlayNextFile}/>}
                 {getFilteredFiles().map((file, i) => {
 
 

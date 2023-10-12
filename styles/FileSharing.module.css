@@ -220,6 +220,10 @@
 }
 .thumbnail {
     scale: 2;
+    z-index: 0 !important;
+    position: absolute !important;
+    object-fit: cover;
+    object-position: inherit;
 }
 .article:hover .thumbnail {
     scale: 1.5;

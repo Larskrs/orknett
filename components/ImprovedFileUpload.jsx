@@ -228,18 +228,12 @@ export default function FileUpload ({batchPreset = ""}) {
                         z-index: 200;
                         position: fixed;
                         overflow: none !important;
-                        background-color: #111;
                         
                         bottom: 0;
-                        left: 0;
                         right: 0;
-                        border-top: 4px solid #333;
+                        left: 0;
                         
-                        display: flex;
-                        flex-wrap: wrap;
-                        flex-direction: column;
-                        padding: 0rem;
-                        padding-right: 0rem !important;
+                        padding: 1rem;
                         gap: 0.5rem;
                     }
                     .upload_button {
@@ -262,6 +256,28 @@ export default function FileUpload ({batchPreset = ""}) {
                         background-color: #111;
                         padding: .5rem 2rem;
                         font-size: 14px;
+                        border-radius: 10px;
+                        width: 100%;
+                        background: rgba(255, 255, 255, 0.1);
+                        border-radius: 16px;
+                        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                        backdrop-filter: blur(5px);
+                        -webkit-backdrop-filter: blur(5px);
+                        border: 1px solid rgba(255, 255, 255, 0.3);
+                    }
+
+
+                    @media screen and (max-height: 600px) {
+                        .container {
+                            bottom: 0;
+                            top: unset;
+                        }
+                    }
+                    @media screen and (max-width: 700px) {
+                        .container {
+                            top: 0;
+                            bottom: unset;
+                        }   
                     }
 
             `}</style>

@@ -28,9 +28,10 @@ export default function Layout({children, pageId = 0, theme = "dark"}) {
                   }}>
                       {/* <Link className={current === -1 ? styles.element : styles.default} href={"/"}><Image width={30} height={30} src={"/aktueltstudio_logo.svg"} /></Link> */}
                       {/* <Link className={current === 0 ? styles.element : styles.default} href={"/dashboard"}>files</Link> */}
-                      <Link className={current === 2 ? styles.element : styles.default} href={"/dashboard/batches"}>Batches</Link>
-                      <Link className={current === 3 ? styles.element : styles.default} href={"/dashboard/articles"}>Articles</Link>
-                      <Link className={current === 4 ? styles.element : styles.default} href={"/dashboard/series"}>Series</Link>
+                      <Link className={current === 2 ? styles.element : styles.default} href={"/dashboard"}>Files</Link>
+                      <Link className={current === 3 ? styles.element : styles.default} href={"/dashboard/batches"}>Batches</Link>
+                      <Link className={current === 4 ? styles.element : styles.default} href={"/dashboard/articles"}>Articles</Link>
+                      <Link className={current === 5 ? styles.element : styles.default} href={"/dashboard/series"}>Series</Link>
                       <LoginButton />
                   </nav>
                   </div>

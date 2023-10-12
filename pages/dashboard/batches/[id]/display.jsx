@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { GetContentTypeFromSource, GetExtensionFromSource } from "@/lib/ExtensionHelper";
-import { AudioPlayer, Badge } from "@/components";
+import { AudioPlayer, Badge, DisplayElement } from "@/components";
 import styles from "@/styles/FileDisplay.module.css"
 import { GetClient } from "@/lib/Supabase";
 
@@ -30,58 +30,6 @@ export default function Display ({batch}) {
         setDisplay(batch?.files?.[newId])
       };
     
-    function DisplayElement ({file, id}) {
-
-        const content = GetContentTypeFromSource(file.source)
-        const contentType = content.split("/").shift();
-        
-        if (contentType == "image") {
-            return (
-                <Image
-                    className={styles.display_element}
-                    key={id}
-                    alt={file.fileName}
-                    src={file.source}
-                    style={{objectFit: "contain"}}
-                    fill
-                    content={GetContentTypeFromSource(file.source)}
-                 />
-            )
-        }
-        if (contentType == "audio") {
-    
-            return (
-                <div className={styles.display_element}>
-                    <AudioPlayer alt={file.fileName} src={file.source} cover={`/api/v1/files/audio/cover?fileId=${file.source.split("fileId=").pop()}`} /> 
-                </div>
-            )
-        }
-        if (contentType == "video") {
-            return (
-                <video 
-                    key={id}
-                    className={styles.display_element}
-                    alt={file.fileName}
-                    src={file.source}
-                    content={GetContentTypeFromSource(file.source)} 
-                    autoPlay={displayId == id}
-                    loop
-                    
-                        
-                />
-            )
-        }
-        else {
-            return (
-                <div className={styles.display_unknown_element} key={id}>
-                    <h2>.{GetExtensionFromSource(file.source)}</h2>
-                    <h3>{file.fileName}</h3>
-                </div>
-            )
-        }
-        
-    
-    }
     useEffect(() => {
     
         const intervalId = setInterval(() => {

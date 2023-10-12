@@ -5,7 +5,7 @@ import Badge from "../badge/badge";
 import styles from "./AudioPlayer.module.css"
 import Slider from "../Slider/Slider";
 import { getContentIconSource } from "@/lib/FileHelper";
-export default function AudioPlayer ({src, cover, alt, title, autoPlay=true, onCompleted=() => {}}) {
+export default function AudioPlayer ({src, cover, alt, title, autoPlay=true, onCompleted=() => {}, defaultTitle=""}) {
 
     const [data, setData] = useState()
     const [volume, setVolume] = useState()
@@ -29,17 +29,21 @@ export default function AudioPlayer ({src, cover, alt, title, autoPlay=true, onC
         const fetchData = async () => {
             const res = await fetch(`/api/v1/files/audio/data?fileId=${src.split("fileId=").pop()}`);
             const data = await res.json()
-            console.log(data)
+            console.log(data, res.status, defaultTitle)
+            if (!data.tags.picture) {
+                setAlbumCover( getContentIconSource("audio") )
+            }
+            
             if (data.error ) {
                 setData({
                     artist: src.split('fileId=').pop().split('.')[0],
                     track: "File does not support tracks",
-                    error: "File not supported"
+                    error: "File not supported",
                 })
-                setAlbumCover( getContentIconSource("audio") )
                 return
             }
             setData(data.tags)
+            
         }
 
         fetchData()
@@ -113,17 +117,18 @@ export default function AudioPlayer ({src, cover, alt, title, autoPlay=true, onC
                         animationPlayState: (isPlaying && data && !data.error ? "running" : "paused"),
                         transition: (isPlaying ? "none" : "inherit"),
                         rotate: (isPlaying ? "0deg" : "0deg"),
+                        background: "#333"
                     }} />
                     <div src={(isPlaying) ? "/pause.svg" : "/play.svg"} className={styles.play} width={75} height={75} alt={albumCover} >
                         <span style={!isPlaying ? {translate: "0px 14.75px", rotate: "45deg"} : {}} />
                         <span style={!isPlaying ? {translate: "0px -14.75px", rotate: "-45deg"} : {}} />
                     </div>
                 </div>
-                <div className={styles.column} style={{width: "100%"}}>
+                <div className={styles.column} style={{width: "100%", justifyContent: "center"}}>
                     <div className={styles.details}>
-                        {data && <p className={styles.title}>{data.title}</p>}
-                        {data && <p className={styles.artist}>{data.artist}</p>}
-                        {data && <p className={styles.artist}>Track Id: {data.track}</p>}
+                        <p className={styles.title}>{defaultTitle}</p>
+                        {data && data.artist && <p className={styles.artist}>{data.artist}</p>}
+                        {data && data.track && <p className={styles.artist}>Track Id: {data.track}</p>}
                     </div>
                     <div className={styles.duration}>
                         <p>{currentTime[0]}:{currentTime[1]}</p>

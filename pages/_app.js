@@ -2,15 +2,20 @@ import Head from 'next/head'
 import '../styles/globals.css'
 import { SessionProvider } from "next-auth/react"
 import AktueltTVLoading from '../components/AktueltTVLoading'
+import localFont from "next/font/local"
 
+const Bricolage = localFont({ 
+  src: "../fonts/Bricolage.ttf",
+  variable: '--bricolage',
+})
 import { Roboto } from 'next/font/google'
-import { Inter } from 'next/font/google'
 
 const roboto = Roboto({
   subsets: ['latin', 'latin-ext'],
   variable: '--inter-font',
   weight: ["100", "300", "400", "500", "700", "900"]
 })
+ 
 
 export default function MyApp({  Component,  pageProps: { session, ...pageProps },}) {
 

@@ -8,7 +8,7 @@ import Image from "next/image";
 
 function index({articles}) {
     return (
-        <FileSharingLayout pageId={3}>
+        <FileSharingLayout pageId={4}>
             <div className={styles.wrap}>
                 {articles.map((article, i) => {
                     return (
