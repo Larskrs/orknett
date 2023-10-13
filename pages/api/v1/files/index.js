@@ -169,7 +169,29 @@ function GetVideoStream (req, res) {
 
   let filePath = `./files/${fileName}`;
 
+  const options = {};
+
+  let start;
+  let end;
+
   const range = req.headers.range;
+  if (range) {
+      const bytesPrefix = "bytes=";
+      if (range.startsWith(bytesPrefix)) {
+          const bytesRange = range.substring(bytesPrefix.length);
+          const parts = bytesRange.split("-");
+          if (parts.length === 2) {
+              const rangeStart = parts[0] && parts[0].trim();
+              if (rangeStart && rangeStart.length > 0) {
+                  options.start = start = parseInt(rangeStart);
+              }
+              const rangeEnd = parts[1] && parts[1].trim();
+              if (rangeEnd && rangeEnd.length > 0) {
+                  options.end = end = parseInt(rangeEnd);
+              }
+          }
+      }
+  }
 
   if (!range) {
     return GetFileStream(req, res)
@@ -188,7 +210,7 @@ function GetVideoStream (req, res) {
 
   const headers = {
     "Content-Range": `bytes ${chunkStart}-${chunkEnd}/${videoSizeInBytes}`,
-    "Accept-Ranges": "bytes",
+    "accept-ranges": "bytes",
     "Content-Length": contentLength,
     "Content-Type": "video/mp4",
   };
@@ -210,11 +232,9 @@ function GetVideoStream (req, res) {
 
 
 export default async function handler(req, res) {
-  const method = req.method;
-
-  if (method === "GET") {
+  if (method === "GET" || method === "HEAD") {
     // return GetFileStream(req, res);
-    return GetVideoStream(req, res);
+    return GetFileStream(req, res);
   }
 
   if (method === "POST") {
