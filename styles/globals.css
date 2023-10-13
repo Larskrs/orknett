@@ -68,6 +68,7 @@ html, body {
   transition-duration: .125s;
   scroll-behavior: smooth;
   box-sizing: border-box;
+  text-decoration: none;
 }
 
 @media (prefers-reduced-motion) {
@@ -140,6 +141,7 @@ h1 {
 }
 p {
   font-size: 1.25rem;
+  margin-block: 8px;
 }
 
 .avatar {
@@ -211,3 +213,13 @@ input[type="range"] {
 :-webkit-autofill { 
   color: #fff !important;
   }
+
+hr {
+  background: rgba(255, 255, 255, .3) !important;
+  height: 1px !important;
+  width: 100%;
+
+}
+p {
+  text-decoration: none;
+}
