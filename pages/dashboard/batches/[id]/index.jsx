@@ -226,7 +226,7 @@ export async function getStaticProps({ params }){
             batch: data,
             batches: batches.data,
         },
-        revalidate: false, // In seconds
+        revalidate: 5, // In seconds
     }
 
 
