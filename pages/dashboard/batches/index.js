@@ -40,16 +40,18 @@ function BatchesPage ({batches}) {
     const session = useSession()
 
     let selfBatches = []
+    let publicBatches = batches; 
     if (session.status === "authenticated") {
         selfBatches = batches.filter((b) => b?.owners?.includes(session.data.user.id))
+        publicBatches = batches.filter((b) => !b?.owners?.includes(session.data.user.id))
     }
-    let publicBatches = batches.filter((b) => !b?.owners?.includes(session.data.user.id))
 
     return (
         <FileSharingLayout pageId={3} batches={batches}>
             <div className="grid">
                 <div className="side">
-                   <BatchList batches={selfBatches} />
+                   {session.status === "authenticated" && <BatchList batches={selfBatches} />}
+                   {session.status !== "authenticated" && <p>You need to be logged in to create your own batches.</p>}
                 </div>
                 <div className={`${styles.wrap} main`}>
 
