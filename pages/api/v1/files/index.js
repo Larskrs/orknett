@@ -232,6 +232,9 @@ function GetVideoStream (req, res) {
 
 
 export default async function handler(req, res) {
+
+  const method = req.method
+
   if (method === "GET" || method === "HEAD") {
     // return GetFileStream(req, res);
     return GetFileStream(req, res);
