@@ -199,7 +199,7 @@ export async function getStaticProps({ params })
         props:{
             batch: data,
         },
-        revalidate: false, // In seconds
+        revalidate: 5, // In seconds
     }
 }
 
