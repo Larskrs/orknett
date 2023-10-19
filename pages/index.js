@@ -26,15 +26,20 @@ export default function Home() {
         className={styles.bg}
           fill
           src={"http://aktuelt.tv/api/v1/files?fileId=6ae7ec9b-9bf9-4032-baa3-c0b3f96e172b.JPG"}
-          style={{objectFit: "cover", objectPosition: "center"}}
+          style={{objectFit: "cover", objectPosition: "center", width: "100%", height: "100%"}}
           ></Image>
         </div>
-        <Image 
-        className={styles.bg}
-          src={"http://aktuelt.tv/api/v1/files?fileId=6ae7ec9b-9bf9-4032-baa3-c0b3f96e172b.JPG"}
-          fill
-          style={{objectFit: "cover", objectPosition: "center"}}
-          ></Image>
+        <video 
+          src={"http://aktuelt.tv/api/v1/files?fileId=ce3359a0-8176-4fa7-aa6d-7b1a4aea2167.mp4"}
+          autoPlay
+          playsInline
+          muted
+          preload="metadata"
+          loop
+          fill style={{objectFit: "cover", objectPosition: "center", width: "100%", height: "100%"}}
+          >
+          
+        </video>
 
 
       </background>
