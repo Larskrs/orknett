@@ -108,7 +108,7 @@ mask: var(--mask);
 }
 
 .header {
-  background-color: #111;
+  background-color: transparent;
   gap: 0px;
   padding: 1rem;
 }

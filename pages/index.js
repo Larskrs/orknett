@@ -21,14 +21,14 @@ export default function Home() {
       <crossfade className={styles.crossfade}></crossfade>
 
       <background className={styles.bg}>
-        <div className={styles.blur}> 
+        {/* <div className={styles.blur}> 
         <Image 
         className={styles.bg}
           fill
           src={"http://aktuelt.tv/api/v1/files?fileId=6ae7ec9b-9bf9-4032-baa3-c0b3f96e172b.JPG"}
           style={{objectFit: "cover", objectPosition: "center", width: "100%", height: "100%"}}
           ></Image>
-        </div>
+        </div> */}
         <video 
           src={"http://aktuelt.tv/api/v1/files?fileId=ce3359a0-8176-4fa7-aa6d-7b1a4aea2167.mp4"}
           autoPlay
@@ -62,37 +62,30 @@ export default function Home() {
         </div>
       </main>
     </wrap>
-    <wrap className={styles.wrap}>
+    <wrap className={styles.wrap} style={{translate: "0 0px", background: "transparent"}}>
       
       
       <section className={styles.header}>
-        <div className={styles.group}>
+        {/* <div className={styles.group}>
         <h3>Hva vil du se?</h3>
         <div className={styles.row} >
           
             <Link href="#desperados" className={styles.home}>
               <Image src={"https://gyazo.com/7c00c36443ec021a386311bf799da5b1.png"} fill style={{objectFit: "cover", objectPosition: "center"}}/>
             </Link>
-            <Link href="#papparau" className={styles.home}>
-              <Image src={"https://gyazo.com/f12284bee733a43ccbda32243e30363e.jpg"} fill style={{objectFit: "cover", objectPosition: "center"}}/>
-            </Link>
-            <Link href="" className={styles.home}>
-              <Image src={"https://cdn.discordapp.com/attachments/1022453749211471882/1124131548724207666/Aktuellefarger.jpg"} fill style={{objectFit: "cover", objectPosition: "center"}}/>
-            </Link>
-            <Link href="" className={styles.home}>
-              <Image src={"https://gyazo.com/ef6b7b2905abc1fd9a4a8fc21d888cd1.png"} fill style={{objectFit: "cover", objectPosition: "top"}}/>
-            </Link>
+
         </div>
         
-      </div>
+      </div> */}
       </section>
 
 
       <section className={styles.section}>
         <div className={styles.group} style={{padding: 0}}>
-          
+          <h2>Prosjekter</h2>
         </div>
       </section>
+
 
       <section id="desperados" className={styles.section}>
         <div className={styles.group}>
