@@ -36,6 +36,7 @@ export default function Home() {
           muted
           preload="metadata"
           loop
+          poster={"http://aktuelt.tv/api/v1/files?fileId=15feab38-2a04-4e74-baf0-07a0383e1830.png"}
           fill style={{objectFit: "cover", objectPosition: "center", width: "100%", height: "100%"}}
           >
           
