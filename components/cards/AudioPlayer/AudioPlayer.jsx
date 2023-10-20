@@ -5,7 +5,7 @@ import Badge from "../badge/badge";
 import styles from "./AudioPlayer.module.css"
 import Slider from "../Slider/Slider";
 import { getContentIconSource } from "@/lib/FileHelper";
-export default function AudioPlayer ({src, cover, alt, title, autoPlay=true, onCompleted=() => {}, defaultTitle=""}) {
+export default function AudioPlayer ({src, cover, alt, autoPlay=true, onCompleted=() => {}, defaultTitle=""}) {
 
     const [data, setData] = useState()
     const [volume, setVolume] = useState()
@@ -19,6 +19,7 @@ export default function AudioPlayer ({src, cover, alt, title, autoPlay=true, onC
     const [durationSec, setDurationSec] = useState(); // // current duration of the 
 
     const [albumCover, setAlbumCover] = useState(cover)
+    const [title, setTitle] = useState(defaultTitle)
     
     useEffect(() => {
         LoadMetaData()
@@ -126,7 +127,7 @@ export default function AudioPlayer ({src, cover, alt, title, autoPlay=true, onC
                 </div>
                 <div className={styles.column} style={{width: "100%", justifyContent: "center"}}>
                     <div className={styles.details}>
-                        <p className={styles.title}>{defaultTitle}</p>
+                        <p className={styles.title}>{defaultTitle }</p>
                         {data && data.artist && <p className={styles.artist}>{data.artist}</p>}
                         {data && data.track && <p className={styles.artist}>Track Id: {data.track}</p>}
                     </div>

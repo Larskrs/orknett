@@ -50,7 +50,7 @@ export default function Home() {
             <Image width={40} height={40} src={"/new_logo_symbol.svg"}></Image>
             {/* <h2>.tv</h2> */}
           </div>
-          <Link href={"/dashboard"}>Files</Link>
+          <Link href={"/dashboard"}>Dashboard</Link>
         </nav>
       <main className={styles.main}>
 

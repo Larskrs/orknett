@@ -19,6 +19,7 @@ export function DisplayElement ({file, id, onEnded=(() => {})}) {
                 quality={50}
                 width={1200}
                 height={1200}
+                style={{width: "auto", height: "auto"}}
                 priority={true}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 key={id}

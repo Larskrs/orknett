@@ -165,23 +165,11 @@ export default function BatchPage ({batch, batches}) {
             
             </div>
             <div className={
-                batch.type == 0 || null ? styles.wrap : 
-                batch.type == 1 ? styles.songList :
-                
-                null
+                styles.wrap
             }>
-
-                    {display && 
-                        <AudioPlayer alt={display.fileName}
-                        key={displayId}
-                        src={display.source}
-                        defaultTitle={display.fileName.split('.').slice(0, -1).join('.')}
-                        onCompleted={() => {
-                            onEnded()
-                        }} 
-                        cover={`/api/v1/files/audio/cover?fileId=${display.source.split("fileId=").pop()}`} />
-                    
-                    }
+                <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
+                </div>
+                {display && <DisplayElement file={display} id={displayId} onEnded={PlayNextFile}/>}
                 {getFilteredFiles().map((file, i) => {
                     // Normal File Display
                     if (batch.type === (0 || null)) {

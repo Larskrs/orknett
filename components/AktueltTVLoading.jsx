@@ -9,10 +9,8 @@ export default function Layout() {
 
     return (
             <div className={styles.loading}>
-                <Image className={styles.bg} width={2000} height={2000} src={"/images/loadingbg.jpg"}></Image>
                 <div className={styles.logo}>
-                    <Image className={styles.logo} width={200} height={200} src={"/aktueltstudio_logo.svg"}></Image>
-                    <h2>Laster inn...</h2>
+                    <Image className={styles.logo} width={200} height={200} src={"/new_logo_symbol.svg"}></Image>
                 </div>
             </div>
     );
