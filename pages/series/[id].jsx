@@ -5,17 +5,15 @@ import styles from '@/styles/FileSharing.module.css'
 import { InputField } from "@/components";
 
 
-function index({article}) {
+function index({series}) {
     return (
-        <FileSharingLayout pageId={3}>
             <div className={styles.settings_wrapper}>
                 <h3>Headers</h3>
                 <section style={{display: "flex", flexDirection: "column", gap: ".5rem"}}>
-                    
+                    {series.episodes.length}
                 </section>
                 
             </div>
-        </FileSharingLayout>
     );
 }
 
@@ -23,13 +21,18 @@ export async function getStaticProps({ params }) {
 
     const { data, error } = await GetClient("public")
     .from("series")
-    .select("*")
+    .select(`
+        *,
+        episodes (*)
+    `)
     .eq("id", params.id)
     .single()
 
+    console.log({data})
+
     return {
         props:{
-            article: data,
+            series: data,
         }
     }
 }
@@ -40,10 +43,7 @@ export async function getStaticPaths() {
     .from("series")
     .select("id")
 
-    console.log({data})
-
     const paths = data.map( (series, i) => {return {params: {id: series.id + "" } } } )
-    console.log({paths: paths[0]})
     return {
       paths,
       fallback: 'blocking',

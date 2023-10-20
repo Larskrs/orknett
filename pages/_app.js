@@ -24,6 +24,10 @@ export default function MyApp({  Component,  pageProps: { session, ...pageProps 
     <div className={roboto.className}>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <title>Aktuelt.tv</title>
+        <meta name="description" content="Your one stop shop for media creation." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/new_logo_symbol.svg" />
       </Head>
       <SessionProvider session={session}>
         <AktueltTVLoading/>
