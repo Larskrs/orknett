@@ -1,0 +1,36 @@
+.container {
+    padding: 2rem;
+    background: #000;
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.section {
+    max-width: 600px;
+    max-height: 800px;
+    padding: 2rem 4rem;
+    display: flex;
+    background-color: #111;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.container p {
+    font-weight: 400;
+    color: #e4e4e4;
+}
+.container input {
+    font-weight: 100 !important;
+}
+.container button {
+    background-color: var(--tekhelet);
+    outline: none;
+    border: none;
+    padding: .5rem 1rem !important;
+    font-size: 18px;
+    font-weight: 400;
+}

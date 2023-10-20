@@ -4,7 +4,6 @@
   justify-content: center;
   position: relative;
   overflow-y: scroll;
-  background-color: black;
   color: white;
 
     scroll-behavior: smooth;
@@ -12,17 +11,34 @@
 
 -webkit-mask: var(--mask); 
 mask: var(--mask);
+overflow: hidden;
+background-color: black;
+
 }
-.wrap:first-child {
-  padding-bottom: 15rem;
-  overflow: hidden;
-}
- 
-.bg {
+
+.crossfade {
+  height: 250px;
+  width: 100%;
   position: absolute;
+  bottom: 0;
+  background-color: black;
+  background: rgb(0,0,0);
+  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+}
+
+.bg {
+  position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  object-fit: cover;
+}
+.bg > video {
+  min-height: 20vh;
+  object-fit: cover;
+  filter: blur(10px);
+  position: fixed;
+  z-index: 0;
 }
 .zoom {
   scale: 1;
@@ -62,11 +78,14 @@ mask: var(--mask);
   animation: rotate linear 50s infinite;
 }
 .main {
-  z-index: 1;
+  z-index: 10;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 5rem;
+  translate: 0px -100px;
+  background-color: black;
+  
 }
 
 .description {
@@ -90,10 +109,17 @@ mask: var(--mask);
 }
 
 .nav {
+  position: fixed !important;
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 1rem;
+  position: absolute;
+  height: 76px;
+  top: 0;
+  left: 0;
+  margin-left: 8px;
+  z-index: 99;
 }
 .nav * {
   color: white;

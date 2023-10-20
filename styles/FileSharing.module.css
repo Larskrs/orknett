@@ -8,6 +8,11 @@
     justify-content: center;
     padding: .5rem;
 }
+.songList {
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+}
 .row {
     flex-direction: row;
     display: flex;

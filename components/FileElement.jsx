@@ -1,5 +1,4 @@
 import styles from '@/styles/FileSharing.module.css'
-import { RatioMedia } from './RatioMedia';
 import Link from 'next/link';
 import Image from 'next/image';
 import { AudioPlayer, Badge, Stars } from '.';

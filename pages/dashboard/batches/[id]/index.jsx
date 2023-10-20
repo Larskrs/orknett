@@ -13,7 +13,7 @@ import FileElement from '@/components/FileElement';
 import { useState, useEffect } from 'react';
 import Arrow from '@/components/Arrow';
 import Head from 'next/head';
-import { AudioPlayer, Badge, DisplayElement, ImprovedFileUpload } from '@/components';
+import { AlbumElement, AudioPlayer, Badge, DisplayElement, ImprovedFileUpload } from '@/components';
 import axios from "axios";
 import { GetBatches } from '@/lib/BatchLib';
 
@@ -103,6 +103,10 @@ export default function BatchPage ({batch, batches}) {
             }
         
         }
+        
+        if (batch.type |= null && batchh.type == 1) {
+            moveDisplay(1)
+        }
     }, )
 
 
@@ -156,26 +160,51 @@ export default function BatchPage ({batch, batches}) {
             </div>
             <div className={styles.row} style={{gap: "2rem"}}>
                 
-                {displayFilters()}
+                {batch.display === (0 || null) && displayFilters()}
                 {session.status == "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id) && <ImprovedFileUpload batchPreset={batch.id} /> }
             
             </div>
-            <div className={styles.wrap}>
-                <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
-                </div>
+            <div className={
+                batch.type == 0 || null ? styles.wrap : 
+                batch.type == 1 ? styles.songList :
+                
+                null
+            }>
 
-                    {display && <DisplayElement file={display} id={displayId} onEnded={PlayNextFile}/>}
+                    {display && 
+                        <AudioPlayer alt={display.fileName}
+                        key={displayId}
+                        src={display.source}
+                        defaultTitle={display.fileName.split('.').slice(0, -1).join('.')}
+                        onCompleted={() => {
+                            onEnded()
+                        }} 
+                        cover={`/api/v1/files/audio/cover?fileId=${display.source.split("fileId=").pop()}`} />
+                    
+                    }
                 {getFilteredFiles().map((file, i) => {
+                    // Normal File Display
+                    if (batch.type === (0 || null)) {
 
+                        return <FileElement 
+                           key={i}
+                           file={file}
+                           download={batch.settings?.download || (session.status === "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id))}
+                           onSelect={() => {
+                               moveDisplay(i)
+                           }}/>
+                    }
+                    // Album File Display
+                    if (batch.type === 1) {
 
-
-                  return <FileElement 
-                    key={i}
-                    file={file}
-                    download={batch.settings?.download || (session.status === "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id))}
-                    onSelect={() => {
-                    moveDisplay(i)
-                  }}/>
+                        return <AlbumElement 
+                           key={i}
+                           file={file}
+                           download={batch.settings?.download || (session.status === "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id))}
+                           onSelect={() => {
+                               moveDisplay(i)
+                           }}/>
+                    }
 
                 } ) }
             </div>

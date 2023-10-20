@@ -18,7 +18,7 @@ export default function Home() {
         <link rel="icon" href="/aktueltstudio_logo.svg" />
       </Head>
 
-      <crossfade className={styles.crossfade}></crossfade>
+      {/* <crossfade className={styles.crossfade}></crossfade> */}
 
       <background className={styles.bg}>
         {/* <div className={styles.blur}> 
@@ -37,33 +37,30 @@ export default function Home() {
           preload="metadata"
           loop
           poster={"http://aktuelt.tv/api/v1/files?fileId=15feab38-2a04-4e74-baf0-07a0383e1830.png"}
-          fill style={{objectFit: "cover", objectPosition: "center", width: "100%", height: "100%"}}
           >
           
         </video>
 
 
+            <Image style={{position: "absolute", translate: "-50% -50%", left: "50%", top: "50%"}} src={"/new_logo.svg"} height={500} width={500} />
       </background>
-      <main className={styles.main}>
-        
-
-        <nav className={styles.nav}>
+      <crossfade className={styles.crossfade} />
+      <nav className={styles.nav}>
           <div>
-            <Image width={50} height={50} src={"/aktueltstudio_logo.svg"}></Image>
-            <h2>.tv</h2>
+            <Image width={40} height={40} src={"/new_logo_symbol.svg"}></Image>
+            {/* <h2>.tv</h2> */}
           </div>
           <Link href={"/dashboard"}>Files</Link>
         </nav>
+      <main className={styles.main}>
 
         <div className={styles.description}>
           
-          <Image width={200} height={200} src={"/aktueltstudio_logo.svg"}></Image>
-          <p>Aktuelt Studio!</p>
 
         </div>
       </main>
     </wrap>
-    <wrap className={styles.wrap} style={{translate: "0 0px", background: "transparent"}}>
+    <wrap className={styles.wrap} style={{translate: "0 -100px"}}>
       
       
       <section className={styles.header}>
@@ -92,7 +89,7 @@ export default function Home() {
         <div className={styles.group}>
           <div className={styles.row}>         
             <div className={styles.image} style={{maxWidth: `none`}}>
-              <Image src={"https://gyazo.com/8a452238e47a596ad2558bb71369bac1.gif"} fill style={{objectFit: "cover", objectPosition: "center"}}></Image>
+              <video src={"http://aktuelt.tv/api/v1/files?fileId=ce3359a0-8176-4fa7-aa6d-7b1a4aea2167.mp4"} fill autoPlay preload="metadata" loop poster={"http://aktuelt.tv/api/v1/files?fileId=15feab38-2a04-4e74-baf0-07a0383e1830.png"} playsInline style={{objectFit: "cover", objectPosition: "center", width: "100%", height: "100%"}}></video>
             </div>
             <div className={styles.card}>
                 <h2>Desperados, Banditos,</h2>
