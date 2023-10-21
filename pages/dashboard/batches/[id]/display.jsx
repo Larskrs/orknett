@@ -199,7 +199,7 @@ export async function getStaticProps({ params })
         props:{
             batch: data,
         },
-        revalidate: 1,
+        revalidate: 10, // In seconds
     }
 }
 
@@ -211,8 +211,5 @@ export async function getStaticPaths() {
     .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
 
     const paths = data.map( (batch, i) => {return {params: {id: batch.id } } } )
-    return {
-      paths,
-      fallback: 'blocking',
-    };
+    return { paths, fallback: 'blocking' }
   }

@@ -37,7 +37,6 @@
     display: flex;
     flex-wrap: nowrap;
     gap: 32px;
-    padding-right: 1rem;
     align-items: center;
     justify-content: center;
     width: 100%;

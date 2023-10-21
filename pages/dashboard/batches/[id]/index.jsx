@@ -1,21 +1,16 @@
 
-import NewFileUpload from '@/components/NewFileUpload';
 import FileSharingLayout from '@/layouts/FileSharingLayout'
 import { GetClient, GetServiceClient } from '@/lib/Supabase';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import styles from '@/styles/FileSharing.module.css'
 import { GetContentType, GetContentTypeFromSource, GetExtensionFromSource, isSourceContentType } from '@/lib/ExtensionHelper';
-import { RatioImage } from '@/components/RatioImage';
 import Image from 'next/image';
-import { RatioMedia } from '@/components/RatioMedia';
 import FileElement from '@/components/FileElement';
 import { useState, useEffect } from 'react';
-import Arrow from '@/components/Arrow';
 import Head from 'next/head';
 import { AlbumElement, AudioPlayer, Badge, DisplayElement, ImprovedFileUpload } from '@/components';
 import axios from "axios";
-import { GetBatches } from '@/lib/BatchLib';
 
 
 
@@ -144,6 +139,7 @@ export default function BatchPage ({batch, batches}) {
 
             <Head>
                 <title>{batch.title}</title>
+                <meta property="twitter:image" content={batch.files[0].source}/> 
             </Head>
 
             <h2>{batch.title}</h2>
@@ -172,8 +168,6 @@ export default function BatchPage ({batch, batches}) {
                 {display && <DisplayElement file={display} id={displayId} onEnded={PlayNextFile}/>}
                 {getFilteredFiles().map((file, i) => {
                     // Normal File Display
-                    if (batch.type === (0 || null)) {
-
                         return <FileElement 
                            key={i}
                            file={file}
@@ -181,19 +175,6 @@ export default function BatchPage ({batch, batches}) {
                            onSelect={() => {
                                moveDisplay(i)
                            }}/>
-                    }
-                    // Album File Display
-                    if (batch.type === 1) {
-
-                        return <AlbumElement 
-                           key={i}
-                           file={file}
-                           download={batch.settings?.download || (session.status === "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id))}
-                           onSelect={() => {
-                               moveDisplay(i)
-                           }}/>
-                    }
-
                 } ) }
             </div>
         </FileSharingLayout>
@@ -236,14 +217,11 @@ export async function getStaticProps({ params }){
     const owners = await GetOwners(data.owners)
     data.owners = owners
 
-    const batches = await GetBatches ();
-
     return {
         props:{
             batch: data,
-            batches: batches.data,
         },
-        revalidate: 1,
+        revalidate: 10, // In seconds
     }
 
 
@@ -259,8 +237,5 @@ export async function getStaticPaths() {
     .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
 
     const paths = data.map( (batch, i) => {return {params: {id: batch.id } } } )
-    return {
-      paths,
-      fallback: 'blocking',
-    };
+    return { paths, fallback: 'blocking' }
   }

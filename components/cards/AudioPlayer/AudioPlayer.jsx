@@ -104,7 +104,7 @@ export default function AudioPlayer ({src, cover, alt, autoPlay=true, onComplete
           const { min, sec } = formatTime(audioRef.current.currentTime);
           setCurrentTimeSec(audioRef.current.currentTime);
           setCurrentTime([min, sec]);
-        }, 1000);
+        },100);
         return () => clearInterval(interval);
       }, [isPlaying]);
 
@@ -166,7 +166,7 @@ export default function AudioPlayer ({src, cover, alt, autoPlay=true, onComplete
                             <p>{currentTime[0]}:{currentTime[1]}</p>
                             <p>{duration[0]}:{duration[1]}</p>
                         </div>
-                        <Slider min={0} max={durationSec} currentValue={currentTimeSec} defaultValue={currentTime} smooth={".25s"} progressStyle={{backgroundImage: `url(${cover})`, backgroundSize: "1000%", backdropFilter: "blur(10px)", borderRadius: "2px"}} containerStyle={{height: "16px"}} onChange={(e) => {audioRef.current.currentTime = e}}/>
+                        <Slider min={0} max={durationSec} currentValue={currentTimeSec} defaultValue={currentTime} smooth={"100ms"} progressStyle={{backgroundImage: `url(${cover})`, backgroundSize: "1000%", backdropFilter: "blur(10px)", borderRadius: "2px", transition: "100ms linear"}} containerStyle={{height: "16px"}} onChange={(e) => {audioRef.current.currentTime = e}}/>
                 </div>
 
             </div>
