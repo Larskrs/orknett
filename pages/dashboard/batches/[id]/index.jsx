@@ -243,6 +243,7 @@ export async function getStaticProps({ params }){
             batch: data,
             batches: batches.data,
         },
+        revalidate: 1,
     }
 
 
