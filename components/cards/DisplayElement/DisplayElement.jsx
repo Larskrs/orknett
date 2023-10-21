@@ -16,22 +16,14 @@ function Element ({file, id, onEnded=(() => {})}) {
     
     if (contentType == "image") {
         return (
-            <div className={styles.display_element}>
                 
-                <Image
-                style={{width: "100%", height: "100%"}}
-                    quality={50}
-                    width={1000}
-                    height={1000}
+                <img
                     className={styles.display_element}
-                    priority={true}
-                    fetchPriority
                     key={id}
                     alt={file.fileName}
                     src={file.source}
                     content={GetContentTypeFromSource(file.source)}
                     />
-            </div>
         )
     }
     if (contentType == "audio") {
