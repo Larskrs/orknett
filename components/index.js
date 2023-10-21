@@ -9,7 +9,7 @@ import AudioPlayer from "./cards/AudioPlayer/AudioPlayer";
 import Slider from "./cards/Slider/Slider";
 import ColorImage from "./cards/ColorImage/ColorImage";
 import Glossy from "./cards/Glossy/Glossy";
-import { DisplayElement } from "./DisplayElement";
+import DisplayElement from "./cards/DisplayElement/DisplayElement";
 import DateField from "./cards/inputfield/datefield";
 import AlbumElement from "./cards/AlbumElement/AlbumElement";
 

@@ -31,10 +31,12 @@ export default function AudioPlayer ({src, cover, alt, autoPlay=true, onComplete
             const res = await fetch(`/api/v1/files/audio/data?fileId=${src.split("fileId=").pop()}`);
             const data = await res.json()
             console.log(data, res.status, defaultTitle)
-            if (!data.tags.picture) {
+            if (data?.tags?.title) {
+                setTitle(data.tags.title)
+            }
+            if (!data?.tags?.picture) {
                 setAlbumCover( getContentIconSource("audio") )
             }
-            
             if (data.error ) {
                 setData({
                     artist: src.split('fileId=').pop().split('.')[0],
@@ -43,6 +45,7 @@ export default function AudioPlayer ({src, cover, alt, autoPlay=true, onComplete
                 })
                 return
             }
+            
             setData(data.tags)
             
         }
@@ -114,36 +117,42 @@ export default function AudioPlayer ({src, cover, alt, autoPlay=true, onComplete
                         handlePlay()
                     }}>
                     {data && data.error && <p style={{position: "absolute", bottom: "4px", left: "0px", margin: 0, width: "100%", textAlign: "center", fontSize: 20}}>.{src.split(".").pop()}</p> }
-                    <Image src={albumCover} width={100} height={100} alt={albumCover} style={{
+                    <Image quality={100} src={albumCover} width={500} height={500} alt={albumCover} style={{
                         animationPlayState: (isPlaying && data && !data.error ? "running" : "paused"),
                         transition: (isPlaying ? "none" : "inherit"),
                         rotate: (isPlaying ? "0deg" : "0deg"),
                         background: "#333"
                     }} />
-                    <div src={(isPlaying) ? "/pause.svg" : "/play.svg"} className={styles.play} width={75} height={75} alt={albumCover} >
-                        <span style={!isPlaying ? {translate: "0px 14.75px", rotate: "45deg"} : {}} />
-                        <span style={!isPlaying ? {translate: "0px -14.75px", rotate: "-45deg"} : {}} />
-                    </div>
+                    
                 </div>
                 <div className={styles.column} style={{width: "100%", justifyContent: "center"}}>
                     <div className={styles.details}>
-                        <p className={styles.title}>{defaultTitle }</p>
+                        <p className={styles.title}>{title}</p>
                         {data && data.artist && <p className={styles.artist}>{data.artist}</p>}
                         {data && data.track && <p className={styles.artist}>Track Id: {data.track}</p>}
                     </div>
-                    <div className={styles.duration}>
-                        <p>{currentTime[0]}:{currentTime[1]}</p>
-                        <p>{duration[0]}:{duration[1]}</p>
-                    </div>
+                    
                     <div className={styles.controls} style={{width: "100%"}}>
-                         <Slider min={0} max={durationSec} currentValue={currentTimeSec} defaultValue={currentTime} smooth={false} progressStyle={{backgroundImage: `url(${cover})`, transform: "scaleY(5)"}} containerStyle={{height: "16px"}} onChange={(e) => {audioRef.current.currentTime = e}}/>
+
+                        <div src={(isPlaying) ? "/pause.svg" : "/play.svg"}
+                            className={styles.play} width={175} height={175} alt={albumCover} 
+                            style={!isPlaying ? {rotate: "-90deg"} : {}}
+                            onClick={() => {
+                                handlePlay()
+                        }}>
+                            <span style={!isPlaying ? {bottom: "25%",  rotate: "45deg", translate: "0px 0px"} : {}} />
+                            <span style={!isPlaying ? {top: "25%",  rotate: "-45deg", translate: "0px 0px"} : {}} />
+                        </div>
+
+                        
+            
                         <audio alt={alt} src={src} autoPlay={autoPlay} ref={audioRef} onEnded={() => {
                             onCompleted()
                         }} onPlay={(e) => {
                             const { min, sec } = sec2Min(audioRef.current.duration);
                             setDurationSec(audioRef.current.duration);
                             setDuration([min, sec]);
-                        
+                            
                             console.log(audioRef.current.duration);
                         }} /> 
 
@@ -153,11 +162,19 @@ export default function AudioPlayer ({src, cover, alt, autoPlay=true, onComplete
                         }}>{isPlaying.toString()}</button> */}
                         {/* {audioRef && <p>{audioRef.current.duration}</p>} */}
                     </div>
+                        <div className={styles.duration}>
+                            <p>{currentTime[0]}:{currentTime[1]}</p>
+                            <p>{duration[0]}:{duration[1]}</p>
+                        </div>
+                        <Slider min={0} max={durationSec} currentValue={currentTimeSec} defaultValue={currentTime} smooth={".25s"} progressStyle={{backgroundImage: `url(${cover})`, backgroundSize: "1000%", backdropFilter: "blur(10px)", borderRadius: "2px"}} containerStyle={{height: "16px"}} onChange={(e) => {audioRef.current.currentTime = e}}/>
                 </div>
 
             </div>
         </>
-    );
+
+);
+
+    
 
     async function LoadMetaData() {
 

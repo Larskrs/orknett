@@ -1,10 +1,11 @@
-import styles from "@/styles/FileSharing.module.css"
+import styles from "./DisplayElement.module.css"
 
 import { GetContentTypeFromSource, GetExtensionFromSource } from "@/lib/ExtensionHelper";
 import Image from "next/image";
-import { AudioPlayer } from ".";
+import { AudioPlayer } from "../..";
 
-export function DisplayElement ({file, id, onEnded=(() => {})}) {
+
+function Element ({file, id, onEnded=(() => {})}) {
 
     if (!file) {
         return <p style={{color: "white", zIndex: 9999}}>Whoops, We had an issue displaying this file in the DisplayElement.jsx</p>
@@ -15,18 +16,22 @@ export function DisplayElement ({file, id, onEnded=(() => {})}) {
     
     if (contentType == "image") {
         return (
-            <Image className={styles.display_element}
-                quality={50}
-                width={1200}
-                height={1200}
-                style={{width: "auto", height: "auto"}}
-                priority={true}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                key={id}
-                alt={file.fileName}
-                src={file.source}
-                content={GetContentTypeFromSource(file.source)}
-             />
+            <div className={styles.display_element}>
+                
+                <Image
+                style={{width: "100%", height: "100%"}}
+                    quality={50}
+                    width={1000}
+                    height={1000}
+                    className={styles.display_element}
+                    priority={true}
+                    fetchPriority
+                    key={id}
+                    alt={file.fileName}
+                    src={file.source}
+                    content={GetContentTypeFromSource(file.source)}
+                    />
+            </div>
         )
     }
     if (contentType == "audio") {
@@ -71,4 +76,12 @@ export function DisplayElement ({file, id, onEnded=(() => {})}) {
     }
     
 
+}
+
+export default function DisplayElement ({file, id, onEnded=(() => {})}) {
+    return (
+        <div className={styles.wrap}>
+            <Element file={file} id={id} onEnded={onEnded} />
+        </div>
+    )
 }

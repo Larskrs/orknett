@@ -1,0 +1,102 @@
+.wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding: 1rem;
+    width: 100vw !important;
+    height: 100vh !important;
+    display: flex;
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.display_element {
+    position: relative !important;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: flex;
+    object-fit: contain;
+    animation: forwards display_element .25s ease-in-out;
+    background-color: rgba(17, 17, 17, 0.25);
+    border-radius: 16px;
+    pointer-events: all !important;
+    z-index: 2000;
+}
+@media screen and (max-width: 700px) {
+    .wrap {
+        padding-top: 0;
+    }
+    
+}
+@media screen and (max-height: 600px) {
+    .wrap {
+        padding-left: 98px;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    .display_element {
+        width: fit-content;
+        height: 100%;
+    }
+}
+.display_unknown_element{
+    display: flex !important;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 1rem;
+    scale: 2;
+    align-items: center !important;
+    justify-content: center !important;
+    animation: forwards display_element .25s ease-in-out;
+}
+.display_unknown_element h2 {
+    width: fit-content;
+    display: flex;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 1rem;
+    animation: forwards display_element .25s ease-in-out;
+}
+.display_controls {
+    position: fixed !important;
+    height: 12vh;
+    width: 100vw;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    pointer-events: all;
+    z-index: 1001;
+}
+.display_controls h3 {
+    white-space: nowrap; 
+    width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+.display_controls > button {
+    pointer-events: all;
+    background: none;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    scale: 2;
+    padding-inline: 2rem;
+}
+@keyframes display_element {
+    0% {
+        translate: -25vw 0;
+        opacity: 0;
+        scale: 0;
+        rotate: 20deg;
+        filter: blur(100px);
+    }
+    80% {
+    }
+}

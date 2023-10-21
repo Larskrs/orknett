@@ -42,7 +42,7 @@ export default function Home() {
         </video>
 
 
-            <Image style={{position: "absolute", zIndex: 10, translate: "-50% -50%", left: "50%", top: "50%"}} src={"/new_logo.svg"} height={500} width={500} />
+            <Image style={{position: "absolute", zIndex: 10, translate: "-50% -50%", left: "50%", top: "50%", maxWidth: 400}} src={"/new_logo.svg"} fill />
       </background>
       <crossfade className={styles.crossfade} />
       <nav className={styles.nav}>

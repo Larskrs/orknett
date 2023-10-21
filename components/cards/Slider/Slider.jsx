@@ -54,7 +54,7 @@ export default function Slider ({
             >
                 <div
                     className={styles.progress}
-                    style={Object.assign({}, progressStyle, progressStyleLocal)}
+                    style={Object.assign({transitionDuration: isDragging ? "0s" : smooth}, progressStyle, progressStyleLocal)}
                 >
 
                 </div>

@@ -5,16 +5,32 @@
     gap: 1rem;
     border-radius: 8px;
     flex-wrap: nowrap;
+    flex-direction: column;
+    max-width: 100%;
+    height: 100%;
 }
+
 .column {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    gap: .5rem;
+}
+@media screen and (max-height: 800px) {
+    .wrap {
+        flex-direction: row;
+    }
+    .coverContainer img {
+        width: 50%;
+        height: 50%;
+    }
 }
 .details {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
 }
 .controls {
     flex-direction: row;
@@ -23,6 +39,7 @@
     gap: 32px;
     padding-right: 1rem;
     align-items: center;
+    justify-content: center;
     width: 100%;
 }
 .title {
@@ -49,25 +66,30 @@
 }
 .coverContainer {
     position: relative;
-    height: 100px;
     object-fit: contain;
     background-color: #111;
     cursor: pointer;
     user-select: none;
+    width: 100%;
 }
-.play {
-    position: absolute;
-    left: 0;
-    top: 0;
+.coverContainer img {
     width: 100%;
     height: 100%;
+}
+.play {
+    position: relative;
+    width: 64px;
+    height: 64px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: rotate .25s;
     transition: opacity 1s ease 1s;
-    transition-delay: 2s;
-    opacity: 0;
+    opacity: 1;
+    transition: all 250ms ease;
+    rotate: 0deg;
+    cursor: pointer;
+    background-color: #222;
+    border-radius: 50%;
 }
 .coverContainer:active .play {
     scale: 1.1;
@@ -90,23 +112,27 @@
     transition-duration: 0s !important;
 }
 .coverContainer > img {
-    animation: playing 10s linear infinite;
-    border-radius: 100%;
+    border-radius: 1rem;
 }
 
 .play > span {
     background-color: white;
-    width: 8px;
-    height: 48px;
+    width: 10%;
+    height: 50%;
     position: absolute;
     border-radius: 8px;
     transition: all 250ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
+.play:active {
+    transition-delay: 0ms;
+    scale: 1.1;
+    transition-duration: 0ms;
+}
 .play span:first-child {
-    translate: -15px 0px;
+    right: 27.5%;
 }
 .play span:last-child {
-    translate: 15px 0px;
+    left: 27.5%;
 }
 
 @keyframes playing {
