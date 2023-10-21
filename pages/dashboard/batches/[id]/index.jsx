@@ -140,7 +140,8 @@ export default function BatchPage ({batch, batches}) {
             <Head>
                 <title>{batch.title}</title>
                 <meta name="description" content={"This is a sharable batch link."} />
-                <meta property="twitter:card" content={batch.files[0].source}/> 
+                <meta name="twitter:card" content="summary_large_image"/>
+                <meta property="twitter:image:src" content={batch.files[0].source}/> 
             </Head>
 
             <h2>{batch.title}</h2>
