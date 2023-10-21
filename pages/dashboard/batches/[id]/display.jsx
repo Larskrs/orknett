@@ -199,7 +199,6 @@ export async function getStaticProps({ params })
         props:{
             batch: data,
         },
-        fallback: false,
     }
 }
 
