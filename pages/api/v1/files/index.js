@@ -90,7 +90,8 @@ async function optimizeVideo (fileName) {
           .videoCodec("libx264")
           .save(`./videos/${id}/${height}.mp4`)
           .on('err',(err)=>{
-              return reject(err)
+              console.log("Well fuck...")
+              return resolve()
           })
           .on('end', async (fim)=>{
             qualities.push(height)
@@ -146,8 +147,6 @@ async function optimizeVideo (fileName) {
       Ffmpeg(basePath)
       .format("mp4")
       .saveToFile(convPath)
-      .videoBitrate("85%")
-      .audioBitrate('96k')
       .on('err',async (err) =>{
         console.log({error: err})
           return reject(err)
