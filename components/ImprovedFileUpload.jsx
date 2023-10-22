@@ -3,7 +3,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import { contentTypeList } from "@/lib/ExtensionHelper";
+import { contentTypeList, GetContentType } from "@/lib/ExtensionHelper";
 import { RatioImage } from "./RatioImage";
 import { GetAuthenticatedClient } from "@/lib/Supabase";
 import Image from "next/image";
@@ -35,6 +35,10 @@ export default function FileUpload ({batchPreset = ""}) {
 
         console.log({session})
         const userId = session.status == "authenticated" ? session.data.user.id : null
+        let source = `/api/v1/files?fileId=${id}.${extension}`
+        if (GetContentType(extension).toLowerCase().includes("video")) {
+            source = `/api/v1/files?quality=${360}&fileId=${id}.${extension}`
+        }
 
         const {select, error} = await GetAuthenticatedClient("public",session).from("files")
         
@@ -42,7 +46,7 @@ export default function FileUpload ({batchPreset = ""}) {
             userId ?     
         {
             id: id,
-            source: `/api/v1/files?fileId=${id}.${extension}`,
+            source: source,
             storage: process.env.NEXT_PUBLIC_STORAGE_ID,
             user: userId,
             batch : (batch != "" ? batch : null),
@@ -50,7 +54,7 @@ export default function FileUpload ({batchPreset = ""}) {
         } :
         {
             id: id,
-            source: `/api/v1/files?fileId=${id}.${extension}`,
+            source: source,
             storage: process.env.NEXT_PUBLIC_STORAGE_ID,  
             batch : (batch != "" ? batch : null),
             fileName : fileName,

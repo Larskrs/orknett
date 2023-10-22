@@ -39,11 +39,10 @@ export async function getStaticPaths() {
     const { data, error } = await GetClient("public")
     .from("series")
     .select("id")
+    .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
 
-    console.log({data})
 
     const paths = data.map( (series, i) => {return {params: {id: series.id + "" } } } )
-    console.log({paths: paths[0]})
     return {
       paths,
       fallback: 'blocking',

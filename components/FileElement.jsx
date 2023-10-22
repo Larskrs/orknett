@@ -21,22 +21,31 @@ export default function FileElement ({file, onSelect, download=true, rating=0}) 
 
         })
 
-        const fileId = file.source.split('/').pop().split('=').pop();
                     const creationDate = new Date(file.created_at);
                     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                     const contentType = GetContentTypeFromSource(file.source)
                     const type = contentType.split('/')[0];
+
+                    const urlParams = new URLSearchParams(file.source);
+                    const fileId = urlParams.get('fileId');
+
 
                     return (
                         <div className={styles.download}>
                             
                             <div onClick={onSelect} style={{width: "100%", height: "100%"}}>
                                 
-                                {type == "video" && <Image alt={file.fileName} fill src={"/video.svg"} /> }
+                                {type == "video" && <div>
+                                <Image alt={file.fileName} fill style={{objectFit: "cover"}} src={`/api/v1/files/videos/thumbnail?fileId=${fileId}`} />
+                                <div style={{width: 50, height: 50, position: "absolute", left: 8, top: 8, background: "rgba(0,0,0,.25)", borderRadius: "50%"}}><Image alt={file.fileName} fill src={"/video.svg"} /></div> 
+                                    </div> }
                                 {/* {type == "audio" && <Image alt={file.fileName} fill src={"/audio.svg"} /> } */}
                                 {type == "audio" && <>
                                     
-                                    <Image alt={file.fileName} fill src={image} /> 
+                                <div>
+                                <Image alt={file.fileName} fill style={{objectFit: "cover"}} src={image} />
+                                <div style={{width: 50, height: 50, position: "absolute", left: 8, top: 8, background: "rgba(0,0,0,.25)", borderRadius: "50%"}}><Image alt={file.fileName} fill src={"/audio.svg"} /></div> 
+                                    </div>
                                     
                                 </> }
                                 {type == "image" && <Image alt={file.fileName} quality={1} style={{objectFit: "contain"}} sizes={[]} fill src={file.source} onError={(e) => {

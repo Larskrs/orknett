@@ -32,14 +32,18 @@ export default function FileUpload ({batchPreset = ""}) {
 
         console.log({session})
         const userId = session.status == "authenticated" ? session.data.user.id : null
-
+        let source = `/api/v1/files?quality=${360}&fileId=${id}.${extension}`
+        if (GetContentType(extension).toLowerCase().includes("video")) {
+            source = `/api/v1/files?quality=${360}&fileId=${id}.${extension}`
+        }
+        console.log(source)
         const {select, error} = await GetAuthenticatedClient("public",session).from("files")
         
         .insert(
             userId ?     
         {
             id: id,
-            source: `/api/v1/files?fileId=${id}.${extension}`,
+            source: source,
             storage: process.env.NEXT_PUBLIC_STORAGE_ID,
             user: userId,
             batch : (batch != "" ? batch : null),
@@ -47,7 +51,7 @@ export default function FileUpload ({batchPreset = ""}) {
         } :
         {
             id: id,
-            source: `/api/v1/files?fileId=${id}.${extension}`,
+            source: source,
             storage: process.env.NEXT_PUBLIC_STORAGE_ID,  
             batch : (batch != "" ? batch : null),
             fileName : fileName,

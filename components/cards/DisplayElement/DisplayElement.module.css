@@ -16,6 +16,7 @@
 }
 
 .display_element {
+    flex-direction: column;
     position: relative !important;
     max-width: 100%  !important;
     max-height: 100% !important;
@@ -101,4 +102,11 @@
     }
     80% {
     }
+}
+.qualityContainer {
+    display: flex;
+    gap: 1rem;
+}
+.qualityContainer button {
+    border: none;
 }

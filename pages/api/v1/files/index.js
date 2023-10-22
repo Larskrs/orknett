@@ -5,8 +5,10 @@ import path from "path";
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "../../auth/[...nextauth]"
 import { GetClient, GetAuthenticatedClient } from "@/lib/Supabase";
-import { GetContentType, isSourceContentType } from "@/lib/ExtensionHelper"
+import { GetContentType, GetContentTypeFromSource, isSourceContentType } from "@/lib/ExtensionHelper"
 import jsmediatags from "jsmediatags";
+import Ffmpeg from "fluent-ffmpeg";
+import { create } from "domain";
 
 export const config = {
   api: {
@@ -16,7 +18,163 @@ export const config = {
   },
 };
 
+async function optimizeVideo (fileName) {
 
+  const startTime = new Date().getTime()
+
+  const dir = "./files/"
+  const vidDir = "./videos/"
+  const basePath = path.join(__dirname, "../../../../../" ,dir, fileName)
+  const baseName = fileName.substr(fileName.lastIndexOf(".") + 1)
+  const id = fileName.split('.').slice(0, -1).join('.')
+
+
+  console.log("Attempting to optimize video...")
+  console.log("[PARAMS]")
+  console.log({fileName, basePath, dir, baseName, id})
+
+  console.log(`./videos/${id}/`)
+  fs.mkdirSync(`./videos/${id}/`)
+
+  const newPath = path.join(__dirname, `../../../../../videos/${id}`)
+
+  createVideos()
+
+  async function createVideos(){
+      console.log("Starting video optimizations and quality segments...")
+
+      const convPath = path.join(__dirname, "../../../../../" ,vidDir, id, "/converted.mp4")
+
+      await convert(basePath, convPath)
+      await deleteOriginalVideo(basePath)
+
+      const data = await readVideo(convPath);
+      const size = {width: data.streams[0].width, height: data.streams[0].height}
+      console.log({original_size: size})
+      
+
+        
+
+        let qualities = []
+        
+        let possible = [360, 480, 540, 720, 1080, 1440 ]
+        if (possible[0] > size.height) {
+          possible = [360]
+        } else {
+          possible = possible.filter(function (i) {
+            return i <= size.height;
+          })
+        }
+        console.log({possible})
+        await captureScreenshots(convPath, id)
+
+        for (let i = 0; i < possible.length; i++) {
+          const el = possible[i];
+          console.log({el})
+          await createVideo ( convPath, id, el)
+        }
+
+      deleteOriginalVideo(convPath)
+
+      function createVideo(path, id, height) {
+
+        console.log(`[Handling Video] id: (${id}) - ${height}p `)
+        console.log({height})
+        
+    
+        return new Promise((resolve,reject)=>{
+          Ffmpeg(path)
+          .size(`?x${height}`)
+          .videoBitrate(height + "k")
+          .format("mp4")
+          .videoCodec("libx264")
+          .save(`./videos/${id}/${height}.mp4`)
+          .on('err',(err)=>{
+              return reject(err)
+          })
+          .on('end', async (fim)=>{
+            qualities.push(height)
+            const update = await GetClient().from("files")
+            .update({quality: qualities})
+            .eq("id", id)
+            .select("*")
+              return resolve()
+          })
+        })
+      }
+  }
+
+  function captureScreenshots(path, id) {
+
+    console.log(`[Handling Video] id: (${id}) - Screenshots `)
+    
+
+    return new Promise((resolve,reject)=>{
+      Ffmpeg(path)
+      .screenshots({
+        count: 4,
+        folder: './videos/'+id+'/thumbnails/',
+      })
+      .on('err',(err)=>{
+          return reject(err)
+      })
+      .on('end', async (fim)=>{
+          return resolve()
+      })
+    })
+  }
+
+  
+  function deleteOriginalVideo (path) {
+    console.log("Preparing to delete original video...")
+    fs.unlink(path, (err) => {
+        if (err) {
+          console.error(err); return;
+        }
+        console.log("Finished Deleting original file without issue. :)")
+    })
+    
+  }
+
+  function convert(basePath, convPath){
+
+    console.log("Attempting to convert video.")
+    console.log("Original file: " + basePath)
+    console.log("Save Location: " + convPath)
+
+    return new Promise((resolve,reject)=>{
+      Ffmpeg(basePath)
+      .format("mp4")
+      .saveToFile(convPath)
+      .videoBitrate("85%")
+      .audioBitrate('96k')
+      .on('err',async (err) =>{
+        console.log({error: err})
+          return reject(err)
+      })
+      .on('progress',async (progress) => {
+        console.log("progress")
+      }) 
+      .on('end', async (fim)=>{
+          console.log("Finished converting.")
+          return resolve()
+      })
+    })
+  }
+
+  function readVideo(path){
+    return new Promise((resolve,reject)=>{
+        Ffmpeg(path)
+        .ffprobe((err, data) => {
+          if (err) {
+            return reject(err)
+          }
+          return resolve(data)
+        })
+    })
+}
+
+}
 
 async function UploadFileStream(req, res) {
 
@@ -51,7 +209,11 @@ async function UploadFileStream(req, res) {
     res.end(`That's the end`);
 
     const [ id, extension ] = fileName.split(".")
-    
+    console.log(GetContentType(extension).toLowerCase())
+    if (GetContentType(extension).toLowerCase().includes("video")) {
+      console.log("File uploaded is a video, converting to multiple qualities...")
+      optimizeVideo(fileName)
+    }
 
 
 
