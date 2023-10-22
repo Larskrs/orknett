@@ -17,6 +17,7 @@
 .env
 
 files/*
+videos/*
 
 # misc
 .DS_Store

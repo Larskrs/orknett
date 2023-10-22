@@ -57,7 +57,7 @@ async function optimizeVideo (fileName) {
 
         let qualities = []
         
-        let possible = [360, 480, 540, 720, 1080, 1440 ]
+        let possible = [100, 360, 480, 540, 720, 1080, 1440 ]
         if (possible[0] > size.height) {
           possible = [360]
         } else {
@@ -80,12 +80,19 @@ async function optimizeVideo (fileName) {
 
         console.log(`[Handling Video] id: (${id}) - ${height}p `)
         console.log({height})
+        let bitrate = '1200k'
+        let aBitrate = '128k'
+        if (height <= 100) {
+          bitrate = '10k',
+          aBitrate = '1k'
+        }
         
     
         return new Promise((resolve,reject)=>{
           Ffmpeg(path)
           .size(`?x${height}`)
-          .videoBitrate(height + "k")
+          .videoBitrate(bitrate)
+          .audioBitrate(aBitrate)
           .format("mp4")
           .videoCodec("libx264")
           .save(`./videos/${id}/${height}.mp4`)
@@ -146,6 +153,7 @@ async function optimizeVideo (fileName) {
     return new Promise((resolve,reject)=>{
       Ffmpeg(basePath)
       .format("mp4")
+      .videoBitrate('1200k')
       .saveToFile(convPath)
       .on('err',async (err) =>{
         console.log({error: err})
