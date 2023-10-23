@@ -5,7 +5,8 @@ import path from "path";
 function GetFileStream(req, res) {
 
 
-    const fileName = req.query.fileId;
+    let fileName = req.query.fileId;
+    fileName = fileName.replace("/",'')
     let quality = req.query.quality;
     if (!quality) quality = 360
     const [ id, extension ] = fileName.split(".")

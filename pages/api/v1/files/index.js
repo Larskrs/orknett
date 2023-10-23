@@ -240,7 +240,8 @@ const CHUNK_SIZE_IN_BYTES = 1000000; // 1 mb
 function GetFileStream(req, res) {
 
 
-  const fileName = req.query.fileId;
+  let fileName = req.query.fileId;
+  fileName = fileName.replace("/",'')
   const [ id, extension ] = fileName.split(".")
 
   let filePath = `./files/${fileName}`;
