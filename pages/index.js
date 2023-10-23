@@ -30,7 +30,7 @@ export default function Home() {
           ></Image>
         </div> */}
         <video 
-          src={"http://aktuelt.tv/api/v1/files?fileId=ce3359a0-8176-4fa7-aa6d-7b1a4aea2167.mp4"}
+          src={"http://aktuelt.tv/api/v1/files/videos?quality=360&fileId=cda1d6fa-e773-4f3c-b9bb-50f475e5f59a.mp4"}
           autoPlay
           playsInline
           muted
