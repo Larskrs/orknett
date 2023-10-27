@@ -43,12 +43,12 @@ async function optimizeVideo (fileName) {
   async function createVideos(){
       console.log("Starting video optimizations and quality segments...")
 
-      const convPath = path.join(__dirname, "../../../../../" ,vidDir, id, "/converted.mp4")
+      const convPath = basePath
 
-      await convert(basePath, convPath)
-      await deleteOriginalVideo(basePath)
+      // await convert(basePath, convPath)
+      // await deleteOriginalVideo(basePath)
 
-      const data = await readVideo(convPath);
+      const data = await readVideo(basePath);
       const size = {width: data.streams[0].width, height: data.streams[0].height}
       console.log({original_size: size})
       
@@ -119,8 +119,10 @@ async function optimizeVideo (fileName) {
 
     return new Promise((resolve,reject)=>{
       Ffmpeg(path)
+      .duration(5)
+      .fps(1)
       .screenshots({
-        count: 4,
+        count: 2,
         folder: './videos/'+id+'/thumbnails/',
       })
       .on('err',(err)=>{
