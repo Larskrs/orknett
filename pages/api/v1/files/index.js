@@ -8,6 +8,7 @@ import { GetClient, GetAuthenticatedClient } from "@/lib/Supabase";
 import { GetContentType, GetContentTypeFromSource, isSourceContentType } from "@/lib/ExtensionHelper"
 import jsmediatags from "jsmediatags";
 import Ffmpeg from "fluent-ffmpeg";
+import { ffprobe } from "fluent-ffmpeg";
 import { create } from "domain";
 
 export const config = {
@@ -49,7 +50,8 @@ async function optimizeVideo (fileName) {
       // await deleteOriginalVideo(basePath)
 
       const data = await readVideo(basePath);
-      const size = {width: data.streams[0].width, height: data.streams[0].height}
+      let size = {width: data.streams[0].width, height: data.streams[0].height}
+      if (size.width === undefined) size = {width: data.streams[1].width, height: data.streams[1].height }
       console.log({original_size: size})
       
 
@@ -174,12 +176,13 @@ async function optimizeVideo (fileName) {
   function readVideo(path){
     return new Promise((resolve,reject)=>{
         Ffmpeg(path)
-        .ffprobe((err, data) => {
+        .ffprobe(0, function(err, data) {
           if (err) {
-            return reject(err)
+            reject(err)
           }
-          return resolve(data)
-        })
+          console.log(data)
+          resolve(data)
+        });
     })
 }
 
