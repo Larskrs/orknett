@@ -47,7 +47,7 @@ export default function BatchPage ({batch, batches}) {
         var files = batch.files
         let filters = []
         files.map((f) => {
-            const ext = GetContentTypeFromSource(f.source).split("/")[0]
+            const ext = GetContentTypeFromSource(f?.source).split("/")[0]
             if (!filters.includes(ext)) {
                 filters.push(ext)
             }
@@ -119,7 +119,7 @@ export default function BatchPage ({batch, batches}) {
         if (filter == "" || null) {
             return files
         }
-        files = files.filter((f) => isSourceContentType(f.source, filter))
+        files = files.filter((f) => isSourceContentType(f?.source, filter))
 
         return files
     }
@@ -141,7 +141,7 @@ export default function BatchPage ({batch, batches}) {
                 <title>{batch.title}</title>
                 <meta name="description" content={"This is a sharable batch link."} />
                 <meta name="twitter:card" content="summary_large_image"/>
-                <meta property="twitter:image:src" content={batch.files[0].source}/> 
+                {batch?.files.length > 0 && <meta property="twitter:image:src" content={batch.files[0].source}/> }
             </Head>
 
             <h2>{batch.title}</h2>
