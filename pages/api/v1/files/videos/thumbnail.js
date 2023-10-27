@@ -20,8 +20,8 @@ export default async function handler(req, res) {
 
   async function GetThumbnail(req, res) {
     
-    let fileName = req?.query?.fileId;
-    fileName = fileName.replace("/",'')
+    let fileId = req?.query?.fileId;
+    fileId = fileId.replace("/",'')
     if (!fileId) {
         return res.status(404).json({ error: `No fileId` });
     }

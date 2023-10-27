@@ -4,9 +4,13 @@ import Link from 'next/link'
 import styles from '../styles/Page.module.css'
 import { RatioMedia } from '@/components/RatioMedia'
 import Head from 'next/head'
+import { useSession } from 'next-auth/react'
 
 
 export default function Home() {
+
+  const session = useSession()
+
   return (
   <div>
 
@@ -41,8 +45,8 @@ export default function Home() {
           
         </video>
 
+        <Image style={{position: "absolute", zIndex: 10, translate: "-50% -50%", left: "50%", top: "50%", maxWidth: 300}} src={"/new_logo.svg"} fill />
 
-            <Image style={{position: "absolute", zIndex: 10, translate: "-50% -50%", left: "50%", top: "50%", maxWidth: 400}} src={"/new_logo.svg"} fill />
       </background>
       <crossfade className={styles.crossfade} />
       <nav className={styles.nav}>
@@ -50,7 +54,13 @@ export default function Home() {
             <Image width={40} height={40} src={"/new_logo_symbol.svg"}></Image>
             {/* <h2>.tv</h2> */}
           </div>
-          <Link href={"/dashboard"}>Dashboard</Link>
+          <Link href={"/dashboard"}>Serier</Link>
+          <div style={{marginLeft: "auto", marginRight: 24}}>
+            {session.status === "authenticated" && <Link href={"/dashboard"} style={{display: "flex", flexDirection: "row", gap: 8, justifyContent: "center"}}>
+                <Image width={40} height={40} style={{borderRadius: "50%"}} src={session.data.user.image} />
+            </Link> }
+            {session.status !== "authenticated" && <Link href={"/auth/signin"}>Log In</Link> }
+          </div>
         </nav>
       <main className={styles.main}>
 

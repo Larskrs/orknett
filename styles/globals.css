@@ -63,9 +63,6 @@ html, body {
 * {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
-  transition-property: all;
-  transition-timing-function: cubic-bezier(.4,0,.2,1);
-  transition-duration: .125s;
   scroll-behavior: smooth;
   box-sizing: border-box;
   text-decoration: none;
