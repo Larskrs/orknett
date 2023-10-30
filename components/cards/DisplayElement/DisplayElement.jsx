@@ -2,7 +2,7 @@ import styles from "./DisplayElement.module.css"
 
 import { GetContentTypeFromSource, GetExtensionFromSource } from "@/lib/ExtensionHelper";
 import Image from "next/image";
-import { AudioPlayer } from "../..";
+import { AudioPlayer, VideoPlayer } from "../..";
 import { useEffect, useState } from "react";
 
 
@@ -63,15 +63,8 @@ function Element ({file, id, onEnded=(() => {})}) {
 
         return (
             <div key={id} className={styles.display_element} style={{background: "transparent"}}> 
-            <video 
-                className={styles.display_element}
-                alt={file.fileName}
-                src={_source}
-                content={GetContentTypeFromSource(file.source)} 
-                controls
-                autoPlay
-                poster=""
-                onEnded={() => onEnded()}
+            <VideoPlayer 
+                source={_source}
                 
                 />
 

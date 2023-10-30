@@ -12,6 +12,7 @@ import Glossy from "./cards/Glossy/Glossy";
 import DisplayElement from "./cards/DisplayElement/DisplayElement";
 import DateField from "./cards/inputfield/datefield";
 import AlbumElement from "./cards/AlbumElement/AlbumElement";
+import VideoPlayer from "./cards/VideoPlayer/VideoPlayer";
 
 export 
 {
@@ -25,6 +26,7 @@ export
     AlbumElement,
     FileUploading,
     AudioPlayer,
+    VideoPlayer,
     Slider,
     ColorImage,
     Glossy,

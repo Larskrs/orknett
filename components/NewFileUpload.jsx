@@ -164,7 +164,7 @@ export default function FileUpload ({batchPreset = ""}) {
 
             
                     <div className="row">
-                    <input style={{display: "none"}} type='file' id='file' accept={contentTypeList['image']} onChange={handleSetFile}/>
+                    <input style={{display: "none"}} type='file' id='file' accept={contentTypeList['image']} draggable onChange={handleSetFile}/>
                     {batchPreset == null && <input type='text' id='batch' onChange={(e) => {setBatch(e.target.value)}} /> }
                     
                         <label className={"upload_button"}htmlFor="file">Select File to upload</label>

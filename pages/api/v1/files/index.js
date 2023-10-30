@@ -85,8 +85,8 @@ async function optimizeVideo (fileName) {
         let bitrate = '1200k'
         let aBitrate = '128k'
         if (height <= 100) {
-          bitrate = '10k',
-          aBitrate = '1k'
+          bitrate = '5k'
+          aBitrate = '0.1k'
         }
         
     

@@ -17,16 +17,19 @@
     background-color: rgb(110, 110, 110);
     height: 100%;
     border-radius: 0px 0px 0px 0px;
-    transition: all .2s cubic-bezier(0.455, 0.03, 0.515, 0.955)
 }
 .thumb {
     position: absolute;
-    width: 8px;
-    margin-left: -4px;
+    width: 10px;
+    max-height: 10px;
+    margin-left: -5px;
     background-color: white;
     height: 100%;
     border-radius: .5rem;
-    transition: none;
-    transition: transform 1s cubic-bezier(2.645, 1, 1, 1);
-    transition: opacity 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: scale 50ms ease-in-out;
+    z-index: 99;
+}
+.container:hover .thumb {
+    scale: 2;
+    opacity: 1;
 }

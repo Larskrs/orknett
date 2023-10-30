@@ -6,6 +6,8 @@ export default function Slider ({
     onChange=() => {},
     trackStyle, thumbStyle, progressStyle, containerStyle, draggingStyle,
     smooth=true,
+    interactive=false,
+    ThumbChildren,
 
 }) {
 
@@ -26,11 +28,13 @@ export default function Slider ({
             setValue(newValue)
     }
     const handleClick = (e) => { 
+
         const { left, width } = e.currentTarget.getBoundingClientRect()
-            const percentage = (event.clientX - left) / width
-            const newValue = Math.round(min + percentage * (max - min))
-            setValue(newValue)
-            onChange(newValue)
+        const percentage = (event.clientX - left) / width
+        const newValue = Math.round(min + percentage * (max - min))
+        setValue(newValue)
+        onChange(newValue)
+
     }
 
     const [isDragging, setIsDragging] = useState(false)
@@ -44,21 +48,22 @@ export default function Slider ({
     const progressStyleLocal = {width: `${getPercentage(value)}%`, transition: smooth ? "inherit" : "none"}
 
     return (
-        <div className={styles.container} style={containerStyle}>
+        <div className={styles.container} style={containerStyle}
+        onMouseDown={interactive ? handleDragStart : () => {}}
+        onMouseUp={interactive ? handleDragEnd : () => {}}
+        onMouseMove={interactive ? handleDrag : () => {}}
+        onClick={interactive ? handleClick : () => {}}
+        >
+            { interactive && <div 
+                className={styles.thumb} style={{left: `${getPercentage(value)}%`}} ></div> }
+            <div style={{left: `${getPercentage(value)}%`, position: "absolute", transition: "translate .25s ease-in-out"}} >{ThumbChildren && <ThumbChildren value={value} />}</div>
             <div className={styles.track} 
                 style={trackStyle}
-                onMouseDown={handleDragStart}
-                onMouseUp={handleDragEnd}
-                onMouseMove={handleDrag}
-                onClick={handleClick}
             >
                 <div
                     className={styles.progress}
-                    style={Object.assign({transitionDuration: isDragging ? "0s" : smooth}, progressStyle, progressStyleLocal)}
+                    style={Object.assign({transitionProperty: "width", transitionDuration: isDragging ? "0s" : smooth}, progressStyle, progressStyleLocal)}
                 >
-
-                </div>
-                <div className={styles.thumb} style={{left: `${getPercentage(value)}%`, opacity: (isDragging) ? 1 : 0, transform: isDragging ? "scale(1)" : "scale(0)"}}>
                 </div>
             </div>
         </div>
