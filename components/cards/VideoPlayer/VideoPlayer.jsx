@@ -198,8 +198,9 @@ export default function VideoPlayer ({source, qualities, videoProps, defaultQual
                 </div>
                 <div className={styles.controlsRow}> 
                 <div style={{display: "flex",gap: 8}}>
-                    <button onClick={() => {handlePlay()}} style={{padding: "0px", background: "none",outline: "none", border: "none", heigh: "unset", margin: 0}}>
-                      <Image src={`/icons/${isPlaying ? "pause" : "play"}_icon.svg`} height={32} width={32} />
+                    <button onClick={() => {handlePlay()}} style={{padding: "0px", background: "none",outline: "none", border: "none", heigh: "unset", margin: 0, width: 32, height: 32, position: "relative"}}>
+                      <Image style={{opacity: isPlaying ? 0 : 1 , transitionDuration: "500ms"}} src={`/icons/play_icon.svg`} fill />
+                      <Image style={{opacity: isPlaying ? 1 : 0 , transitionDuration: "500ms"}} src={`/icons/pause_icon.svg`} fill />
                     </button>
 
                     <div className={styles.timeCode}>

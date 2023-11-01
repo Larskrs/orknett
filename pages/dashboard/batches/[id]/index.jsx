@@ -139,7 +139,7 @@ export default function BatchPage ({batch, batches}) {
 
     return (
 
-        <FileSharingLayout pageId={2} batches={batches}>
+        <FileSharingLayout pageId={3} batches={batches}>
 
             <Head>
                 <title>{batch.title}</title>
