@@ -54,6 +54,9 @@
     cursor: pointer;
     font-size: 14px;
 }
+.downloadLink:hover img {
+    scale: 1.25;
+}
 .image {
     display: flex;
     align-items: center;

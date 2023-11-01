@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { getContentIconSource } from '@/lib/FileHelper';
 
 
-export default function FileElement ({file, onSelect, download=true, rating=0}) {
+export default function FileElement ({file, onSelect, download=true, rating=0, owner}) {
 
 
         const [image, setImage] = useState()
@@ -34,7 +34,7 @@ export default function FileElement ({file, onSelect, download=true, rating=0}) 
                         <div className={styles.download}>
                             
                             <div onClick={onSelect} style={{width: "100%", height: "100%"}}>
-                                
+                                {owner && <Image src={owner.image} width={16} height={16} style={{borderRadius: "50%", bottom: 16, right: 16, position: "absolute", zIndex: 10}} />}
                                 {type == "video" && <div>
                                 <Image alt={file.fileName} fill style={{objectFit: "cover"}} src={`/api/v1/files/videos/thumbnail?fileId=${fileId}`} />
                                 <div style={{width: 50, height: 50, position: "absolute", left: 8, top: 8, background: "rgba(0,0,0,.25)", borderRadius: "50%"}}><Image alt={file.fileName} fill src={"/video.svg"} /></div> 
@@ -57,8 +57,8 @@ export default function FileElement ({file, onSelect, download=true, rating=0}) 
                             <div className={styles.download_detail}>
                                 <a>{file.fileName}</a>
                                 <div className={styles.links}>
-                                    {download && <a href={file.source} className={styles.downloadLink} download={file.source}>Download</a>}
-                                    <Link href={file.source} target="_blank" onClick={() => {navigator.clipboard.writeText(document.domain +  file.source)}} className={styles.downloadLink} >Del</Link>
+                                    {download && <a style={{borderColor: "white"}} href={file.source} className={styles.downloadLink} download={file.source}><Image src={"/icons/download_icon.svg"} height={16} width={16} /></a>}
+                                    <Link style={{borderColor: "white"}} href={file.source} target="_blank" onClick={() => {navigator.clipboard.writeText(document.domain +  file.source)}} className={styles.downloadLink} ><Image src={"/icons/share_icon.svg"} height={16} width={16} /></Link>
                                 </div>
                                 {rating > 0 && <Stars max={5} rating={rating} ><span> your rating</span></Stars>}
 
