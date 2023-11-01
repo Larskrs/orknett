@@ -19,7 +19,7 @@
 .controls {
     transition-delay: 0s;
     transition-duration: 1s;
-    opacity: 1;
+    opacity: 0;
     position: absolute;
     left: 0px;
     right: 0px;
