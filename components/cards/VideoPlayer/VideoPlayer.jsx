@@ -74,15 +74,15 @@ export default function VideoPlayer ({source, qualities, videoProps, defaultQual
 
       function formatTime(seconds) {
         const s = Math.round(seconds % 60);
-        const m = Math.round((seconds / 60) % 60);
-        const h = Math.round((seconds / (3600)) % 24);
+        const m = Math.floor((seconds / 60) % 60);
+        const h = Math.floor((seconds / (3600)) % 24);
 
         const timeCode = [
           
         ]
 
         if (h >= 1) { timeCode.push(h) }
-        timeCode.push(m >= 1 ? m : "0")
+        timeCode.push(h >= 1 ? String(m).padStart(2, '0') : m)
         timeCode.push(String(s).padStart(2, '0'))
 
         return {
