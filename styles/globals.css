@@ -85,16 +85,15 @@ html, body {
 }
 
 button {
-  padding: 1rem !important;
-  padding-block: .5rem !important;
-  margin-block: .5rem !important;
-  background-color: var(--gray-2);
   border-radius: 10px;
   color: white;
   text-decoration: none;
   font-weight: 700;
-  outline: 1px solid white;
+  outline: none;
   width: fit-content;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
 }
 input[type="text"] {
   background-color: var(--gray-2);

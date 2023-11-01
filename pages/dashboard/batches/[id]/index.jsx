@@ -57,12 +57,16 @@ export default function BatchPage ({batch, batches}) {
 
     function moveDisplay (newID) {
 
+        console.log("moving display to " + newID)
+
         if (newID + 1 > getFilteredFiles().length) {
             newID = getFilteredFiles().length;
         }
 
         setDisplayId(newID)
         setDisplay(getFilteredFiles()[newID])
+
+        console.log(display)
     }
 
     function PlayNextFile() {
@@ -167,7 +171,7 @@ export default function BatchPage ({batch, batches}) {
             }>
                 <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
                 </div>
-                {display && <DisplayElement file={display} id={displayId} onEnded={PlayNextFile}/>}
+                {display && <DisplayElement file={display} id={displayId} onClose={() => {setDisplay(null)}} onEnded={PlayNextFile}/>}
                 {getFilteredFiles().map((file, i) => {
                     // Normal File Display
                         return <FileElement 

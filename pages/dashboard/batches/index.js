@@ -43,7 +43,7 @@ function BatchesPage ({batches}) {
     let publicBatches = batches; 
     if (session.status === "authenticated") {
         selfBatches = batches.filter((b) => b?.owners?.includes(session.data.user.id))
-        publicBatches = batches.filter((b) => !b?.owners?.includes(session.data.user.id))
+        publicBatches = batches.filter((b) => !b?.owners?.includes(session.data.user.id) && b.data?.access !== "private")
     }
 
     return (
@@ -53,7 +53,7 @@ function BatchesPage ({batches}) {
                    {session.status === "authenticated" && <BatchList batches={selfBatches} />}
                    {session.status !== "authenticated" && <p>You need to be logged in to create your own batches.</p>}
                 </div>
-                <div className={`${styles.wrap} main`}>
+                <div className={`${styles.wrap} main`}> 
 
                     <div className="head">
                         <h2>Offentlige</h2>

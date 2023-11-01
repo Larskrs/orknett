@@ -33,6 +33,7 @@
     position: relative;
     overflow: hidden;
     border-radius: 10px;
+    cursor: pointer;
 }
 .download * {
     margin: 0;

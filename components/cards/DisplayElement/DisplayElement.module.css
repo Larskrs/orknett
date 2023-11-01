@@ -9,9 +9,19 @@
     align-items: center;
     justify-content: center;
     justify-content: center;
-    pointer-events: none;
-    background-color: #111;
+    pointer-events: none !important;
+    background-color: rgba(17, 17, 17, 0.25);
     border-radius: 8px;
+}
+.close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    pointer-events: all !important;
+}
+.close:hover {
+    scale: 1.1;
 }
 
 .display_element {
@@ -27,19 +37,23 @@
     background-color: rgba(17, 17, 17, 0.25);
     border-radius: 16px;
     pointer-events: all !important;
-    z-index: 2000;
+    /* z-index: 2000; */
 }
 @media screen and (max-width: 700px) {
     .wrap {
-        padding-top: 0;
+        left: 0;
+        top: 0;
+        bottom: 92px;
+        right: 0;
+        padding: 1rem;
     }
     
 }
 @media screen and (max-height: 600px) {
     .wrap {
-        padding-left: 98px;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
+        left: 98px;
+        top: 1rem;
+        bottom: 1rem;
     }
     .display_element {
         width: fit-content;

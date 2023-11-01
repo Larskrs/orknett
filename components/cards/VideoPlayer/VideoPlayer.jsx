@@ -1,11 +1,13 @@
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Slider from "../Slider/Slider";
 import styles from "./VideoPlayer.module.css"
 
-export default function VideoPlayer ({source, qualities, videoProps}) {
+export default function VideoPlayer ({source, qualities, videoProps, defaultQuality}) {
 
     const videoRef = useRef(null);
+    const containerRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
     
     const [buffered, setBuffered] = useState(0)
@@ -16,15 +18,35 @@ export default function VideoPlayer ({source, qualities, videoProps}) {
     const [duration, setDuration] = useState([0, 0]); // // total duration of the video in the array. The first value represents the minute and the second represents seconds.
     const [durationSec, setDurationSec] = useState(); // // current duration of the 
 
+    const [capturedCurrentTime, setCapturedCurrentTime] = useState(0)
+
+    const [quality, setQuality] = useState(qualities.length - 1)
+
+    function GetQualitySource (source, newQuality) {
+      const urlObject = new URL(source);
+      urlObject.searchParams.set('quality', newQuality);
+      return urlObject.href;
+    }
+
+    function changeQuality (q) {
+      setCapturedCurrentTime(videoRef.current.currentTime)
+      console.log(videoRef.current.currentTime)
+      setQuality(q)
+      console.log(GetQualitySource(process.env.NEXT_PUBLIC_URL + source, qualities[q]))
+      // setLoadedSource(GetQualitySource(source, qualities[q]))
+    }
+
     useEffect(() => {
+
         const { min, sec } = sec2Min(videoRef.current.duration);
         setDurationSec(videoRef.current.duration);
         setDuration([min, sec]);
-    
-        console.log(videoRef.current);
 
         videoRef.current.addEventListener('play', () => {
-            console.log("Starting playback...")
+            if (capturedCurrentTime) {
+              videoRef.current.currentTime = capturedCurrentTime
+            }
+
             setIsPlaying(true)
           });
 
@@ -53,14 +75,15 @@ export default function VideoPlayer ({source, qualities, videoProps}) {
       function formatTime(seconds) {
         const s = Math.round(seconds % 60);
         const m = Math.round((seconds / 60) % 60);
-        const h = Math.round((seconds / (60 * 60)) % 24);
+        const h = Math.round((seconds / (3600)) % 24);
 
         const timeCode = [
-          m >= 1 ? m : "0",
-          String(s).padStart(2, '0'),
+          
         ]
 
-        if (h >= 1) { timeCode.push(h+"") }
+        if (h >= 1) { timeCode.push(h) }
+        timeCode.push(m >= 1 ? m : "0")
+        timeCode.push(String(s).padStart(2, '0'))
 
         return {
           timeCode,
@@ -75,6 +98,7 @@ export default function VideoPlayer ({source, qualities, videoProps}) {
     }
 
     useEffect(() => {
+
         const { timeCode } = formatTime(videoRef.current.duration);
         setDurationSec(videoRef.current.duration);
         setDuration(timeCode);
@@ -97,8 +121,6 @@ export default function VideoPlayer ({source, qualities, videoProps}) {
             const endTime = buffered.end(0);
 
             setBuffered(endTime)
-    
-            console.log(`Video has been buffered from ${startTime} to ${endTime} seconds.`);
           }
         
         },1);
@@ -118,14 +140,31 @@ export default function VideoPlayer ({source, qualities, videoProps}) {
           }
       }
 
-    //   console.log(currentTimeSec)
+      function OpenFullscreen () {
+
+        if (document.fullscreenElement) {
+          document.exitFullscreen()
+        }
+
+        if (containerRef.current.requestFullscreen) {
+          containerRef.current.requestFullscreen();
+        } else if (containerRef.current.webkitRequestFullscreen) { /* Safari */
+          containerRef.current.webkitRequestFullscreen();
+        } else if (containerRef.current.msRequestFullscreen) { /* IE11 */
+          containerRef.current.msRequestFullscreen();
+        }
+
+      }
+
 
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} ref={containerRef}>
             <video
+                preload="meta"
+                autoPlay
                 onClick={() => handlePlay()}
                 ref={videoRef}
-                src={source}
+                src={GetQualitySource(process.env.NEXT_PUBLIC_URL + source, qualities[quality])}
                 {...videoProps}
             />
 
@@ -134,7 +173,7 @@ export default function VideoPlayer ({source, qualities, videoProps}) {
                     <Slider containerStyle={{position: "absolute"}}
                         progressStyle={{borderRadius: 0, background: "gray"}}
                         trackStyle={{borderRadius: 4, height: 6, }}
-                        min={0} maxr={durationSec*1000} currentValue={buffered*1000} defaultValue={currentTime*1000}
+                        min={0} max={durationSec*1000} currentValue={buffered*1000} defaultValue={currentTime*1000}
                         smooth={"1000ms"}
                         />
                     <Slider
@@ -146,11 +185,11 @@ export default function VideoPlayer ({source, qualities, videoProps}) {
 
                           let _value = value/1000
 
-                          const { hours, min, sec } = formatTime(_value);
+                          const { timeCode } = formatTime(_value);
 
                           return (
                             <div className={styles.slider_preview}>
-                              {hours}:{min}:{sec}
+                              {timeCode.join(":")}
                             </div>
                           )
                         }}
@@ -158,13 +197,34 @@ export default function VideoPlayer ({source, qualities, videoProps}) {
                         smooth={"0ms"} onChange={(e) => {videoRef.current.currentTime = e/1000; handleChangeSlider()}}/>
                 </div>
                 <div className={styles.controlsRow}> 
-                  <div className={styles.timeCode}>
-                    <p>{currentTime.join(":")}</p>
-                    <p>/</p>
-                    <p>{duration.join(":")}</p>
-                  </div>
-                  <div>
-                  </div>
+                <div style={{display: "flex",gap: 8}}>
+                    <button onClick={() => {handlePlay()}} style={{padding: "0px", background: "none",outline: "none", border: "none", heigh: "unset", margin: 0}}>
+                      <Image src={`/icons/${isPlaying ? "pause" : "play"}_icon.svg`} height={32} width={32} />
+                    </button>
+
+                    <div className={styles.timeCode}>
+                      <p>{currentTime.join(":")}</p>
+                      <p>/</p>
+                      <p>{duration.join(":")}</p>
+                    </div>
+                     
+                </div>
+                <div style={{display: "flex",gap: 8, overflowX: "scroll"}}>
+                {qualities && qualities.map((q, i) => {
+                  return <button key={q} style={{
+                    borderBottom: i == quality ? "rgba(255,255,255,1) 2px solid" : "2px solid rgba(255,255,255,.1)",
+                    padding: ".25rem .5rem",
+                    borderRadius: 0
+                  }}
+                  onClick={() => {changeQuality(i)}}
+                  >
+                    {q}
+                  </button>
+                 })}
+                 <button onClick={() => {OpenFullscreen()}}>
+                    <Image src={`/icons/fullscreen_open_icon.svg`} height={32} width={32} />
+                 </button>
+                </div>
                 </div>
             </div>
 

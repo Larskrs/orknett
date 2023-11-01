@@ -130,7 +130,7 @@ function FilePage ({files, batches}) {
                  <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
                 </div>
 
-                    {display && <DisplayElement file={display} id={displayId} onEnded={() => moveDisplay(displayId + 1)} />}
+                    {display && <DisplayElement file={display} id={displayId} onClose={() => {setDisplay(null)}} onEnded={() => moveDisplay(displayId + 1)} />}
 
                 {Object.keys(groupedFiles).map((group, gi) => {
                     var files = groupedFiles[group]

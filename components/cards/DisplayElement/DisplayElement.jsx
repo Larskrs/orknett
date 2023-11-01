@@ -65,7 +65,7 @@ function Element ({file, id, onEnded=(() => {})}) {
             <div key={id} className={styles.display_element} style={{background: "transparent"}}> 
             <VideoPlayer 
                 source={_source}
-                qualities={file?.qualities}
+                qualities={file.quality ? file.quality : [100, 360]}
                 />
 
                 {/* <div className={styles.qualityContainer}>
@@ -91,10 +91,12 @@ function Element ({file, id, onEnded=(() => {})}) {
 
 }
 
-export default function DisplayElement ({file, id, onEnded=(() => {})}) {
+export default function DisplayElement ({file, id, onClose=(() => {}), onEnded=(() => {})}) {
+
     return (
         <div className={styles.wrap}>
             <Element file={file} id={id} onEnded={onEnded} />
+            <button className={styles.close} onClick={() => onClose()}><Image src={"/icons/close_icon.svg"} height={32} width={32} /></button>
         </div>
     )
 }
