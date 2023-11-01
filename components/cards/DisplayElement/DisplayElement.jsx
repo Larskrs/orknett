@@ -65,17 +65,17 @@ function Element ({file, id, onEnded=(() => {})}) {
             <div key={id} className={styles.display_element} style={{background: "transparent"}}> 
             <VideoPlayer 
                 source={_source}
-                
+                qualities={file?.qualities}
                 />
 
-                <div className={styles.qualityContainer}>
+                {/* <div className={styles.qualityContainer}>
                     {file?.quality?.map((q) =>{
                         return <button
                             key={q} 
                             onClick={() => setQuality(q)}
                             style={{outline: q == quality ? "1px solid white" : "unset"}}>{q}</button>
                     })}
-                </div>
+                </div> */}
                 </div>
         )
     }

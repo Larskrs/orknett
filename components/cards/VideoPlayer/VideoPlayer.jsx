@@ -55,29 +55,35 @@ export default function VideoPlayer ({source, qualities, videoProps}) {
         const m = Math.round((seconds / 60) % 60);
         const h = Math.round((seconds / (60 * 60)) % 24);
 
-        return { 
-           hours: String(h).padStart(2, '0'),
-           min:   String(m).padStart(2, '0'),
-           sec:   String(s).padStart(2, '0'),
-           remainingSeconds: s};
+        const timeCode = [
+          m >= 1 ? m : "0",
+          String(s).padStart(2, '0'),
+        ]
+
+        if (h >= 1) { timeCode.push(h+"") }
+
+        return {
+          timeCode,
+          remainingSeconds: s
+        }
       }
 
     function updateTimeLeft () {
       const timeLeftMillis = videoRef.current.duration - videoRef.current.currentTime
-      const { hours, min, sec } = formatTime(timeLeftMillis);
-      setTimeLeft([hours, min, sec]);
+      const { timeCode } = formatTime(timeLeftMillis);
+      setTimeLeft(timeCode);
     }
 
     useEffect(() => {
-        const { hours, min, sec } = formatTime(videoRef.current.duration);
+        const { timeCode } = formatTime(videoRef.current.duration);
         setDurationSec(videoRef.current.duration);
-        setDuration([hours, min, sec]);
+        setDuration(timeCode);
     
         // console.log(videoRef.current.duration);
         const interval = setInterval(() => {
-          const { hours, min, sec } = formatTime(videoRef.current.currentTime);
+          const { timeCode } = formatTime(videoRef.current.currentTime);
           setCurrentTimeSec(videoRef.current.currentTime);
-          setCurrentTime([hours, min, sec]);
+          setCurrentTime(timeCode);
           
           updateTimeLeft ()
           
@@ -152,11 +158,12 @@ export default function VideoPlayer ({source, qualities, videoProps}) {
                         smooth={"0ms"} onChange={(e) => {videoRef.current.currentTime = e/1000; handleChangeSlider()}}/>
                 </div>
                 <div className={styles.controlsRow}> 
-                  <div>
-                    {currentTime[0]}:{currentTime[1]}:{currentTime[2]}
+                  <div className={styles.timeCode}>
+                    <p>{currentTime.join(":")}</p>
+                    <p>/</p>
+                    <p>{duration.join(":")}</p>
                   </div>
                   <div>
-                    {timeLeft[0]}:{timeLeft[1]}:{timeLeft[2]}
                   </div>
                 </div>
             </div>
