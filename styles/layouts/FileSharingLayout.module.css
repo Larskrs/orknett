@@ -30,15 +30,17 @@
     height: 60px;
 }
 .main {
-    padding-top: 76px;
+    margin-top: 76px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
     overflow: hidden;
-    height: 100% !important;
+    /* height: 100% !important; */
     overflow-x: hidden;
-    
+    overflow-y: scroll;
+    position: fixed;
 }
 @media screen and (max-width: 700px) {
     .navContainer {
@@ -47,6 +49,7 @@
     }
     .main {
         padding-top: 0;
+        margin-top: 0px;
         padding-bottom: 76px;
     }
     .nav {

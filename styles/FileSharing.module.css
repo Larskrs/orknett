@@ -236,9 +236,9 @@
 }
 .article:hover .thumbnail {
     scale: 1.5;
-    rotate: 5deg;
     transition-duration: .25s;
     opacity: .5;
+    filter: blur(5px);
 }
 .article:hover {
     border-color: #7e7e7e;
