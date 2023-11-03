@@ -141,65 +141,75 @@ export default function BatchPage ({batch, batches}) {
 
         <FileSharingLayout pageId={3} batches={batches}>
 
-            <Head>
-                <title>{batch.title}</title>
-                <meta name="description" content={"This is a sharable batch link."} />
-                <meta name="twitter:card" content="summary_large_image"/>
-                {batch?.files.length > 0 && <meta property="twitter:image:src" content={batch.files[0].source}/> }
-            </Head>
+            <div className={styles.wrap}>
+                <Head>
+                    <title>{batch.title}</title>
+                    <meta name="description" content={"This is a sharable batch link."} />
+                    <meta name="twitter:card" content="summary_large_image"/>
+                    {batch?.files.length > 0 && <meta property="twitter:image:src" content={batch.files[0].source}/> }
+                </Head>
 
-            <h2>{batch.title}</h2>
-            
-            <div style={{display: "flex", gap: ".5rem", flexWrap: "wrap"}}>
-                {batch.owners.map((owner, i) => {
-                    return (
-                    <Badge key={i}>
-                        <Image className="avatar" src={owner.image} alt={owner.name + "'s avatar"} width={25} height={25}  />
-                        <p style={{fontSize: "16px", maxWidth: "100px", textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden"}}>{owner.name}</p>
-                    </Badge>
-                    )
-                })}
-            </div>
-            <div className={styles.row} style={{gap: "2rem"}}>
-                
-                {batch.display === (0 || null) && displayFilters()}
-                {session.status == "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id) && <ImprovedFileUpload batchPreset={batch.id} /> }
-            
-            </div>
-            <div className={
-                styles.wrap
-            }>
-                <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
+
+                <div className={styles.settingsWrapper}>
+                    <div className={styles.row}>
+                        <Badge onClick={() => {console.log("MADNESS")}}><Image src={"/icons/settings_icon.svg"} width={25} height={25} /></Badge>
+                        <div className={styles.members}>
+                            {batch.owners.map((owner, i) => {
+                                return (
+                                    <div className={styles.member} key={i}>
+                                        <Image className="avatar" src={owner.image} alt={owner.name + "'s avatar"} width={25} height={25}  />
+                                        <div className={styles.info}>
+                                            <Image className="avatar" src={owner.image} alt={owner.name + "'s avatar"} width={25} height={25}  />
+                                            <p style={{fontSize: "16px", maxWidth: "100px", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>{owner.name}</p>
+                                        </div>
+                                    </div>
+                                )
+                            })}
+
+                        </div>
+                    </div>
                 </div>
-                {display && <DisplayElement file={display} id={displayId} onClose={() => {setDisplay(null)}} onEnded={PlayNextFile}/>}
-                {getFilteredFiles().map((file, i) => {
-                    // Normal File Display
+                <div className={styles.row} style={{gap: "2rem"}}>
+
+                    {batch.display === (0 || null) && displayFilters()}
+                    {session.status == "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id) && <ImprovedFileUpload batchPreset={batch.id} /> }
+                
+                </div>
+                <div className={
+                    styles.wrap
+                }>
+                    <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
+                    </div>
+                    {display && <DisplayElement file={display} id={displayId} onClose={() => {setDisplay(null)}} onEnded={PlayNextFile}/>}
+                    {getFilteredFiles().map((file, i) => {
+                        // Normal File Display
                         return <FileElement 
-                           key={i}
-                           file={file}
-                           owner={batch.owners.filter((o) => o.id)?.[0]}
-                           download={batch.settings?.download || (session.status === "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id))}
-                           onSelect={() => {
-                               moveDisplay(i)
-                           }}/>
-                } ) }
+                        key={i}
+                        file={file}
+                        owner={batch.owners.filter((o) => o.id)?.[0]}
+                        download={batch.settings?.download || (session.status === "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id))}
+                        onSelect={() => {
+                            moveDisplay(i)
+                        }}/>
+                    } ) }
+                </div>
             </div>
         </FileSharingLayout>
     );
 }
 
 export async function getStaticProps({ params }){
-
     
-
+    
+    
     async function GetOwners(owners) {
         const {data, error} = await GetServiceClient("next_auth")
         .from("users")
         .select(`
-          *
+        *
         `)
         .in("id", owners)
-
+        
         return data
         
 

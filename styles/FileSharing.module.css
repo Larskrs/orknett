@@ -273,3 +273,85 @@
     color: gray;
     font-size: 14px;
 }
+
+
+.batchElement {
+    min-width: 110px;
+    height: 110px;
+    padding: 1rem;
+    border: 1px solid #222;
+    border-radius: 8px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+.batchElement img {
+    object-fit: cover;
+    scale: 1;
+}
+.settingsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 1rem;
+    border: #333 1px solid;
+    border-radius: 8px;
+    width: 100%;
+}
+.members {
+    display: flex;
+    gap: 0px;
+    border-radius: 8px;
+    width: 100%;
+}
+.member {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 8px;
+    gap: 8px;
+}
+.member:hover {
+    width: auto;
+}
+.member .info {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    background-color: #222;
+    padding: 8px 8px;
+    border-radius: 8px;
+    display: flex;
+    gap: 8px;
+    transition: 250ms all ease-in-out;
+}
+.member .info p {
+    width: fit-content;
+    max-width: 100% !important;
+    translate: -100%;
+    opacity: 0;
+    scale: 0;
+}
+.member img {
+    transition: 0s;
+    z-index: 100;
+}
+.member:hover .info {
+    opacity: 1;
+    z-index: 200;
+}
+.member:hover .info p {
+    translate: 0px;
+    opacity: 1;
+    scale: 1;
+}
+.member:hover img {
+
+}

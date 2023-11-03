@@ -20,8 +20,8 @@ function BatchList ({batches}) {
         return (
 
             <Link key={i} href={"/dashboard/batches/" + batch.id}>
-                <div className={styles.article}>
-                    <Image style={{objectFit: "contain"}}  src={batch.thumbnail} alt={batch.thumbnail} fill />
+                <div className={styles.batchElement}>
+                    <Image src={batch.thumbnail} alt={batch.thumbnail} fill />
                 </div>
                 <p style={{zIndex: 5, color: "#777", position: "relative"}}>{batch.title} </p>
             </Link>
@@ -77,7 +77,7 @@ function BatchesPage ({batches}) {
                     <div className="header">
                         <div className="background">
                             {batches.map((b, i) => {
-                               return  <Image key={b.id} alt={"Batch header"} fill style={{objectFit: "cover", translate: batchPreview != i ? "100% 0": "0%", opacity: batchPreview == i ? 1: 0}} src={b.thumbnail}/>
+                               return  <Image key={b.id} alt={"Batch header"} fill style={{objectFit: "cover", borderRadius: 8, transitionDuration: "1s", translate: batchPreview != i ? "100% 0": "0%", opacity: batchPreview == i ? 1: 0}} src={b.thumbnail}/>
                             })
 
                             }
@@ -142,7 +142,8 @@ function BatchesPage ({batches}) {
                         border-radius: 0px !important;
                 }
                 .header {
-                    height: 250px;
+                    height: 250px !important;
+                    max-height: 250px !important;
                     width: 100%;
                     padding: 1rem;
                     background: rgba(255, 255, 255, .5)
