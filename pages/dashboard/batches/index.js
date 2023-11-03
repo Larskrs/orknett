@@ -175,8 +175,10 @@ export async function getServerSideProps(ctx){
         let thumbnail = ""
         for (const f in batch.files) {
             const file = batch.files[f]
-            if (!isSourceContentType(file.source, "image")) { continue; }
-            thumbnail = file.source
+            if (isSourceContentType(file.source, "image")) { thumbnail = file.source ; break; }
+            if (isSourceContentType(file.source, "audio")) { thumbnail = `/api/v1/files/audio/cover?fileId=${file.source.split("fileId=").pop()}` ; break; }
+            if (isSourceContentType(file.source, "video")) { thumbnail = `/api/v1/files/videos/thumbnail?fileId=${file.source.split("fileId=").pop()}` ; break; }
+            thumbnail = ""
             break
 
         }
