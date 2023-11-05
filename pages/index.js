@@ -54,7 +54,8 @@ export default function Home() {
             <Image width={40} height={40} src={"/new_logo_symbol.svg"}></Image>
             {/* <h2>.tv</h2> */}
           </div>
-          <Link href={"/dashboard"}>Serier</Link>
+          <Link href={"/dashboard"}>Filer</Link>
+          <Link href={"/streaming"}>Streaming</Link>
           <div style={{marginLeft: "auto", marginRight: 24}}>
             {session.status === "authenticated" && <Link href={"/dashboard"} style={{display: "flex", flexDirection: "row", gap: 8, justifyContent: "center"}}>
                 <Image width={40} height={40} style={{borderRadius: "50%"}} src={session.data.user.image} />

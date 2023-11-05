@@ -23,7 +23,13 @@ export default function VideoPlayer ({source, qualities, videoProps, defaultQual
     const [quality, setQuality] = useState(qualities.length - 1)
 
     function GetQualitySource (source, newQuality) {
-      const urlObject = new URL(source);
+      let urlObject = null;
+      if (!source.includes("://")) {
+        urlObject = new URL(process.env.NEXT_PUBLIC_URL + source)
+      } else {
+        urlObject = new URL(source)
+      }
+      console.log(urlObject.href)
       urlObject.searchParams.set('quality', newQuality);
       return urlObject.href;
     }
@@ -32,7 +38,7 @@ export default function VideoPlayer ({source, qualities, videoProps, defaultQual
       setCapturedCurrentTime(videoRef.current.currentTime)
       console.log(videoRef.current.currentTime)
       setQuality(q)
-      console.log(GetQualitySource(process.env.NEXT_PUBLIC_URL + source, qualities[q]))
+      console.log(GetQualitySource(source, qualities[q]))
       // setLoadedSource(GetQualitySource(source, qualities[q]))
     }
 
@@ -164,7 +170,7 @@ export default function VideoPlayer ({source, qualities, videoProps, defaultQual
                 autoPlay
                 onClick={() => handlePlay()}
                 ref={videoRef}
-                src={GetQualitySource(process.env.NEXT_PUBLIC_URL + source, qualities[quality])}
+                src={GetQualitySource(source, qualities[quality])}
                 {...videoProps}
             />
 

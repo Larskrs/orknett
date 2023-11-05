@@ -81,7 +81,7 @@
 .grid div {
     background: rgba(255, 255, 255, 0);
     border-radius: 8px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
     position: relative;
 
 }
@@ -109,6 +109,24 @@
     width: 150px;
     height: 150px;
     position: relative;
+    box-shadow: none !important;
+}
+.previewItem div {
+    height: 100%;
+    width: 100%;
+    z-index: 4;
+}
+.previewItem .blurred {
+    scale: 1;
+    top: 0;
+    left: 0;
+    opacity: .5;
+    scale: 2;
+    filter: blur(20px);
+    position: absolute;
+    z-index: 2;
+    overflow: hidden;
+    border-radius: 50%;
 }
 .header .background {
     top: 0;
@@ -139,6 +157,7 @@
     flex-direction: row;
     text-align: center;
     box-shadow: none;
+    color: white;
 }
 .header .info p {
     margin: 0;
