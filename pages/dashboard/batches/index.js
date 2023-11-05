@@ -25,7 +25,8 @@ function BatchList ({batches}) {
                 </div>
                 <div className={styles.info}>
                     <p className={styles.title}>{batch.title} </p>
-                    <p>{batch.owners.length} member{batch.owners.length > 1 ? "s" : ""}</p>
+                    <p>{batch.owners.length} medlem{batch.owners.length > 1 ? "mer" : ""}</p>
+                    <p>{batch.files.length} fil{batch.files.length > 1 ? "er" : ""}</p>
                 </div>
             </Link>
 
@@ -93,7 +94,8 @@ function BatchesPage ({batches, thumbnailBatches}) {
                             </div>
                             <div className={styles.details}>
                                 <h1>{thumbnailBatches?.[batchPreview].title}</h1>
-                                <p>{thumbnailBatches?.[batchPreview].owners.length} member{thumbnailBatches?.[batchPreview].owners.length == 1 ? "" : "s"}</p>
+                                <p>{thumbnailBatches?.[batchPreview].owners.length} medlem{thumbnailBatches?.[batchPreview].owners.length == 1 ? "" : "mer"}</p>
+                                <p>{thumbnailBatches?.[batchPreview].files.length} fil{thumbnailBatches?.[batchPreview].files.length == 1 ? "" : "er"}</p>
                             </div>
                         </div>
                     </div>
@@ -146,8 +148,6 @@ export async function getServerSideProps(ctx){
             if (isSourceContentType(file.source, "image")) { thumbnail = file.source ; break; }
             if (isSourceContentType(file.source, "audio")) { thumbnail = `/api/v1/files/audio/cover?fileId=${file.source.split("fileId=").pop()}` ; break; }
             if (isSourceContentType(file.source, "video")) { thumbnail = `/api/v1/files/videos/thumbnail?fileId=${file.source.split("fileId=").pop()}` ; break; }
-            
-            break
         }
 
         if (thumbnail !== "")
