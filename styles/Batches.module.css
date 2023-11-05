@@ -29,6 +29,7 @@
 .article p {
     color: white;
     font-size: 16px;
+    margin: 0;
 }
 .article .title {
     font-size: 20px;
@@ -141,7 +142,12 @@
     text-align: center;
     box-shadow: none;
 }
+.header .info p {
+    margin: 0;
+    font-size: 18px;
+}
 .header .info .details {
+    gap: 2px;
     padding: 1rem;
     background-color: transparent;
     box-shadow: none;
