@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import styles from "../../styles/Streaming.module.css"
 
-export default function({series}) {
+export default function StreamingHomePage({series}) {
 
     
 
@@ -50,7 +50,7 @@ export default function({series}) {
                             {series[header].tags.ageRating && <Badge>{series[header].tags.ageRating}</Badge>}
                             {series[header].tags.categories && series[header].tags.categories.map((category, i) => {
                                 return (
-                                    <p style={{animationDelay: i*100 + "ms"}}>{category}</p>
+                                    <p key={category+series[header].id} style={{animationDelay: i*100 + "ms"}}>{category}</p>
                                 )
                             })}
                         </div>
