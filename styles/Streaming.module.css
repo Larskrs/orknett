@@ -67,6 +67,7 @@
 }
 .header {
     display: flex;
+    max-height: 55vh;
 }
 .header .blurred {
     left:   1rem;
@@ -99,7 +100,7 @@
     top: 0;
     bottom: 0;
     justify-content: flex-end;
-    padding: 1rem 1rem 6rem 2rem;
+    padding: 1rem 1rem 3rem 2rem;
     background-color: rgba(0,0,0,.5);
     background: linear-gradient(90deg, rgba(17,17,17,1) 0%, rgba(255,255,255,0) 100%);
     overflow: hidden;
@@ -160,3 +161,46 @@
     font-size: 18px;
 }
 
+.top_streaming {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    z-index: 10;
+    padding-inline: 1rem;
+    border-radius: 16px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.top_streaming .series {
+    min-width:  210px;
+    min-height: 297px;
+    position: relative;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.series .poster {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.series:hover .logo {
+    scale: 1.25;
+}
+.series:hover .poster img {
+    scale: 1.05;
+}
+.series .logo {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 50%;
+}
+.series .logo img {
+    padding: 2rem;
+    object-fit: contain;
+}

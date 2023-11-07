@@ -1,4 +1,4 @@
-import { Badge, VideoPlayer } from "@/components";
+import { Badge, SeriesCard, VideoPlayer } from "@/components";
 import StreamingLayout from "@/layouts/StreamingLayout";
 import { GetClient } from "@/lib/Supabase";
 import Image from "next/image";
@@ -31,7 +31,7 @@ export default function StreamingHomePage({series}) {
     return (
         <StreamingLayout >
             <div className={styles.wrap}>
-                <div className={styles.header} key={header} onClick={() => {NextHeader()}}>
+                <div className={styles.header} key={header}>
                     <div className={styles.image}>
                         <Image fill style={{objectFit: "cover"}} src={series[header]?.images?.thumbnail} />
                     </div>
@@ -64,6 +64,17 @@ export default function StreamingHomePage({series}) {
                        </div>
                     </div>  
                 </div>
+                    
+                    <div className={styles.top_streaming}>
+                        {series.map((s,i) => {
+                            return <div key={s.id} className={styles.series} onClick={() => setHeader(i)}>
+                                <div className={styles.poster}>
+                                    <Image fill style={{objectFit: "cover"}} src={s?.images?.poster} />
+                                </div>
+                                
+                            </div>
+                        })}
+                    </div>
 
 
             </div>
@@ -89,7 +100,7 @@ export async function getServerSideProps(ctx){
     .select(`
         *
     `)
-    .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
+    // .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
     // .filter('files.source', 'in', ['png','jpg'])
 
     data.map((d) => {
