@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    padding-block: 1rem;
 }
 .header {
     padding: 1rem;
@@ -67,7 +68,7 @@
 }
 .header {
     display: flex;
-    max-height: 55vh;
+    max-height: 75vh;
 }
 .header .blurred {
     left:   1rem;
@@ -144,12 +145,17 @@
     overflow: hidden;
     white-space: pre-wrap;
     word-wrap: break-word;
-    display: -webkit-box;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     max-width: 400px;
     color: rgb(200, 200, 200);
     opacity: 0;
     animation: fade 1s 250ms forwards cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.header .episode_count {
+    margin: 0;
+    font-size: 18px;
 }
 
 .playShow {
@@ -167,7 +173,6 @@
     gap: 2rem;
     z-index: 10;
     padding-inline: 1rem;
-    border-radius: 16px;
     overflow-x: scroll;
     overflow-y: hidden;
 }
@@ -177,6 +182,8 @@
     position: relative;
     border-radius: 8px;
     cursor: pointer;
+    background-color: #111;
+    border: none;
 }
 .series .poster {
     position: absolute;

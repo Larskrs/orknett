@@ -3,14 +3,14 @@ import StreamingLayout from "@/layouts/StreamingLayout";
 import { GetClient } from "@/lib/Supabase";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styles from "../../styles/Streaming.module.css"
 
-export default function StreamingHomePage({series}) {
-
-    
+export default function StreamingHomePage({series, selectedSeries}) {
 
     const [header, setHeader] = useState(0)
+
     function NextHeader () {
         let next = header + 1
         if (next > series.length -1) {
@@ -20,7 +20,6 @@ export default function StreamingHomePage({series}) {
     }
 
     useEffect(() => {
-    
         // console.log(videoRef.current.duration);
         const interval = setInterval(() => {
             NextHeader()
@@ -45,7 +44,7 @@ export default function StreamingHomePage({series}) {
                         <div className={styles.logo}>
                             <Image fill src={series[header]?.images?.logo} />
                         </div>
-                            {series?.[header]?.released_at && <p className={styles.year}>{series[header].released_at.split("-").shift()}</p>}
+
                         <div className={styles.tags}>
                             {series[header].tags.ageRating && <Badge>{series[header].tags.ageRating}</Badge>}
                             {series[header].tags.categories && series[header].tags.categories.map((category, i) => {
@@ -54,13 +53,15 @@ export default function StreamingHomePage({series}) {
                                 )
                             })}
                         </div>
-                        {series[header].description && <p className={styles.description}>{breakTextLength(series[header].description, 100)}</p>}
+                        <p className={styles.episode_count}>{series[header].episodes.length} episoder</p>
+                        {series[header].description && <p className={styles.description}>
+                            {breakTextLength(series[header].description, 100)}
+                        </p>}
 
                        <div className={styles.tags}>
                             {series[header].isReleased && <button className={styles.playShow} style={{background: (series[header]?.colors?.[0])}} >Spill av</button>}
                             {!series[header].isReleased && <button className={styles.playShow} style={{background: "transparent"}} >Kommer {series[header].released_at_string}</button>}
                             <Link href={"/"}>Les mer</Link>
-                            <p></p>
                        </div>
                     </div>  
                 </div>
@@ -74,7 +75,9 @@ export default function StreamingHomePage({series}) {
                                 
                             </div>
                         })}
+                    
                     </div>
+
 
 
             </div>
@@ -94,12 +97,22 @@ function breakTextLength (text, characterLength) {
 export async function getServerSideProps(ctx){
 
     const { req, res} = ctx
+    const params = ctx.query
 
     let { data, error } = await GetClient("public")
     .from("series")
     .select(`
+        *,
+        episodes (*)
+    `)
+    let selected = await GetClient("public")
+    .from("series")
+    .select(`
         *
     `)
+    .eq("id", params.series)
+    .single()
+    
     // .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
     // .filter('files.source', 'in', ['png','jpg'])
 
@@ -135,6 +148,7 @@ export async function getServerSideProps(ctx){
     return {
         props:{
             series: data.filter((series) => series?.images != undefined),
+            selectedSeries: selected.data
         }
     }
 
