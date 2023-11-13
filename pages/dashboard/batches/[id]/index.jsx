@@ -9,13 +9,14 @@ import Image from 'next/image';
 import FileElement from '@/components/FileElement';
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import { AlbumElement, AudioPlayer, Badge, DisplayElement, ImprovedFileUpload } from '@/components';
+import { AlbumElement, AudioPlayer, Badge, DisplayElement, ImprovedFileUpload, SlimListModal } from '@/components';
 import axios from "axios";
+import { useRouter } from 'next/router';
 
 
 
 
-export default function BatchPage ({batch, batches}) {
+export default function BatchPage ({batch, batches, users}) {
 
     function NoAccessPage () {
         return (
@@ -42,6 +43,8 @@ export default function BatchPage ({batch, batches}) {
     const [displayId, setDisplayId] = useState(-1)
     const [filter, setFilter] = useState("")
     const [current, setCurrent] = useState(0)
+
+    const router = useRouter()
 
     function getPossibleExtensionFilters () {
         var files = batch.files
@@ -136,6 +139,21 @@ export default function BatchPage ({batch, batches}) {
         }</div>
     }
 
+    async function ConfirmUsers (selected) {
+        let ownerIdList = selected.map((s) => s.id)
+        if (!ownerIdList.includes(batch.owner)) {
+            ownerIdList = [batch.owner, ...ownerIdList]
+        }
+
+        const {data, error} = await GetClient()
+        .from("batches")
+        .update({
+            owners: ownerIdList
+        })
+        .eq("id", batch.id)
+
+        router.reload()
+    }
 
     return (
 
@@ -152,7 +170,21 @@ export default function BatchPage ({batch, batches}) {
 
                 <div className={styles.settingsWrapper}>
                     <div className={styles.row}>
-                        <Badge onClick={() => {console.log("MADNESS")}}><Image src={"/icons/settings_icon.svg"} width={25} height={25} /></Badge>
+                        <SlimListModal
+                            data={users}
+                            alreadySelected={batch.owners}
+                            onConfirm={async (selected) => await ConfirmUsers(selected)}
+                            onRenderItem={(owner, i) => {return(
+                               <div className={styles.info} style={{display: "flex", gap: 8, padding: "8px"}}>
+                                    <Image className="avatar" src={owner.image} alt={owner.name + "'s avatar"} width={25} height={25}  />
+                                    <p style={{fontSize: "16px", maxWidth: "100px", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>{owner.name}</p>
+                                </div>
+                            )}}
+                            title='Manage Members'
+                            description='Click to add or remove members.'
+                        >
+                            <Badge><Image src={"/icons/settings_icon.svg"} width={25} height={25} /></Badge>
+                        </SlimListModal>
                         <div className={styles.members}>
                             {batch.owners.map((owner, i) => {
                                 return (
@@ -206,7 +238,9 @@ export async function getStaticProps({ params }){
         const {data, error} = await GetServiceClient("next_auth")
         .from("users")
         .select(`
-        *
+            name,
+            image,
+            id
         `)
         .in("id", owners)
         
@@ -214,6 +248,17 @@ export async function getStaticProps({ params }){
         
 
     }
+    async function GetUsers() {
+        const {data, error} = await GetServiceClient("next_auth")
+        .from("users")
+        .select(`
+            name,
+            image,
+            id
+        `)
+        .order("name", {ascending: true})
+        return data
+    }   
     
     
     const batchId = params.id
@@ -232,11 +277,13 @@ export async function getStaticProps({ params }){
     .single()
 
     const owners = await GetOwners(data.owners)
+    const users = await GetUsers()
     data.owners = owners
 
     return {
         props:{
             batch: data,
+            users,
         },
         revalidate: 10, // In seconds
     }

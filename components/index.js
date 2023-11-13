@@ -13,6 +13,7 @@ import DisplayElement from "./cards/DisplayElement/DisplayElement";
 import DateField from "./cards/inputfield/datefield";
 import AlbumElement from "./cards/AlbumElement/AlbumElement";
 import VideoPlayer from "./cards/VideoPlayer/VideoPlayer";
+import SlimListModal from "./cards/SlimListModal/SlimListModal";
 
 export 
 {
@@ -30,5 +31,6 @@ export
     Slider,
     ColorImage,
     Glossy,
-    DisplayElement
+    DisplayElement,
+    SlimListModal
 };
