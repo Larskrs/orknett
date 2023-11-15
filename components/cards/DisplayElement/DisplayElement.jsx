@@ -27,8 +27,9 @@ function Element ({file, id, onEnded=(() => {})}) {
     if (contentType == "image") {
         return (
                 
-                <img
+                <Image
                     className={styles.display_element}
+                    fill
                     key={id}
                     alt={file.fileName}
                     src={file.source}

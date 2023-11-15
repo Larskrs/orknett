@@ -39,6 +39,36 @@ function BatchList ({batches}) {
     </>
 }
 
+
+function BatchTable ({batches, onBatchClick=() => {}}) {
+    return <table className={styles.table}>
+
+        <tr>
+            <th>Batch Name</th>
+            <th>Last edited</th>
+            <th>Members</th>
+        </tr>
+
+    {batches.map((batch, i) => {
+        
+        return (
+
+            
+            <tr key={batch.id} className={styles.batchRow} onClick={() => onBatchClick(batch, i)}>
+                    <td className={styles.title}>{batch.title} </td>
+                    <td>{batch.owners.length} medlem{batch.owners.length > 1 ? "mer" : ""}</td>
+                    <td>{batch.files.length} fil{batch.files.length > 1 ? "er" : ""}</td>
+            </tr>
+
+            // <Badge style={{cursor: "pointer", overflow: "hidden"}} key={batch.id} onClick={() => router.push("/dashboard/batches/" + batch.id)}>
+            //     <ColorImage style={{zIndex: 0}} source={batch.thumbnail} />
+            //     <h1 style={{zIndex: 1}}>{GetShortHandle(batch.title).combined}</h1>
+            // </Badge>
+        )
+    })}
+    </table>
+}
+
 function BatchesPage ({batches, thumbnailBatches}) {
 
     const router = useRouter()
@@ -69,9 +99,10 @@ function BatchesPage ({batches, thumbnailBatches}) {
             nextBatchPreview()
         },3 * 1000);
         return () => clearInterval(interval);
-      }, [batchPreview]);
+      }, [batchPreview,nextBatchPreview]);
 
     return (
+        
         <FileSharingLayout pageId={3} batches={batches}>
             <div className={styles.grid}>
                 {/* <div className="side">
@@ -116,13 +147,13 @@ function BatchesPage ({batches, thumbnailBatches}) {
                         <h3>Dine ({selfBatches.length})</h3>
                     </div>
                     <div className={styles.public}>
-                        <BatchList batches={selfBatches} />
+                        <BatchTable batches={selfBatches} onBatchClick={(batch, i) => {router.push("/dashboard/batches/" + batch.id)}} />
                     </div>
                     <div className={styles.head}>
                         <h3>Delt med deg ({sharedBatches.length})</h3>
                     </div>
                     <div className={styles.public}>
-                        <BatchList batches={sharedBatches} />
+                        <BatchTable batches={sharedBatches} onBatchClick={(batch, i) => {router.push("/dashboard/batches/" + batch.id)}} />
                     </div>
                 </div>
 

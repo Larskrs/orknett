@@ -57,7 +57,7 @@ export default function VideoPlayer ({source, qualities, videoProps, defaultQual
           });
 
         
-      }, [videoRef]);
+      }, [videoRef,capturedCurrentTime]);
 
     const handlePlay = () => {
         if (isPlaying) {
@@ -131,7 +131,7 @@ export default function VideoPlayer ({source, qualities, videoProps, defaultQual
         
         },1);
         return () => clearInterval(interval);
-      }, [isPlaying]);
+      }, [isPlaying,updateTimeLeft]);
 
       function handleChangeSlider () {
         const buffered = videoRef.current.buffered;
@@ -205,8 +205,8 @@ export default function VideoPlayer ({source, qualities, videoProps, defaultQual
                 <div className={styles.controlsRow}> 
                 <div style={{display: "flex",gap: 8}}>
                     <button onClick={() => {handlePlay()}} style={{padding: "0px", background: "none",outline: "none", border: "none", heigh: "unset", margin: 0, width: 32, height: 32, position: "relative"}}>
-                      <Image style={{opacity: isPlaying ? 0 : 1 , transitionDuration: "500ms"}} src={`/icons/play_icon.svg`} fill />
-                      <Image style={{opacity: isPlaying ? 1 : 0 , transitionDuration: "500ms"}} src={`/icons/pause_icon.svg`} fill />
+                      <Image alt="play_icon" style={{opacity: isPlaying ? 0 : 1 , transitionDuration: "500ms"}} src={`/icons/play_icon.svg`} fill />
+                      <Image alt="pause_icon" style={{opacity: isPlaying ? 1 : 0 , transitionDuration: "500ms"}} src={`/icons/pause_icon.svg`} fill />
                     </button>
 
                     <div className={styles.timeCode}>
@@ -229,7 +229,7 @@ export default function VideoPlayer ({source, qualities, videoProps, defaultQual
                   </button>
                  })}
                  <button onClick={() => {OpenFullscreen()}}>
-                    <Image src={`/icons/fullscreen_open_icon.svg`} height={32} width={32} />
+                    <Image alt="fullscreen_icon" src={`/icons/fullscreen_open_icon.svg`} height={32} width={32} />
                  </button>
                 </div>
                 </div>

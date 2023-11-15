@@ -123,7 +123,7 @@ export default function FileUploading ({
 
     return (
         <div onClick={handleSubmit} style={{background: "#111", border: "1px solid #222", cursor: "pointer", borderRadius: "8px", padding: "1rem 2rem 1rem 1rem", display: (finished ? "none" : "flex"), wordBreak: "break-word", flexDirection: "row", minWidth: "200px", width: "auto", gap: 8}}>
-            <Image style={{objectFit: "cover", borderRadius: 8}} width={50} height={50} src={fileUrl} quality={0} />
+            <Image style={{objectFit: "cover", borderRadius: 8}} width={50} height={50} alt="File_URL_PREVIEW" src={fileUrl} quality={0} />
             <div>
 
                 <p style={{opacity: finished ? 0.25 : 1, fontSize: 20, margin: 0}}>{file.name}</p>

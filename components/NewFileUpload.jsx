@@ -157,7 +157,7 @@ export default function FileUpload ({batchPreset = ""}) {
                     </div>}
                 {fileUrl &&
                     <div style={{width: `500px`, height: `500px`, position: "relative"}}>
-                        <Image src={fileUrl} fill style={{objectFit: "contain"}} />
+                        <Image alt="preview_file_image" src={fileUrl} fill style={{objectFit: "contain"}} />
                     </div>
                 }
 

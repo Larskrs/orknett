@@ -10,11 +10,12 @@ export default function SignIn({ providers }) {
         <div className="wrap">
             <div className="background">
                 <Image 
+                alt="background"
                 style={{objectFit: "cover", objectPosition: "center",}}
                 src={"http://aktuelt.tv/api/v1/files?fileId=c73e05a8-a81a-4fb8-a348-84d4ad81d33c.jpg"} fill/>
             </div>
             <div className="box">
-                <Image src={"/aktueltstudio_logo.svg"} width={150} height={150} />
+                <Image src={"/aktueltstudio_logo.svg"} alt="logo" width={150} height={150} />
                 <p>Du er bare noen få klikk unna noe veldig <span style={{fontWeight: "700", textDecoration: "underline"}}>aktuelt!</span></p>
                 {displayProviders(providers)}
             </div>
@@ -85,7 +86,7 @@ export default function SignIn({ providers }) {
             onClick={() => signIn(provider.id)}
             >
               Log in med
-              <Image src={"/google.png"} width={100} height={32} style={{objectFit: "contain", translate: "0px 2px"}} />
+              <Image alt="google_signin_provider" src={"/google.png"} width={100} height={32} style={{objectFit: "contain", translate: "0px 2px"}} />
             </div>
           ))}
         </>

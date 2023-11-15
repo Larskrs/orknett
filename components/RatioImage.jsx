@@ -26,7 +26,7 @@ export function RatioImage ({credit, quality=75, src, children, axis="height" })
         src={src}
         layout='fill'
         quality={quality}
-        
+        alt=''
         onLoadingComplete={(img => {
 
             console.log({height: img.naturalHeight, width: img.naturalWidth})

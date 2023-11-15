@@ -1,12 +1,13 @@
 .article {
     width: fit-content;
+    flex-direction: row;
     display: flex;
     align-items: center;
     gap: 16px;
 }
 .thumbnail {
     min-width: 110px;
-    height: 110px;
+    height: 60px;
     padding: 1rem;
     border: 1px solid #222;
     border-radius: 8px;
@@ -36,7 +37,8 @@
 }
 .article .info {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 16px;
     justify-content: center;
 }
 .article * {
@@ -60,8 +62,8 @@
 .public {
     width: 100%;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
+    flex-wrap: nowrap;
     gap: 2rem;
     padding: 8px 0px 8px 16px !important;
     border: none;
@@ -219,3 +221,39 @@
         scale: 1;
     }
 }
+
+.table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .table td, .table th {
+    border-bottom: 1px solid #444;
+    padding: 16px 8px;
+  }
+  .table th {
+    border: 1px solid transparent;
+  }
+  .table th:first-of-type {
+    border-top-left-radius: 10px;
+  }
+  .table th:last-of-type {
+    border-top-right-radius: 10px;
+  }
+  .table tr:last-of-type .table td:first-of-type {
+    border-bottom-left-radius: 10px;
+  }
+  .table tr:last-of-type .table td:last-of-type {
+    border-bottom-right-radius: 10px;
+  }
+  
+  .batchRow:hover  {background-color: #222;}
+  
+  .table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    color: white;
+  }

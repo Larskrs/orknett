@@ -43,7 +43,7 @@ export default function Slider ({
     useEffect(() => {
         if (isDragging) return;
         setValue(currentValue)
-    }, [currentValue])
+    }, [currentValue,isDragging])
         
     const progressStyleLocal = {width: `${getPercentage(value)}%`, transition: smooth ? "inherit" : "none"}
 
