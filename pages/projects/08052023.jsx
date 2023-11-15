@@ -33,7 +33,7 @@ export default function Home() {
       <div className={styles.main}>
           <section id="bekk" className={styles.section}>
 
-            <img src={`/images/Flytendebekk.jpg`} alt="Flytende Bekk" /> 
+            <Image fill src={`/images/Flytendebekk.jpg`} alt="Flytende Bekk" /> 
 
             <div>
               <h2>Flytende bekk</h2>

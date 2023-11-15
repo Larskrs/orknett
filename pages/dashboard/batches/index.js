@@ -42,7 +42,7 @@ function BatchList ({batches}) {
 
 function BatchTable ({batches, onBatchClick=() => {}}) {
     return <table className={styles.table}>
-
+        <tbody>
         <tr>
             <th>Batch Name</th>
             <th>Last edited</th>
@@ -66,6 +66,7 @@ function BatchTable ({batches, onBatchClick=() => {}}) {
             // </Badge>
         )
     })}
+    </tbody>
     </table>
 }
 
@@ -73,6 +74,8 @@ function BatchesPage ({batches, thumbnailBatches}) {
 
     const router = useRouter()
     const session = useSession()
+
+    const [batchTab, setBatchTab] = useState(0)
 
     let selfBatches = []
     let sharedBatches = batches; 
@@ -142,19 +145,15 @@ function BatchesPage ({batches, thumbnailBatches}) {
                             </div>
                         </Link>
                     </div>
+                    <div className={styles.tabWrap}>
+                        <button style={{borderBottomColor: batchTab == 0 ? "#444" : "transparent"}} onClick={() => {setBatchTab(0)}}> Your Batches </button>
+                        <button style={{borderBottomColor: batchTab == 1 ? "#444" : "transparent"}} onClick={() => {setBatchTab(1)}}> Shared with you </button>
+                    </div>
+                    <div className={styles.public}>
+                        {batchTab === 0 && <BatchTable batches={selfBatches} onBatchClick={(batch, i) => {router.push("/dashboard/batches/" + batch.id)}} /> }
+                        {batchTab === 1 && <BatchTable batches={sharedBatches} onBatchClick={(batch, i) => {router.push("/dashboard/batches/" + batch.id)}} /> }
+                    </div>
 
-                    <div className={styles.head}>
-                        <h3>Dine ({selfBatches.length})</h3>
-                    </div>
-                    <div className={styles.public}>
-                        <BatchTable batches={selfBatches} onBatchClick={(batch, i) => {router.push("/dashboard/batches/" + batch.id)}} />
-                    </div>
-                    <div className={styles.head}>
-                        <h3>Delt med deg ({sharedBatches.length})</h3>
-                    </div>
-                    <div className={styles.public}>
-                        <BatchTable batches={sharedBatches} onBatchClick={(batch, i) => {router.push("/dashboard/batches/" + batch.id)}} />
-                    </div>
                 </div>
 
 
@@ -181,6 +180,7 @@ export async function getServerSideProps(ctx){
     .order("created_at", {ascending: false, foreignTable: "files"})
     // .filter('files.source', 'in', ['png','jpg'])
     .limit(15, { foreignTable: "files"})
+    
 
     for (const i in data) {
         const batch = data[i]

@@ -25,7 +25,7 @@ export default function StreamingHomePage({series, selectedSeries}) {
             NextHeader()
         },10 * 1000);
         return () => clearInterval(interval);
-      }, [header]);
+      }, [NextHeader]);
 
     return (
         <StreamingLayout >
