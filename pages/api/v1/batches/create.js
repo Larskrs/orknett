@@ -22,7 +22,6 @@ async function PostRequest (req,res) {
     const session = await getServerSession(req, res, authOptions)
     if (session) {
       // Signed in
-      console.log("Session", JSON.stringify(session, null, 2))
       await CreateBatch(req, res,session)
     } else {
       // Not Signed in
@@ -36,15 +35,18 @@ async function PostRequest (req,res) {
 async function CreateBatch (req, res, session) {
 
     const body = req.body
-    console.log(body)
-    if (!body.title) {
-        res.status(400).json({error: "No title in body."})
+    const title = body.title
+    const minTitleLength = 7
+    if (!title) {
+        res.status(400).json({error: "No name for batch."})
+        return
+    }
+    if (title.length < minTitleLength) {
+        res.status(400).json({error: "The name of the batch is too short."})
         return
     }
 
-    const title = body.title
     const owner = session.user.id
-    console.log(owner)
 
     const {data, error} = await GetServiceClient("public")
     .from("batches")
@@ -57,7 +59,6 @@ async function CreateBatch (req, res, session) {
     .select(`*`)
     .single()
 
-    console.log({data, error})
     res.status(200).json({data, error})
 
 }

@@ -20,7 +20,7 @@ export default function InputField ({children, placeholder, style={}, maxInputLe
             onChange={(e) => {
                 
                 const value = e.target.value
-                if (value > maxInputLength) { return; }
+                if (value.length > maxInputLength) { return; }
                 
                 setLength(e.target.value.length)
                 onValueChange(value)
