@@ -14,6 +14,7 @@ import DateField from "./cards/inputfield/datefield";
 import AlbumElement from "./cards/AlbumElement/AlbumElement";
 import VideoPlayer from "./cards/VideoPlayer/VideoPlayer";
 import SlimListModal from "./cards/SlimListModal/SlimListModal";
+import CreateBatch from "./cards/CreateBatch/CreateBatch";
 
 export 
 {
@@ -32,5 +33,6 @@ export
     ColorImage,
     Glossy,
     DisplayElement,
-    SlimListModal
+    SlimListModal,
+    CreateBatch
 };

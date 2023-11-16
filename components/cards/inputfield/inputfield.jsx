@@ -2,7 +2,7 @@
 import styles from "./inputfield.module.css"
 import { useState } from "react";
 
-export default function InputField ({children, placeholder, style={}, maxInputLength = 25, defaultValue=""},  ...props) {
+export default function InputField ({children, placeholder, style={}, maxInputLength = 25, defaultValue="", onValueChange=() => {}},  ...props) {
 
     const [length, setLength] = useState(defaultValue.length)
 
@@ -23,6 +23,8 @@ export default function InputField ({children, placeholder, style={}, maxInputLe
                 if (value > maxInputLength) { return; }
                 
                 setLength(e.target.value.length)
+                onValueChange(value)
+
             }} {...props} />
             <p className={styles.name}>{placeholder}</p>
             <p 

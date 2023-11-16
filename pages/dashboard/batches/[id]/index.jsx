@@ -275,6 +275,8 @@ export async function getStaticProps({ params }){
         ascending: false
     })
     .single()
+    
+    
 
     const owners = await GetOwners(data.owners)
     const users = await GetUsers()

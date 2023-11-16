@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from '@/styles/Batches.module.css'
 import { GetCookie } from "@/lib/CookieHelper";
 import Image from "next/image";
-import { Badge, ColorImage } from "@/components";
+import { Badge, ColorImage, CreateBatch } from "@/components";
 import { RatioImage } from "@/components/RatioImage";
 import { contentTypeList, isSourceContentType } from "@/lib/ExtensionHelper";
 import { GetShortHandle } from "@/lib/ShorthandHelper";
@@ -112,6 +112,8 @@ function BatchesPage ({batches, thumbnailBatches}) {
                    {session.status === "authenticated" && <BatchList batches={selfBatches} />}
                    {session.status !== "authenticated" && <p>You need to be logged in to create your own batches.</p>}
                 </div> */}
+
+
                 <div className={styles.main}> 
 
                     <div className={styles.header}>
@@ -145,6 +147,9 @@ function BatchesPage ({batches, thumbnailBatches}) {
                             </div>
                         </Link>
                     </div>
+                                
+                    <CreateBatch session={session} />
+
                     <div className={styles.tabWrap}>
                         <button style={{borderBottomColor: batchTab == 0 ? "#444" : "transparent"}} onClick={() => {setBatchTab(0)}}> Your Batches </button>
                         <button style={{borderBottomColor: batchTab == 1 ? "#444" : "transparent"}} onClick={() => {setBatchTab(1)}}> Shared with you </button>
