@@ -49,7 +49,7 @@ export default function CreateBatch ({session, children}) {
 
     return (
         <>
-            <div style={{cursor: "pointer"}} onClick={() => {setIsVisible(true)}}>
+            <div style={{cursor: "pointer", width: "fit-content"}} onClick={() => {setIsVisible(true)}}>
                 {children}
             </div>
             <div style={{opacity: isVisible ? 1 : 0, pointerEvents: isVisible ? "all" : "none"}} className={styles.deadzone} onClick={() => {setIsVisible(false)}} />
