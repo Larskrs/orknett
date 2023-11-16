@@ -125,6 +125,8 @@ function BatchesPage ({batches, thumbnailBatches}) {
 
                             }
                         </div>
+
+                        
                         
                         <Link className={styles.info} href={"/dashboard/batches/" + thumbnailBatches[batchPreview].id}>
                             <div className={styles.previewItem}>
@@ -147,15 +149,20 @@ function BatchesPage ({batches, thumbnailBatches}) {
                             </div>
                         </Link>
                     </div>
-                                
-                    <CreateBatch session={session} />
+
 
                     <div className={styles.tabWrap}>
                         <button style={{borderBottomColor: batchTab == 0 ? "#444" : "transparent"}} onClick={() => {setBatchTab(0)}}> Your Batches </button>
                         <button style={{borderBottomColor: batchTab == 1 ? "#444" : "transparent"}} onClick={() => {setBatchTab(1)}}> Shared with you </button>
                     </div>
                     <div className={styles.public}>
-                        {batchTab === 0 && <BatchTable batches={selfBatches} onBatchClick={(batch, i) => {router.push("/dashboard/batches/" + batch.id)}} /> }
+                        {batchTab === 0 && <>
+                            <CreateBatch session={session}>
+                                <button className="button">Create Batch</button>
+                            </CreateBatch>
+                            <BatchTable batches={selfBatches} onBatchClick={(batch, i) => {router.push("/dashboard/batches/" + batch.id)}} />
+                            
+                        </> }
                         {batchTab === 1 && <BatchTable batches={sharedBatches} onBatchClick={(batch, i) => {router.push("/dashboard/batches/" + batch.id)}} /> }
                     </div>
 

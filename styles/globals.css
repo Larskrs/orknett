@@ -28,6 +28,10 @@
   --magenta-haze: #ac3976;
   --tekhelet: #631a86;
   --folly: #ff1053;
+  
+  --ak-primary: #df37e3;
+  --ak-secondary: #1f143e;
+  --ak-tertiary: #effd95;
 
   color: white;
   padding: 0rem;
@@ -219,4 +223,10 @@ hr {
 }
 p {
   text-decoration: none;
+}
+
+.button {
+  padding: 8px 16px;
+  background-color: var(--ak-secondary);
+  margin: 0;
 }
