@@ -1,0 +1,11 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.line {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 700;
+    color: #999;
+
+}

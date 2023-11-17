@@ -15,7 +15,7 @@ import AlbumElement from "./cards/AlbumElement/AlbumElement";
 import VideoPlayer from "./cards/VideoPlayer/VideoPlayer";
 import SlimListModal from "./cards/SlimListModal/SlimListModal";
 import CreateBatch from "./cards/CreateBatch/CreateBatch";
-
+import LiveLyrics from "./cards/LiveLyrics/LiveLyrics";
 export 
 {
     SeriesCard,
@@ -34,5 +34,6 @@ export
     Glossy,
     DisplayElement,
     SlimListModal,
-    CreateBatch
+    CreateBatch,
+    LiveLyrics
 };

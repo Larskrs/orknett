@@ -40,7 +40,7 @@ export default function BatchPage ({batch, batches, users}) {
     const session = useSession()
 
     const [display, setDisplay] = useState(null)
-    const [displayId, setDisplayId] = useState(-1)
+    const [displayId, setDisplayId] = useState(0)
     const [filter, setFilter] = useState("")
     const [current, setCurrent] = useState(0)
 
