@@ -2,20 +2,20 @@
 import { Londrina_Sketch } from "next/font/google";
 import { useState, useEffect } from "react";
 import styles from "./LiveLyrics.module.css"
+import Image from "next/image";
 
-export default function LiveLyrics ({lyrics, audioRef}) {
+export default function LiveLyrics ({title, lyrics, audioRef, albumCover}) {
 
     const [currentLine, setCurrentLine] = useState(0)
     const [currentVerse, setCurrentVerse] = useState(0)
     const [currentMillis, setCurrentMillis] = useState(0)
 
     const lines = [].concat(...lyrics);
-    console.log(lines)
 
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentMillis(audioRef.current.currentTime)
-          },10);
+          },100);
           return () => clearInterval(interval);
     }, [currentMillis, audioRef]);
 
@@ -40,6 +40,13 @@ export default function LiveLyrics ({lyrics, audioRef}) {
 
     }, [currentLine, currentMillis])
 
+    useEffect(() => {
+        const lyric_element = document.getElementById("lyric_"+(currentLine-1))
+        if (!lyric_element) {return; }
+        lyric_element.scrollIntoView()
+    }, [currentLine])
+    
+
     function calculateOpacity(x, midpoint, maxOpacity) {
         // Calculate the absolute difference between x and the midpoint
         var difference = Math.abs(x - midpoint);
@@ -53,24 +60,44 @@ export default function LiveLyrics ({lyrics, audioRef}) {
         return opacity;
     }
 
-    return (
-        <div className={styles.verse}>
+    function Verse (verse) {
+        return (
+            <div className={styles.verse}>
+    
+                        {lines.map((line, i) => {
+                                   
+                                   if (!verse.includes(line)) {
+                                    return ;
+                                   }
+                                   
+                            return <p className={styles.line} id={`lyric_${i}`} key={i} style={{
+                                opacity: currentLine == i ? 1 : .25,
+                                display: "flex",
+                                gap: 8,
+                                transform: currentLine == i ? "scale(1.2)" : "scale(1)"
+                            }}
+                            onClick={() => {
+                                console.log("Skipping to lyric point.")
+                                audioRef.current.pause()
+                                audioRef.current.currentTime = line.millis;
+                                audioRef.current.play()
+                            }}> {line.line} </p>
+                            })}
+            </div>
+        )
+    }
 
-                    {lines.map((line, i) => {
-                                            
-                        return <p key={i} style={{
-                            opacity: currentLine == i ? 1 : .5,
-                            display: "flex",
-                            gap: 8,
-                            transform: currentLine == i ? "scale(1.2)" : "scale(1)"
-                        }}
-                        onClick={() => {
-                            audioRef.current.pause()
-                            audioRef.current.currentTime = line.millis;
-                            audioRef.current.play()
-                        }}> {line.line}</p>
-                        })}
-        </div>
+    return (
+        <>
+            <div className={styles.lyrics}>
+                <h1>{title}</h1>
+            {lyrics.map((verse, i) => {
+                return Verse(verse)
+            })}
+            <div className={styles.bg}><Image className={styles.bg} fill src={albumCover} /></div>
+            
+            </div>
+        </>
     )
 
 }
