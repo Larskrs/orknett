@@ -1,7 +1,14 @@
-.wrap {
+.lyric {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    align-items: center;
+}
+.verse {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    align-items: center;
 }
 .line {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
