@@ -58,7 +58,7 @@ export default function LiveLyrics ({lyrics, audioRef}) {
 
                     {lines.map((line, i) => {
                                             
-                        return <p style={{
+                        return <p key={i} style={{
                             opacity: currentLine == i ? 1 : .5,
                             display: "flex",
                             gap: 8,
