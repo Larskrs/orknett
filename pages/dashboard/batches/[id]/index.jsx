@@ -40,7 +40,7 @@ export default function BatchPage ({batch, batches, users}) {
     const session = useSession()
 
     const [display, setDisplay] = useState(null)
-    const [displayId, setDisplayId] = useState(-1)
+    const [displayId, setDisplayId] = useState(0)
     const [filter, setFilter] = useState("")
     const [current, setCurrent] = useState(0)
 
@@ -218,7 +218,7 @@ export default function BatchPage ({batch, batches, users}) {
                         return <FileElement 
                         key={i}
                         file={file}
-                        owner={batch.owners.filter((o) => o.id)?.[0]}
+                        owner={batch.owners.filter((o) =>file.user == o.id)?.[0]}
                         download={batch.settings?.download || (session.status === "authenticated" && batch.owners.map((o) => o.id).includes(session.data.user.id))}
                         onSelect={() => {
                             moveDisplay(i)
@@ -276,7 +276,7 @@ export async function getStaticProps({ params }){
     })
     .single()
     
-    
+
 
     const owners = await GetOwners(data.owners)
     const users = await GetUsers()
