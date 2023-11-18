@@ -5,7 +5,8 @@ import Badge from "../badge/badge";
 import styles from "./AudioPlayer.module.css"
 import Slider from "../Slider/Slider";
 import { getContentIconSource } from "@/lib/FileHelper";
-export default function AudioPlayer ({src, cover, alt, autoPlay=true, onCompleted=() => {}, defaultTitle=""}) {
+import LiveLyrics from "../LiveLyrics/LiveLyrics";
+export default function AudioPlayer ({src, cover, alt, autoPlay=true, onCompleted=() => {}, defaultTitle="", lyrics=null}) {
 
     const [data, setData] = useState()
     const [volume, setVolume] = useState()
@@ -111,7 +112,7 @@ export default function AudioPlayer ({src, cover, alt, autoPlay=true, onComplete
     //   console.log(currentTimeSec)
 
     return (
-        <>
+        <div style={{display: "flex", gap: 8}}>
             <div className={styles.wrap} style={{width: "500px", userSelect: "none"}}>
                 <div className={styles.coverContainer} onClick={() => {
                         handlePlay()
@@ -168,9 +169,9 @@ export default function AudioPlayer ({src, cover, alt, autoPlay=true, onComplete
                         </div>
                         <Slider interactive min={0} max={durationSec} currentValue={currentTimeSec} defaultValue={currentTime} smooth={"100ms"} progressStyle={{backgroundImage: `url(${cover})`, backgroundSize: "1000%", backdropFilter: "blur(10px)", borderRadius: "2px", transition: "100ms linear"}} containerStyle={{height: "16px"}} onChange={(e) => {audioRef.current.currentTime = e}}/>
                 </div>
-
             </div>
-        </>
+                {lyrics && <LiveLyrics title={"Two words"} audioRef={audioRef} albumCover={albumCover} lyrics={lyrics} />}
+        </div>
 
 );
 

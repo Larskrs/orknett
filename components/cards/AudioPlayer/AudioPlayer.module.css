@@ -19,10 +19,19 @@
 @media screen and (max-height: 800px) {
     .wrap {
         flex-direction: row;
+        background-color: transparent;
     }
     .coverContainer img {
         width: 50%;
         height: 50%;
+    }
+}
+@media screen and (max-width: 600px) {
+    .wrap {
+        flex-direction: column;
+        background-color: transparent;
+        width: 100% !important;
+        height: 100% !important;
     }
 }
 .details {
@@ -66,7 +75,7 @@
 .coverContainer {
     position: relative;
     object-fit: contain;
-    background-color: #111;
+    background-color: transparent;
     cursor: pointer;
     user-select: none;
     width: 100%;

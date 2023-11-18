@@ -94,7 +94,6 @@ export default function LiveLyrics ({title, lyrics, audioRef, albumCover}) {
             {lyrics.map((verse, i) => {
                 return Verse(verse)
             })}
-            <div className={styles.bg}><Image className={styles.bg} fill src={albumCover} /></div>
             
             </div>
         </>
