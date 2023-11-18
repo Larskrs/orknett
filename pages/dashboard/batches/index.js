@@ -194,8 +194,9 @@ export async function getServerSideProps(ctx){
     const { req, res} = ctx
     const session = await getServerSession(req, res, authOptions)
     let userId = ""
+    console.log(session)
     if (session != null) {
-        userId = session.user.id
+        userId = session?.user?.id
     }
 
 
