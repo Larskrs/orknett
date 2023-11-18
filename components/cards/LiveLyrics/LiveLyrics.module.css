@@ -1,18 +1,40 @@
-.lyric {
+.lyrics {
     display: flex;
     flex-direction: column;
     gap: 64px;
     align-items: center;
+    z-index: 99;
+    position: relative;
+    overflow-y: scroll;
+    width: 100%;
+    padding: 5rem 2rem; 
+    background-color: #111;
+}
+.bg {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    z-index: 10;
+    
+    opacity: 1;
+    object-fit: cover;
+    scale: 1.1;
+    
 }
 .verse {
     display: flex;
     flex-direction: column;
-    gap: 16px;
     align-items: center;
+    max-width: 800px;
 }
 .line {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: 700;
-    color: #999;
-
+    font-weight: 400;
+    transition: 250ms all;
+    color: #eee;
+    cursor: pointer;
+    padding: 16px;
+}
+.line:hover {
+    opacity: 1 !important;
 }
