@@ -78,9 +78,9 @@
     min-height: 100vh;
     gap: 1rem;
     padding: 1rem;
-
 }
 .grid div {
+    overflow: hidden;
     background: rgba(255, 255, 255, 0);
     border-radius: 8px;
     /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
