@@ -6,10 +6,7 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "../../auth/[...nextauth]"
 import { GetClient, GetAuthenticatedClient } from "@/lib/Supabase";
 import { GetContentType, GetContentTypeFromSource, isSourceContentType } from "@/lib/ExtensionHelper"
-import jsmediatags from "jsmediatags";
 import Ffmpeg from "fluent-ffmpeg";
-import { ffprobe } from "fluent-ffmpeg";
-import { create } from "domain";
 
 export const config = {
   api: {
@@ -18,6 +15,7 @@ export const config = {
     externalResolver: true,
   },
 };
+
 
 async function optimizeVideo (fileName) {
 
@@ -92,16 +90,20 @@ async function optimizeVideo (fileName) {
     
         return new Promise((resolve,reject)=>{
           Ffmpeg(path)
+
+          .setFfprobePath(process.env.FFPROBE_LOCATION)
+          .setFfmpegPath(process.env.FFMPEG_LOCATION)
+
           .size(`?x${height}`)
-          .videoBitrate(bitrate)
-          .audioBitrate(aBitrate)
-          .format("mp4")
-          .videoCodec("libx264")
-          .save(`./videos/${id}/${height}.mp4`)
-          .on('err',(err)=>{
-              console.log("Well fuck...")
-              return resolve()
+          .videoCodec('libvpx') //libvpx-vp9 could be used too
+          .videoBitrate(1000, true) //Outputting a constrained 1Mbit VP8 video stream
+          .on('filenames', function (filenames) {
+            console.log("Creating video: " + filenames.join(', '))
           })
+          .on('err',(err)=>{
+                  console.log("Well fuck...")
+                  return resolve()
+                })
           .on('end', async (fim)=>{
             qualities.push(height)
             const update = await GetClient().from("files")
@@ -110,7 +112,8 @@ async function optimizeVideo (fileName) {
             .select("*")
               return resolve()
           })
-        })
+          .save(`./videos/${id}/${height}.webm`)
+          })
       }
   }
 
@@ -121,18 +124,21 @@ async function optimizeVideo (fileName) {
 
     return new Promise((resolve,reject)=>{
       Ffmpeg(path)
-      .duration(5)
-      .fps(1)
-      .screenshots({
-        count: 2,
-        folder: './videos/'+id+'/thumbnails/',
+      .setFfprobePath(process.env.FFPROBE_LOCATION)
+      .setFfmpegPath(process.env.FFMPEG_LOCATION)
+      .on('filenames', function(filenames) {
+        console.log('screenshots are ' + filenames.join(', '));
       })
-      .on('err',(err)=>{
-          return reject(err)
+      .on('end', function() {
+        console.log('screenshots were saved');
+        return resolve()
       })
-      .on('end', async (fim)=>{
-          return resolve()
+      .on('error', function(err) {
+        console.log('an error happened: ' + err.message);
+        return reject(err)
       })
+      // take 2 screenshots at predefined timemarks and size
+      .takeScreenshots({ count: 2, timemarks: [ '00:00:02.000', '6' ], size: '150x100' }, './videos/'+id+'/thumbnails/');
     })
   }
 

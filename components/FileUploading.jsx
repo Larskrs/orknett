@@ -33,7 +33,7 @@ export default function FileUploading ({
         const userId = session.status == "authenticated" ? session.data.user.id : null
         let source = `/api/v1/files?fileId=${id}.${extension}`
         if (GetContentType(extension).toLowerCase().includes("video")) {
-            source = `/api/v1/files/videos?quality=${360}&fileId=${id}.${extension}`
+            source = `/api/v1/files/videos?quality=${360}&fileId=${id}.webm`
         }
         const {select, error} = await GetClient("public").from("files")
         
