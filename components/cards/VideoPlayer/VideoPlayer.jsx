@@ -35,10 +35,9 @@ export default function VideoPlayer ({source, qualities, videoProps, defaultQual
     }
 
     function changeQuality (q) {
-      setCapturedCurrentTime(videoRef.current.currentTime)
-      console.log(videoRef.current.currentTime)
+
       setQuality(q)
-      console.log(GetQualitySource(source, qualities[q]))
+
       // setLoadedSource(GetQualitySource(source, qualities[q]))
     }
 
@@ -190,6 +189,7 @@ export default function VideoPlayer ({source, qualities, videoProps, defaultQual
                         ThumbChildren={({value}) => {
 
                           let _value = value/1000
+                          setCapturedCurrentTime(_value)
 
                           const { timeCode } = formatTime(_value);
 

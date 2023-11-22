@@ -139,7 +139,7 @@ function BatchesPage ({batches, thumbnailBatches}) {
 
                         
                         
-                        <Link className={styles.info} href={"/dashboard/batches/" + thumbnailBatches[batchPreview].id}>
+                        {thumbnailBatches && <Link className={styles.info} href={"/dashboard/batches/" + thumbnailBatches?.[batchPreview]?.id}>
                             <div className={styles.previewItem}>
                                 <div>
                                 {thumbnailBatches.map((b, i) => {
@@ -158,7 +158,7 @@ function BatchesPage ({batches, thumbnailBatches}) {
                                 <p>{thumbnailBatches?.[batchPreview].owners.length} medlem{thumbnailBatches?.[batchPreview].owners.length == 1 ? "" : "mer"}</p>
                                 <p>{thumbnailBatches?.[batchPreview].files.length} fil{thumbnailBatches?.[batchPreview].files.length == 1 ? "" : "er"}</p>
                             </div>
-                        </Link>
+                        </Link> }
                     </div>
 
 

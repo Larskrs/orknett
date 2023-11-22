@@ -93,7 +93,7 @@ async function optimizeVideo (fileName) {
 
           .setFfprobePath(process.env.FFPROBE_LOCATION)
           .setFfmpegPath(process.env.FFMPEG_LOCATION)
-
+          
           .size(`?x${height}`)
           .videoCodec('libvpx') //libvpx-vp9 could be used too
           .videoBitrate(1000, true) //Outputting a constrained 1Mbit VP8 video stream
@@ -101,9 +101,12 @@ async function optimizeVideo (fileName) {
             console.log("Creating video: " + filenames.join(', '))
           })
           .on('err',(err)=>{
-                  console.log("Well fuck...")
-                  return resolve()
-                })
+            console.log("Well fuck...")
+            return resolve()
+          })
+          .on('progress', function (progress) {
+            console.log(`${Math.round(progress.percent)}% [${height}] ${id}`)
+          })
           .on('end', async (fim)=>{
             qualities.push(height)
             const update = await GetClient().from("files")
@@ -113,6 +116,7 @@ async function optimizeVideo (fileName) {
               return resolve()
           })
           .save(`./videos/${id}/${height}.webm`)
+          .addOptions(['-crf 40'])
           })
       }
   }
@@ -138,7 +142,7 @@ async function optimizeVideo (fileName) {
         return reject(err)
       })
       // take 2 screenshots at predefined timemarks and size
-      .takeScreenshots({ count: 2, timemarks: [ '00:00:02.000', '6' ], size: '150x100' }, './videos/'+id+'/thumbnails/');
+      .takeScreenshots({ count: 2, timemarks: [ '00:00:02.000', '6' ], size: '?x360' }, './videos/'+id+'/thumbnails/');
     })
   }
 
