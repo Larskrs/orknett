@@ -186,6 +186,7 @@ async function optimizeVideo (fileName) {
   function readVideo(path){
     return new Promise((resolve,reject)=>{
         Ffmpeg(path)
+        .setFfprobePath(process.env.FFPROBE_LOCATION)
         .ffprobe(0, function(err, data) {
           if (err) {
             reject(err)
@@ -290,8 +291,10 @@ function GetFileStream(req, res) {
 
     fs.stat(filePath, (err, stat) => {
         if (err) {
+          if (process.env.CLEAN_CONSOLE != "true") {
             console.error(`File stat error for ${filePath}.`);
             console.error(err);
+          }
             res.status(500);
             res.end();
             return;

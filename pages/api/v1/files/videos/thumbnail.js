@@ -73,8 +73,10 @@ export default async function handler(req, res) {
   
       fs.stat(filePath, (err, stat) => {
           if (err) {
-              console.error(`File stat error for ${filePath}.`);
-              console.error(err);
+            if (process.env.CLEAN_CONSOLE != "true") {
+                console.error(`File stat error for ${filePath}.`);
+                console.error(err);
+            }
               res.status(500);
               res.end();
               return;

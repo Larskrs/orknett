@@ -35,11 +35,14 @@ export default function VideoPlayer ({source, qualities, videoProps, defaultQual
     }
 
     function changeQuality (q) {
-
+      setCapturedCurrentTime(videoRef.current.currentTime)
       setQuality(q)
 
       // setLoadedSource(GetQualitySource(source, qualities[q]))
     }
+    useEffect(() => {
+      videoRef.current.currentTime = capturedCurrentTime
+    }, [quality])
 
     useEffect(() => {
 
@@ -48,15 +51,12 @@ export default function VideoPlayer ({source, qualities, videoProps, defaultQual
         setDuration([min, sec]);
 
         videoRef.current.addEventListener('play', () => {
-            if (capturedCurrentTime) {
-              videoRef.current.currentTime = capturedCurrentTime
-            }
 
             setIsPlaying(true)
           });
 
         
-      }, [videoRef,capturedCurrentTime]);
+      }, [videoRef]);
 
     const handlePlay = () => {
         if (isPlaying) {
@@ -128,9 +128,9 @@ export default function VideoPlayer ({source, qualities, videoProps, defaultQual
             setBuffered(endTime)
           }
         
-        },1);
+        },0);
         return () => clearInterval(interval);
-      }, [isPlaying,updateTimeLeft]);
+      }, [isPlaying]);
 
       function handleChangeSlider () {
         const buffered = videoRef.current.buffered;
@@ -199,8 +199,8 @@ export default function VideoPlayer ({source, qualities, videoProps, defaultQual
                             </div>
                           )
                         }}
-                        min={0} max={durationSec*1000} currentValue={currentTimeSec*1000} defaultValue={currentTime*1000}
-                        smooth={"0ms"} onChange={(e) => {videoRef.current.currentTime = e/1000; handleChangeSlider()}}/>
+                        min={0} max={durationSec*1000} currentValue={videoRef.current?.currentTime*1000} defaultValue={currentTime*1000}
+                        smooth={"100ms"} onChange={(e) => {videoRef.current.currentTime = e/1000; handleChangeSlider()}}/>
                 </div>
                 <div className={styles.controlsRow}> 
                 <div style={{display: "flex",gap: 8}}>

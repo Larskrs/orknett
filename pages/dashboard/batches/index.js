@@ -194,7 +194,6 @@ export async function getServerSideProps(ctx){
     const { req, res} = ctx
     const session = await getServerSession(req, res, authOptions)
     let userId = ""
-    console.log(session)
     if (session != null) {
         userId = session?.user?.id
     }
@@ -227,7 +226,6 @@ export async function getServerSideProps(ctx){
     }
 
     const thumbnailBatches = data.filter((b) => b.thumbnail !== undefined)
-    console.log(thumbnailBatches.map((b) => { return b.thumbnail}))
 
     return {
         props:{
