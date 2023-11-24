@@ -10,18 +10,6 @@ import { getContentIconSource } from '@/lib/FileHelper';
 
 export default function FileElement ({file, onSelect, download=true, rating=0, owner}) {
 
-        function GetQualitySource (source, newQuality) {
-            let urlObject = null;
-            if (!source.includes("://")) {
-            urlObject = new URL(process.env.NEXT_PUBLIC_URL + source)
-            } else {
-            urlObject = new URL(source)
-            }
-            console.log(urlObject.href)
-            urlObject.searchParams.set('quality', newQuality);
-            return urlObject.href;
-        }
-
         const [image, setImage] = useState()
 
         useEffect(() => {
@@ -36,10 +24,6 @@ export default function FileElement ({file, onSelect, download=true, rating=0, o
                     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                     const contentType = GetContentTypeFromSource(file.source)
                     const type = contentType.split('/')[0];
-
-                    const newUrl = GetQualitySource(file.source, file?.quality.pop())
-                    console.log(file.source)
-
 
                     return (
                         <div className={styles.download}>
@@ -68,7 +52,7 @@ export default function FileElement ({file, onSelect, download=true, rating=0, o
                             <div className={styles.download_detail}>
                                 <a>{file.fileName}</a>
                                 <div className={styles.links}>
-                                    {download && <a style={{borderColor: "white"}} href={newUrl} className={styles.downloadLink} download><Image src={"/icons/download_icon.svg"}  alt="Download_ICON"  height={16} width={16} /></a>}
+                                    {download && <a style={{borderColor: "white"}} href={file.source} className={styles.downloadLink} download><Image src={"/icons/download_icon.svg"}  alt="Download_ICON"  height={16} width={16} /></a>}
                                     <Link style={{borderColor: "white"}} href={file.source} target="_blank" onClick={() => {navigator.clipboard.writeText(document.domain +  file.source)}} className={styles.downloadLink} ><Image  alt="Share_ICON"  src={"/icons/share_icon.svg"} height={16} width={16} /></Link>
                                 </div>
                                 {rating > 0 && <Stars max={5} rating={rating} ><span> your rating</span></Stars>}
