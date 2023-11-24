@@ -10,6 +10,17 @@ import { getContentIconSource } from '@/lib/FileHelper';
 
 export default function FileElement ({file, onSelect, download=true, rating=0, owner}) {
 
+        function GetQualitySource (source, newQuality) {
+            let urlObject = null;
+            if (!source.includes("://")) {
+            urlObject = new URL(process.env.NEXT_PUBLIC_URL + source)
+            } else {
+            urlObject = new URL(source)
+            }
+            console.log(urlObject.href)
+            urlObject.searchParams.set('quality', newQuality);
+            return urlObject.href;
+        }
 
         const [image, setImage] = useState()
 
@@ -26,8 +37,8 @@ export default function FileElement ({file, onSelect, download=true, rating=0, o
                     const contentType = GetContentTypeFromSource(file.source)
                     const type = contentType.split('/')[0];
 
-                    const urlParams = new URLSearchParams(file.source);
-                    const fileId = urlParams.get('fileId');
+                    const newUrl = GetQualitySource(file.source, file?.quality.pop())
+                    console.log(file.source)
 
 
                     return (
@@ -36,7 +47,7 @@ export default function FileElement ({file, onSelect, download=true, rating=0, o
                             <div onClick={onSelect} style={{width: "100%", height: "100%"}}>
                                 {owner && <Image src={owner.image} alt='OWNER_AVATAR' width={16} height={16} style={{borderRadius: "50%", bottom: 16, right: 16, position: "absolute", zIndex: 10}} />}
                                 {type == "video" && <div>
-                                <Image alt={file.fileName} fill style={{objectFit: "cover"}} src={`/api/v1/files/videos/thumbnail?fileId=${fileId}`} />
+                                <Image alt={file.fileName} fill style={{objectFit: "cover"}} src={`/api/v1/files/videos/thumbnail?fileId=${file.id}`} />
                                 <div style={{width: 50, height: 50, position: "absolute", left: 8, top: 8, background: "rgba(0,0,0,.25)", borderRadius: "50%"}}><Image alt={file.fileName} fill src={"/video.svg"} /></div> 
                                     </div> }
                                 {/* {type == "audio" && <Image alt={file.fileName} fill src={"/audio.svg"} /> } */}
@@ -57,7 +68,7 @@ export default function FileElement ({file, onSelect, download=true, rating=0, o
                             <div className={styles.download_detail}>
                                 <a>{file.fileName}</a>
                                 <div className={styles.links}>
-                                    {download && <a style={{borderColor: "white"}} href={file.source} className={styles.downloadLink} download={file.source}><Image src={"/icons/download_icon.svg"}  alt="Download_ICON"  height={16} width={16} /></a>}
+                                    {download && <a style={{borderColor: "white"}} href={newUrl} className={styles.downloadLink} download><Image src={"/icons/download_icon.svg"}  alt="Download_ICON"  height={16} width={16} /></a>}
                                     <Link style={{borderColor: "white"}} href={file.source} target="_blank" onClick={() => {navigator.clipboard.writeText(document.domain +  file.source)}} className={styles.downloadLink} ><Image  alt="Share_ICON"  src={"/icons/share_icon.svg"} height={16} width={16} /></Link>
                                 </div>
                                 {rating > 0 && <Stars max={5} rating={rating} ><span> your rating</span></Stars>}
