@@ -29,7 +29,9 @@ export default function MyApp({  Component,  pageProps: { session, ...pageProps 
         <meta name="description" content="Your one stop shop for media creation." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/new_logo_symbol.svg" />
+        <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} />
       </Head>
+
       <SessionProvider session={session}>
         <AktueltTVLoading/>
         <Component {...pageProps} />
