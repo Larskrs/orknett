@@ -115,25 +115,6 @@ Litagoen. Med nådeløse fiender i hælene og uventede vendepunkter, er det en k
       </section>
 
 
-      <section id="papparau" className={styles.section}>
-        <div className={styles.group}>
-          <div className={styles.row}>         
-            <div className={styles.card}>
-                <h2>Papparau</h2>
-                <p>Barn vil ikke <span className={styles.gradient}>elske! </span>
-                Den sjarmerende one hit wonder <span className={styles.gradient}>Ap Aarau</span> er Papparau i denne nye barneserien om gode gamle barnebøker. En nyere lesing med mormonske verdier.
-                Bli med på reisen med <span className={styles.gradient}>Papparau</span> gjennom velkjente fortellinger fra ghettoen og stuebordet!
-                </p>
-                
-            </div>
-            <div className={styles.image} style={{maxWidth: `none`}}>
-              <Image src={"https://gyazo.com/f12284bee733a43ccbda32243e30363e.jpg"} fill style={{objectFit: "cover", objectPosition: "center"}}></Image>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
     
   </wrap>
   </div>
