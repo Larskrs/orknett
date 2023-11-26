@@ -22,7 +22,7 @@ export default function MyApp({  Component,  pageProps: { session, ...pageProps 
 
   
   return (
-    <div className={`${roboto.className} ${Bricolage.style}`}>
+    <div className={`${roboto.className} ${Bricolage.variable}`}>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
         <title>Aktuelt.tv</title>
@@ -30,6 +30,10 @@ export default function MyApp({  Component,  pageProps: { session, ...pageProps 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/new_logo_symbol.svg" />
         <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} />
+
+        {/* Fonts */}
+        <link rel="stylesheet" href="https://use.typekit.net/vip1htc.css" />
+
       </Head>
 
       <SessionProvider session={session}>
