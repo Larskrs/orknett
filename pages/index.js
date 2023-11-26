@@ -10,11 +10,13 @@ import Head from 'next/head'
 import Layout from '@/layouts/newUI/layout'
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 export default function Home () {
 
   const [productSpanText, setProductSpanText] = useState(0)
-  const [isHovering, setIsHovering] = useState(0)
+  const [isHovering, setIsHovering] = useState(false)
+  const [transitionPage, setTransitionPage] = useState(null)
   const [mousePosition, setMousePosition] = useState([0,0])
   const availableSpans = [
     "Produkt", 
@@ -95,16 +97,51 @@ export default function Home () {
     
   }, []);
 
+  const router = useRouter()
+
+  useEffect(() => {
+    if (transitionPage == "" || transitionPage === undefined || transitionPage === null) {
+        return;
+    }
+    const interval = setInterval(() => {
+      router.push(transitionPage)
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [transitionPage])
+
   const session = useSession()
 
+  const ballStyle = () => {
+
+    if (transitionPage) {
+      return {
+        width: "314vw",
+        height: "314vw",
+        transitionDuration: "1s",
+        zIndex: "999",
+        background: "var(--background)"
+      }
+    }
+    if (isHovering) {
+      return {
+        width: "250px",
+        height: "250px"
+      }
+    } else {
+
+      return {
+        width: "100px",
+        height: "100px"
+      }
+    }
+    
+
+}
 
   return (
     <div className={styles.container}>
 
-        <div id="ball" style={{
-          width: isHovering ? "200px" : "50px",
-          height: isHovering ? "200px" : "50px",
-      }} className={styles.ball}></div>
+        <div id="ball" style={ballStyle()} className={styles.ball}></div>
 
           <nav className={styles.nav}>
               <div style={{marginRight: "1.2em"}}>
@@ -113,7 +150,7 @@ export default function Home () {
               </div>
               <Link href={"/profiles"}>Profiler</Link>
               <Link href={"/projects"}>Prosjekter</Link>
-              <Link href={"/contact"}>Kontakt Oss</Link>
+              <p style={{cursor: "pointer"}} onClick={() => {setTransitionPage("contact")}}>Kontakt Oss</p>
               <div style={{marginLeft: "auto", marginRight: 24}}>
                 {session.status === "authenticated" && <Link href={"/dashboard"} style={{display: "flex", flexDirection: "row", gap: 8, justifyContent: "center"}}>
                     <Image width={40} height={40} style={{borderRadius: "50%"}} src={session.data.user.image} />
@@ -132,25 +169,22 @@ export default function Home () {
           <h1>
             <span>Fra tanke,</span>
             <span>til <span className={styles.highlight}>
-                <div style={{translate: `0px -${productSpanText * 10}vmin`, padding: 0, margin: 0}}>
+                <div style={{translate: `0px -${productSpanText * 12}vmin`, padding: 0, margin: 0}}>
                   {productSpanTexts.map((p, i) => {
-                    return <span style={{height: "10vmin",opacity: productSpanText == i ? "1": "0"}}>{p}</span>
+                    return <span style={{height: "12vmin",opacity: productSpanText == i ? "1": "0"}}>{p}</span>
                   })}
                 </div>
               </span></span>
           </h1>
           <p>Vi hjelper deg med å få din bedrift eller virksomhet klar for lerretet. </p>
           <div className={styles.action}>
-            <button>Kontakt Oss</button>
+            <button onClick={() => {setTransitionPage("contact")}} >Kontakt Oss</button>
           </div>
           </div>
         </header>
 
         <section className={styles.projects}>
             <div className={styles.project}>
-                <div className={styles.image}>
-                  <Image fill src={"new_logo_symbol.svg"} />
-                </div>
                 <div className={styles.info}>
                     <h1>Arbeidsgiver
                     <div className={styles.arrow}>
@@ -162,11 +196,8 @@ export default function Home () {
                 </div>
             </div>
             <div className={styles.project}>
-                <div className={styles.image}>
-                  <Image fill src={"http://aktuelt.tv/api/v1/files?fileId=d8e5e400-ec12-4c7d-babe-3d95ad75d0e7.JPG"} />
-                </div>
                 <div className={styles.info}>
-                    <h1>Jens sin butikk
+                    <h1>Fjelldal materials
                     <div className={styles.arrow}>
                     →
                     </div>

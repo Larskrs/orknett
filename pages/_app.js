@@ -37,7 +37,7 @@ export default function MyApp({  Component,  pageProps: { session, ...pageProps 
       </Head>
 
       <SessionProvider session={session}>
-        <AktueltTVLoading/>
+        {/* <AktueltTVLoading/> */}
         <Component {...pageProps} />
         
       </SessionProvider>

@@ -18,7 +18,7 @@
     gap: 1vmin;
     flex-direction: column;
     background-color: #070709;
-    max-height: 60vh;
+    max-height: 80vh;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -58,10 +58,13 @@
 }
 .header h1 span {
     display: flex;
+    position: relative;
     gap: .35em;
+    
     align-items: center;
-    font-size: min(max(60px, 10vw), 100px);
-    height: 10vmin;
+    flex-direction: row;
+    font-size: 12vmin;
+    line-height: 1.2;
 }
 .highlight {
     color: var(--folly);
@@ -69,15 +72,14 @@
     display: flex !important;
     flex-direction: column;
     gap: 0;
-    height: 10vmin;
+    height: 12vmin;
     justify-content: flex-start;
     align-items:flex-start !important;
     scroll-snap-type: y mandatory;
 }
 .highlight span {
     text-align:center;
-    height: 10vmin;
-    max-height: 12vmin;
+    height: 89px;
     margin: 0;
     padding: 0;
 }
@@ -129,32 +131,36 @@
     flex-wrap: wrap;
     flex-direction: row;
     gap: 8px;
+    z-index: 10;
+    position: relative;
 }
 .project {
     display: flex;
-    gap: 8px;
+    gap: 24px;
     width: 100%;
-    max-width: 800px;
-    background: var(--background);
+    max-width: 600px;
     border-radius: 8px;
+    align-items: center;
     position: relative;
     cursor: pointer;
     z-index: 2;
 }
 .project .info {
-    padding: 1rem;   
+    padding: 8px;   
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
 }
 .project .info h1 {
-    font-size: min(max(20px, 10vw), 40px);
+    font-size: min(max(20px, 2vw), 30px);
     font-family: "brother-1816", sans-serif;
     margin: 0;
     position: relative;
     display: flex;
-    height: 60px;
+    display: flex;flex-direction: row;
+    align-items: center;
+    border-bottom: 2px solid transparent;
 }
 .project .info p {
     font-family: "brother-1816", sans-serif;
@@ -172,7 +178,7 @@
 }
 .arrow {
     width: 100px;
-    height: 50px;
+    height: 0px;
     text-align: center;
     border-radius: 50%;
     position: relative;
@@ -192,6 +198,13 @@
 }
 .project:hover .info h1 {
     border-bottom: 2px solid var(--folly);
+}
+@media only screen and (max-width: 600px) {
+
+    .project .image {
+        display: none;
+    }
+    
 }
 
 
