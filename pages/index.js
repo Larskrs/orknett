@@ -171,7 +171,7 @@ export default function Home () {
             <span>til <span className={styles.highlight}>
                 <div style={{translate: `0px -${productSpanText * 12}vmin`, padding: 0, margin: 0}}>
                   {productSpanTexts.map((p, i) => {
-                    return <span style={{height: "12vmin",opacity: productSpanText == i ? "1": "0"}}>{p}</span>
+                    return <span key={p} style={{height: "12vmin",opacity: productSpanText == i ? "1": "0"}}>{p}</span>
                   })}
                 </div>
               </span></span>
@@ -191,7 +191,7 @@ export default function Home () {
                     →
                     </div>
                     </h1>
-                    <p>"Maskin bom bom bom..." - Anne Lianne</p>
+                    <p>{`"Maskin bom bom bom..." - Anne Lianne`}</p>
                     
                 </div>
             </div>
@@ -202,7 +202,7 @@ export default function Home () {
                     →
                     </div>
                     </h1>
-                    <p>"Jeg er en fiktiv arbeidsgiver" - Jens Usannson</p>
+                    <p>{`"Jeg er en fiktiv arbeidsgiver" - Jens Usannson"`}</p>
                     
                 </div>
             </div>
