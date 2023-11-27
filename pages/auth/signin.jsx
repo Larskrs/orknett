@@ -12,10 +12,10 @@ export default function SignIn({ providers }) {
                 <Image 
                 alt="background"
                 style={{objectFit: "cover", objectPosition: "center",}}
-                src={"http://aktuelt.tv/api/v1/files?fileId=c73e05a8-a81a-4fb8-a348-84d4ad81d33c.jpg"} fill/>
+                src={"http://aktuelt.tv/api/v1/files?fileId=d8e5e400-ec12-4c7d-babe-3d95ad75d0e7.JPG"} fill/>
             </div>
             <div className="box">
-                <Image src={"/aktueltstudio_logo.svg"} alt="logo" width={150} height={150} />
+                <Image src={"/new_logo.svg"} alt="logo" width={250} height={100} />
                 <p>Du er bare noen få klikk unna noe veldig <span style={{fontWeight: "700", textDecoration: "underline"}}>aktuelt!</span></p>
                 {displayProviders(providers)}
             </div>
@@ -32,7 +32,6 @@ export default function SignIn({ providers }) {
           .background {
             width: 200%;
             height: 100%;
-            animation: zoomOut 2.5s cubic-bezier(.17,.67,.44,.99);
           } 
           .background img {
             object-fit: cover;
@@ -44,14 +43,15 @@ export default function SignIn({ providers }) {
             width: 100%;
             max-width: 500px;
             display: flex;
-            background: rgba(0,0,0,0.75);
+            background: var(--background);
+            border-left: 1px solid #222;
             padding: 4rem 2rem;
+            gap: 8px;
             z-index: 6;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            backdrop-filter: blur(20px);
             animation: zoomOut 2.5s cubic-bezier(.17,.67,.44,.99);
           }
           .box > p {
@@ -63,9 +63,7 @@ export default function SignIn({ providers }) {
           }
           @keyframes zoomOut {
             0% {
-                scale: 3;
-                opacity: 0;
-                rotate: 10deg;
+                translate: 500px 0px; 
             }
             100% {
                 scale: 1;
@@ -82,7 +80,7 @@ export default function SignIn({ providers }) {
     return (
         <>
           {Object.values(providers).map((provider) => (
-            <div key={provider.name} style={{padding: ".5rem 1rem", cursor: "pointer", background: "rgba(0,0,0,.5)", border: "2px solid white", borderRadius: "8px", fontSize: "20px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700"}} 
+            <div key={provider.name} style={{padding: ".5rem 1rem", cursor: "pointer", background: "var(--background)", border: "1px solid #222", fontSize: "20px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700"}} 
             onClick={() => signIn(provider.id)}
             >
               Log in med

@@ -162,7 +162,7 @@ export default function Home () {
             <p>Foto: Lars Kristian Småge Syvertsen, bilde av: Mari Boine</p>
           </div>
           <div className={styles.image}>
-            <Image fill src={"https://cdn.discordapp.com/attachments/1017698590690381884/1177739599204843581/image.png?ex=65739a79&is=65612579&hm=d21ef0bb3de2b065f014ec449966fc7ad1701fdbb1d7c4a77019540fc8b05412&"} />
+            <Image fill src={"http://aktuelt.tv/api/v1/files?fileId=d8e5e400-ec12-4c7d-babe-3d95ad75d0e7.JPG"} />
           </div>
           <div className={styles.info}>
           <h1>
