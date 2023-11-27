@@ -17,7 +17,6 @@ export default function Home () {
   const [productSpanText, setProductSpanText] = useState(0)
   const [isHovering, setIsHovering] = useState(false)
   const [transitionPage, setTransitionPage] = useState(null)
-  const [mousePosition, setMousePosition] = useState([0,0])
   const availableSpans = [
     "Produkt", 
     "Film",
