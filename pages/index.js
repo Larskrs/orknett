@@ -179,6 +179,7 @@ export default function Home () {
           <p>Vi hjelper deg med å få din bedrift eller virksomhet klar for lerretet. </p>
           <div className={styles.action}>
             <button onClick={() => {setTransitionPage("contact")}} >Kontakt Oss</button>
+            <p>Lorem Ipsum...</p>
           </div>
           </div>
         </header>
