@@ -1,6 +1,6 @@
 :root {
 
-  overflow-x: hidden;
+  
   background: var(--background);
   background-size: cover;
   width: 100vw;
@@ -37,6 +37,7 @@
   color: white;
   padding: 0rem;
   margin: 0px;
+  overflow: hidden;
 
   scroll-behavior: smooth;
   
