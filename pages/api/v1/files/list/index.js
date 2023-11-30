@@ -31,6 +31,7 @@ export default async function handler(req, res) {
       .select(`
         *
       `)
+      .order('created_at', { ascending: false})
       .eq("user", userId)
       .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
     

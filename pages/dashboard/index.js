@@ -37,7 +37,7 @@ function FilePage ({batches}) {
         setAmount(amount + 25)
     }, [bottomed])
     useEffect(() => {
-        refetch()
+            refetch()
     }, [amount])
 
     const {  data, isLoading, error, refetch } = useFetch(`files/list?page=0&size=${amount}`)

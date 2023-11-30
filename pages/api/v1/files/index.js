@@ -57,7 +57,7 @@ async function optimizeVideo (fileName) {
 
         let qualities = []
         
-        let possible = [100, 360, 480, 540, 720, 1080, 1440 ]
+        let possible = [100, 360, 720, 1080, 1440, 2160]
         if (possible[0] > size.height) {
           possible = [360]
         } else {
@@ -95,7 +95,7 @@ async function optimizeVideo (fileName) {
           .setFfmpegPath(process.env.FFMPEG_LOCATION)
           
           .size(`?x${height}`)
-          .videoCodec('libvpx') //libvpx-vp9 could be used too
+          .videoCodec('libx265')
           .on('filenames', function (filenames) {
             console.log("Creating video: " + filenames.join(', '))
           })
@@ -115,7 +115,7 @@ async function optimizeVideo (fileName) {
               return resolve()
           })
           .addOption(["-lossless 0", "-compression_level 0"])
-          .save(`./videos/${id}/${height}.webm`)
+          .save(`./videos/${id}/${height}.mp4`)
           })
       }
   }

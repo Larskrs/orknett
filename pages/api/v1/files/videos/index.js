@@ -12,7 +12,9 @@ function GetFileStream(req, res) {
     const [ id, extension ] = fileName.split(".")
   
     let filePath = `./videos/${id}/${quality}.${extension}`;
-  
+    console.log("--------------------------------")
+    console.log(filePath)
+    console.log("--------------------------------")
     
     const options = {};
   

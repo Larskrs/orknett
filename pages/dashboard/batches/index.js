@@ -139,26 +139,7 @@ function BatchesPage ({batches, thumbnailBatches}) {
 
                         
                         
-                        {thumbnailBatches && <Link className={styles.info} href={"/dashboard/batches/" + thumbnailBatches?.[batchPreview]?.id}>
-                            <div className={styles.previewItem}>
-                                <div>
-                                {thumbnailBatches.map((b, i) => {
-                                    return     <Image key={b.id} alt={"Batch header"} fill style={{objectFit: "cover", borderRadius: 8, transitionDuration: "1s", translate: batchPreview != i ? "-100% 0": "0%", scale: batchPreview != i ? "0": "1", opacity: batchPreview == i ? 1: 0}} src={b.thumbnail}/>
-                                })}
-                                </div>
-                                <div className={styles.blurred}>
-                                {thumbnailBatches.map((b, i) => {
-                                    return     <Image key={b.id} quality={1} alt={"Batch header"} fill style={{objectFit: "cover", borderRadius: 8, transitionDuration: "1s", translate: batchPreview != i ? "-100% 0": "0%", scale: batchPreview != i ? "0": "1", opacity: batchPreview == i ? 1: 0}} src={b.thumbnail}/>
-                                   
-                                })}
-                                </div>
-                            </div>
-                            <div className={styles.details}>
-                                <h1>{thumbnailBatches?.[batchPreview].title}</h1>
-                                <p>{thumbnailBatches?.[batchPreview].owners.length} medlem{thumbnailBatches?.[batchPreview].owners.length == 1 ? "" : "mer"}</p>
-                                <p>{thumbnailBatches?.[batchPreview].files.length} fil{thumbnailBatches?.[batchPreview].files.length == 1 ? "" : "er"}</p>
-                            </div>
-                        </Link> }
+                        
                     </div>
 
 

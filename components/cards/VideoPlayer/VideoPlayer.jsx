@@ -216,7 +216,7 @@ export default function VideoPlayer ({source, qualities, videoProps, defaultQual
                     </div>
                      
                 </div>
-                <div style={{display: "flex",gap: 8, overflowX: "scroll"}}>
+                <div style={{display: "flex",gap: 8, overflowX: "hidden"}}>
                 {qualities && qualities.map((q, i) => {
                   return <button key={q} style={{
                     borderBottom: i == quality ? "rgba(255,255,255,1) 2px solid" : "2px solid rgba(255,255,255,.1)",

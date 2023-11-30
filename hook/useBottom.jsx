@@ -9,7 +9,7 @@ const usePageBottom = () => {
       const innerHeight = window.innerHeight;
       const scrollTop = document.documentElement.scrollTop;
 
-      const hasReachedBottom = offsetHeight - (innerHeight + scrollTop) <= 10;
+      const hasReachedBottom = offsetHeight - (innerHeight + scrollTop) <= 50;
 
       setReachedBottom(hasReachedBottom);
     };

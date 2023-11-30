@@ -123,14 +123,14 @@ export default function Home () {
     }
     if (isHovering) {
       return {
-        width: "250px",
-        height: "250px"
+        width: "0px",
+        height: "0px"
       }
     } else {
 
       return {
-        width: "100px",
-        height: "100px"
+        width: "0px",
+        height: "0px"
       }
     }
     
