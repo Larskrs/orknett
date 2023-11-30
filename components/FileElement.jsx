@@ -31,7 +31,7 @@ export default function FileElement ({file, onSelect, download=true, rating=0, o
                             <div onClick={onSelect} style={{width: "100%", height: "100%"}}>
                                 {owner && <Image src={owner.image} alt='OWNER_AVATAR' width={16} height={16} style={{borderRadius: "50%", bottom: 16, right: 16, position: "absolute", zIndex: 10}} />}
                                 {type == "video" && <div>
-                                <Image alt={file.fileName} fill style={{objectFit: "cover"}} src={`/api/v1/files/videos/thumbnail?fileId=${file.id}`} />
+                                <Image alt={file.fileName} fill style={{objectFit: "cover"}} src={`/api/v1/files/videos/thumbnail?fileId=${file.id}.webm`} />
                                 <div style={{width: 50, height: 50, position: "absolute", left: 8, top: 8, background: "rgba(0,0,0,.25)", borderRadius: "50%"}}><Image alt={file.fileName} fill src={"/video.svg"} /></div> 
                                     </div> }
                                 {/* {type == "audio" && <Image alt={file.fileName} fill src={"/audio.svg"} /> } */}

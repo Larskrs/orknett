@@ -208,6 +208,24 @@ export default function Home () {
             </div>
         </section>
 
+        <section className={styles.gallery}>
+            <div className={styles.image}>
+                  <Image fill src={"/images/projects/22052023/alternativ.png"} />
+            </div>
+            <div className={styles.image}>
+                  <Image fill src={"/images/projects/22052023/fashionista.png"} />
+            </div>
+            <div className={styles.image}>
+                  <Image fill src={"/images/projects/22052023/antikk.png"} />
+            </div>
+            <div className={styles.image}>
+                  <Image fill src={"/images/projects/22052023/moderne.png"} />
+            </div>
+            <div className={styles.image}>
+                  <Image fill src={"/images/projects/22052023/gråmus.png"} />
+            </div>
+        </section>
+
     </div>
   )
 }

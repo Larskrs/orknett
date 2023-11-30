@@ -28,7 +28,7 @@
 
     background-image: radial-gradient(#222 1px, transparent 0);
     background-size: 40px 40px;
-    background-position: -19px -19px;
+    background-position: 0px 0px;
     
 }
 
@@ -278,4 +278,45 @@
 }
 .descriptor_image p {
     font-size: 14px;
+}
+
+
+.gallery {
+    z-index: 2;
+    position: relative;
+    min-height: 50vh;
+    background-color: var(--background);
+    gap: 0px;
+    display: flex;
+    flex-wrap:nowrap;
+    overflow:hidden;
+    width: 100%;
+    margin-bottom: 100px;
+}
+.gallery .image {
+    min-width: 500px;
+    width: 20vw;
+    position: relative;
+    aspect-ratio: unset;
+    overflow: hidden;
+}
+.gallery .image:hover:after {
+    left: -150%;
+   scale: 1;
+}
+.gallery .image:after {
+    content: "";
+    left: 0;
+    display: block;
+    position: absolute;
+    top: 98%;
+    width: 400%;
+    height: 400%;
+    background: var(--eerie-black);
+    transform: rotate(-15deg);
+    transform-origin: center center;
+    transition: 250ms all cubic-bezier(0.215, 0.610, 0.355, 1);
+ }
+.gallery .image img {
+    border-radius: 0;
 }

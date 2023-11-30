@@ -29,7 +29,7 @@ export default async function handler(req, res) {
     const id = fileId?.replace("." + extension, '')
     if (!GetContentType(extension).toLowerCase().includes("video")) { 
         // Is not a video
-        return res.status(404).json({ error: `No valid video found with id ${id}` });
+        return res.status(404).json({ error: `No valid video found with id ${id} : ${extension}` });
     }
 
     GetThumbnailStream(req, res, id)
@@ -43,6 +43,7 @@ export default async function handler(req, res) {
     const extension = "png" 
   
     let filePath = `./videos/${id}/thumbnails/tn_1.png`;
+    console.log(filePath)
   
     
     const options = {};

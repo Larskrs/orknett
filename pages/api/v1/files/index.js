@@ -96,7 +96,6 @@ async function optimizeVideo (fileName) {
           
           .size(`?x${height}`)
           .videoCodec('libvpx') //libvpx-vp9 could be used too
-          .videoBitrate(1000, true) //Outputting a constrained 1Mbit VP8 video stream
           .on('filenames', function (filenames) {
             console.log("Creating video: " + filenames.join(', '))
           })
@@ -115,8 +114,8 @@ async function optimizeVideo (fileName) {
             .select("*")
               return resolve()
           })
+          .addOption(["-lossless 0", "-compression_level 0"])
           .save(`./videos/${id}/${height}.webm`)
-          .addOptions(['-crf 40'])
           })
       }
   }

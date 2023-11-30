@@ -37,10 +37,9 @@
   color: white;
   padding: 0rem;
   margin: 0px;
-  overflow: hidden;
+  /* overflow: hidden; */
 
   scroll-behavior: smooth;
-  
 }
 body {
   margin: 0;
@@ -104,12 +103,14 @@ textarea {
   padding-block: .5rem !important;
   margin-block: .5rem !important;
   background-color: var(--gray-2);
-  border-radius: 6px;
+  border: none;
+  outline: none;
   color: white;
   text-decoration: none;
   font-weight: 500;
-  border: 1px solid white;
   width: 500px;
+  resize: none;
+  width: 100%;
   height: 150px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: none;

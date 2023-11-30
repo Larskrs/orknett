@@ -122,7 +122,7 @@ export default function FileUploading ({
     }
 
     return (
-        <div onClick={handleSubmit} style={{background: "#111", border: "1px solid #222", cursor: "pointer", borderRadius: "8px", padding: "1rem 2rem 1rem 1rem", display: (finished ? "none" : "flex"), wordBreak: "break-word", flexDirection: "row", minWidth: "200px", width: "auto", gap: 8}}>
+        <div onClick={handleSubmit} style={{background: "#111", border: "1px solid #222", cursor: "pointer", borderRadius: "8px", padding: "1rem 2rem 1rem 1rem", display: (finished ? "none" : "flex"), wordBreak: "break-word", flexDirection: "row", minWidth: "200px", width: "fit-content", gap: 8}}>
             <Image style={{objectFit: "cover", borderRadius: 8}} width={50} height={50} alt="File_URL_PREVIEW" src={fileUrl} quality={0} />
             <div>
 
@@ -130,7 +130,7 @@ export default function FileUploading ({
                 <p style={{margin: 0, fontSize: 16, color: "#444"}}>{getReadableFileSizeString(file.size)}</p>
                 {!finished && submitting && <div style={{display: "flex", gap: ".5rem"}}>
                     {/* <progress max={100} value={progress} /> */}
-                    <Slider currentValue={progress} max={100} min={0} smooth={true} trackStyle={{height: "16px"}} progressStyle={{background: "yellow"}} />
+                    <Slider currentValue={progress} max={100} min={0} smooth={true} trackStyle={{height: "16px"}} progressStyle={{background: "var(--folly)"}} />
                 </div> }
 
             </div>

@@ -152,7 +152,7 @@ export default function FileUpload ({batchPreset = ""}) {
 
         <button onClick={() => {setVisible(true); setFiles([])}}>Upload File</button>
 
-        <div className="background" onClick={() => {setVisible(false)}} style={{opacity: visible ? 1 : 0, pointerEvents: visible ? "all" : "none"}}>
+        <div className="background" style={{opacity: visible ? 1 : 0, pointerEvents: visible ? "all" : "none"}}>
             </div>
 
             {visible && <div className="container">
@@ -172,10 +172,7 @@ export default function FileUpload ({batchPreset = ""}) {
                     </div>
                 } */}
 
-                <div className="fileList">{filesLeft && filesLeft.length > 0 && filesLeft.map((f, i) => <FileUploading key={f.name} file={f} batch={batch} session={session} run={submitting} onUploaded={() => {
-                    filesLeft = filesLeft.splice(i, 1);
-                    
-                }} />) }</div>
+                
                 {/* {files && [...files].forEach(file => console.log(file) )} */}
 
             
@@ -186,7 +183,13 @@ export default function FileUpload ({batchPreset = ""}) {
                         <label className={"upload_button"}htmlFor="file">Select File to upload</label>
                         {/* <label className="upload_button" onClick={() => {setSubmitting(true)}}> Upload File </label> */}
                         <p style={{fontSize: 14}}>Size {getReadableFileSizeString(getTotalSize(files))}</p>
-                    </div> 
+                        <button onClick={() => {setVisible(false)}}>Close</button>
+                    </div>
+
+                    <div className="fileList">{filesLeft && filesLeft.length > 0 && filesLeft.map((f, i) => <FileUploading key={f.name} file={f} batch={batch} session={session} run={submitting} onUploaded={() => {
+                    filesLeft = filesLeft.splice(i, 1);
+                    
+                }} />) }</div> 
 
         </div> }
 
@@ -200,7 +203,7 @@ export default function FileUpload ({batchPreset = ""}) {
                         width: 100%;
                         left: 0;
                         top: 0;
-                        background-color: rgba(0,0,0,.75);
+                        background-color: var(--background);
                         backdrop-filter: blur(50px);
                         
                         align-items: center;
@@ -209,19 +212,15 @@ export default function FileUpload ({batchPreset = ""}) {
                         gap: 0.5rem;
                     }
                     .fileList {
-                        position: fixed;
+                        position: relative;
          
                         display: flex;
                         flex-direction: column;
-                        width: fit-content; /* viewport width */
                         /* height: 90vh; */
                         max-height: 80vh;
                         overflow-y: scroll;
                         overflow-x: hidden;
                         padding: 0rem;
-                        top: 6rem;
-                        left: 2rem;
-                        right: 2rem;
                         gap: 0.5rem;
 
                     }
@@ -233,9 +232,14 @@ export default function FileUpload ({batchPreset = ""}) {
                         position: fixed;
                         overflow: none !important;
                         
+                        background: var(--background);
+                        display: flex;
+                        flex-direction: column;
                         bottom: 0;
                         right: 0;
                         left: 0;
+                        top: 92px;
+                        height: 100%;
                         
                         padding: 1rem;
                         gap: 0.5rem;
@@ -261,7 +265,7 @@ export default function FileUpload ({batchPreset = ""}) {
                         padding: .5rem 2rem;
                         font-size: 14px;
                         border-radius: 10px;
-                        width: 100%;
+                        width: fit-content;
                         background: rgba(255, 255, 255, 0.1);
                         border-radius: 16px;
                         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
