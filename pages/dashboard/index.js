@@ -18,10 +18,12 @@ import { AudioPlayer, DisplayElement, ImprovedFileUpload } from '@/components';
 import axios from 'axios';
 import { GetBatches } from '@/lib/BatchLib';
 import Layout from '@/layouts/newUI/layout';
+import useFetch from '@/hooks/useFetch';
+import usePageBottom from '@/hook/useBottom';
 
 
 
-function FilePage ({files, batches}) {
+function FilePage ({batches}) {
 
     const [display, setDisplay] = useState(null)
     const [displayId, setDisplayId] = useState(-1)
@@ -29,6 +31,18 @@ function FilePage ({files, batches}) {
         required: true
     })
     const [filter, setFilter] = useState("")
+    const bottomed = usePageBottom()
+    const [amount, setAmount] = useState(25)
+    useEffect(() => {
+        setAmount(amount + 25)
+    }, [bottomed])
+    useEffect(() => {
+        refetch()
+    }, [amount])
+
+    const {  data, isLoading, error, refetch } = useFetch(`files/list?page=0&size=${amount}`)
+    let files = []
+    files = [...files, ...data]
 
     function getPossibleExtensionFilters () {
         let filters = []
@@ -152,6 +166,7 @@ function FilePage ({files, batches}) {
                         </div>
                     )
                 })}
+                <button onClick={() => {setAmount(amount + 10)}}>Load 10 more files</button>
             </div>
         </FileSharingLayout>
     );
@@ -178,23 +193,9 @@ export async function getServerSideProps(ctx){
         return {props: {}};
     }
 
-    const userId = session.user.id
-    
-    const { data, error } = await GetClient()
-    .from("files")
-    .select(`
-        *
-    `)
-    .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
-    .eq("user", userId)
-    .order("created_at", {ascending: false})
-
-    const batches = await GetBatches ()
-
     return {
         props:{
-            files: data,
-            batches: batches.data
+            
         },
     }
 }
