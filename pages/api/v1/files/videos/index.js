@@ -11,10 +11,8 @@ function GetFileStream(req, res) {
     if (!quality) quality = 360
     const [ id, extension ] = fileName.split(".")
   
-    let filePath = `./videos/${id}/${quality}.${extension}`;
-    console.log("--------------------------------")
-    console.log(filePath)
-    console.log("--------------------------------")
+    let filePath = `./videos/${id}/${quality}.mp4`;
+  
     
     const options = {};
   
@@ -44,10 +42,8 @@ function GetFileStream(req, res) {
   
       fs.stat(filePath, (err, stat) => {
           if (err) {
-            if (process.env.CLEAN_CONSOLE != "true") {
-                console.error(`File stat error for ${filePath}.`);
-                console.error(err);
-              }
+              console.error(`File stat error for ${filePath}.`);
+              console.error(err);
               res.status(500);
               res.end();
               return;

@@ -80,7 +80,7 @@ async function optimizeVideo (fileName) {
 
         console.log(`[Handling Video] id: (${id}) - ${height}p `)
         console.log({height})
-        let bitrate = '1200k'
+        let bitrate = '4000'
         let aBitrate = '128k'
         if (height <= 100) {
           bitrate = '5k'
@@ -95,7 +95,10 @@ async function optimizeVideo (fileName) {
           .setFfmpegPath(process.env.FFMPEG_LOCATION)
           
           .size(`?x${height}`)
-          .videoCodec('libx265')
+          .videoBitrate(bitrate)
+          .audioBitrate(aBitrate)
+          .format("mp4")
+          .videoCodec("libx264")
           .on('filenames', function (filenames) {
             console.log("Creating video: " + filenames.join(', '))
           })
