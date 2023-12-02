@@ -80,8 +80,8 @@ async function optimizeVideo (fileName) {
 
         console.log(`[Handling Video] id: (${id}) - ${height}p `)
         console.log({height})
-        let bitrate = '4000'
-        let aBitrate = '128k'
+        let bitrate = '18000k'
+        let aBitrate = '1500k'
         if (height <= 100) {
           bitrate = '5k'
           aBitrate = '0.1k'
