@@ -16,6 +16,7 @@ import VideoPlayer from "./cards/VideoPlayer/VideoPlayer";
 import SlimListModal from "./cards/SlimListModal/SlimListModal";
 import CreateBatch from "./cards/CreateBatch/CreateBatch";
 import LiveLyrics from "./cards/LiveLyrics/LiveLyrics";
+import RadialProgress from "./cards/RadialProgress/RadialProgress";
 export 
 {
     SeriesCard,
@@ -35,5 +36,6 @@ export
     DisplayElement,
     SlimListModal,
     CreateBatch,
-    LiveLyrics
+    LiveLyrics,
+    RadialProgress
 };
