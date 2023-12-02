@@ -35,7 +35,7 @@ export default function AdminPage ({storage}) {
                 return (
                 <div key={i} style={{display: "flex", flexDirection: "column", gap: 8, alignItems: "center"}}>
                     <RadialProgress progress={usage}
-                        trackWidth={9.5} indicatorWidth={10} label={"Files"} trackColor={"#222"}
+                        trackWidth={9.5} indicatorWidth={10} label={"Thread " (+ i + 1)} trackColor={"#222"}
                         indicatorColor={"var(--folly)"}
                         />
                 </div>
