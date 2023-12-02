@@ -27,13 +27,13 @@ export default function AdminPage ({storage}) {
         </section>
 
         <section style={{display: "flex", alignItems: "center", justifyContent: "center", flexWrap: "wrap"}}>
-            {storage.cpus.map((cpu) => { 
+            {storage.cpus.map((cpu, i) => { 
                 
 
                 const usage = (cpu.times.user/cpu.times.idle) * 100
 
                 return (
-                <div style={{display: "flex", flexDirection: "column", gap: 8, alignItems: "center"}}>
+                <div key={i} style={{display: "flex", flexDirection: "column", gap: 8, alignItems: "center"}}>
                     <RadialProgress progress={usage}
                         trackWidth={9.5} indicatorWidth={10} label={"Files"} trackColor={"#222"}
                         indicatorColor={"var(--folly)"}
