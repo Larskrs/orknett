@@ -80,10 +80,9 @@ export default async function handler(req, res) {
     }
     console.log(getReadableFileSizeString(size))
     res.status(200).json({
-        data: {
             size: size,
             amount: physicalSources.length,
-        }
+            size_formatted: getReadableFileSizeString(size)
     })
 
   }

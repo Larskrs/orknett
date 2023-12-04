@@ -48,18 +48,22 @@ export default function AdminPage ({storage}) {
 }
 function FilesUploadAmount ({session}) {
 
-    const {  data, isLoading, error, refetch } = useFetch(`files/storage?userId=${session.data.user.id}`)
+    const {  data, isLoading, error, refetch } = useFetch(`files/storage/user?userId=${session.data.user.id}`)
     useEffect(() => {
-        console.log(data)
+        console.log("You've uploaded: " + data.size)
     }, [data])
 
-    const fileSize = getReadableFileSizeString(data.files)
+    if (!data || isLoading) {
+        return (<p>Loading...</p>)
+    }
+
+    const fileSize = getReadableFileSizeString(data.size)
 
     
     return (
 
             <div style={{display: "flex", flexDirection: "column", gap: 8, alignItems: "center"}}>
-                <RadialProgress progress={(data.files / 20000000000) * 100} trackWidth={9.5} indicatorWidth={10} label={"Your Files"} trackColor={"#222"} indicatorColor={"var(--ak-tertiary)"}/>
+                <RadialProgress progress={(data.size / 20000000000) * 100} trackWidth={9.5} indicatorWidth={10} label={"Your Files"} trackColor={"#222"} indicatorColor={"var(--ak-tertiary)"}/>
                 <p>{fileSize}</p>
             </div>
     )

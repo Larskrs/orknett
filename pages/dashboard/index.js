@@ -177,15 +177,15 @@ function FilePage ({batches}) {
 
 function FilesUploadAmount ({session}) {
 
-    const {  data, isLoading, error, refetch } = useFetch(`files/storage?userId=${session.data.user.id}`)
+    const {  data, isLoading, error, refetch } = useFetch(`files/storage/user?userId=${session.data.user.id}`)
     useEffect(() => {
         console.log(data)
     }, [data])
     
     return (
         <div>
-            <p>Du har lastet opp: {getReadableFileSizeString(data.files)}</p>
-            <Slider max={20000000000} min={0} currentValue={data.files} smooth={"100ms"} progressStyle={{background: "var(--folly)", backgroundSize: "1000%", backdropFilter: "blur(10px)", borderRadius: "2px", transition: "100ms linear"}} containerStyle={{height: "16px"}}  />
+            <p>Du har lastet opp: {getReadableFileSizeString(data.size)}</p>
+            <Slider max={20000000000} min={0} currentValue={data.size} smooth={"100ms"} progressStyle={{background: "var(--folly)", backgroundSize: "1000%", backdropFilter: "blur(10px)", borderRadius: "2px", transition: "100ms linear"}} containerStyle={{height: "16px"}}  />
         </div>
     )
 }
