@@ -14,12 +14,13 @@ import { RatioMedia } from '@/components/RatioMedia';
 import FileElement from '@/components/FileElement'
 import { useEffect, useState } from 'react';
 import Arrow from '@/components/Arrow';
-import { AudioPlayer, DisplayElement, ImprovedFileUpload } from '@/components';
+import { AudioPlayer, DisplayElement, ImprovedFileUpload, Slider } from '@/components';
 import axios from 'axios';
 import { GetBatches } from '@/lib/BatchLib';
 import Layout from '@/layouts/newUI/layout';
 import useFetch from '@/hooks/useFetch';
 import usePageBottom from '@/hook/useBottom';
+import { getReadableFileSizeString } from '@/lib/FileHelper';
 
 
 
@@ -139,6 +140,7 @@ function FilePage ({batches}) {
                 {displayFilters()}
                 {session.status == "authenticated" && <ImprovedFileUpload /> }
             </div>
+                <FilesUploadAmount session={session} />
             <div>
                     
                  <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
@@ -171,13 +173,21 @@ function FilePage ({batches}) {
         </FileSharingLayout>
     );
 
+}
 
+function FilesUploadAmount ({session}) {
 
-
-
-
-
-
+    const {  data, isLoading, error, refetch } = useFetch(`files/storage?userId=${session.data.user.id}`)
+    useEffect(() => {
+        console.log(data)
+    }, [data])
+    
+    return (
+        <div>
+            <p>Du har lastet opp: {getReadableFileSizeString(data.files)}</p>
+            <Slider max={20000000000} min={0} currentValue={data.files} smooth={"100ms"} progressStyle={{background: "var(--folly)", backgroundSize: "1000%", backdropFilter: "blur(10px)", borderRadius: "2px", transition: "100ms linear"}} containerStyle={{height: "16px"}}  />
+        </div>
+    )
 }
 
 export async function getServerSideProps(ctx){

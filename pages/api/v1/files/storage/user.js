@@ -33,6 +33,7 @@ export default async function handler(req, res) {
         storage
     `)
     .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
+    .eq("user", userId)
 
     if (error) {
         console.error(error)
