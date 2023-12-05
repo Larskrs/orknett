@@ -69,11 +69,14 @@ export default async function handler(req, res) {
                 } else {
                     addSize = sourceStat.size
                 }
+                
+                    console.log(`${addSize > 0 ? "✔" : "X" } ${PSource} ${getReadableFileSizeString(addSize)}`)
+                
                 size += addSize
                 
 
         } catch (err) {
-            // console.log(err)
+            console.log(err)
             continue;
         }
         
