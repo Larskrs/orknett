@@ -62,18 +62,14 @@ export default async function handler(req, res) {
         const path = join(__dirname + "../../../../../../../../",  PSource );
         try {
                 sourceStat = await stat(path)
-                let addSize = 0
-                if (sourceStat.isDirectory) {
-                    sourceStat = await dirSize(path)
-                    addSize =  sourceStat
-                } else {
-                    addSize = sourceStat.size
+                if (sourceStat.isDirectory()) {
+                    size += await dirSize(path)
+                } else if (sourceStat.isFile()) {
+                    size += sourceStat.size
                 }
-                size += addSize
-                
 
         } catch (err) {
-            // console.log(err)
+            console.log(err)
             continue;
         }
         
