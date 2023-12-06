@@ -67,9 +67,10 @@ export default async function handler(req, res) {
                 } else if (sourceStat.isFile()) {
                     size += sourceStat.size
                 }
+                size += addSize
+                
 
         } catch (err) {
-            console.log(err)
             continue;
         }
         

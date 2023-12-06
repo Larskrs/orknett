@@ -11,7 +11,7 @@ function GetFileStream(req, res) {
     if (!quality) quality = 360
     const [ id, extension ] = fileName.split(".")
   
-    let filePath = `./videos/${id}/${quality}.mp4`;
+    let filePath = `./videos/${id}/${quality}.${extension}`;
   
     
     const options = {};
