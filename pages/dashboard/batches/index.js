@@ -187,7 +187,7 @@ export async function getServerSideProps(ctx){
         files (*)
     `)
     .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
-    .order("created_at", {ascending: false, foreignTable: "files"})
+    .order("title", {ascending: false})
     // .filter('files.source', 'in', ['png','jpg'])
     .limit(15, { foreignTable: "files"})
 

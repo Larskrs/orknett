@@ -3,7 +3,7 @@ import { getReadableFileSizeString } from "@/lib/FileHelper";
 import axios from "axios";
 import { useSession } from 'next-auth/react';
 import useFetch from "@/hooks/UseFetch";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Slider } from "@/components";
 import Image from "next/image";
 
@@ -49,21 +49,23 @@ export default function AdminPage ({storage}) {
 function FilesUploadAmount ({session}) {
 
     const {  data, isLoading, error, refetch } = useFetch(`files/storage/user?userId=${session.data.user.id}`)
+    const [bytesLoaded, setBytesLoaded] = useState(100)
     useEffect(() => {
         console.log("You've uploaded: " + data.size)
     }, [data])
 
-    if (!data || isLoading) {
-        return (<p>Loading...</p>)
-    }
-
-    const fileSize = getReadableFileSizeString(data.size)
+    const fileSize = getReadableFileSizeString(bytesLoaded)
+    useEffect(() => {
+        if (data.size > 1000) {
+            setBytesLoaded(data.size)
+        }
+    }, [isLoading])
 
     
     return (
 
             <div style={{display: "flex", flexDirection: "column", gap: 8, alignItems: "center"}}>
-                <RadialProgress progress={(data.size / 20000000000) * 100} trackWidth={9.5} indicatorWidth={10} label={"Your Files"} trackColor={"#222"} indicatorColor={"var(--ak-tertiary)"}/>
+                <RadialProgress progress={(bytesLoaded / 20000000000) * 100} trackWidth={9.5} indicatorWidth={10} label={"Your Files"} trackColor={"#222"} indicatorColor={"var(--ak-tertiary)"}/>
                 <p>{fileSize}</p>
             </div>
     )

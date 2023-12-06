@@ -109,10 +109,10 @@ function FilePage ({batches}) {
         return files
     }
 
-    function displayFilters () {
+    function DisplayFilters () {
         return <div className={styles.row}>{
             getPossibleExtensionFilters().map((ext) => {
-                return <button key={ext} onClick={() => {if (ext == filter) {setFilter("")} else setFilter(ext)}} style={{border: "none", outline: filter != ext ? "none" : "2px solid white"}}>{ext}</button>
+                return <button key={ext} onClick={() => {if (ext == filter) {setFilter("")} else setFilter(ext)}} style={{border: "none", background: "#111", borderRadius: 0, outline: filter != ext ? "none" : "2px solid white", padding: "8px 16px"}}>{ext}</button>
             })
         }</div>
     }
@@ -136,11 +136,11 @@ function FilePage ({batches}) {
     return (
         <FileSharingLayout pageId={2} batches={batches}>
 
-            <div className={styles.row} style={{gap: "2rem"}}>
-                {displayFilters()}
+            <div className={styles.row} style={{gap: "1rem", flexDirection: "row", alignItems: "center", flexWrap: "wrap", padding: "16px 16px"}}>
+                <DisplayFilters />
                 {session.status == "authenticated" && <ImprovedFileUpload /> }
-            </div>
                 <FilesUploadAmount session={session} />
+            </div>
             <div>
                     
                  <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>
@@ -178,14 +178,22 @@ function FilePage ({batches}) {
 function FilesUploadAmount ({session}) {
 
     const {  data, isLoading, error, refetch } = useFetch(`files/storage/user?userId=${session.data.user.id}`)
+    const [bytesLoaded, setBytesLoaded] = useState(100)
     useEffect(() => {
-        console.log(data)
+        console.log("You've uploaded: " + data.size)
     }, [data])
+
+    const fileSize = getReadableFileSizeString(bytesLoaded)
+    useEffect(() => {
+        if (data.size > 1000) {
+            setBytesLoaded(data.size)
+        }
+    }, [isLoading])
     
     return (
-        <div>
-            <p>Du har lastet opp: {getReadableFileSizeString(data.size)}</p>
-            <Slider max={20000000000} min={0} currentValue={data.size} smooth={"100ms"} progressStyle={{background: "var(--folly)", backgroundSize: "1000%", backdropFilter: "blur(10px)", borderRadius: "2px", transition: "100ms linear"}} containerStyle={{height: "16px"}}  />
+        <div style={{width: "100%", padding: "16px 0px"}}>
+            <p>Du har lastet opp: {getReadableFileSizeString(bytesLoaded)}</p>
+            <Slider max={20000000000} min={0} currentValue={bytesLoaded} smooth={"2000ms"} progressStyle={{background: "var(--folly)", backgroundSize: "1000%", backdropFilter: "blur(10px)", borderRadius: "2p"}} containerStyle={{height: "16px"}}  />
         </div>
     )
 }
