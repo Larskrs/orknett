@@ -189,7 +189,7 @@ export async function getServerSideProps(ctx){
     .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
     .order("title", {ascending: false})
     // .filter('files.source', 'in', ['png','jpg'])
-    .limit(15, { foreignTable: "files"})
+    .limit(1, { foreignTable: "files"})
 
     for (const i in data) {
         const batch = data[i]
