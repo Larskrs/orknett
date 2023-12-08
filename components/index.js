@@ -17,6 +17,7 @@ import SlimListModal from "./cards/SlimListModal/SlimListModal";
 import CreateBatch from "./cards/CreateBatch/CreateBatch";
 import LiveLyrics from "./cards/LiveLyrics/LiveLyrics";
 import RadialProgress from "./cards/RadialProgress/RadialProgress";
+import ArticleCard from "./cards/ArticleCard/ArticleCard";
 export 
 {
     SeriesCard,
@@ -37,5 +38,6 @@ export
     SlimListModal,
     CreateBatch,
     LiveLyrics,
-    RadialProgress
+    RadialProgress,
+    ArticleCard
 };
