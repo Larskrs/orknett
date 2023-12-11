@@ -1,3 +1,25 @@
 .card {
-    aspect-ratio: 3/1;
+    height: 500px;
+    width: 350px;
+    background-color: var(--jet);
+    border: 1px solid #222;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+.card .image {
+    height: 50%;
+    position: relative;
+    object-fit: cover;
+}
+.card .image img {
+    object-fit: cover;
+}
+.card .title {
+    font-size: 28px;
+}
+.card .description {
+    font-size: 18px;
 }

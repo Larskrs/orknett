@@ -284,12 +284,13 @@
     position: relative;
     min-height: 50vh;
     background-color: var(--background);
-    gap: 0px;
+    gap: 16px;
     display: flex;
     flex-wrap:nowrap;
     overflow:hidden;
     width: 100%;
     margin-bottom: 100px;
+    padding: 1rem;
 }
 .gallery .image {
     min-width: 500px;

@@ -1,5 +1,5 @@
 
-import { LargeCard } from '@/components/index'
+import { ArticleCard, LargeCard } from '@/components/index'
 
 import { RatioImage } from '@/components/RatioImage'
 import Image from 'next/image'
@@ -183,7 +183,7 @@ export default function Home () {
           </div>
         </header>
 
-        <section className={styles.projects}>
+        {/* <section className={styles.projects}>
             <div className={styles.project}>
                 <div className={styles.info}>
                     <h1>Arbeidsgiver
@@ -206,24 +206,12 @@ export default function Home () {
                     
                 </div>
             </div>
-        </section>
+        </section> */}
 
         <section className={styles.gallery}>
-            <div className={styles.image}>
-                  <Image fill src={"/images/projects/22052023/alternativ.png"} />
-            </div>
-            <div className={styles.image}>
-                  <Image fill src={"/images/projects/22052023/fashionista.png"} />
-            </div>
-            <div className={styles.image}>
-                  <Image fill src={"/images/projects/22052023/antikk.png"} />
-            </div>
-            <div className={styles.image}>
-                  <Image fill src={"/images/projects/22052023/moderne.png"} />
-            </div>
-            <div className={styles.image}>
-                  <Image fill src={"/images/projects/22052023/gråmus.png"} />
-            </div>
+            <ArticleCard title={"Det blir dokumentar!"} image={"http://aktuelt.tv/_next/image?url=%2Fapi%2Fv1%2Ffiles%2Fvideos%2Fthumbnail%3FfileId%3D86c515d3-8702-4718-82f8-8a46baef7e88.webm&w=1920&q=75"} />
+            <ArticleCard title={"Filmer Western film i brekkeparken"} image={"http://aktuelt.tv/api/v1/files?fileId=f84f827e-e3ed-4c99-bcb0-df52d97e611e.JPG"} />
+            <ArticleCard title={"Sebastian dør av Pen-overdose."} image={"http://aktuelt.tv/api/v1/files?fileId=21a6bdef-28dd-4cc0-ba84-7b2762eb7ff2.png"} />
         </section>
 
     </div>
