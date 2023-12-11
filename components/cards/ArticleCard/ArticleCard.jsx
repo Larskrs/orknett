@@ -1,7 +1,7 @@
 import Image from "next/image"
 import styles from "./ArticleCard.module.css"
 
-export default function ({
+export default function ArticleCard ({
     image,
     title,
     description,
@@ -17,7 +17,7 @@ export default function ({
                 <Image fill src={image} />
             </div>
             {tags && tags.map((t) => {
-                return (<span>{t.text}</span>)
+                return (<span key={t.text}>{t.text}</span>)
             })}
             <h2 className={styles.title}>{title}</h2>
             <p>{description}</p>
