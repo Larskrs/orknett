@@ -1,6 +1,7 @@
 .card {
     height: 500px;
     width: 350px;
+    min-width: 300px;
     background-color: var(--jet);
     border: 1px solid #222;
     border-radius: 16px;
@@ -21,5 +22,7 @@
     font-size: 28px;
 }
 .card .description {
-    font-size: 18px;
+    font-size: 20px;
+    line-height: 1.5;
+    color: #aaa;
 }

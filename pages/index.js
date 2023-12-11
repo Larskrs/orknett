@@ -159,7 +159,7 @@ export default function Home () {
         </nav>
         <header className={styles.header}>
           <div className={styles.descriptor_image}>
-            <p>Foto: Lars Kristian Småge Syvertsen, bilde av: Mari Boine</p>
+            <p>Foto: Lars Kristian Småge Syvertsen, bilde av: Daniel Grimsrud Hagen</p>
           </div>
           <div className={styles.image}>
             <Image fill src={"http://aktuelt.tv/api/v1/files?fileId=d8e5e400-ec12-4c7d-babe-3d95ad75d0e7.JPG"} />
@@ -208,10 +208,11 @@ export default function Home () {
             </div>
         </section> */}
 
+        <p style={{marginLeft: 16, padding: 8, width: "fit-content", background: "var(--jet)"}}>Denne siden er ikke ferdig og representerer ikke et ferdig produkt eller bilde av Aktuelt Studio</p>
         <section className={styles.gallery}>
-            <ArticleCard title={"Det blir dokumentar!"} image={"http://aktuelt.tv/_next/image?url=%2Fapi%2Fv1%2Ffiles%2Fvideos%2Fthumbnail%3FfileId%3D86c515d3-8702-4718-82f8-8a46baef7e88.webm&w=1920&q=75"} />
-            <ArticleCard title={"Filmer Western film i brekkeparken"} image={"http://aktuelt.tv/api/v1/files?fileId=f84f827e-e3ed-4c99-bcb0-df52d97e611e.JPG"} />
-            <ArticleCard title={"Sebastian dør av Pen-overdose."} image={"http://aktuelt.tv/api/v1/files?fileId=21a6bdef-28dd-4cc0-ba84-7b2762eb7ff2.png"} />
+            <ArticleCard title={"Aktuelt Nå, tilbakeblikk"} description={"Det har gått noen år siden sist."} image={"http://aktuelt.tv/_next/image?url=%2Fapi%2Fv1%2Ffiles%2Fvideos%2Fthumbnail%3FfileId%3D86c515d3-8702-4718-82f8-8a46baef7e88.webm&w=1920&q=75"} />
+            <ArticleCard title={"Bilde informasjon"} description={"I en kommende oppdatering vil det bli mulig å se blender, lukkertid og flere detaljer fra bilder."} image={"http://aktuelt.tv/api/v1/files?fileId=c94a42d9-d7b2-417d-9d64-76e394389fee.JPG"} />
+            <ArticleCard title={"Vinter inspirasjon"} description={"En rekke inspirasjon for vinterland. "} image={"http://aktuelt.tv/api/v1/files?fileId=aad2db12-8dd8-4306-b6d2-254e5b87d002.JPG"} />
         </section>
 
     </div>
