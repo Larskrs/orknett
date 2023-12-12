@@ -24,7 +24,7 @@ export default function Nyheter ({ }) {
                             {
                                     a?.categories?.map((c) => {
                                         if (typeof c === 'string' || c instanceof String) {
-                                            return <p style={{padding: "4px 8px", background: "#222"}}>{c}</p>
+                                            return <p key={c} style={{padding: "4px 8px", background: "#222"}}>{c}</p>
                                         }
                                     })
                             }
