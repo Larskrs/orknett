@@ -52,6 +52,14 @@
     transition: 500ms all ease;
     z-index: 100;
 }
+.deadzone {
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    background-color: transparent;
+}
 .name {
     font-size: 18px !important;
     padding: 0px 16px;
@@ -63,16 +71,30 @@
     flex-direction: column;
     padding: 16px;
 }
+.signout:hover {
+    background-color: var(--folly);
+}
+.signout {
+    margin-top: 50px;
+    border: 1px solid #222 !important;
+}
 .buttons button {
     padding: 8px 16px;
     background-color: var(--background);
     color: white;
     font-size: 18px;
-    /* border: 1px solid #222; */
-    font-weight: 400;
+    border: 1px solid transparent;
+    font-weight: 100;
     text-align: left;
     width: 100%;
     border-radius: 4px;
+    display: flex;
+    align-items: center;
+    text-indent: 8px;
+    
+}
+.buttons button:hover {
+    border: 1px solid #222;
 }
 
 .banner {
@@ -89,4 +111,12 @@
 }
 .banner .image img {
     object-fit: cover;
+}
+
+@media screen and (max-width: 700px) {
+    .menu {
+        top: unset;
+        bottom: 72px;
+    }
+
 }

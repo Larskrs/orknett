@@ -29,6 +29,7 @@ export default function UserDropMenu ({}) {
                 <Image src={data.image} fill />
             </div>
 
+            {isExpanded && <div onClick={() => {setIsExpanded(false)}} className={styles.deadzone}></div>}
 
             <div style={{
                     opacity: isExpanded ? 1 : 0,
@@ -48,12 +49,12 @@ export default function UserDropMenu ({}) {
                     <p className={styles.name}>{data.name}</p>
                     <div className={styles.buttons}>
 
-                        <button onClick={() => {router.push("/profile/" + session.data.user.name)}}>Din Profil</button>
-                        <button onClick={() => {router.push("/settings")}}>Innstillinger</button>
-                        <button onClick={() => {router.push("/dashboard")}}>Dine Filer</button>
-                        <button onClick={() => {router.push("/dashboard/batches")}}>Batcher</button>
+                        <button onClick={() => {router.push("/profile/" + session.data.user.name)}}><Image src={"/icons/user_icon.svg"} width={25} height={25} />Profil</button>
+                        <button onClick={() => {router.push("/settings")}}><Image src={"/icons/settings_icon.svg"} width={25} height={25} /> Innstillinger</button>
+                        <button onClick={() => {router.push("/dashboard")}}><Image src={"/icons/files_icon.svg"} width={25} height={25} /> Filer</button>
+                        <button onClick={() => {router.push("/dashboard/batches")}}><Image src={"/icons/batches_icon.svg"} width={25} height={25} /> Batcher</button>
 
-                        <button style={{border: "1px solid #222"}} onClick={() => {signOut()}}>Log Ut</button>
+                        <button className={styles.signout} onClick={() => {signOut()}}><Image src={"/icons/download_icon.svg"} style={{rotate: "90deg"}} width={25} height={25} />Log Ut</button>
 
                     </div>
 
