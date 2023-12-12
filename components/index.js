@@ -18,6 +18,7 @@ import CreateBatch from "./cards/CreateBatch/CreateBatch";
 import LiveLyrics from "./cards/LiveLyrics/LiveLyrics";
 import RadialProgress from "./cards/RadialProgress/RadialProgress";
 import ArticleCard from "./cards/ArticleCard/ArticleCard";
+import UserDropMenu from "./UserDropMenu/UserDropMenu";
 export 
 {
     SeriesCard,
@@ -39,5 +40,6 @@ export
     CreateBatch,
     LiveLyrics,
     RadialProgress,
-    ArticleCard
+    ArticleCard,
+    UserDropMenu
 };

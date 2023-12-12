@@ -1,5 +1,5 @@
 
-import { ArticleCard, LargeCard } from '@/components/index'
+import { ArticleCard, LargeCard, UserDropMenu } from '@/components/index'
 
 import { RatioImage } from '@/components/RatioImage'
 import Image from 'next/image'
@@ -151,10 +151,10 @@ export default function Home () {
               <Link href={"/projects"}>Prosjekter</Link>
               <p style={{cursor: "pointer"}} onClick={() => {setTransitionPage("contact")}}>Kontakt Oss</p>
               <div style={{marginLeft: "auto", marginRight: 24}}>
-                {session.status === "authenticated" && <Link href={"/dashboard"} style={{display: "flex", flexDirection: "row", gap: 8, justifyContent: "center"}}>
-                    <Image width={40} height={40} style={{borderRadius: "50%"}} src={session.data.user.image} />
-                </Link> }
-                {session.status !== "authenticated" && <Link href={"/auth/signin"}></Link> }
+                {session.status === "authenticated" && 
+                    <UserDropMenu avatar={session.data.user.image} name={session.data.user.name} />
+                }
+                {session.status !== "authenticated" && <Link href={"/auth/signin"}>Log In</Link> }
               </div>
         </nav>
         <header className={styles.header}>
@@ -210,8 +210,9 @@ export default function Home () {
 
         <p style={{marginLeft: 16, padding: 8, width: "fit-content", background: "var(--jet)"}}>Denne siden er ikke ferdig og representerer ikke et ferdig produkt eller bilde av Aktuelt Studio</p>
         <section className={styles.gallery}>
-            <ArticleCard title={"Aktuelt Nå, tilbakeblikk"} description={"Det har gått noen år siden sist."} image={"http://aktuelt.tv/_next/image?url=%2Fapi%2Fv1%2Ffiles%2Fvideos%2Fthumbnail%3FfileId%3D86c515d3-8702-4718-82f8-8a46baef7e88.webm&w=1920&q=75"} />
-            <ArticleCard title={"Bilde informasjon"} description={"I en kommende oppdatering vil det bli mulig å se blender, lukkertid og flere detaljer fra bilder."} image={"http://aktuelt.tv/api/v1/files?fileId=c94a42d9-d7b2-417d-9d64-76e394389fee.JPG"} />
+            <ArticleCard title={"Nytt kontrollvindu!"} tags={[{text: "Oppdatering", color: "#222"}]} description={"Et nytt vindu for å lettere kunne flytte deg gjennom nettsiden. Trykk på profilbildet ditt for å åpne menyen."} image={"http://aktuelt.tv/api/v1/files?fileId=268d7464-c10b-4d0d-a59e-6a57e67e587e.png"} />
+            <ArticleCard title={"Aktuelt Nå, tilbakeblikk"} tags={[{text: "Podcast", color: "var(--ak-secondary)"},{text: "Nyheter", color: "var(--tekhelet)"}]} description={"Som dere kan se, så er jeg er kanskje en litt eldre podcast enn dere andre."} image={"http://aktuelt.tv/_next/image?url=%2Fapi%2Fv1%2Ffiles%2Fvideos%2Fthumbnail%3FfileId%3D86c515d3-8702-4718-82f8-8a46baef7e88.webm&w=1920&q=75"} />
+            <ArticleCard title={"Bilde informasjon"} tags={[{text: "Fotografering", color: "var(--magenta-haze)"},{text: "Oppdatering", color: "#222"}]} description={"I en kommende oppdatering vil det bli mulig å se blender, lukkertid og flere detaljer fra bilder."} image={"http://aktuelt.tv/api/v1/files?fileId=c94a42d9-d7b2-417d-9d64-76e394389fee.JPG"} />
             <ArticleCard title={"Vinter inspirasjon"} description={"En rekke inspirasjon for vinterland. "} image={"http://aktuelt.tv/api/v1/files?fileId=aad2db12-8dd8-4306-b6d2-254e5b87d002.JPG"} />
         </section>
 

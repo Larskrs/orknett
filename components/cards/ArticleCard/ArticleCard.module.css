@@ -4,11 +4,16 @@
     min-width: 300px;
     background-color: var(--jet);
     border: 1px solid #222;
-    border-radius: 16px;
     display: flex;
     flex-direction: column;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+}
+.card:hover {
+    box-shadow: 0px 0px 5px 0px #333;
+    border-color: #333;
+    z-index: 5; 
 }
 .card .image {
     height: 50%;
@@ -25,4 +30,22 @@
     font-size: 20px;
     line-height: 1.5;
     color: #aaa;
+}
+.card .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.card .tags span {
+    color: white;
+    font-size: 20px;
+    padding: 4px 8px;
+    background-color: #111;
+    border: 1px solid #222;
+    border-radius: 4px;
 }
