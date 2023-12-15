@@ -81,7 +81,7 @@ export default function SignIn({ providers }) {
         <>
           {Object.values(providers).map((provider) => (
             <div key={provider.name} style={{padding: ".5rem 1rem", cursor: "pointer", background: "var(--background)", border: "1px solid #222", fontSize: "20px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700"}} 
-            onClick={() => signIn(provider.id)}
+            onClick={() => signIn(provider.id, { redirect: true })}
             >
               Log in med
               <Image alt="google_signin_provider" src={"/google.png"} width={100} height={32} style={{objectFit: "contain", translate: "0px 2px"}} />
