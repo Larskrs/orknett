@@ -16,7 +16,7 @@ import { getServerSession } from "next-auth";
 
 
 function BatchList ({batches}) {
-    return <>
+    return <div className={styles.batchList}>
     {batches.map((batch, i) => {
         
         return (
@@ -27,8 +27,6 @@ function BatchList ({batches}) {
                 </div>
                 <div className={styles.info}>
                     <p className={styles.title}>{batch.title} </p>
-                    <p>{batch.owners.length} medlem{batch.owners.length > 1 ? "mer" : ""}</p>
-                    <p>{batch.files.length} fil{batch.files.length > 1 ? "er" : ""}</p>
                 </div>
             </Link>
 
@@ -38,7 +36,7 @@ function BatchList ({batches}) {
             // </Badge>
         )
     })}
-    </>
+    </div>
 }
 
 
@@ -152,10 +150,10 @@ function BatchesPage ({batches, thumbnailBatches}) {
                             <CreateBatch session={session}>
                                 <button className="button">Create Batch</button>
                             </CreateBatch>
-                            <BatchTable batches={selfBatches} onBatchClick={(batch, i) => {router.push("/dashboard/batches/" + batch.id)}} />
+                            <BatchList batches={selfBatches} onBatchClick={(batch, i) => {router.push("/dashboard/batches/" + batch.id)}} />
                             
                         </> }
-                        {batchTab === 1 && <BatchTable batches={sharedBatches} onBatchClick={(batch, i) => {router.push("/dashboard/batches/" + batch.id)}} /> }
+                        {batchTab === 1 && <BatchList batches={sharedBatches} onBatchClick={(batch, i) => {router.push("/dashboard/batches/" + batch.id)}} /> }
                     </div>
 
                 </div>
