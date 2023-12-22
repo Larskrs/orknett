@@ -226,11 +226,6 @@
     z-index: 1;
 }
 
-@media (pointer: coarse) {
-    .ball {
-        display: none;
-    }
-}
 @media (hover: hover) {
     .ball {
       scale: 1;

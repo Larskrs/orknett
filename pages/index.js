@@ -144,11 +144,10 @@ export default function Home () {
 
           <nav className={styles.nav}>
               <div style={{marginRight: "1.2em"}}>
-                <Image width={100} height={40} src={"/new_logo.svg"}></Image>
+                <Image width={40} height={40} src={"/new_logo_symbol.svg"}></Image>
                 {/* <h2>.tv</h2> */}
               </div>
               <Link href={"/profiles"}>Profiler</Link>
-              <Link href={"/projects"}>Prosjekter</Link>
               <p style={{cursor: "pointer"}} onClick={() => {setTransitionPage("contact")}}>Kontakt Oss</p>
               <div style={{marginLeft: "auto", marginRight: 24}}>
                 {session.status === "authenticated" && 

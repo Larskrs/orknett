@@ -29,7 +29,11 @@ export default function UserDropMenu ({}) {
                 <Image src={data.image} fill />
             </div>
 
-            {isExpanded && <div onClick={() => {setIsExpanded(false)}} className={styles.deadzone}></div>}
+            <div style={{
+                    opacity: isExpanded ? 1 : 0,
+                    pointerEvents: isExpanded ? "all" : "none",
+                }}
+            onClick={() => {setIsExpanded(false)}} className={styles.deadzone}></div>
 
             <div style={{
                     opacity: isExpanded ? 1 : 0,
