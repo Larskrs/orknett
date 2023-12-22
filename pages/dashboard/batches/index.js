@@ -23,7 +23,7 @@ function BatchList ({batches}) {
 
             <Link className={styles.article} key={i} href={"/dashboard/batches/" + batch.id}>
                 <div className={styles.thumbnail}>
-                    <Image src={batch.thumbnail} alt={batch.thumbnail} fill />
+                    <Image quality={1} src={batch.thumbnail} width={175} height={175} alt={batch.thumbnail} />
                 </div>
                 <div className={styles.info}>
                     <p className={styles.title}>{batch.title} </p>
