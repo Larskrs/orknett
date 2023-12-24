@@ -22,9 +22,9 @@ export default function Odometer () {
                     console.log(c)
                     const digit = abc.findIndex(char => char === c);
 
-                    return <div style={{translate: `0 ${(digit) * -40}px`, display: "flex", flexDirection: "column", transitionDuration: `${(i)*.25}s`, transitionTimingFunction: "ease"}}>
-                        {abc.map((num) => {
-                            return <p style={{margin: 0, fontSize: 40, height: "40px", width: "30px", display: 'flex', alignItems: "center", justifyContent: "center"}}>{num}</p>
+                    return <div key={i} style={{translate: `0 ${(digit) * -40}px`, display: "flex", flexDirection: "column", transitionDuration: `${(i)*.25}s`, transitionTimingFunction: "ease"}}>
+                        {abc.map((num, i) => {
+                            return <p key={i} style={{margin: 0, fontSize: 40, height: "40px", width: "30px", display: 'flex', alignItems: "center", justifyContent: "center"}}>{num}</p>
                         })}
                     </div>
 
