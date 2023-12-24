@@ -108,7 +108,8 @@ function BatchesPage ({batches, thumbnailBatches}) {
     if (session.status !== "authenticated") { 
         return (
             <FileSharingLayout pageId={3} batches={batches}>
-                <h1>Seger</h1>
+                <h1>Whoops!</h1>
+                <p>Noe galt har ukjent har skjedd! prøv å laste inn siden på nytt eller gå tilbake til <Link href={"/"}>hjemmesiden</Link> vår.</p>
             </FileSharingLayout>
         )    
     }

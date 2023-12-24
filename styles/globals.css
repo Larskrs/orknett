@@ -86,6 +86,13 @@ button {
   cursor: pointer;
   background-color: transparent;
 }
+button:disabled {
+  opacity: 0.25;
+  cursor: unset;
+}
+button:disabled:hover {
+  border-color: transparent !important;
+}
 input[type="text"] {
   background-color: var(--gray-2);
   border-radius: 6px;
