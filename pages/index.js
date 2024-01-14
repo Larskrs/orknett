@@ -157,9 +157,6 @@ export default function Home () {
               </div>
         </nav>
         <header className={styles.header}>
-          <div className={styles.descriptor_image}>
-            <p>Foto: Lars Kristian Småge Syvertsen, bilde av: Daniel Grimsrud Hagen</p>
-          </div>
           <div className={styles.image}>
             <Image fill src={"http://aktuelt.tv/api/v1/files?fileId=d8e5e400-ec12-4c7d-babe-3d95ad75d0e7.JPG"} />
           </div>
@@ -177,42 +174,14 @@ export default function Home () {
           <p>Vi hjelper deg med å få din bedrift eller virksomhet klar for lerretet. </p>
           <div className={styles.action}>
             <button onClick={() => {setTransitionPage("contact")}} >Kontakt Oss</button>
-            <p>Lorem Ipsum...</p>
           </div>
           </div>
         </header>
 
-        {/* <section className={styles.projects}>
-            <div className={styles.project}>
-                <div className={styles.info}>
-                    <h1>Arbeidsgiver
-                    <div className={styles.arrow}>
-                    →
-                    </div>
-                    </h1>
-                    <p>{`"Maskin bom bom bom..." - Anne Lianne`}</p>
-                    
-                </div>
-            </div>
-            <div className={styles.project}>
-                <div className={styles.info}>
-                    <h1>Fjelldal materials
-                    <div className={styles.arrow}>
-                    →
-                    </div>
-                    </h1>
-                    <p>{`"Jeg er en fiktiv arbeidsgiver" - Jens Usannson"`}</p>
-                    
-                </div>
-            </div>
-        </section> */}
-
-        <p style={{marginLeft: 16, padding: 8, width: "fit-content", background: "var(--jet)"}}>Denne siden er ikke ferdig og representerer ikke et ferdig produkt eller bilde av Aktuelt Studio</p>
         <section className={styles.gallery}>
-            <ArticleCard title={"Nytt kontrollvindu!"} tags={[{text: "Oppdatering", color: "#222"}]} description={"Et nytt vindu for å lettere kunne flytte deg gjennom nettsiden. Trykk på profilbildet ditt for å åpne menyen."} image={"http://aktuelt.tv/api/v1/files?fileId=38390b0b-f3bc-42c9-9a1e-72f4fea2d3ae.jpg"} />
-            <ArticleCard title={"Aktuelt Nå, tilbakeblikk"} tags={[{text: "Podcast", color: "var(--ak-secondary)"},{text: "Nyheter", color: "var(--tekhelet)"}]} description={"Som dere kan se, så er jeg er kanskje en litt eldre podcast enn dere andre."} image={"http://aktuelt.tv/_next/image?url=%2Fapi%2Fv1%2Ffiles%2Fvideos%2Fthumbnail%3FfileId%3D86c515d3-8702-4718-82f8-8a46baef7e88.webm&w=1920&q=75"} />
-            <ArticleCard title={"Bilde informasjon"} tags={[{text: "Fotografering", color: "var(--magenta-haze)"},{text: "Oppdatering", color: "#222"}]} description={"I en kommende oppdatering vil det bli mulig å se blender, lukkertid og flere detaljer fra bilder."} image={"http://aktuelt.tv/api/v1/files?fileId=c94a42d9-d7b2-417d-9d64-76e394389fee.JPG"} />
-            <ArticleCard title={"Vinter inspirasjon"} description={"En rekke inspirasjon for vinterland. "} image={"http://aktuelt.tv/api/v1/files?fileId=aad2db12-8dd8-4306-b6d2-254e5b87d002.JPG"} />
+            <ArticleCard title={"Ny film, nye folk!"}  description={"Vi trenger elever som er villige til å prøve noe nytt. "} contain image={"http://aktuelt.tv/api/v1/files?fileId=a685f6b5-5bd6-4cec-9c9f-e3d0840cef17.png"} />
+            <ArticleCard title={""}  description={""} contain image={"http://aktuelt.tv/api/v1/files?fileId=f9c656bd-dff5-4a30-a624-ff707aa6bf0b.png"} />
+            <ArticleCard title={"DBL på DVD!"}  description={"DBL vil bli utgitt på DVD!"} contain image={"http://aktuelt.tv/api/v1/files?fileId=55baf4a7-856f-4a03-81b5-22de9d097a44.png"} />
         </section>
 
     </div>

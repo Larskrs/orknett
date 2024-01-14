@@ -1,51 +1,85 @@
 .card {
-    height: 500px;
-    width: 350px;
-    min-width: 300px;
-    background-color: var(--jet);
-    border: 1px solid #222;
+    height: 250px;
+    min-width: 400px;
+    max-width: 400px;
+    border-radius: 16px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     position: relative;
-    overflow: hidden;
     cursor: pointer;
+    /* background-color: rgb(16, 16, 24); */
 }
-.card:hover {
-    box-shadow: 0px 0px 5px 0px #333;
-    border-color: #333;
-    z-index: 5; 
+.bg {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+}
+.bg img {
+    object-fit: cover;
+    filter: blur(25px);
+    scale: 1.2
 }
 .card .image {
-    height: 50%;
+    height: 300px;
+    min-width: 500px;
+    max-width: 500px;
+    scale: 1;
     position: relative;
     object-fit: cover;
+    overflow: hidden;
+    border-radius: 16px;
+    background-color: transparent;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    right: 0;
+    bottom: 0;
+    translate: -50% -50%;
+    z-index: 1;
+}
+.card:hover {
+    scale: 1.025;
 }
 .card .image img {
-    object-fit: cover;
+    background-color: transparent;
 }
 .card .title {
-    font-size: 28px;
+    font-size: 20px;
+    margin-block: 0;
 }
 .card .description {
-    font-size: 20px;
-    line-height: 1.5;
+    font-size: 18px;
     color: #aaa;
+}
+.card .details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* padding: 1rem; */
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    border-radius: 16px;
+    padding: 16px;
+    margin-left: 150px;
+    z-index: 2;
+
+    /* From https://css.glass */
 }
 .card .tags {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    padding: 8px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    padding: 0px;
 }
 .card .tags span {
     color: white;
-    font-size: 20px;
-    padding: 4px 8px;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 4px 16px;
     background-color: #111;
-    border: 1px solid #222;
-    border-radius: 4px;
+    border-radius: 16px;    
 }

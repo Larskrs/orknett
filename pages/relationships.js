@@ -11,15 +11,16 @@ export default function Relationships ({data}) {
             <h2>Venner</h2>
 
             <div style={{display: "flex", flexDirection: "column", gap: 8}}>
-              <IngoingRequests />
+              <p>{data.length}</p>
+              <IngoingRequests data={data}/>
             </div>
 
         </Layout>
     );
 }
 
-function IngoingRequests () {
-    const { data, error, isLoading, refetch, fetch } = useFetch({endpoint: "/relationships/ingoing", fetchOnLoad: true})
+function IngoingRequests ({data}) {
+    // const { data, error, isLoading, refetch, fetch } = useFetch("/relationships/ingoing", null)
 
     console.log(data)
     
