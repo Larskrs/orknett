@@ -1,3 +1,4 @@
+import useFetch from "@/hooks/useFetch";
 import Layout from "@/layouts/FileSharingLayout";
 import { GetServiceClient } from "@/lib/Supabase";
 import { getSession } from "next-auth/react";
@@ -10,17 +11,26 @@ export default function Relationships ({data}) {
             <h2>Venner</h2>
 
             <div style={{display: "flex", flexDirection: "column", gap: 8}}>
-            {data.map((d) => {
-                return (
-                    <div key={d.id} style={{gap: 8, display: "flex", alignItems: "center", justifyContent: "flex-start", border: "1px solid #222", padding: "8px 16px"}}>
-                        <div><Image style={{borderRadius: "50%", border: "1px solid #222"}} src={d.users.image} height={50} width={50}/></div>
-                        <div><p>{d.users.name}</p></div>
-                    </div>
-                )
-            })}
+              <IngoingRequests />
             </div>
+
         </Layout>
     );
+}
+
+function IngoingRequests () {
+    const { data, error, isLoading, refetch, fetch } = useFetch({endpoint: "/relationships/ingoing", fetchOnLoad: true})
+
+    console.log(data)
+    
+    {data && data.map((d) => {
+      return (
+          <div key={d.id} style={{gap: 8, display: "flex", alignItems: "center", justifyContent: "flex-start", border: "1px solid #222", padding: "8px 16px"}}>
+              <div><Image style={{borderRadius: "50%", border: "1px solid #222"}} src={d.users.image} height={50} width={50}/></div>
+              <div><p>{d.users.name}</p></div>
+          </div>
+      )
+  })}
 }
 
 export const getServerSideProps = async (context) => {

@@ -38,7 +38,7 @@ export default function FileElement ({file, onSelect, download=true, rating=0, o
                                 {type == "audio" && <>
                                     
                                 <div>
-                                <Image alt={file.fileName} fill style={{objectFit: "cover"}} src={image} />
+                                <Image alt={file.fileName} width={10} height={10} style={{objectFit: "cover"}} src={image} />
                                 <div style={{width: 50, height: 50, position: "absolute", left: 8, top: 8, background: "rgba(0,0,0,.25)", borderRadius: "50%"}}><Image alt={file.fileName} fill src={"/audio.svg"} /></div> 
                                     </div>
                                     

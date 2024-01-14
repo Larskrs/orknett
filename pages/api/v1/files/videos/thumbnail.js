@@ -79,7 +79,6 @@ export default async function handler(req, res) {
                 console.error(err);
             }
               res.status(500);
-              res.end();
               return;
           }
   
@@ -89,8 +88,7 @@ export default async function handler(req, res) {
               res.statusCode = 200;
               res.setHeader("accept-ranges", "bytes");
               res.setHeader("content-length", contentLength);
-              
-              res.end();
+              res.status(200)
           }
           else {        
               let retrievedLength;

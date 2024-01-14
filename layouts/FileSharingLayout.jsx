@@ -24,9 +24,9 @@ export default function Layout({children, pageId = 0, theme = "dark"}) {
                   <nav className={styles.nav} style={{
                     backgroundColor: (theme == "dark" ? "var(--dark-green)" : "transparent")
                   }}>
-                      <Link className={current === -1 ? styles.element : styles.default} href={"/"}><Image width={30} height={30} src={"/new_logo_symbol.svg"} /></Link>
-                      <Link className={current === 2 ? styles.element : styles.default} href={"/dashboard"}><Image width={30} height={30} src={"/icons/files_icon.svg"} /></Link>
-                      <Link className={current === 3 ? styles.element : styles.default} href={"/dashboard/batches"}><Image width={30} height={30} src={"/icons/batches_icon.svg"} /></Link>
+                      <Link className={current === -1 ? styles.element : styles.default} href={"/"}><Image alt={"logo"} width={30} height={30} src={"/new_logo_symbol.svg"} /></Link>
+                      <Link className={current === 2 ? styles.element : styles.default} href={"/dashboard"}><Image alt={"files"} width={30} height={30} src={"/icons/files_icon.svg"} /></Link>
+                      <Link className={current === 3 ? styles.element : styles.default} href={"/dashboard/batches"}><Image alt={"batches"} width={30} height={30} src={"/icons/batches_icon.svg"} /></Link>
                       {/* <Link className={current === 4 ? styles.element : styles.default} href={"/dashboard/articles"}>Articles</Link> */}
                       {/* <Link className={current === 5 ? styles.element : styles.default} href={"/dashboard/series"}>Series</Link> */}
                       <UserDropMenu />

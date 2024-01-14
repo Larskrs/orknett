@@ -2,6 +2,12 @@ import { GetContentType } from "@/lib/ExtensionHelper";
 import fs from "fs"
 import path from "path";
 
+export const config = {
+    api: {
+      responseLimit: false,
+    },
+  }
+
 function GetFileStream(req, res) {
 
 
