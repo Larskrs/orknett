@@ -4,6 +4,7 @@ import Link from "next/link";
 import styles from "@/styles/newUI/articles.module.css"
 import { InputField } from "@/components";
 import Image from "next/image";
+import Layout from "@/layouts/newUI/ArticleLayout";
 
 
 function index({article}) {
@@ -11,16 +12,32 @@ function index({article}) {
     console.log(article)
 
     return (
+        <Layout>
             <div className={styles.container}>
                 <div className={styles.main}>
-                <header className={styles.header}>
-                    <Image height={250} width={250} src={"http://aktuelt.tv/api/v1/files?fileId=6d42d853-3e41-4926-b245-6b41569154b0.png"}></Image>
+                <section className={styles.header}>
+                    <div className={styles.feature}> 
+                        <Image fill src={article?.feature ? article.feature : ""} alt="Feature Image"></Image>
+                    </div>
                     <h1>{article?.title}</h1>
-                </header>
+                </section>
+
+            <div className={styles.fields}>
 
 
+                <section className={styles.field}>
+                    <h3>Hvilke stillinger kan jeg søke om?</h3>
+                    <p>Vi trenger hjelp med lyssetting, scene oppsett, statister og grafisk design. </p>
+                </section>
+                <section className={styles.field}>
+                    <h3>Hvem kan søke?</h3>
+                    <p>Om du går på medier og kommunikasjon hos Hjalmar Johansen Videregående skole, kan du søke om mediarelevante stillinger, dessverre godtar vi ikke MK elever fra Larvik (Blodpenger). </p>
+                </section>
+                
                 </div>
             </div>
+            </div>
+        </Layout>
     );
 }
 
@@ -32,8 +49,7 @@ export async function getStaticProps({ params }) {
         *
     `)
     .eq("slug", params.slug)
-    .single()
-
+    .single();
     // console.log(data)
     return {
         props:{
