@@ -11,9 +11,12 @@ import Layout from '@/layouts/newUI/layout'
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import useViewDown from '@/hook/useViewDown'
+import usePageBottom from '@/hook/useBottom'
 
 export default function Home () {
 
+  const isNavDown = useViewDown(72)
   const [productSpanText, setProductSpanText] = useState(0)
   const [isHovering, setIsHovering] = useState(false)
   const [transitionPage, setTransitionPage] = useState(null)
@@ -78,7 +81,6 @@ export default function Home () {
     
           if (cursorStyle === 'pointer') {
             // The element being hovered has a pointer cursor style
-            console.log('Element has a pointer cursor style!');
             setIsHovering(true)
           } else {
             setIsHovering(false)
@@ -142,18 +144,18 @@ export default function Home () {
 
         <div id="ball" style={ballStyle()} className={styles.ball}></div>
 
-          <nav className={styles.nav}>
+          <nav className={styles.nav}  style={{background: isNavDown ? "var(--midnight)" : "transparent"}}>
               <div style={{marginRight: "1.2em"}}>
                 <Image width={40} height={40} src={"/new_logo_symbol.svg"}></Image>
                 {/* <h2>.tv</h2> */}
               </div>
-              <Link href={"/profiles"}>Profiler</Link>
+              {/* <Link href={"/profiles"}>Profiler</Link> */}
               <p style={{cursor: "pointer"}} onClick={() => {setTransitionPage("contact")}}>Kontakt Oss</p>
               <div style={{marginLeft: "auto", marginRight: 24}}>
                 {session.status === "authenticated" && 
                     <UserDropMenu avatar={session.data.user.image} name={session.data.user.name} />
                 }
-                {session.status !== "authenticated" && <Link href={"/auth/signin"}>Log In</Link> }
+                {session.status !== "authenticated" && <Link href={"/auth/signin"}>Logg In</Link> }
               </div>
         </nav>
         <header className={styles.header}>
@@ -184,6 +186,14 @@ export default function Home () {
             <ArticleCard title={"DBL på DVD!"}  description={"DBL vil bli utgitt på DVD!"} contain image={"http://aktuelt.tv/api/v1/files?fileId=55baf4a7-856f-4a03-81b5-22de9d097a44.png"} />
         </section>
 
+        <footer className={styles.footer}>
+          <section>
+            
+          </section>
+          <section>
+
+          </section>
+        </footer>
     </div>
   )
 }

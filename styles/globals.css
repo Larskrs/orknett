@@ -20,6 +20,8 @@
   /* THEME COLORS */
   --eerie-black: #0a0a0f;
   --jet: #111013;
+  --midnight: #10111a;
+  --midnight-background: #0c0d14;
   --black-olive: #423e37;
   --xanthous: #e3b23c;
   --gold-metallic: #e1c066;
@@ -32,6 +34,8 @@
   --ak-primary: #df37e3;
   --ak-secondary: #1f143e;
   --ak-tertiary: #effd95;
+
+  --scrollBarColor: var(--midnight);
   
 
   color: white;
@@ -40,7 +44,10 @@
   /* overflow: hidden; */
 
   scroll-behavior: smooth;
+
+  
 }
+
 body {
   margin: 0;
   padding: 0;
@@ -52,6 +59,37 @@ html, body {
   overflow-x: hidden;
   
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: transparent;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: transparent;
+  opacity: 0;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(0,0,0);
+  background: var(--scrollBarColor);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ak-secondary); 
+}
+::-webkit-scrollbar:hover {
+  background: var(--ak-secondary); 
+}
+
+
 
 
 

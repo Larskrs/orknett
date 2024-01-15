@@ -2,7 +2,8 @@
 
 .container {
     background-color: var(--background);
-    height: 100vh;
+    --scrollBarColor: #aaa;
+    min-width: 100vw;
 }
 .header .image {
     opacity: .125;
@@ -16,6 +17,7 @@
     overflow: hidden;
     padding: 4vmin;
     display: flex;
+    min-height: 80vh;
     gap: 1vmin;
     flex-direction: column;
     background-color: #070709;
@@ -240,13 +242,16 @@
     align-items: center;
     gap: 1rem;
     padding: 1rem;
+    padding-left: 2rem;
     position: absolute;
     height: 76px;
     top: 0;
     left: 0;
-    margin-left: 8px;
+    right: 0;
+    margin: 0;
     z-index: 99;
     width: 100%;
+    transition: all 250ms ease-in-out;
   }
   .nav * {
     color: white;
@@ -282,11 +287,10 @@
     gap: 16px;
     display: flex;
     flex-wrap:nowrap;
-    overflow:visible !important;
-    overflow-x: scroll;
+    overflow:   visible-scroll !important;
     width: 100%;
-    margin-bottom: 100px;
     padding: 1rem;
+    padding-block: 1rem;
 }
 .gallery .image {
     min-width: 500px;
@@ -314,4 +318,17 @@
  }
 .gallery .image img {
     border-radius: 0;
+}
+
+
+.footer {
+    background-color: var(--midnight);
+    padding: 2rem;
+    justify-content: center;
+    align-items: center;
+    min-height: 35vh;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 1;
 }

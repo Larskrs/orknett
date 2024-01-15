@@ -1,0 +1,28 @@
+.container {
+    background-color: var(--midnight-background);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+.main {
+    background-color: var(--midnight );
+    height: 100%;
+    width: 100%;
+    max-width: 900px;
+    padding: 1rem;
+}
+.header h1 {
+    font-size: 52px;
+}
+.header {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+}
+.header img {
+    object-fit: cover;
+}
