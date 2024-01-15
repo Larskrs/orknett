@@ -1,0 +1,38 @@
+.wrap button {
+    padding: 8px 16px;
+    border-radius: 0px;
+    font-size: 20px;
+    font-weight: 400;
+    background-color: #222;
+}
+.regneark {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 1px solid #222;
+    
+}
+.bolig {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: #111;
+    padding: 8px 16px;
+    /* border-top: 5px solid #222; */
+}
+
+.wrap table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+.wrap td, .wrap th {
+    border: 1px solid #333;
+    text-align: left;
+    padding: 8px;
+  }
+  
+.wrap tr:nth-child(even) {
+    background-color: #111;
+  }
