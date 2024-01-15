@@ -22,7 +22,7 @@ export default function Layout({children, current=0}) {
                   </Link>
                   {/* <Link href={"/profiles"}>Profiler</Link> */}
                   <p style={{cursor: "pointer"}} onClick={() => {setTransitionPage("contact")}}>Kontakt Oss</p>
-                  <div style={{marginLeft: "auto", marginRight: 24}}>
+                  <div style={{marginLeft: "auto"}}>
                     {session.status === "authenticated" && 
                         <UserDropMenu avatar={session.data.user.image} name={session.data.user.name} />
                     }
@@ -31,6 +31,14 @@ export default function Layout({children, current=0}) {
             </nav>
 
             {children}
+
+            <footer className={styles.footer}>
+              <section>
+                    <Image src={"/new_logo.svg"} width={125} height={50}/>
+              </section>
+                <p>Aktuelt Studio 2024©</p>
+              
+            </footer>
             
         </div>
       )

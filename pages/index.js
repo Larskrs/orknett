@@ -7,7 +7,7 @@ import Link from 'next/link'
 import styles from '../styles/newUI/home.module.css'
 import { RatioMedia } from '@/components/RatioMedia'
 import Head from 'next/head'
-import Layout from '@/layouts/newUI/layout'
+import Layout from '@/layouts/newUI/ArticleLayout'
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
@@ -140,24 +140,10 @@ export default function Home () {
 }
 
   return (
-    <div className={styles.container}>
+    <Layout>
 
         <div id="ball" style={ballStyle()} className={styles.ball}></div>
 
-          <nav className={styles.nav}  style={{background: isNavDown ? "var(--midnight)" : "transparent"}}>
-              <div style={{marginRight: "1.2em"}}>
-                <Image width={40} height={40} src={"/new_logo_symbol.svg"}></Image>
-                {/* <h2>.tv</h2> */}
-              </div>
-              {/* <Link href={"/profiles"}>Profiler</Link> */}
-              <p style={{cursor: "pointer"}} onClick={() => {setTransitionPage("contact")}}>Kontakt Oss</p>
-              <div style={{marginLeft: "auto", marginRight: 24}}>
-                {session.status === "authenticated" && 
-                    <UserDropMenu avatar={session.data.user.image} name={session.data.user.name} />
-                }
-                {session.status !== "authenticated" && <Link href={"/auth/signin"}>Logg In</Link> }
-              </div>
-        </nav>
         <header className={styles.header}>
           <div className={styles.image}>
             <Image fill src={"http://aktuelt.tv/api/v1/files?fileId=d8e5e400-ec12-4c7d-babe-3d95ad75d0e7.JPG"} />
@@ -186,14 +172,7 @@ export default function Home () {
             <ArticleCard title={"DBL på DVD!"}  description={"DBL vil bli utgitt på DVD!"} contain image={"http://aktuelt.tv/api/v1/files?fileId=55baf4a7-856f-4a03-81b5-22de9d097a44.png"} />
         </section>
 
-        <footer className={styles.footer}>
-          <section>
-            
-          </section>
-          <section>
 
-          </section>
-        </footer>
-    </div>
+    </Layout>
   )
 }

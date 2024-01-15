@@ -241,8 +241,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1rem;
-    padding-left: 2rem;
+    padding: 2rem;
     position: absolute;
     height: 76px;
     top: 0;
@@ -322,7 +321,7 @@
 
 
 .footer {
-    background-color: var(--midnight);
+    background-color: var(--midnight-background);
     padding: 2rem;
     justify-content: center;
     align-items: center;
