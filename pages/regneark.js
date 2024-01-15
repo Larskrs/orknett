@@ -114,7 +114,7 @@ export default function What ({}) {
                 terminBeløp = rentebeløp + avdrag
 
                 return (
-                    <tr>
+                    <tr key={i}>
                         <td>År {i}</td>
                         <td>{Formater(restlån)}</td>
                         <td>{Formater(rentebeløp)}</td>
