@@ -22,7 +22,6 @@
 .article:hover .thumbnail img {
     scale: 1.125;
     transition-duration: .25s;
-    opacity: .5;
 }
 .article:hover {
     border-color: #7e7e7e;
@@ -273,3 +272,52 @@
     padding-bottom: 8px;
     border-bottom: 2px solid transparent;
   }
+
+
+.batchList {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.batchList .article {
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, .5);
+    width: 175px;
+    height: 175px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    border: none;
+}
+.batchList .article .thumbnail {
+    width: 100%;
+    height: 100%;
+    scale: 1.05;
+    opacity: .5;
+    filter: blur(1px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.batchList .article:hover > .thumbnail {
+    opacity: 1;
+}
+
+.batchList .article .thumbnail img:not([src]){ display:none; }
+.batchList .article .info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+.batchList .article .info p {
+    font-size: 24px;
+    text-align: center;
+}

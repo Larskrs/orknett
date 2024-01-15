@@ -33,6 +33,8 @@ function Element ({file, id, onEnded=(() => {})}) {
                     key={id}
                     alt={file.fileName}
                     src={file.source}
+                    priority={true}
+                    quality={70}
                     content={GetContentTypeFromSource(file.source)}
                     />
         )

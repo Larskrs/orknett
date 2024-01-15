@@ -16,19 +16,17 @@ import { getServerSession } from "next-auth";
 
 
 function BatchList ({batches}) {
-    return <>
+    return <div className={styles.batchList}>
     {batches.map((batch, i) => {
         
         return (
 
             <Link className={styles.article} key={i} href={"/dashboard/batches/" + batch.id}>
                 <div className={styles.thumbnail}>
-                    <Image src={batch.thumbnail} alt={batch.thumbnail} fill />
+                    <Image quality={1} src={batch.thumbnail} width={175} height={175} alt={batch.thumbnail} />
                 </div>
                 <div className={styles.info}>
                     <p className={styles.title}>{batch.title} </p>
-                    <p>{batch.owners.length} medlem{batch.owners.length > 1 ? "mer" : ""}</p>
-                    <p>{batch.files.length} fil{batch.files.length > 1 ? "er" : ""}</p>
                 </div>
             </Link>
 
@@ -38,7 +36,7 @@ function BatchList ({batches}) {
             // </Badge>
         )
     })}
-    </>
+    </div>
 }
 
 
@@ -110,7 +108,8 @@ function BatchesPage ({batches, thumbnailBatches}) {
     if (session.status !== "authenticated") { 
         return (
             <FileSharingLayout pageId={3} batches={batches}>
-                <h1>Seger</h1>
+                <h1>Whoops!</h1>
+                <p>Noe galt har ukjent har skjedd! prøv å laste inn siden på nytt eller gå tilbake til <Link href={"/"}>hjemmesiden</Link> vår.</p>
             </FileSharingLayout>
         )    
     }
@@ -152,10 +151,10 @@ function BatchesPage ({batches, thumbnailBatches}) {
                             <CreateBatch session={session}>
                                 <button className="button">Create Batch</button>
                             </CreateBatch>
-                            <BatchTable batches={selfBatches} onBatchClick={(batch, i) => {router.push("/dashboard/batches/" + batch.id)}} />
+                            <BatchList batches={selfBatches} onBatchClick={(batch, i) => {router.push("/dashboard/batches/" + batch.id)}} />
                             
                         </> }
-                        {batchTab === 1 && <BatchTable batches={sharedBatches} onBatchClick={(batch, i) => {router.push("/dashboard/batches/" + batch.id)}} /> }
+                        {batchTab === 1 && <BatchList batches={sharedBatches} onBatchClick={(batch, i) => {router.push("/dashboard/batches/" + batch.id)}} /> }
                     </div>
 
                 </div>
@@ -188,6 +187,7 @@ export async function getServerSideProps(ctx){
     `)
     .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
     .order("title", {ascending: false})
+    .order("created_at", { ascending: false, foreignTable: "files"})
     // .filter('files.source', 'in', ['png','jpg'])
     .limit(1, { foreignTable: "files"})
 

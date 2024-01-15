@@ -78,7 +78,6 @@
     background-color: var(--folly);
 }
 .signout {
-    margin-top: 50px;
     border: 1px solid #222 !important;
 }
 .buttons button {
@@ -116,10 +115,3 @@
     object-fit: cover;
 }
 
-@media screen and (max-width: 700px) {
-    .menu {
-        top: unset;
-        bottom: 72px;
-    }
-
-}

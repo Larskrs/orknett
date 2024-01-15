@@ -16,6 +16,7 @@ export const authOptions = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            checks: ['nonce', 'pkce'],
             authorization: {
                 params: {
                     prompt: "consent",
@@ -37,14 +38,12 @@ export const authOptions = {
           jwt: async ({ user, token }) => {
               if (user) {
                 token.uid = user.id;
-                token.banner = user.banner
               }
               return token;
             },
             session: async ({ session, token, user }) => {
                 if (session?.user) {
                   session.user.id = token.uid;
-                  session.user.banner = token.banner;
                   // Expanding the session
                   
                   const signingSecret = process.env.SUPABASE_JWT_SECRET
@@ -58,13 +57,6 @@ export const authOptions = {
                     }
                     session.supabaseAccessToken = jwt.sign(payload, signingSecret)
           }
-
-          const db = await GetServiceClient("next_auth")
-          .from("users")
-          .select("*")
-          .eq("id", token.uid)
-
-          session.user.banner = db.data.banner
           
           return session
         }

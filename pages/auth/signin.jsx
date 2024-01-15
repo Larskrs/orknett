@@ -3,6 +3,7 @@ import { getProviders, signIn } from "next-auth/react"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "../api/auth/[...nextauth]";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function SignIn({ providers }) {
     return (
@@ -13,61 +14,76 @@ export default function SignIn({ providers }) {
                 alt="background"
                 style={{objectFit: "cover", objectPosition: "center",}}
                 src={"http://aktuelt.tv/api/v1/files?fileId=d8e5e400-ec12-4c7d-babe-3d95ad75d0e7.JPG"} fill/>
+                <span className="gradient"></span>
             </div>
             <div className="box">
                 <Image src={"/new_logo.svg"} alt="logo" width={250} height={100} />
-                <p>Du er bare noen få klikk unna noe veldig <span style={{fontWeight: "700", textDecoration: "underline"}}>aktuelt!</span></p>
+                <p>Du er bare noen få klikk unna noe veldig <Link href={"/"} style={{fontWeight: "700", textDecoration: "underline", color: "var(--folly)"}}>aktuelt!</Link></p>
+                <p>Aktuelt.tv lagrer ikke ditt google passord.</p>
+                <br />
                 {displayProviders(providers)}
             </div>
         </div>
 
         <style jsx>{`
+          .wrap br {
+            height: 50px;
+            position: relative;
+            margin-block: 10px;
+          }
           .wrap {
             display: flex;
             width: 100vw;
             height: 100vh;
             align-items: center;
+            overflow: hidden;
             justify-content: center;
           }  
           .background {
             width: 200%;
             height: 100%;
+            filter: blur(0px);
+            overflow: hidden;
+            animation: blurOut 2s cubic-bezier(.17,.67,.44,.99);
           } 
+          .background .gradient {
+            background: rgba(2,2,2,1); 
+            background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(2,2,2,1) 100%); 
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+          }
           .background img {
             object-fit: cover;
           }
           .box {
             position: fixed;
-            right: 0;
-            top: 0;
-            width: 100%;
-            max-width: 500px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             display: flex;
-            background: var(--background);
-            border-left: 1px solid #222;
+            background: transparent;
             padding: 4rem 2rem;
             gap: 8px;
             z-index: 6;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            animation: zoomOut 2.5s cubic-bezier(.17,.67,.44,.99);
           }
           .box > p {
             text-align: center;
+            color: #bbb;
+            font-size: 1.1rem;
+            margin: 0;
           }
-          .provider {
-            padding: .5rem;
-            background: #222;
-          }
-          @keyframes zoomOut {
+          @keyframes blurOut {
             0% {
-                translate: 500px 0px; 
+              filter: blur(10px);
+              scale: 1.2;
             }
             100% {
-                scale: 1;
-                opacity: 1;
+              scale: 1;
+              filter: blur(0px);
             }
           }
           
@@ -80,13 +96,45 @@ export default function SignIn({ providers }) {
     return (
         <>
           {Object.values(providers).map((provider) => (
-            <div key={provider.name} style={{padding: ".5rem 1rem", cursor: "pointer", background: "var(--background)", border: "1px solid #222", fontSize: "20px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700"}} 
-            onClick={() => signIn(provider.id)}
+            <div key={provider.name} className="wrap"
+            onClick={() => signIn(provider.id, { redirect: true })}
             >
-              Log in med
-              <Image alt="google_signin_provider" src={"/google.png"} width={100} height={32} style={{objectFit: "contain", translate: "0px 2px"}} />
+              <span>Log in med</span>
+              <Image className="image" alt="google_signin_provider" src={"/google.png"} width={100} height={32} style={{objectFit: "contain", translate: "0px 2px"}} />
             </div>
           ))}
+
+          <style jsx>{`
+                .wrap {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  cursor: pointer;
+                  font-weight: 600;
+                  padding: 8px 16px;
+                  background: rgba(112.5,112.5,112.5, 0.2);
+                  border-radius: 6px;
+                  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                  backdrop-filter: blur(5px);
+                  -webkit-backdrop-filter: blur(5px);
+                  border: 1px solid rgba(255, 255, 255, 0.3);
+                }
+                .wrap:hover  {
+                  scale: 1.05;
+                  border-color: white;
+
+                }
+                @keyframes jump {
+                  0% {
+                    translate: 0px 0px;
+                  }
+                  100% {
+                    translate: 0px -2.5px;
+                    scale: 1.1;
+                  }
+                }
+                
+            `}</style>
         </>
       )
   }

@@ -100,12 +100,12 @@
 .action button {
     border-collapse: collapse;
     padding: 8px 16px;
-    border-radius: 0;
     color: white;
     border-color: var(--folly);
     font-size: 16px;
     box-shadow: 0px 0px 0px 1px var(--folly);
     font-family: "brother-1816", sans-serif;
+    border-radius: 8px;
 }
 .action button:hover {
     background-color: var(--folly);
@@ -226,11 +226,6 @@
     z-index: 1;
 }
 
-@media (pointer: coarse) {
-    .ball {
-        display: none;
-    }
-}
 @media (hover: hover) {
     .ball {
       scale: 1;
@@ -282,12 +277,12 @@
 .gallery {
     z-index: 2;
     position: relative;
-    min-height: 50vh;
     background-color: var(--background);
     gap: 16px;
     display: flex;
     flex-wrap:nowrap;
-    overflow:hidden;
+    overflow:visible !important;
+    overflow-x: scroll;
     width: 100%;
     margin-bottom: 100px;
     padding: 1rem;
