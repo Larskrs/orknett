@@ -24,10 +24,6 @@ function index({article}) {
 
             <article className={styles.article}>
 
-            <div className={styles.side}>
-                <p>Skrevet av: <Link href={"/profiler/"} >Lars Kristian Småge Syvertsen</Link></p>
-            </div>
-
             <div className={styles.fields}>
                 {article?.fields?.map((f) => {
 
@@ -47,6 +43,10 @@ function index({article}) {
                     
                 })}
                 
+                </div>
+
+                <div className={styles.side}>
+                    <p>Skrevet av: <Link href={"/profiler/"} >Lars Kristian Småge Syvertsen</Link></p>
                 </div>
                 </article>
             </div>
