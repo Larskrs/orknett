@@ -22,20 +22,35 @@ function index({article}) {
                     <h1>{article?.title}</h1>
                 </section>
 
+            <article className={styles.article}>
+
+            <div className={styles.side}>
+                <p>Skrevet av: <Link href={"/profiler/"} >Lars Kristian Småge Syvertsen</Link></p>
+            </div>
+
             <div className={styles.fields}>
+                {article?.fields?.map((f) => {
 
+                    return (
+                        <section key={f.id} className={styles.field}>
+                            {f?.title && <h3>{f?.title}</h3>}
 
-                <section className={styles.field}>
-                    <h3>Hvilke stillinger kan jeg søke om?</h3>
-                    <p>Vi trenger hjelp med lyssetting, scene oppsett, statister og grafisk design. </p>
-                </section>
-                <section className={styles.field}>
-                    <h3>Hvem kan søke?</h3>
-                    <p>Om du går på medier og kommunikasjon hos Hjalmar Johansen Videregående skole, kan du søke om mediarelevante stillinger, dessverre godtar vi ikke MK elever fra Larvik (Blodpenger). </p>
-                </section>
+                            <div className={styles.lines}>
+                                {f?.lines && f?.lines?.map((line, i) => {
+                                    return (
+                                        <p key={i}>{line}</p>
+                                    )
+                                })}
+                            </div>
+                        </section>
+                    )
+                    
+                })}
                 
                 </div>
+                </article>
             </div>
+            
             </div>
         </Layout>
     );
