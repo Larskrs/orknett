@@ -54,7 +54,8 @@ function index({article}) {
 
                 </article>
                 <div className={styles.side}>
-                    <p>Skrevet av: <Link href={"/profiler/"} >Lars Kristian Småge Syvertsen</Link></p>
+                    <Credit user={article.users} role={"Skrevet av"} />
+                    {/* {article?.author && <p>Skrevet av: <Link href={"/profiler/"} >{article?.users?.name}</Link></p> } */}
                 </div>
                 </div>
             </div>
@@ -64,15 +65,28 @@ function index({article}) {
     );
 }
 
+function Credit ({user, role}) {
+    return (
+        <div className={styles.credit}>
+            <Image width={50} height={50} src={user.image} />
+            <span>{role}</span>
+            <p>{user.name}</p>
+        </div>
+    )
+}
+
 export async function getStaticProps({ params }) {
 
     const { data, error } = await GetClient("public")
     .from("articles")
     .select(`
-        *
+        *,
+        users(*)
     `)
     .eq("slug", params.slug)
     .single();
+
+    console.log(data)
     // console.log(data)
     return {
         props:{
