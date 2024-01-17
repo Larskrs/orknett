@@ -9,7 +9,7 @@
 }
 .main {
     background-color: var(--midnight );
-    max-width: 900px;
+    max-width: 1000px;
     padding: 1rem;
     width: 100%;
     padding-top: 72px;
@@ -39,11 +39,12 @@
     font-weight: 800;
     margin-top: 1rem;
 }
+
     
-.header h1 {
-    font-size: 52px;
-    height: 100%;
-    width: 100%;
+.main h1 {
+    font-size: 3rem;
+    margin-block: .5rem;
+    font-weight: 600;
 }
 .header {
     display: flex;
@@ -54,7 +55,7 @@
 }
 .feature {
     min-width: 100%;
-    min-height: 250px;
+    min-height: 360px;
     border-radius: 8px;
     background: #10111a;
     box-shadow:  15px 15px 8px #0f1018,
@@ -79,9 +80,9 @@
     display: flex;
     flex-direction: column;
     gap: 4rem;
-    min-width:      400px;
+    min-width:      300px;
     max-width:      500px;
-    align-items: flex-end;
+    align-items: center;
 }
 .article {
     display: flex;
@@ -95,38 +96,6 @@
         gap: 2rem;
         width: 100%;
 }
-@media only screen and (max-width: 900px) {
-    .grid {
-        display: grid;
-        grid-template-columns: 10fr 2fr;
-        grid-template-rows: 1fr;
-        gap: 1rem;
-        width: 100%;
-    }
-    .side {
-        display: flex;
-        text-align: center;
-        max-width: 100%;
-        width: 100%;
-        text-align: end;
-    }
-}
-@media only screen and (max-width: 800px) {
-    .grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr;
-        gap: 1rem;
-        width: 100%;
-    }
-    .side {
-        display: flex;
-        text-align: center;
-        max-width: 100%;
-        width: 100%;
-        text-align: end;
-    }
-}
 .side {
     display: flex;
     width: 100%;
@@ -137,6 +106,42 @@
     max-width: 400px;
     flex-wrap: wrap;
     font-size: 16px;
+}
+
+@media only screen and (max-width: 800px) {
+    .grid {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 1rem;
+        width: 100%;
+    }
+    .credit {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+    }
+    .credit span {
+        display: none;
+    }
+    .side {
+        display: flex;
+        text-align: center;
+        max-width: 100%;
+        width: 100%;
+        text-align: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+    .main h1 {
+        font-size: 2rem;
+        margin-block: .5rem;
+        font-weight: 600;
+    }
+    .description {
+        font-size: 1.25rem;
+        margin-block: .5rem;
+    }
 }
 .lines {
     display: flex;

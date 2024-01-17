@@ -5,8 +5,10 @@ import styles from "@/styles/newUI/articles.module.css"
 import { InputField } from "@/components";
 import Image from "next/image";
 import Layout from "@/layouts/newUI/ArticleLayout";
-
-
+import Head from "next/head";
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm";
+  
 function index({article}) {
 
     return (
@@ -17,6 +19,10 @@ function index({article}) {
                     --background: var(--midnight);
                 }
             `}</style>
+
+            <Head>
+                <title>{article.title}</title>
+            </Head>
 
             <div className={styles.container}>
                 <div className={styles.main}>
@@ -41,7 +47,7 @@ function index({article}) {
                             <div className={styles.lines}>
                                 {f?.lines && f?.lines?.map((line, i) => {
                                     return (
-                                        <p key={i}>{line}</p>
+                                            <ReactMarkdown remarkPlugins={[[remarkGfm]]} key={i}>{line}</ReactMarkdown>
                                         )
                                     })}
                             </div>

@@ -59,6 +59,9 @@ html, body {
   overflow-x: hidden;
   
 }
+.bold {
+  font-weight: 900;
+}
 
 /* width */
 ::-webkit-scrollbar {
