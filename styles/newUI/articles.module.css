@@ -16,6 +16,10 @@
     display: flex;
     flex-direction: column;
 }
+.description {
+    font-size: 24px;
+    line-height: 1.7em;
+}
 .header h1 {
     font-size: 52px;
     height: 100%;
@@ -55,19 +59,44 @@
     flex-direction: column;
     gap: 4rem;
     min-width:      400px;
-    max-width:      400px;
+    max-width:      500px;
     align-items: flex-end;
 }
 .article {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.grid {
         display: grid;
         grid-template-columns: 3fr 1fr;
         grid-template-rows: 1fr;
         gap: 1rem;
+        width: 100%;
 }
-@media only screen and (max-width: 700px) {
-    .article {
-        flex-wrap: wrap;
-        justify-content: center;
+@media only screen and (max-width: 900px) {
+    .grid {
+        display: grid;
+        grid-template-columns: 10fr 2fr;
+        grid-template-rows: 1fr;
+        gap: 1rem;
+        width: 100%;
+    }
+    .side {
+        display: flex;
+        text-align: center;
+        max-width: 100%;
+        width: 100%;
+        text-align: end;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        gap: 1rem;
+        width: 100%;
     }
     .side {
         display: flex;
@@ -84,8 +113,9 @@
     flex-direction: column;
     align-items: flex-end;
     min-width: 150px;
-    max-width: 300px;
+    max-width: 400px;
     flex-wrap: wrap;
+    font-size: 16px;
 }
 .lines {
     display: flex;
@@ -95,7 +125,11 @@
 }
 .lines p {
     font-size: 1.125rem;
-    line-height: 1.55;
+    line-height: 1.7;
+}
+.side a {
+    color: rgb(109, 153, 236);
+    font-weight: 400;
 }
 
 @keyframes zoom-up {

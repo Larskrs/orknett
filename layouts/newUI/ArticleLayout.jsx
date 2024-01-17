@@ -6,14 +6,16 @@ import useViewDown from "@/hook/useViewDown";
 import { useSession } from "next-auth/react";
 import { UserDropMenu } from "@/components";
 
-export default function Layout({children, current=0}) {
+export default function Layout({children, current=0, background}) {
 
     const isNavDown = useViewDown(72)
     const router = useSession()
     const session = useSession()
 
     return (
-        <div className={styles.container}>
+        <div className={styles.container} style={{
+          background: background,
+        }}>
     
               <nav className={styles.nav}  style={{background: isNavDown ? "var(--midnight)" : "transparent"}}>
                   <Link href={"/"} style={{marginRight: "1.2em"}}>

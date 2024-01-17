@@ -9,24 +9,31 @@ import Layout from "@/layouts/newUI/ArticleLayout";
 
 function index({article}) {
 
-    console.log(article)
-
     return (
         <Layout>
+
+            <style jsx global>{`
+                :root {
+                    --background: var(--midnight);
+                }
+            `}</style>
+
             <div className={styles.container}>
                 <div className={styles.main}>
-                <section className={styles.header}>
+
+                    <h1>{article?.title}</h1>
+                    {article?.description && <p className={styles.description}>{article?.description}</p>}
+            <div className={styles.grid}>
+
+            <article className={styles.article}>
+                    <section className={styles.header}>
                     <div className={styles.feature}> 
                         <Image fill src={article?.feature ? article.feature : ""} alt="Feature Image"></Image>
                     </div>
-                    <h1>{article?.title}</h1>
                 </section>
-
-            <article className={styles.article}>
-
             <div className={styles.fields}>
                 {article?.fields?.map((f) => {
-
+                    
                     return (
                         <section key={f.id} className={styles.field}>
                             {f?.title && <h3>{f?.title}</h3>}
@@ -35,8 +42,8 @@ function index({article}) {
                                 {f?.lines && f?.lines?.map((line, i) => {
                                     return (
                                         <p key={i}>{line}</p>
-                                    )
-                                })}
+                                        )
+                                    })}
                             </div>
                         </section>
                     )
@@ -45,10 +52,11 @@ function index({article}) {
                 
                 </div>
 
+                </article>
                 <div className={styles.side}>
                     <p>Skrevet av: <Link href={"/profiler/"} >Lars Kristian Småge Syvertsen</Link></p>
                 </div>
-                </article>
+                </div>
             </div>
             
             </div>
