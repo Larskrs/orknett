@@ -180,7 +180,7 @@ export default function Home ({articles}) {
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 
   const articles = await GetClient("public")
   .from("articles")
