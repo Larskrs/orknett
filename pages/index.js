@@ -170,7 +170,7 @@ export default function Home ({articles}) {
         <section className={styles.gallery}>
           {articles.data.map((article, i) => {
             return (
-              <ArticleCard link={`/articles/${article.slug}`} title={"Ny film, nye folk!"}  description={article.description} contain image={article.thumbnail} />
+              <ArticleCard key={article.slug} link={`/articles/${article.slug}`} title={"Ny film, nye folk!"}  description={article.description} contain image={article.thumbnail} />
             )
            })}
         </section>
