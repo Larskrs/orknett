@@ -1,5 +1,6 @@
 import Image from "next/image"
 import styles from "./ArticleCard.module.css"
+import Link from "next/link"
 
 export default function ArticleCard ({
     image,
@@ -9,11 +10,12 @@ export default function ArticleCard ({
     writerAvatar,
     dataCreated,
     tags,
+    link,
     contain = false,
 }) {
 
     return (
-        <div className={styles.card}>
+        <Link href={link ? link : "/"} className={styles.card}>
             {/* <Image alt={"Bilde av: " + title} fill quality={1} style={{objectFit: "cover", filter: "blur(20px)", zIndex: 0, scale:"1.5", opacity: .2}} src={image} /> */}
             <div className={styles.image}>
                 <Image alt={"Bilde av: " + title} quality={100} fill src={image}
@@ -33,7 +35,7 @@ export default function ArticleCard ({
             </div>
             </div>
 
-        </div>
+        </Link>
     )
 
 }

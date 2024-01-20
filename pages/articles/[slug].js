@@ -91,9 +91,7 @@ export async function getStaticProps({ params }) {
     `)
     .eq("slug", params.slug)
     .single();
-
-    console.log(data)
-    // console.log(data)
+    
     return {
         props:{
             article: data,

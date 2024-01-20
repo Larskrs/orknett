@@ -13,8 +13,9 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import useViewDown from '@/hook/useViewDown'
 import usePageBottom from '@/hook/useBottom'
+import { GetClient } from '@/lib/Supabase'
 
-export default function Home () {
+export default function Home ({articles}) {
 
   const isNavDown = useViewDown(72)
   const [productSpanText, setProductSpanText] = useState(0)
@@ -161,18 +162,36 @@ export default function Home () {
           </h1>
           <p>Vi hjelper deg med å få din bedrift eller virksomhet klar for lerretet. </p>
           <div className={styles.action}>
-            <button onClick={() => {setTransitionPage("contact")}} >Kontakt Oss</button>
+            <button onClick={() => {setTransitionPage("contact")}} >Kontakt oss</button>
           </div>
           </div>
         </header>
 
         <section className={styles.gallery}>
-            <ArticleCard title={"Ny film, nye folk!"}  description={"Vi trenger elever som er villige til å prøve noe nytt. "} contain image={"http://aktuelt.tv/api/v1/files?fileId=a685f6b5-5bd6-4cec-9c9f-e3d0840cef17.png"} />
-            <ArticleCard title={""}  description={""} contain image={"http://aktuelt.tv/api/v1/files?fileId=f9c656bd-dff5-4a30-a624-ff707aa6bf0b.png"} />
-            <ArticleCard title={"DBL på DVD!"}  description={"DBL vil bli utgitt på DVD!"} contain image={"http://aktuelt.tv/api/v1/files?fileId=55baf4a7-856f-4a03-81b5-22de9d097a44.png"} />
+          {articles.data.map((article, i) => {
+            return (
+              <ArticleCard link={`/articles/${article.slug}`} title={"Ny film, nye folk!"}  description={article.description} contain image={article.thumbnail} />
+            )
+           })}
         </section>
 
 
     </Layout>
   )
+}
+
+export async function getServerSideProps() {
+
+  const articles = await GetClient("public")
+  .from("articles")
+  .select(`
+      *,
+      users(*)
+  `)
+
+  return {
+      props:{
+          articles: articles,
+      }
+  }
 }

@@ -62,7 +62,6 @@
                  -15px -15px 8px #11121c;
     position: relative;
     overflow: hidden;
-    animation: 2s zoom-up ease-in-out;
 }
 .feature::after {
     content: "";
@@ -156,13 +155,4 @@
 .side a {
     color: rgb(109, 153, 236);
     font-weight: 400;
-}
-
-@keyframes zoom-up {
-    0% {
-        scale: 1.1;
-    }
-    100% {
-        scale: 1;
-    }
 }

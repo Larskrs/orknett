@@ -23,12 +23,12 @@ export default function Layout({children, current=0, background}) {
                     {/* <h2>.tv</h2> */}
                   </Link>
                   {/* <Link href={"/profiles"}>Profiler</Link> */}
-                  <p style={{cursor: "pointer"}} onClick={() => {setTransitionPage("contact")}}>Kontakt Oss</p>
+                  <Link href={"/contact"}>Kontakt oss</Link>
                   <div style={{marginLeft: "auto"}}>
                     {session.status === "authenticated" && 
                         <UserDropMenu avatar={session.data.user.image} name={session.data.user.name} />
                     }
-                    {session.status !== "authenticated" && <Link href={"/auth/signin"}>Logg In</Link> }
+                    {session.status !== "authenticated" && <Link href={"/auth/signin"}>Logg inn</Link> }
                   </div>
             </nav>
 
