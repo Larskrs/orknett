@@ -2,27 +2,32 @@ import { GetClient } from "@/lib/Supabase";
 import FileSharingLayout from "@/layouts/FileSharingLayout";
 import Link from "next/link";
 import styles from "@/styles/newUI/articles.module.css"
-import { InputField } from "@/components";
+import { InputField, TextArea } from "@/components";
 import Image from "next/image";
 import Layout from "@/layouts/newUI/ArticleLayout";
 import Head from "next/head";
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm";
+import { useState } from "react";
   
 function index({article}) {
 
+    const [preview, setPreview] = useState(false)
+
     return (
         <Layout>
+
+            <Head>
+                <title>{article.title}</title>
+            </Head>
 
             <style jsx global>{`
                 :root {
                     --background: var(--midnight);
                 }
+                textarea {all: unset;}
             `}</style>
 
-            <Head>
-                <title>{article.title}</title>
-            </Head>
 
             <div className={styles.container}>
                 <div className={styles.main}>
@@ -36,9 +41,18 @@ function index({article}) {
                     <div className={styles.feature}> 
                         <Image fill src={article?.feature ? article.feature : ""} alt="Feature Image"></Image>
                     </div>
-                </section>
+            </section>
+
+            <div className={styles.buttonTab}>
+                <button onClick={() => {setPreview(false)}}style={{background: preview == false ? "var(--tekhelet)" : "var(--midnight-background)"}}>Rediger</button>
+                <button onClick={() => {setPreview(true)}}style={{background: preview == true ? "var(--tekhelet)" : "var(--midnight-background)"}}>Forhåndsvis</button>
+                
+                <button onClick={() => {handlePublish()}} className={styles.publishChanges}>
+                    Lagre Endringer
+                </button>
+            </div>
             <div className={styles.fields}>
-                {article?.fields?.map((f) => {
+                {article?.fields?.map((f, fid) => {
                     
                     return (
                         <section key={f.id} className={styles.field}>
@@ -47,7 +61,10 @@ function index({article}) {
                             <div className={styles.lines}>
                                 {f?.lines && f?.lines?.map((line, i) => {
                                     return (
-                                            <ReactMarkdown remarkPlugins={[[remarkGfm]]} key={i}>{line}</ReactMarkdown>
+                                        <>
+                                            {!preview && <TextArea onChange={(value) => {article.fields[fid].lines[i] = value}} placeholder="Dette er min nye linje..." defaultValue={line ? line : ""} key={i} />}
+                                            {preview && <ReactMarkdown remarkPlugins={[[remarkGfm]]} key={i}>{line}</ReactMarkdown> }
+                                        </>
                                         )
                                     })}
                             </div>

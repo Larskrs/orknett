@@ -2,6 +2,11 @@ import { GetContentType } from "@/lib/ExtensionHelper";
 import fs from "fs"
 import path from "path";
 
+export const config = {
+    api: {
+      responseLimit: false,
+    },
+  }
 export default async function handler(req, res) {
 
     const method = req.method
@@ -23,16 +28,18 @@ export default async function handler(req, res) {
     let fileId = req?.query?.fileId;
     fileId = fileId.replace("/",'')
     if (!fileId) {
-        return res.status(404).json({ error: `No fileId` });
+        res.status(404).json({ error: `No fileId` });
+        return;
     }
     const extension = fileId?.split('.')?.pop();
     const id = fileId?.replace("." + extension, '')
     if (!GetContentType(extension).toLowerCase().includes("video")) { 
         // Is not a video
-        return res.status(404).json({ error: `No valid video found with id ${id} : ${extension}` });
+        res.status(404).json({ error: `No valid video found with id ${id} : ${extension}` });
+        return;
     }
 
-    GetThumbnailStream(req, res, id)
+    return GetThumbnailStream(req, res, id)
 
   }
 
@@ -43,7 +50,7 @@ export default async function handler(req, res) {
     const extension = "png" 
   
     let filePath = `./videos/${id}/thumbnails/tn_1.png`;
-    console.log(filePath)
+    // console.log(filePath)
   
     
     const options = {};
@@ -88,7 +95,7 @@ export default async function handler(req, res) {
               res.statusCode = 200;
               res.setHeader("accept-ranges", "bytes");
               res.setHeader("content-length", contentLength);
-              res.status(200)
+              res.status(200).json({"message": "Head sent"})
           }
           else {        
               let retrievedLength;
@@ -122,7 +129,7 @@ export default async function handler(req, res) {
               fileStream.on("error", error => {
                   console.log(`Error reading file ${filePath}.`);
                   console.log(error);
-                  res.sendStatus(500);
+                  res.status(500);
                   
               });
   

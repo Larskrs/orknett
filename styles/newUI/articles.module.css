@@ -148,11 +148,38 @@
     flex-wrap: wrap;
     gap: 1rem;
 }
-.lines p {
+.lines p, .lines textarea{
     font-size: 1.125rem;
     line-height: 1.7;
+    background-color: transparent;
+    color: white;
+    font-weight: 400;
+}
+.lines textarea {
+    display: flex;
+    resize: none;
+    width: 100%;
 }
 .side a {
     color: rgb(109, 153, 236);
     font-weight: 400;
+}
+
+
+.publishChanges {
+    background-color: var(--midnight-background) !important;
+    margin-left: auto;
+}
+.buttonTab {
+    display: flex;
+    gap: 4px;
+    background-color: var(--midnight);
+    z-index: 8;
+    align-items: center;
+}
+.buttonTab button {
+    background-color: var(--midnight-background);
+    padding: 1rem 2rem;
+    border-radius: 0;
+    font-size: 16px;
 }
