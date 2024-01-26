@@ -10,7 +10,7 @@ import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm";
 import { useState } from "react";
   
-function index({article}) {
+function EditArticle({article}) {
 
     const [preview, setPreview] = useState(false)
 
@@ -130,4 +130,4 @@ export async function getStaticPaths() {
   }
 
 
-export default index;
+export default EditArticle;
