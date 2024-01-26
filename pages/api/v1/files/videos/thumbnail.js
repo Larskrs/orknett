@@ -2,6 +2,14 @@ import { GetContentType } from "@/lib/ExtensionHelper";
 import fs from "fs"
 import path from "path";
 
+export const config = {
+    api: {
+      bodyParser: false,
+      responseLimit: '32mb',
+      externalResolver: true,
+    },
+  };
+
 export default async function handler(req, res) {
 
     const method = req.method

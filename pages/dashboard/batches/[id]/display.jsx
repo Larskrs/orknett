@@ -86,7 +86,7 @@ export default function Display ({batch}) {
     
         const intervalId = setInterval(() => {
             ScrollDisplay()
-        }, 15000); // Replace 60000 with your desired interval in milliseconds (e.g., 60000 milliseconds = 1 minute)
+        }, 5000); // Replace 60000 with your desired interval in milliseconds (e.g., 60000 milliseconds = 1 minute)
     
         return () => {
           clearInterval(intervalId); // Clean up the interval when the component unmounts
@@ -96,73 +96,25 @@ export default function Display ({batch}) {
     return (
         <div onClick={() => ScrollDisplay()}>
             {/* <button style={{zIndex:99999999, position: "fixed", left: 0, top: 0}} onClick={fetchData}>Fetch</button> */}
+            <div className="container">
+                {displayId && 
+                    <DisplayElement file={display} id={displayId} />
+                }
+            </div>
 
-            <div style={{position: "absolute", left: 0, top: 0, transitionDuration: "2.5s"}}>{batch.files.map((f, i) => {
-                return (
-                    <div key={i} className="display_element" >
-                        <h2 className={`display_title ${displayId == i ? `active_text` : ""}`}>{f.fileName}</h2>
-                        {displayId == i && <DisplayElement file={f} id={i} />}
-                    </div>
-                )
-            })}</div>
-
-            <div style={{zIndex:9999, position: "fixed", left: "1rem", bottom: "1rem"}}>
-            <div>{batch.files.map((f, i) => {
-                return <p key={f.id} style={{margin: 0, display: "flex"}}>
-                    <span style={{fontSize: 18, transitionDuration: ".5s", height: "25px", width: (displayId == i ? "5spx" : "2.5px"), display: "flex", background: (displayId == i ? "lime" : "#333")}}></span>
-                    {((displayId == i) ? <span style={{opacity: 1, translate: "10px 0px"}}>{f.fileName}</span> : <span style={{opacity: 0}}>{f.fileName}</span>)}
-                    </p>
-            })}</div>
+           
                 {/* <div>
                     {display && <h3>{display.fileName}</h3>}
                     {display && <h1>{batch.title}</h1>}
                 </div> */}
-            </div>
+            
 
             <style jsx>{`
-                @keyframes scroll {
-                    0% {
-                        opcaity: 0;
-                        translate: 100vw;
-                    }
-                    10% {
-                        opacity: 1;
-                        scale: 1;
-                        translate: 0 0;
-                    }
-                    90% {
-                        translate: 0 0;
-                    }
-                    100% {
-                        translate: -100vw;
-                    }
+                .container {
+                    min-width: 100vw;
+                    min-height: 100vh;
+                    display: flex;
                 }
-                .display_element {
-                    animation: 5s scroll cubic-bezier(.13,.69,.47,.99);
-                    scale: .2;
-                    height: 100vh;
-                }
-                .display_title {
-                    position: absolute;
-                    left: 50%;
-                    top: 50%;
-                    translate: -50% -50%;
-                    z-index: 999;
-                    font-size: 5vw;
-                    text-align: center;
-                    transition: 5s;
-                    transition-delay: 1s;
-                }
-                .active_text {
-                    color: transparent;
-                    scale: 1;
-                    position: absolute;
-                    
-                    letter-spacing: 32px;
-                    width: 10000%;
-                    
-                }
-                
             `}</style>
 
         </div>
@@ -172,7 +124,6 @@ export default function Display ({batch}) {
 
 export async function getStaticProps({ params })
 {
-
 
     const batchId = params.id
     const { data, error } = await GetClient()

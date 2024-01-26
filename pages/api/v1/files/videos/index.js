@@ -4,11 +4,14 @@ import path from "path";
 
 export const config = {
     api: {
+      bodyParser: false,
       responseLimit: false,
+      externalResolver: true,
     },
-  }
+  };
 
 function GetFileStream(req, res) {
+
 
 
     let fileName = req.query.fileId;
