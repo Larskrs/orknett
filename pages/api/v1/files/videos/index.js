@@ -99,7 +99,7 @@ function GetFileStream(req, res) {
               fileStream.on("error", error => {
                   console.log(`Error reading file ${filePath}.`);
                   console.log(error);
-                  res.sendStatus(500);
+                  res.status(500);
                   
               });
   

@@ -19,6 +19,7 @@ import LiveLyrics from "./cards/LiveLyrics/LiveLyrics";
 import RadialProgress from "./cards/RadialProgress/RadialProgress";
 import ArticleCard from "./cards/ArticleCard/ArticleCard";
 import UserDropMenu from "./UserDropMenu/UserDropMenu";
+import { TextArea } from "./cards/TextArea/TextArea";
 export 
 {
     SeriesCard,
@@ -41,5 +42,6 @@ export
     LiveLyrics,
     RadialProgress,
     ArticleCard,
-    UserDropMenu
+    UserDropMenu,
+    TextArea
 };

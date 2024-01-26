@@ -143,29 +143,7 @@ input[type="text"] {
   width: 100%;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-input[type="text"]:focus {
-  outline: none;
-}
-textarea {
-  padding: 1rem !important;
-  padding-block: .5rem !important;
-  margin-block: .5rem !important;
-  background-color: var(--gray-2);
-  border: none;
-  outline: none;
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  width: 500px;
-  resize: none;
-  width: 100%;
-  height: 150px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  transition: none;
-}
-textarea:focus {
-  outline: none;
-}
+
 
 h2 {
   font-size: 2rem;
