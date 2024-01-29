@@ -53,9 +53,7 @@ export default function FileElement ({file, onSelect, download=true, rating=0, o
                                 <a>{file.fileName}</a>
                                 <div className={styles.links}>
                                     {download && <a style={{borderColor: "white"}} href={file.source} className={styles.downloadLink} download><Image src={"/icons/download_icon.svg"}  alt="Download_ICON"  height={16} width={16} /></a>}
-                                    <ClipboardWrap data={document.location.hostname + file.source}>
-                                        <p style={{borderColor: "white"}} href={file.source} target="_blank" className={styles.downloadLink} ><Image  alt="Share_ICON"  src={"/icons/share_icon.svg"} height={16} width={16} /></p>
-                                    </ClipboardWrap>
+                                    <Link style={{borderColor: "white"}} href={file.source} target="_blank" onClick={() => {navigator.clipboard.writeText(document.domain +  file.source)}} className={styles.downloadLink} ><Image  alt="Share_ICON"  src={"/icons/share_icon.svg"} height={16} width={16} /></Link>
                                 </div>
                                 {rating > 0 && <Stars max={5} rating={rating} ><span> your rating</span></Stars>}
 
