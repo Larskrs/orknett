@@ -4,13 +4,18 @@ import Image from 'next/image';
 import { AudioPlayer, Badge, ClipboardWrap, Stars } from '.';
 import { GetContentTypeFromSource, isSourceContentType } from '@/lib/ExtensionHelper';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getContentIconSource } from '@/lib/FileHelper';
 
 
 export default function FileElement ({file, onSelect, download=true, rating=0, owner}) {
 
         const [image, setImage] = useState()
+
+        const baseUrl = (process.env.NEXT_PUBLIC_ENVIRONMENT === "production"
+            ? "http://aktuelt.tv"
+            : "http://localhost"
+        )
 
         useEffect(() => {
             
@@ -26,6 +31,7 @@ export default function FileElement ({file, onSelect, download=true, rating=0, o
                     const type = contentType.split('/')[0];
 
                     return (
+
                         <div className={styles.download}>
                             
                             <div onClick={onSelect} style={{width: "100%", height: "100%"}}>
@@ -53,7 +59,9 @@ export default function FileElement ({file, onSelect, download=true, rating=0, o
                                 <a>{file.fileName}</a>
                                 <div className={styles.links}>
                                     {download && <a style={{borderColor: "white"}} href={file.source} className={styles.downloadLink} download><Image src={"/icons/download_icon.svg"}  alt="Download_ICON"  height={16} width={16} /></a>}
-                                    <Link style={{borderColor: "white"}} href={file.source} target="_blank" onClick={() => {navigator.clipboard.writeText(document.domain +  file.source)}} className={styles.downloadLink} ><Image  alt="Share_ICON"  src={"/icons/share_icon.svg"} height={16} width={16} /></Link>
+                                    <ClipboardWrap data={baseUrl + file.source}>
+                                        <p style={{borderColor: "white"}} href={file.source} target="_blank" className={styles.downloadLink} ><Image  alt="Share_ICON"  src={"/icons/share_icon.svg"} height={16} width={16} /></p>
+                                    </ClipboardWrap>
                                 </div>
                                 {rating > 0 && <Stars max={5} rating={rating} ><span> your rating</span></Stars>}
 

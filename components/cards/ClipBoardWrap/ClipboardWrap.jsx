@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./ClipboardWrap.module.css"
 
 export default function ClipboardWrap ({data, children}) {
@@ -15,15 +15,17 @@ export default function ClipboardWrap ({data, children}) {
      }, [copied]);
 
     return (
+        <React.Suspense fallback={<></>}>
         <div>
             <div className={styles.container}>
             <div onClick={() => {navigator.clipboard.writeText(data); setCopied(true)}}>
                 {children}
                 </div>
             {copied && <div className={styles.pop_up}>
-                Kopiert til utklipstavle!
+                Kopiert til utklippstavle!
             </div>}
             </div>
         </div>
+        </React.Suspense>
     )
 }
