@@ -20,6 +20,7 @@ import RadialProgress from "./cards/RadialProgress/RadialProgress";
 import ArticleCard from "./cards/ArticleCard/ArticleCard";
 import UserDropMenu from "./UserDropMenu/UserDropMenu";
 import { TextArea } from "./cards/TextArea/TextArea";
+import ClipboardWrap from "./cards/ClipBoardWrap/ClipboardWrap";
 export 
 {
     SeriesCard,
@@ -43,5 +44,6 @@ export
     RadialProgress,
     ArticleCard,
     UserDropMenu,
-    TextArea
+    TextArea,
+    ClipboardWrap,
 };

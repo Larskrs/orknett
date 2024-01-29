@@ -136,10 +136,8 @@ button:disabled:hover {
 }
 input[type="text"] {
   background-color: var(--gray-2);
-  border-radius: 6px;
   color: white;
   text-decoration: none;
-  border: 1px solid white;
   width: 100%;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }

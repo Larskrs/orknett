@@ -1,4 +1,4 @@
-import { InputField } from "@/components";
+import { ClipboardWrap, InputField } from "@/components";
 import styles from "@/styles/newUI/contact.module.css"
 import Image from "next/image";
 import Link from "next/link";
@@ -6,17 +6,22 @@ import Link from "next/link";
 export default function Contact () {
     return (
         <div className={styles.container}>
-            <div className={styles.main}>
-
-                <div className={styles.image}>
-                    <h1>Kontakt oss</h1>
-                    <Image fill src={"http://aktuelt.tv/api/v1/files?fileId=97b9c093-b87c-49bd-a4dc-1bbabdd644e1.jpeg"} />
-                </div>
+            <div className={styles.grid}>
                 
-                <p className={styles.detail}>aktueltstudio@gmail.com</p>
+                <div className={styles.main}>
 
-                <Link className={styles.action} href={"/"}>Hjem</Link>
-            </div>
+                <div className={styles.information}>
+                    <p>Kontakt oss på email</p>
+                    <ClipboardWrap data={"aktueltstudio@gmail.com"}><p className={styles.detail}>aktueltstudio@gmail.com</p></ClipboardWrap>
+                    </div>
+
+                    <Link className={styles.action} href={"/"}>Hjem</Link>
+                    </div>
+                    <div className={styles.image}>
+                        <Image className={styles.blur} fill src={"http://aktuelt.tv/api/v1/files?fileId=d8e5e400-ec12-4c7d-babe-3d95ad75d0e7.JPG"} />
+                        <Image fill src={"http://aktuelt.tv/api/v1/files?fileId=d8e5e400-ec12-4c7d-babe-3d95ad75d0e7.JPG"} />
+                    </div>
+                </div>
         </div>
     );
 }

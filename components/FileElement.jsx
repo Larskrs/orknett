@@ -1,7 +1,7 @@
 import styles from '@/styles/FileSharing.module.css'
 import Link from 'next/link';
 import Image from 'next/image';
-import { AudioPlayer, Badge, Stars } from '.';
+import { AudioPlayer, Badge, ClipboardWrap, Stars } from '.';
 import { GetContentTypeFromSource, isSourceContentType } from '@/lib/ExtensionHelper';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -38,7 +38,7 @@ export default function FileElement ({file, onSelect, download=true, rating=0, o
                                 {type == "audio" && <>
                                     
                                 <div>
-                                <Image alt={file.fileName} width={10} height={10} style={{objectFit: "cover"}} src={image} />
+                                {/* <Image alt={file.fileName} width={10} height={10} style={{objectFit: "cover"}} src={image} /> */}
                                 <div style={{width: 50, height: 50, position: "absolute", left: 8, top: 8, background: "rgba(0,0,0,.25)", borderRadius: "50%"}}><Image alt={file.fileName} fill src={"/audio.svg"} /></div> 
                                     </div>
                                     
@@ -53,7 +53,9 @@ export default function FileElement ({file, onSelect, download=true, rating=0, o
                                 <a>{file.fileName}</a>
                                 <div className={styles.links}>
                                     {download && <a style={{borderColor: "white"}} href={file.source} className={styles.downloadLink} download><Image src={"/icons/download_icon.svg"}  alt="Download_ICON"  height={16} width={16} /></a>}
-                                    <Link style={{borderColor: "white"}} href={file.source} target="_blank" onClick={() => {navigator.clipboard.writeText(document.domain +  file.source)}} className={styles.downloadLink} ><Image  alt="Share_ICON"  src={"/icons/share_icon.svg"} height={16} width={16} /></Link>
+                                    <ClipboardWrap data={document.location.hostname + file.source}>
+                                        <p style={{borderColor: "white"}} href={file.source} target="_blank" className={styles.downloadLink} ><Image  alt="Share_ICON"  src={"/icons/share_icon.svg"} height={16} width={16} /></p>
+                                    </ClipboardWrap>
                                 </div>
                                 {rating > 0 && <Stars max={5} rating={rating} ><span> your rating</span></Stars>}
 
