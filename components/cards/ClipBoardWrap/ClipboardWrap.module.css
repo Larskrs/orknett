@@ -13,6 +13,7 @@
     left: 50%;
     translate: -50% -50%;
     box-shadow: 0px 0px 10px var(--midnight-background);
+    pointer-events: none;
 }
 .container {
     display: flex;
@@ -30,6 +31,7 @@
         scale: 1.1;
         opacity: 1;
         z-index: 100;
+        translate: -50% -175%;
     }
     50% {
         scale: 1;
@@ -37,6 +39,7 @@
     75% {
         opacity: 1;
         z-index: 100;
+        translate: -50% -175%;
     }
     100% {
         opacity: 0;
