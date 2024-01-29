@@ -129,11 +129,7 @@ function BatchesPage ({batches, thumbnailBatches}) {
                     <div className={styles.header}>
                         
                         <div className={styles.background}>
-                            {thumbnailBatches.map((b, i) => {
-                               return  <Image key={b.id} alt={"Batch header"} fill style={{objectFit: "cover", borderRadius: 8, transitionDuration: "1s", translate: batchPreview != i ? "100% 0": "0%", opacity: batchPreview == i ? 1: 0}} src={b.thumbnail}/>
-                            })
-
-                            }
+                            <Image key={thumbnailBatches?.[0].id} alt={"Batch header"} fill src={thumbnailBatches?.[0].thumbnail}/>
                         </div>
 
                         
