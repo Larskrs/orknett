@@ -57,11 +57,11 @@ export default function Filecard ( {
                             </button></ClipboardWrap>
                         <a href={file.source} download={true} >
                             <Image width={20} height={20} alt="download_icon" src={"/icons/download_icon.svg"} />
-                            Download
+                            Last ned
                         </a>
-                        <button disabled >Delete</button>
-                        <button disabled >Move</button>
-                        <button disabled >Rename</button>
+                        <button disabled >Slett</button>
+                        <button disabled >Flytt</button>
+                        <button disabled >Endre navn</button>
 
                     </div>
                     <div className={styles.image} onClick={onSelect}>
