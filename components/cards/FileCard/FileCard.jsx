@@ -5,6 +5,7 @@ import { GetContentTypeFromSource, isSourceContentType } from "@/lib/ExtensionHe
 import ClipboardWrap from "../ClipBoardWrap/ClipboardWrap"
 import { useRouter } from "next/router"
 import Link from "next/link"
+import axios from "axios"
 
 export default function Filecard ( {
     onDelete = (()=>{}),
@@ -40,6 +41,9 @@ export default function Filecard ( {
 
     const [showTools, setShowTools] = useState(false)
 
+    if (deleted) {
+        return
+    }
 
 
     return (
@@ -59,7 +63,7 @@ export default function Filecard ( {
                             <Image width={20} height={20} alt="download_icon" src={"/icons/download_icon.svg"} />
                             Last ned
                         </a>
-                        <button disabled >Slett</button>
+                        <button disabled={deleted} onClick={() => {DeleteFile()}} >Slett</button>
                         <button disabled >Flytt</button>
                         <button disabled >Endre navn</button>
 
@@ -82,8 +86,17 @@ export default function Filecard ( {
         </>
     )
 
-    function Delete () {
-
+    async function DeleteFile() {
+        try {
+            const response = await axios.delete(
+                `${process.env.NEXT_PUBLIC_URL}/api/v1/files/delete?fileId=${file.source.split("fileId=").pop()}`
+            )
+            setDeleted(true)
+            console.log(`API Response:`, response.data)
+        } catch (error) {
+            console.error("Error occured when deleting, client error.")
+            console.error(error)
+        }
     }
     
 }

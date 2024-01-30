@@ -1,5 +1,7 @@
+import { GetContentType, GetContentTypeFromSource } from "@/lib/ExtensionHelper";
 import { GetClient } from "@/lib/Supabase";
 import { fstat, stat, unlink } from "fs";
+import { rm } from "fs/promises";
 
 export const config = {
     api: {
@@ -24,12 +26,20 @@ export const config = {
     let fileName = req.query.fileId;
     fileName = fileName.replace("/", "");
     const [id, extension] = fileName.split(".");
-  
+
     let filePath = `./files/${id}.${extension}`;
+    if (GetContentType(extension).includes("video")) {
+        filePath = `./videos/${id}`;
+    } 
+  
+    
 
     try {
         // Check if the file exists
         const stat = await FileExists(filePath);
+        if (stat.isDirectory) {
+            console.log("Is directory")
+        }
     
         // If the file exists, attempt to delete it
         try {
@@ -51,7 +61,7 @@ export const config = {
 
 async function UnlinkFile (filePath) {
     return new Promise((resolve, reject) => {
-        unlink(filePath, (err, stats) => {
+        rm(filePath, {recursive: true, force: true}, (err, stats) => {
           if (err) {
             // If there's an error, reject the promise
             reject(err);
