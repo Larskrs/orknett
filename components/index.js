@@ -21,6 +21,7 @@ import ArticleCard from "./cards/ArticleCard/ArticleCard";
 import UserDropMenu from "./UserDropMenu/UserDropMenu";
 import { TextArea } from "./cards/TextArea/TextArea";
 import ClipboardWrap from "./cards/ClipBoardWrap/ClipboardWrap";
+import Filecard from "./cards/FileCard/FileCard";
 export 
 {
     SeriesCard,
@@ -46,4 +47,5 @@ export
     UserDropMenu,
     TextArea,
     ClipboardWrap,
+    Filecard
 };

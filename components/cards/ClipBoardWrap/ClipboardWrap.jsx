@@ -14,6 +14,12 @@ export default function ClipboardWrap ({data, children}) {
         return () => clearInterval(timeout)
      }, [copied]);
 
+
+     if (typeof window === 'undefined') {
+        return
+     }
+
+
     return (
         <React.Suspense fallback={<></>}>
         <div>

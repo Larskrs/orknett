@@ -1,14 +1,17 @@
 import styles from '@/styles/FileSharing.module.css'
 import Link from 'next/link';
 import Image from 'next/image';
-import { AudioPlayer, Badge, ClipboardWrap, Stars } from '.';
+import { AudioPlayer, Badge, ClipboardWrap, Filecard, Stars } from '.';
 import { GetContentTypeFromSource, isSourceContentType } from '@/lib/ExtensionHelper';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { getContentIconSource } from '@/lib/FileHelper';
+import axios from 'axios';
 
 
 export default function FileElement ({file, onSelect, download=true, rating=0, owner}) {
+
+        return <Filecard file={file} onSelect={onSelect} download={download} />
 
         const [image, setImage] = useState()
 
@@ -62,13 +65,25 @@ export default function FileElement ({file, onSelect, download=true, rating=0, o
                                     <ClipboardWrap data={baseUrl + file.source}>
                                         <p style={{borderColor: "white"}} href={file.source} target="_blank" className={styles.downloadLink} ><Image  alt="Share_ICON"  src={"/icons/share_icon.svg"} height={16} width={16} /></p>
                                     </ClipboardWrap>
+                                    <button className={styles.delete} onClick={() => {DeleteFile()}}><Image alt="Share_ICON"  src={"/icons/delete_icon.svg"} height={16} width={16} /></button>
                                 </div>
-                                {rating > 0 && <Stars max={5} rating={rating} ><span> your rating</span></Stars>}
+                                {rating  > 0 && <Stars max={5} rating={rating} ><span> your rating</span></Stars>}
 
                                 {/* <a>{creationDate.toLocaleDateString("en-EN")}</a> */}
                             </div>
                         </div>
                         )
         
+            async function DeleteFile() {
+                try {
+                    const response = await axios.delete(
+                        `${process.env.NEXT_PUBLIC_URL}/api/v1/files/delete?fileId=${file.source.split("fileId=").pop()}`
+                    )
+                    console.log(`API Response:`, response.data)
+                } catch (error) {
+                    console.error("Error occured when deleting, client error.")
+                    console.error(error)
+                }
+            }
     
 }
