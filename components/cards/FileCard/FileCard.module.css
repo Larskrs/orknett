@@ -4,14 +4,70 @@
     height: 200px;
     position: relative;
 }
+.wrap > * {
+    transition: all 250ms ease-in-out !important;
+}
 .image {
     border-radius: 8px;
     overflow: hidden;
+    height: 100%;
+    width: 100%;
 }
 .image img {
-    object-fit: cover;
+    object-fit: contain;
 }
 
+.details {
+    display: grid;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--midnight-background);
+    z-index: 8;
+    padding: 8px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 2fr 2fr 2fr 2fr;
+    gap: 4px;
+}
+.details button, .details a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--midnight-background);
+    width: 100%;
+    height: 100%;
+    border: 1px solid  rgba(0,0,0,0.1);
+    border-radius: 4px;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+}
+.details button:hover, .details a:hover {
+    background-color: var(--midnight-highlight);
+    animation: 250ms bob ease-in-out;
+}
+.details .fileName {
+    width: 100%;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@keyframes bob {
+    0% {
+        translate: 0px 0px;
+    }
+    25% {
+        translate: 0px 2px;
+    }
+}
 
 
 .tools {
@@ -28,7 +84,8 @@
     border-radius: 50%;
     flex-direction: column;
     background-color: rgba(0,0,0,.25);
-    box-shadow: 0px 0px 25px rgba(0,0,0,.75);
+    z-index: 10;
+    cursor: pointer;
 }
 .tools span {
     position: absolute;
@@ -36,7 +93,6 @@
     width: 5px;
     border-radius: 50%;
     background-color: white;
-    transition-duration: 250ms;
 }
 .tools span:nth-child(1) {
     translate: 0% 150%;

@@ -22,6 +22,7 @@
   --jet: #111013;
   --midnight: #10111a;
   --midnight-background: #0c0d14;
+  --midnight-highlight: #2b2a31;
   --black-olive: #423e37;
   --xanthous: #e3b23c;
   --gold-metallic: #e1c066;
@@ -100,6 +101,7 @@ html, body {
   transition: all 250ms cubic-bezier(0.075, 0.82, 0.165, 1);
   box-sizing: border-box;
   text-decoration: none;
+  font-family: 'Roboto' !important;
 }
 
 @media (prefers-reduced-motion) {

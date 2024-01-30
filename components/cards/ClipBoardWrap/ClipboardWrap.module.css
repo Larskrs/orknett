@@ -16,10 +16,12 @@
     pointer-events: none;
 }
 .container {
-    display: flex;
     position: relative;
-    height: fit-content !important;
-    width: fit-content;
+    height: 100% !important;
+    display: flex !important;
+}
+.content {
+    width: 100%;
 }
 @keyframes pop_up {
     0% {

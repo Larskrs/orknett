@@ -11,22 +11,22 @@ import axios from 'axios';
 
 export default function FileElement ({file, onSelect, download=true, rating=0, owner}) {
 
-        return <Filecard file={file} onSelect={onSelect} download={download} />
-
-        const [image, setImage] = useState()
-
-        const baseUrl = (process.env.NEXT_PUBLIC_ENVIRONMENT === "production"
-            ? "http://aktuelt.tv"
-            : "http://localhost"
-        )
-
-        useEffect(() => {
-            
-            if (isSourceContentType(file.source, "audio")) {
-                setImage(`/api/v1/files/audio/cover?fileId=${file.source.split("fileId=").pop()}`)
-            }
-
-        }, [image])
+    
+    const [image, setImage] = useState()
+    
+    const baseUrl = (process.env.NEXT_PUBLIC_ENVIRONMENT === "production"
+    ? "http://aktuelt.tv"
+    : "http://localhost"
+    )
+    
+    useEffect(() => {
+        
+        if (isSourceContentType(file.source, "audio")) {
+            setImage(`/api/v1/files/audio/cover?fileId=${file.source.split("fileId=").pop()}`)
+        }
+        
+    }, [image])
+    return <Filecard file={file} onSelect={onSelect} download={download} />
 
                     const creationDate = new Date(file.created_at);
                     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
