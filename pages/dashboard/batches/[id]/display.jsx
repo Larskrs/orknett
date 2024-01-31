@@ -12,16 +12,15 @@ export default function Display ({batch}) {
     const searchParams = useSearchParams()
     const credits = searchParams.get('credits')
     const animation = searchParams.get('animation')
+    const displayTime = parseFloat(searchParams.get('time'))
 
 
     const [display, setDisplay] = useState(null)
     const [displayId, setDisplayId] = useState(0)
-    const [displayTime, setDisplayTime] = useState(15)
     const [loading, setLoading] = useState(false)
 
     const ScrollDisplay = () => {
 
-        setDisplayTime(15)
         setDisplay(null)
 
         let newId = displayId + 1;
@@ -91,7 +90,7 @@ export default function Display ({batch}) {
     
         const intervalId = setInterval(() => {
             ScrollDisplay()
-        }, 5000); // Replace 60000 with your desired interval in milliseconds (e.g., 60000 milliseconds = 1 minute)
+        }, displayTime ? displayTime : 5000); // Replace 60000 with your desired interval in milliseconds (e.g., 60000 milliseconds = 1 minute)
     
         return () => {
           clearInterval(intervalId); // Clean up the interval when the component unmounts
