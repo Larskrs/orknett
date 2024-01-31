@@ -1,6 +1,6 @@
 import { GetContentType, GetContentTypeFromSource } from "@/lib/ExtensionHelper";
 import { GetClient } from "@/lib/Supabase";
-import { fstat, stat, unlink } from "fs";
+import { fstat, rmdir, stat, unlink } from "fs";
 import { rm } from "fs/promises";
 
 export const config = {
@@ -61,7 +61,7 @@ export const config = {
 
 async function UnlinkFile (filePath) {
     return new Promise((resolve, reject) => {
-        rm(filePath, {recursive: true, force: true}, (err, stats) => {
+        rmdir(filePath, {recursive: true, force: true}, (err, stats) => {
           if (err) {
             // If there's an error, reject the promise
             reject(err);

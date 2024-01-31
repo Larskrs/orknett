@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { GetContentTypeFromSource, GetExtensionFromSource } from "@/lib/ExtensionHelper";
 import { AudioPlayer, Badge } from "@/components";
 import styles from "@/styles/FileDisplay.module.css"
-import { GetClient } from "@/lib/Supabase";
+import { GetClient, GetServiceClient } from "@/lib/Supabase";
 
 export default function Display ({batch}) {
 
@@ -28,6 +28,7 @@ export default function Display ({batch}) {
 
         setDisplayId(newId)
         setDisplay(batch?.files?.[newId])
+        console.log(display, displayId)
       };
     
     function DisplayElement ({file, id}) {
@@ -97,7 +98,7 @@ export default function Display ({batch}) {
         <div onClick={() => ScrollDisplay()}>
             {/* <button style={{zIndex:99999999, position: "fixed", left: 0, top: 0}} onClick={fetchData}>Fetch</button> */}
             <div className="container">
-                {displayId && 
+                {display && 
                     <DisplayElement file={display} id={displayId} />
                 }
             </div>
@@ -122,9 +123,37 @@ export default function Display ({batch}) {
 }
 
 
-export async function getStaticProps({ params })
-{
+export async function getStaticProps({ params }){
+    
+    
+    
+    async function GetOwners(owners) {
+        const {data, error} = await GetServiceClient("next_auth")
+        .from("users")
+        .select(`
+            name,
+            image,
+            id
+        `)
+        .in("id", owners)
+        
+        return data
+        
 
+    }
+    async function GetUsers() {
+        const {data, error} = await GetServiceClient("next_auth")
+        .from("users")
+        .select(`
+            name,
+            image,
+            id
+        `)
+        .order("name", {ascending: true})
+        return data
+    }   
+    
+    
     const batchId = params.id
     const { data, error } = await GetClient()
     .from("batches")
@@ -139,13 +168,24 @@ export async function getStaticProps({ params })
         ascending: false
     })
     .single()
+    
+
+
+    const owners = await GetOwners(data.owners)
+    const users = await GetUsers()
+    data.owners = owners
 
     return {
         props:{
             batch: data,
+            users,
         },
-        revalidate: 10, // In seconds
+        revalidate: false, // In seconds
     }
+
+
+
+
 }
 
 
