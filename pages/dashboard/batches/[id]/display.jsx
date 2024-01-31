@@ -5,10 +5,15 @@ import { GetContentTypeFromSource, GetExtensionFromSource } from "@/lib/Extensio
 import { AudioPlayer, Badge } from "@/components";
 import styles from "@/styles/FileDisplay.module.css"
 import { GetClient, GetServiceClient } from "@/lib/Supabase";
+import { useSearchParams } from 'next/navigation'
 
 export default function Display ({batch}) {
 
-    
+    const searchParams = useSearchParams()
+    const credits = searchParams.get('credits')
+    const animation = searchParams.get('animation')
+
+
     const [display, setDisplay] = useState(null)
     const [displayId, setDisplayId] = useState(0)
     const [displayTime, setDisplayTime] = useState(15)
@@ -19,16 +24,15 @@ export default function Display ({batch}) {
         setDisplayTime(15)
         setDisplay(null)
 
-        console.log("Changing...")
-
         let newId = displayId + 1;
         if (newId > batch.files.length - 1) {
             newId = 0
         }
-
+        const file = batch?.files?.[newId]
+        const owner = batch.owners.filter((o) => file.user == o.id)?.[0]
+        file.owner = owner
         setDisplayId(newId)
-        setDisplay(batch?.files?.[newId])
-        console.log(display, displayId)
+        setDisplay(file)
       };
     
     function DisplayElement ({file, id}) {
@@ -96,10 +100,32 @@ export default function Display ({batch}) {
 
     return (
         <div onClick={() => ScrollDisplay()}>
+
+            <style global jsx>{`
+                ${animation === '0' ? `* {
+                    animation: none !important;
+                    opacity: 1 !important;
+                }` : ``}  
+            `}</style>
+
             {/* <button style={{zIndex:99999999, position: "fixed", left: 0, top: 0}} onClick={fetchData}>Fetch</button> */}
             <div className="container">
-                {display && 
+                {display && <>
+                    {(credits !== '0') && <div key={displayId} className={styles.credits}>
+                        <div className={styles.user}>
+                            <Image alt={display.owner.name} src={display.owner.image} width={50} height={50} />
+                            <div className={styles.detail}>
+                                <span>Lastet opp av</span>
+                                <p>{display.owner.name}</p>
+                            </div>
+                        </div>
+                        <div className={styles.file}>
+                            <p>{display.fileName.split(".").shift()}</p>
+                        </div>
+                    </div> }
                     <DisplayElement file={display} id={displayId} />
+                </>
+
                 }
             </div>
 
