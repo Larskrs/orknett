@@ -37,7 +37,7 @@ const useDynamicFetch = () => {
       setIsLoading(false)    
     } finally {
       setIsLoading(false);
-      console.log(data)
+      // console.dir(data)
     }
   };
 

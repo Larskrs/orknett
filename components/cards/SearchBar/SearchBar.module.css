@@ -1,0 +1,36 @@
+.container {
+    width: 100%;
+    max-width: 500px;
+}
+.input {
+    display: flex;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid var(--midnight-highlight);
+    border-radius: 2rem;
+    overflow: hidden;
+}
+.input button {
+    background-color: var(--midnight);
+    padding: 0.5rem 2rem;
+    border-radius: 0 2rem 2rem 0;
+    box-shadow: inset 0px 0px 2px var(--midnight-background);
+}
+.input button:hover {
+    background-color: var(--folly);
+}
+.input input{
+    box-shadow: inset 0px 0px 25px var(--midnight);
+    width: 100%;
+    display: flex;
+    padding: 0.5rem 1rem;
+    background: var(--midnight-background);
+    border: none;
+    color: #eee;
+    font-weight: 400;
+    font-size: 18px;
+    overflow: hidden;
+}
+.input input:focus {
+    outline: none;
+}

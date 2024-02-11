@@ -22,6 +22,7 @@ import UserDropMenu from "./UserDropMenu/UserDropMenu";
 import { TextArea } from "./cards/TextArea/TextArea";
 import ClipboardWrap from "./cards/ClipBoardWrap/ClipboardWrap";
 import Filecard from "./cards/FileCard/FileCard";
+import SearchBar from "./cards/SearchBar/SearchBar";
 export 
 {
     SeriesCard,
@@ -47,5 +48,6 @@ export
     UserDropMenu,
     TextArea,
     ClipboardWrap,
-    Filecard
+    Filecard,
+    SearchBar
 };

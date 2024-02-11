@@ -21,6 +21,8 @@ import Layout from '@/layouts/newUI/layout';
 import useFetch from '@/hooks/useFetch';
 import usePageBottom from '@/hook/useBottom';
 import { getReadableFileSizeString } from '@/lib/FileHelper';
+import { useSearchParams } from 'next/navigation';
+import useDynamicFetch from '@/hooks/useDynamicFetch';
 
 
 
@@ -41,7 +43,9 @@ function FilePage ({batches}) {
             refetch()
     }, [amount])
 
-    const {  data, isLoading, error, refetch } = useFetch(`files/list?page=0&size=${amount}`)
+    const searchParams = useSearchParams()
+    const search = searchParams.get('s')
+    const { data, isLoading, error, refetch, fetch } = useDynamicFetch()
     let files = []
     files = [...files, ...data]
 
@@ -141,7 +145,7 @@ function FilePage ({batches}) {
                 {session.status == "authenticated" && <ImprovedFileUpload /> }
                 <FilesUploadAmount session={session} />
             </div>
-                <SearchBar placeholder="Søk etter filer..." searchUrl={(query) => { console.log("Getting URL: "); return `/files/search?s=${query}` }}/>
+                <SearchBar placeholder="Søk etter filer..." defaultValue={search} onSearch={(data) => {setResults}} searchUrl={(query) => { console.log("Getting URL: "); return `/files/search?s=${search}` }}/>
             <div>
                     
                  <div style={{opacity: display != null ? 1 : 0, pointerEvents: display != null ? "all" : "none"}} className={styles.display} onClick={() => {setDisplay(null)}}>

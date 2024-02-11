@@ -10,6 +10,8 @@ import { GetClient } from "@/lib/Supabase";
 import { GetContentTagFromSource, GetContentType, GetContentTypeFromSource, GetExtensionFromSource } from '@/lib/ExtensionHelper';
 import { Image } from "next/image" 
 import Link from 'next/link';
+import { DisplayElement } from '@/components';
+import FileElement from '@/components/FileElement';
 
 export default function Secret({upload}) {
     
@@ -19,15 +21,11 @@ export default function Secret({upload}) {
 
     return (
 
-
         <FileSharingLayout pageId={0}>
 
-                <source
-                    src={upload.source}
-                    type={GetContentType(GetExtensionFromSource(upload.source))}
-                >
-                </source> 
-                <Link href={upload.source}>{upload.source}</Link>
+            {upload.map((file) => {
+                return <FileElement key={file.id} file={file} />
+            })}
 
            
         </FileSharingLayout>
@@ -36,12 +34,12 @@ export default function Secret({upload}) {
 
 export async function getServerSideProps(ctx){
 
-    const { data, error } = await GetClient().from("random_files")
+    const search = ctx.query.s
+
+    const { data, error } = await GetClient().from("files")
     .select('*')
     .eq("storage", process.env.NEXT_PUBLIC_STORAGE_ID)
-    .limit(1)
-    .single()
-    
+    .textSearch("fileName", search)
 
     console.log({data, error})
     
