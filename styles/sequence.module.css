@@ -1,0 +1,74 @@
+.container {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+}
+.table {
+    display: table;
+    background-color: var(--midnight-background);
+    margin-top: 180px;
+    table-layout: fixed;
+    gap: 0px; 
+}
+.table tbody {
+    transition-duration: 2s;
+    background-color: var(--midnight-background);
+}
+.table thead {
+    height: 60px;
+    translate: 0px -76px;
+    z-index: 200;
+    position: relative;
+}
+.table thead tr {
+    font-size: 30px;
+}
+.table tr {
+    background-color: var(--midnight-background);
+    display: table-row;
+    height: 60px;
+    font-size: 22px;
+    max-height: 60px !important;
+    overflow: hidden;
+}
+.table td:first-child {
+    
+
+}
+.table td {
+    padding: 4px;
+    height: 60px;
+    max-height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.controller {
+    display: flex;
+    position: fixed;
+    left: 16px;
+    top: 16px;
+    background-color: var(--midnight-background);
+    border: 1px solid var(--folly);
+    padding: 8px;
+    border-radius: 6px;
+    z-index: 1000;
+    align-items: stretch;
+    justify-content: space-evenly;
+    width: 200px;
+}
+.controller button {
+    background-color: var(--midnight-highlight);
+    padding: 8px 16px;
+}
+.controller input {
+    background-color: transparent;
+    border: 0px;
+    width: 40px;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+}
